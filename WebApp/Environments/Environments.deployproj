@@ -29,10 +29,10 @@
       <Visible>False</Visible>
     </None>
     <Content Include="Deploy-AzureResourceGroup.ps1" />
-    <None Include="vNet.json" />
-    <None Include="vNet.parameters.json" />
-    <None Include="WebSrv.json" />
-    <None Include="WebSrv.parameters.json" />
+    <Content Include="vNet.json" />
+    <Content Include="vNet.parameters.json" />
+    <Content Include="WebSrv.json" />
+    <Content Include="WebSrv.parameters.json" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>

@@ -11,13 +11,11 @@
     "WebSrvAdminPassword": {
       "value": "P2ssw0rd"
     },
+    "WebSrvPubIpDnsName": {
+      "value": "karlrisswsrv"
+    },
     "vNetName": {
       "value": "vNet"
-    },
-    {
-      "WebSrvPubIpDnsName": {
-        "value":  "karlrisstestwsrv"
-      }
     }
   }
 }

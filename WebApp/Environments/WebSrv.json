@@ -1,0 +1,135 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "WebSrvStorageAccType": {
+      "type": "string",
+      "defaultValue": "Standard_LRS",
+      "allowedValues": [
+        "Standard_LRS",
+        "Premium_LRS"
+      ]
+    },
+    "WebSrvName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "WebSrvAdminUserName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "WebSrvAdminPassword": {
+      "type": "securestring"
+    },
+    "WebSrvWindowsOSVersion": {
+      "type": "string",
+      "defaultValue": "2012-R2-Datacenter",
+      "allowedValues": [
+        "2012-R2-Datacenter",
+        "Windows-Server-Technical-Preview"
+      ]
+    },
+    "vNetName": {
+      "type": "string"
+    }
+  },
+  "variables": {
+    "WebSrvStorageAccName": "[concat('webstoracc', uniqueString(resourceGroup().id))]",
+    "WebSrvImagePublisher": "MicrosoftWindowsServer",
+    "WebSrvImageOffer": "WindowsServer",
+    "WebSrvOSDiskName": "WebSrvOSDisk",
+    "WebSrvVmSize": "Standard_D2_v2",
+    "WebSrvVnetID": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks', parameters('vNetName'))]",
+    "WebSrvSubnetRef": "[concat(variables('WebSrvVnetID'), '/subnets/', 'Subnet-1')]",
+    "WebSrvStorageAccountContainerName": "vhds",
+    "WebSrvNicName": "[concat(parameters('WebSrvName'), 'NetworkInterface')]"
+  },
+  "resources": [
+    {
+      "name": "[variables('WebSrvStorageAccName')]",
+      "type": "Microsoft.Storage/storageAccounts",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2016-01-01",
+      "sku": {
+        "name": "[parameters('WebSrvStorageAccType')]"
+      },
+      "dependsOn": [ ],
+      "tags": {
+        "displayName": "WebSrvStorageAcc"
+      },
+      "kind": "Storage"
+    },
+    {
+      "name": "[variables('WebSrvNicName')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2016-03-30",
+      "dependsOn": [],
+      "tags": {
+        "displayName": "WebSrvNic"
+      },
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('WebSrvSubnetRef')]"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[parameters('WebSrvName')]",
+      "type": "Microsoft.Compute/virtualMachines",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2015-06-15",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', variables('WebSrvStorageAccName'))]",
+        "[resourceId('Microsoft.Network/networkInterfaces', variables('WebSrvNicName'))]"
+      ],
+      "tags": {
+        "displayName": "WebSrv"
+      },
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "[variables('WebSrvVmSize')]"
+        },
+        "osProfile": {
+          "computerName": "[parameters('WebSrvName')]",
+          "adminUsername": "[parameters('WebSrvAdminUsername')]",
+          "adminPassword": "[parameters('WebSrvAdminPassword')]"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "[variables('WebSrvImagePublisher')]",
+            "offer": "[variables('WebSrvImageOffer')]",
+            "sku": "[parameters('WebSrvWindowsOSVersion')]",
+            "version": "latest"
+          },
+          "osDisk": {
+            "name": "WebSrvOSDisk",
+            "vhd": {
+              "uri": "[concat(reference(resourceId('Microsoft.Storage/storageAccounts', variables('WebSrvStorageAccName')), '2016-01-01').primaryEndpoints.blob, variables('WebSrvStorageAccountContainerName'), '/', variables('WebSrvOSDiskName'), '.vhd')]"
+            },
+            "caching": "ReadWrite",
+            "createOption": "FromImage"
+          }
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('WebSrvNicName'))]"
+            }
+          ]
+        }
+      }
+    }
+    
+  ],
+  "outputs": {
+  }
+}

@@ -13,6 +13,11 @@
     },
     "vNetName": {
       "value": "vNet"
+    },
+    {
+      "WebSrvPubIpDnsName": {
+        "value":  "karlrisstestwsrv"
+      }
     }
   }
 }

@@ -33,6 +33,7 @@
     <Content Include="vNet.parameters.json" />
     <Content Include="WebSrv.json" />
     <Content Include="WebSrv.parameters.json" />
+    <None Include="WebSrvDscConfig.ps1" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>

@@ -14,8 +14,17 @@
     "WebSrvPubIpDnsName": {
       "value": "karlrisswsrv"
     },
+    "WebSrvWindowsOSVersion": {
+      "value": "2012-R2-Datacenter"
+    },
+    "WebSrvStorageAccType": {
+      "value": "Standard_LRS"
+    },
     "vNetName": {
-      "value": "vNet"
+      "value": "vNet",
+      "metadata": {
+        "description": "This is from the parameters file"
+      }
     }
   }
 }

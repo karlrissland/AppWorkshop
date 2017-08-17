@@ -38,12 +38,14 @@
     },
     "_artifactsLocation": {
       "type": "string",
+      "defaultValue": "https://karlrissartifacts.blob.core.windows.net/",
       "metadata": {
-        "description": "Auto-generated container in staging storage account to receive post-build staging folder upload"
+        "description": "From Template File"
       }
     },
     "_artifactsLocationSasToken": {
       "type": "securestring",
+      "defaultValue": "GSSvYlV0fye5aib3TttNK3iF9FXhb3Z4fY+2JNi9kCQXy0lVZniSo1VrBycXPOXun0kFkbvhCY+dg2C2DfQqgg==",
       "metadata": {
         "description": "Auto-generated token to access _artifactsLocation"
       }

@@ -14,6 +14,18 @@
     "WebSrvPubIpDnsName": {
       "value": "karlrisswsrv"
     },
+    "WebSrvWindowsOSVersion": {
+      "value": "2012-R2-Datacenter"
+    },
+    "WebSrvStorageAccType": {
+      "value": "Standard_LRS"
+    },
+    "_artifactsLocation": {
+      "value": "uri"
+    },
+    "_artifactsLocationSasToken": {
+      "value": "Token"
+    },
     "vNetName": {
       "value": "vNet"
     }

@@ -36,18 +36,11 @@
       "type": "string",
       "minLength": 1
     },
-    "_artifactsLocation": {
+    "DscLocation": {
       "type": "string",
       "defaultValue": "https://karlrissartifacts.blob.core.windows.net/",
       "metadata": {
         "description": "From Template File"
-      }
-    },
-    "_artifactsLocationSasToken": {
-      "type": "securestring",
-      "defaultValue": "GSSvYlV0fye5aib3TttNK3iF9FXhb3Z4fY+2JNi9kCQXy0lVZniSo1VrBycXPOXun0kFkbvhCY+dg2C2DfQqgg==",
-      "metadata": {
-        "description": "Auto-generated token to access _artifactsLocation"
       }
     }
   },
@@ -171,7 +164,7 @@
             "autoUpgradeMinorVersion": true,
             "settings": {
               "configuration": {
-                "url": "[concat(parameters('_artifactsLocation'), '/', variables('ConfigWebSrvArchiveFolder'), '/', variables('ConfigWebSrvArchiveFileName'))]",
+                "url": "[concat(parameters('DscLocation'), '/', variables('ConfigWebSrvArchiveFolder'), '/', variables('ConfigWebSrvArchiveFileName'))]",
                 "script": "ConfigWebSrv.ps1",
                 "function": "Main"
               },
@@ -180,7 +173,7 @@
               }
             },
             "protectedSettings": {
-              "configurationUrlSasToken": "[parameters('_artifactsLocationSasToken')]"
+              "configurationUrlSasToken": "GSSvYlV0fye5aib3TttNK3iF9FXhb3Z4fY+2JNi9kCQXy0lVZniSo1VrBycXPOXun0kFkbvhCY+dg2C2DfQqgg=="
             }
           }
         }

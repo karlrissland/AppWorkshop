@@ -20,6 +20,7 @@
     "WebSrvStorageAccType": {
       "value": "Standard_LRS"
     },
+    "DscLocation": { "value": "https://karlrissartifacts.blob.core.windows.net/dsc/ConfigWebSrv.zip" },
     "vNetName": {
       "value": "vNet",
       "metadata": {

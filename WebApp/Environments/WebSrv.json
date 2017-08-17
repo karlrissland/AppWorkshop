@@ -175,9 +175,7 @@
               },
               "configurationArguments": {
                 "nodeName": "[parameters('WebSrvName')]"
-              },
-              "modulesUrl": "",
-              "configurationFunction": ""
+              }
             },
             "protectedSettings": {
               "configurationUrlSasToken": "[parameters('_artifactsLocationSasToken')]"

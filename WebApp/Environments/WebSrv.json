@@ -31,6 +31,18 @@
     },
     "virtualNetworkName": {
       "type": "string"
+    },
+    "_artifactsLocation": {
+      "type": "string",
+      "metadata": {
+        "description": "Auto-generated container in staging storage account to receive post-build staging folder upload"
+      }
+    },
+    "_artifactsLocationSasToken": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Auto-generated token to access _artifactsLocation"
+      }
     }
   },
   "variables": {
@@ -45,7 +57,9 @@
     "WebSrvNicName": "[concat(parameters('WebSrvName'), 'NetworkInterface')]",
     "virtualNetworkLocation": "[resourceGroup().location]",
     "WebSrvPubIpName": "[concat(parameters('WebSrvName'),'PubIp')]",
-    "WebSrvPubIpDnsName": "[toLower(concat(parameters('WebSrvName'),uniqueString(resourceGroup().id)))]"
+    "WebSrvPubIpDnsName": "[toLower(concat(parameters('WebSrvName'),uniqueString(resourceGroup().id)))]",
+    "WebSrvDscConfigArchiveFolder": "DSC",
+    "WebSrvDscConfigArchiveFileName": "WebSrvDscConfig.zip"
   },
   "resources": [
     {
@@ -133,7 +147,40 @@
             }
           ]
         }
-      }
+      },
+      "resources": [
+        {
+          "name": "Microsoft.Powershell.DSC",
+          "type": "extensions",
+          "location": "[resourceGroup().location]",
+          "apiVersion": "2016-03-30",
+          "dependsOn": [
+            "[resourceId('Microsoft.Compute/virtualMachines', parameters('WebSrvName'))]"
+          ],
+          "tags": {
+            "displayName": "WebSrvDscConfig"
+          },
+          "properties": {
+            "publisher": "Microsoft.Powershell",
+            "type": "DSC",
+            "typeHandlerVersion": "2.9",
+            "autoUpgradeMinorVersion": true,
+            "settings": {
+              "configuration": {
+                "url": "[concat(parameters('_artifactsLocation'), '/', variables('WebSrvDscConfigArchiveFolder'), '/', variables('WebSrvDscConfigArchiveFileName'))]",
+                "script": "WebSrvDscConfig.ps1",
+                "function": "Main"
+              },
+              "configurationArguments": {
+                "nodeName": "[parameters('WebSrvName')]"
+              }
+            },
+            "protectedSettings": {
+              "configurationUrlSasToken": "[parameters('_artifactsLocationSasToken')]"
+            }
+          }
+        }
+      ]
     },
     {
       "name": "[variables('WebSrvPubIpName')]",

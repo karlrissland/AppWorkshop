@@ -33,9 +33,7 @@
     <Content Include="vNet.parameters.json" />
     <Content Include="WebSrv.json" />
     <Content Include="WebSrv.parameters.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DSC\" />
+    <Content Include="DSC\WebSrvDscConfig.ps1" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>

@@ -2,200 +2,33 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "WebSrvStorageAccType": {
+    "WebSrvStorageType": {
       "type": "string",
       "defaultValue": "Standard_LRS",
       "allowedValues": [
         "Standard_LRS",
         "Premium_LRS"
       ]
-    },
-    "WebSrvName": {
-      "type": "string",
-      "minLength": 1
-    },
-    "WebSrvAdminUserName": {
-      "type": "string",
-      "minLength": 1
-    },
-    "WebSrvAdminPassword": {
-      "type": "securestring"
-    },
-    "WebSrvWindowsOSVersion": {
-      "type": "string",
-      "defaultValue": "2012-R2-Datacenter",
-      "allowedValues": [
-        "2012-R2-Datacenter",
-        "Windows-Server-Technical-Preview"
-      ]
-    },
-    "vNetName": {
-      "type": "string"
-    },
-    "WebSrvPubIpDnsName": {
-      "type": "string",
-      "minLength": 1
-    },
-    "DscLocation": {
-      "type": "string",
-      "defaultValue": "https://karlrissartifacts.blob.core.windows.net/",
-      "metadata": {
-        "description": "From Template File"
-      }
     }
   },
   "variables": {
-    "WebSrvStorageAccName": "[concat('webstoracc', uniqueString(resourceGroup().id))]",
-    "WebSrvImagePublisher": "MicrosoftWindowsServer",
-    "WebSrvImageOffer": "WindowsServer",
-    "WebSrvOSDiskName": "WebSrvOSDisk",
-    "WebSrvVmSize": "Standard_D2_v2",
-    "WebSrvVnetID": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks', parameters('vNetName'))]",
-    "WebSrvSubnetRef": "[concat(variables('WebSrvVnetID'), '/subnets/', 'Subnet-1')]",
-    "WebSrvStorageAccountContainerName": "vhds",
-    "WebSrvNicName": "[concat(parameters('WebSrvName'), 'NetworkInterface')]",
-    "WebSrvPubIpName": "WebSrvPubIp",
-    "ConfigWebSrvArchiveFolder": "DSC",
-    "ConfigWebSrvArchiveFileName": "ConfigWebSrv.zip"
+    "WebSrvStorageName": "[toLower(concat(substring('WebSrvStorage',0,11), uniqueString(resourceGroup().id)))]"
   },
   "resources": [
     {
-      "name": "[variables('WebSrvStorageAccName')]",
+      "name": "[variables('WebSrvStorageName')]",
       "type": "Microsoft.Storage/storageAccounts",
       "location": "[resourceGroup().location]",
       "apiVersion": "2016-01-01",
       "sku": {
-        "name": "[parameters('WebSrvStorageAccType')]"
+        "name": "[parameters('WebSrvStorageType')]"
       },
       "dependsOn": [ ],
       "tags": {
-        "displayName": "WebSrvStorageAcc"
+        "displayName": "WebSrvStorage"
       },
       "kind": "Storage"
-    },
-    {
-      "name": "[variables('WebSrvNicName')]",
-      "type": "Microsoft.Network/networkInterfaces",
-      "location": "[resourceGroup().location]",
-      "apiVersion": "2016-03-30",
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/publicIPAddresses', variables('WebSrvPubIpName'))]"],
-      "tags": {
-        "displayName": "WebSrvNic"
-      },
-      "properties": {
-        "ipConfigurations": [
-          {
-            "name": "ipconfig1",
-            "properties": {
-              "privateIPAllocationMethod": "Dynamic",
-              "subnet": {
-                "id": "[variables('WebSrvSubnetRef')]"
-              },
-              "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('WebSrvPubIpName'))]"
-              }
-            }
-          }
-        ]
-      }
-    },
-    {
-      "name": "[parameters('WebSrvName')]",
-      "type": "Microsoft.Compute/virtualMachines",
-      "location": "[resourceGroup().location]",
-      "apiVersion": "2015-06-15",
-      "dependsOn": [
-        "[resourceId('Microsoft.Storage/storageAccounts', variables('WebSrvStorageAccName'))]",
-        "[resourceId('Microsoft.Network/networkInterfaces', variables('WebSrvNicName'))]"
-      ],
-      "tags": {
-        "displayName": "WebSrv"
-      },
-      "properties": {
-        "hardwareProfile": {
-          "vmSize": "[variables('WebSrvVmSize')]"
-        },
-        "osProfile": {
-          "computerName": "[parameters('WebSrvName')]",
-          "adminUsername": "[parameters('WebSrvAdminUsername')]",
-          "adminPassword": "[parameters('WebSrvAdminPassword')]"
-        },
-        "storageProfile": {
-          "imageReference": {
-            "publisher": "[variables('WebSrvImagePublisher')]",
-            "offer": "[variables('WebSrvImageOffer')]",
-            "sku": "[parameters('WebSrvWindowsOSVersion')]",
-            "version": "latest"
-          },
-          "osDisk": {
-            "name": "WebSrvOSDisk",
-            "vhd": {
-              "uri": "[concat(reference(resourceId('Microsoft.Storage/storageAccounts', variables('WebSrvStorageAccName')), '2016-01-01').primaryEndpoints.blob, variables('WebSrvStorageAccountContainerName'), '/', variables('WebSrvOSDiskName'), '.vhd')]"
-            },
-            "caching": "ReadWrite",
-            "createOption": "FromImage"
-          }
-        },
-        "networkProfile": {
-          "networkInterfaces": [
-            {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('WebSrvNicName'))]"
-            }
-          ]
-        }
-      },
-      "resources": [
-        {
-          "name": "Microsoft.Powershell.DSC",
-          "type": "extensions",
-          "location": "[resourceGroup().location]",
-          "apiVersion": "2016-03-30",
-          "dependsOn": [
-            "[resourceId('Microsoft.Compute/virtualMachines', parameters('WebSrvName'))]"
-          ],
-          "tags": {
-            "displayName": "ConfigWebSrv"
-          },
-          "properties": {
-            "publisher": "Microsoft.Powershell",
-            "type": "DSC",
-            "typeHandlerVersion": "2.9",
-            "autoUpgradeMinorVersion": true,
-            "settings": {
-              "configuration": {
-                "url": "[concat(parameters('DscLocation'), '/', variables('ConfigWebSrvArchiveFolder'), '/', variables('ConfigWebSrvArchiveFileName'))]",
-                "script": "ConfigWebSrv.ps1",
-                "function": "Main"
-              },
-              "configurationArguments": {
-                "nodeName": "[parameters('WebSrvName')]"
-              }
-            },
-            "protectedSettings": {
-              "configurationUrlSasToken": "GSSvYlV0fye5aib3TttNK3iF9FXhb3Z4fY+2JNi9kCQXy0lVZniSo1VrBycXPOXun0kFkbvhCY+dg2C2DfQqgg=="
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "[variables('WebSrvPubIpName')]",
-      "type": "Microsoft.Network/publicIPAddresses",
-      "location": "[resourceGroup().location]",
-      "apiVersion": "2016-03-30",
-      "dependsOn": [ ],
-      "tags": {
-        "displayName": "WebSrvPubIp"
-      },
-      "properties": {
-        "publicIPAllocationMethod": "Dynamic",
-        "dnsSettings": {
-          "domainNameLabel": "[parameters('WebSrvPubIpDnsName')]"
-        }
-      }
     }
-    
   ],
   "outputs": {
   }

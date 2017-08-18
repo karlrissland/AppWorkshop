@@ -7,8 +7,7 @@ Import-DscResource -ModuleName PSDesiredStateConfiguration
 
 Node $nodeName
   {
-   <# This section represents an example configuration that can be updated as required.#>
-    WindowsFeature WebServerRole
+	WindowsFeature WebServerRole
     {
       Name = "Web-Server"
       Ensure = "Present"
@@ -74,7 +73,7 @@ Node $nodeName
             Test-Path "C:\WindowsAzure\WebDeploy_amd64_en-US.msi"
         }
         SetScript ={
-            $source = "http://download.microsoft.com/download/A/5/0/A502BE57-7848-42B8-97D5-DEB2069E2B05/WebDeploy_amd64_en-US.msi"
+            $source = "https://download.microsoft.com/download/0/1/D/01DC28EA-638C-4A22-A57B-4CEF97755C6C/WebDeploy_amd64_en-US.msi"
             $dest = "C:\WindowsAzure\WebDeploy_amd64_en-US.msi"
             Invoke-WebRequest $source -OutFile $dest
         }
@@ -85,8 +84,8 @@ Node $nodeName
     {
         Ensure = "Present"  
         Path  = "C:\WindowsAzure\WebDeploy_amd64_en-US.msi"
-        Name = "Microsoft Web Deploy 3.6 Beta"
-        ProductId = "{50638DB8-30CE-4713-8EA0-6AA405740391}"
+        Name = "Microsoft Web Deploy 3.6"
+        ProductId = "{6773A61D-755B-4F74-95CC-97920E45E696}"
         Arguments = "ADDLOCAL=ALL"
         DependsOn = "[Script]DownloadWebDeploy"
     }
@@ -96,6 +95,6 @@ Node $nodeName
         StartupType = "Automatic"
         State = "Running"
         DependsOn = "[Package]InstallWebDeploy"
-    }
+    } 
   }
 }

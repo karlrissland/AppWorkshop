@@ -2,32 +2,5 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "WebSrvName": {
-      "value": "krisswebsrv1"
-    },
-    "WebSrvAdminUserName": {
-      "value": "karl"
-    },
-    "WebSrvAdminPassword": {
-      "value": "P2ssw0rd"
-    },
-    "WebSrvPubIpDnsName": {
-      "value": "karlrisswsrv"
-    },
-    "WebSrvWindowsOSVersion": {
-      "value": "2012-R2-Datacenter"
-    },
-    "WebSrvStorageAccType": {
-      "value": "Standard_LRS"
-    },
-    "_artifactsLocation": {
-      "value": "uri"
-    },
-    "_artifactsLocationSasToken": {
-      "value": "Token"
-    },
-    "vNetName": {
-      "value": "vNet"
-    }
   }
 }

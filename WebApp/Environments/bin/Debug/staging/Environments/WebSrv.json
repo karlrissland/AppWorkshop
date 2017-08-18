@@ -43,7 +43,9 @@
     "WebSrvSubnetRef": "[concat(variables('WebSrvVnetID'), '/subnets/', 'Subnet-1')]",
     "WebSrvStorageAccountContainerName": "vhds",
     "WebSrvNicName": "[concat(parameters('WebSrvName'), 'NetworkInterface')]",
-    "virtualNetworkLocation": "[resourceGroup().location]"
+    "virtualNetworkLocation": "[resourceGroup().location]",
+    "WebSrvPubIpName": "[concat(parameters('WebSrvName'),'PubIp')]",
+    "WebSrvPubIpDnsName": "[toLower(concat(parameters('WebSrvName'),uniqueString(resourceGroup().id)))]"
   },
   "resources": [
     {
@@ -65,7 +67,8 @@
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[variables('virtualNetworkLocation')]",
       "apiVersion": "2016-03-30",
-      "dependsOn": [ ],
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/publicIPAddresses', variables('WebSrvPubIpName'))]" ],
       "tags": {
         "displayName": "WebSrvNic"
       },
@@ -77,6 +80,9 @@
               "privateIPAllocationMethod": "Dynamic",
               "subnet": {
                 "id": "[variables('WebSrvSubnetRef')]"
+              },
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('WebSrvPubIpName'))]"
               }
             }
           }
@@ -126,6 +132,22 @@
               "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('WebSrvNicName'))]"
             }
           ]
+        }
+      }
+    },
+    {
+      "name": "[variables('WebSrvPubIpName')]",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "location": "[variables('virtualNetworkLocation')]",
+      "apiVersion": "2016-03-30",
+      "dependsOn": [ ],
+      "tags": {
+        "displayName": "WebSrvPubIp"
+      },
+      "properties": {
+        "publicIPAllocationMethod": "Dynamic",
+        "dnsSettings": {
+          "domainNameLabel": "[variables('WebSrvPubIpDnsName')]"
         }
       }
     }

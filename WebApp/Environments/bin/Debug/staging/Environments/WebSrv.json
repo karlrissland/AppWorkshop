@@ -9,10 +9,48 @@
         "Standard_LRS",
         "Premium_LRS"
       ]
+    },
+    "WebSrvName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "WebSrvAdminUserName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "WebSrvAdminPassword": {
+      "type": "securestring"
+    },
+    "WebSrvWindowsOSVersion": {
+      "type": "string",
+      "defaultValue": "2012-R2-Datacenter",
+      "allowedValues": [
+        "2008-R2-SP1",
+        "2012-Datacenter",
+        "2012-R2-Datacenter",
+        "Windows-Server-Technical-Preview"
+      ]
+    },
+    "virtualNetworkName": {
+      "type": "string"
+    },
+    "virtualNetworkLocation": {
+      "type": "string"
+    },
+    "virtualNetworkResourceGroup": {
+      "type": "string"
     }
   },
   "variables": {
-    "WebSrvStorageName": "[toLower(concat(substring('WebSrvStorage',0,11), uniqueString(resourceGroup().id)))]"
+    "WebSrvStorageName": "[toLower(concat(substring('WebSrvStorage',0,11), uniqueString(resourceGroup().id)))]",
+    "WebSrvImagePublisher": "MicrosoftWindowsServer",
+    "WebSrvImageOffer": "WindowsServer",
+    "WebSrvOSDiskName": "WebSrvOSDisk",
+    "WebSrvVmSize": "Standard_D2_v2",
+    "WebSrvVnetID": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+    "WebSrvSubnetRef": "[concat(variables('WebSrvVnetID'), '/subnets/', 'Subnet-1')]",
+    "WebSrvStorageAccountContainerName": "vhds",
+    "WebSrvNicName": "[concat(parameters('WebSrvName'), 'NetworkInterface')]"
   },
   "resources": [
     {
@@ -28,6 +66,75 @@
         "displayName": "WebSrvStorage"
       },
       "kind": "Storage"
+    },
+    {
+      "name": "[variables('WebSrvNicName')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "location": "[parameters('virtualNetworkLocation')]",
+      "apiVersion": "2016-03-30",
+      "dependsOn": [ ],
+      "tags": {
+        "displayName": "WebSrvNic"
+      },
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('WebSrvSubnetRef')]"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[parameters('WebSrvName')]",
+      "type": "Microsoft.Compute/virtualMachines",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2015-06-15",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', variables('WebSrvStorageName'))]",
+        "[resourceId('Microsoft.Network/networkInterfaces', variables('WebSrvNicName'))]"
+      ],
+      "tags": {
+        "displayName": "WebSrv"
+      },
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "[variables('WebSrvVmSize')]"
+        },
+        "osProfile": {
+          "computerName": "[parameters('WebSrvName')]",
+          "adminUsername": "[parameters('WebSrvAdminUsername')]",
+          "adminPassword": "[parameters('WebSrvAdminPassword')]"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "[variables('WebSrvImagePublisher')]",
+            "offer": "[variables('WebSrvImageOffer')]",
+            "sku": "[parameters('WebSrvWindowsOSVersion')]",
+            "version": "latest"
+          },
+          "osDisk": {
+            "name": "WebSrvOSDisk",
+            "vhd": {
+              "uri": "[concat(reference(resourceId('Microsoft.Storage/storageAccounts', variables('WebSrvStorageName')), '2016-01-01').primaryEndpoints.blob, variables('WebSrvStorageAccountContainerName'), '/', variables('WebSrvOSDiskName'), '.vhd')]"
+            },
+            "caching": "ReadWrite",
+            "createOption": "FromImage"
+          }
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('WebSrvNicName'))]"
+            }
+          ]
+        }
+      }
     }
   ],
   "outputs": {

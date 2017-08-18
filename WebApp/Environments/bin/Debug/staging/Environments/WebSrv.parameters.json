@@ -13,12 +13,6 @@
     },
     "virtualNetworkName": {
       "value": "vNetTest"
-    },
-    "virtualNetworkLocation": {
-      "value": "East US 2"
-    },
-    "virtualNetworkResourceGroup": {
-      "value": "MyResGroup"
     }
   }
 }

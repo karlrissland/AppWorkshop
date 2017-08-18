@@ -25,19 +25,11 @@
       "type": "string",
       "defaultValue": "2012-R2-Datacenter",
       "allowedValues": [
-        "2008-R2-SP1",
-        "2012-Datacenter",
         "2012-R2-Datacenter",
         "Windows-Server-Technical-Preview"
       ]
     },
     "virtualNetworkName": {
-      "type": "string"
-    },
-    "virtualNetworkLocation": {
-      "type": "string"
-    },
-    "virtualNetworkResourceGroup": {
       "type": "string"
     }
   },
@@ -47,10 +39,11 @@
     "WebSrvImageOffer": "WindowsServer",
     "WebSrvOSDiskName": "WebSrvOSDisk",
     "WebSrvVmSize": "Standard_D2_v2",
-    "WebSrvVnetID": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+    "WebSrvVnetID": "[resourceId(resourceGroup().Name, 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
     "WebSrvSubnetRef": "[concat(variables('WebSrvVnetID'), '/subnets/', 'Subnet-1')]",
     "WebSrvStorageAccountContainerName": "vhds",
-    "WebSrvNicName": "[concat(parameters('WebSrvName'), 'NetworkInterface')]"
+    "WebSrvNicName": "[concat(parameters('WebSrvName'), 'NetworkInterface')]",
+    "virtualNetworkLocation": "[resourceGroup().location]"
   },
   "resources": [
     {
@@ -70,7 +63,7 @@
     {
       "name": "[variables('WebSrvNicName')]",
       "type": "Microsoft.Network/networkInterfaces",
-      "location": "[parameters('virtualNetworkLocation')]",
+      "location": "[variables('virtualNetworkLocation')]",
       "apiVersion": "2016-03-30",
       "dependsOn": [ ],
       "tags": {

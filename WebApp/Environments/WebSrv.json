@@ -58,7 +58,7 @@
     "virtualNetworkLocation": "[resourceGroup().location]",
     "WebSrvPubIpName": "[concat(parameters('WebSrvName'),'PubIp')]",
     "WebSrvPubIpDnsName": "[toLower(concat(parameters('WebSrvName'),uniqueString(resourceGroup().id)))]",
-    "WebSrvDscConfigArchiveFolder": "[toLower(concat(resourceGroup().name, '-artifacts'))]",
+    "WebSrvDscConfigArchiveFolder": "DSC",
     "WebSrvDscConfigArchiveFileName": "WebSrvDscConfig.zip"
   },
   "resources": [

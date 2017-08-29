@@ -1,0 +1,156 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "VsDevWorkstationStorageType": {
+      "type": "string",
+      "defaultValue": "Standard_LRS",
+      "allowedValues": [
+        "Standard_LRS",
+        "Premium_LRS"
+      ]
+    },
+    "VsDevWorkstationName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "VsDevWorkstationAdminUserName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "VsDevWorkstationAdminPassword": {
+      "type": "securestring"
+    },
+    "VsDevWorkstationWindowsOSVersion": {
+      "type": "string",
+      "defaultValue": "VS-2017-Ent-Win10-N",
+      "allowedValues": [
+        "VS-2017-Ent-Win10-N",
+        "VS-2017-Ent-WS2016"
+      ]
+    },
+    "virtualNetworkName": {
+      "type": "string"
+    }
+  },
+  "variables": {
+    "VsDevWorkstationStorageName": "[toLower(concat(substring(parameters('VsDevWorkstationName'),0,11), uniqueString(resourceGroup().id)))]",
+    "VsDevWorkstationImagePublisher": "MicrosoftVisualStudio",
+    "VsDevWorkstationImageOffer": "VisualStudio",
+    "VsDevWorkstationOSDiskName": "VsDevWorkstationOSDisk",
+    "VsDevWorkstationVmSize": "Standard_D2_v2",
+    "VsDevWorkstationVnetID": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+    "VsDevWorkstationSubnetRef": "[concat(variables('VsDevWorkstationVnetID'), '/subnets/', 'Subnet-1')]",
+    "VsDevWorkstationStorageAccountContainerName": "vhds",
+    "VsDevWorkstationNicName": "[concat(parameters('VsDevWorkstationName'), 'NetworkInterface')]",
+    "VsDevWorkstationPubIPName": "[concat(parameters('vsDevWorkstationName'),'PubIP')]",
+    "VsDevWorkstationPubIPDnsName": "[concat(parameters('VsDevWorkstationName'),uniqueString(resourceGroup().id))]"
+  },
+  "resources": [
+    {
+      "name": "[variables('VsDevWorkstationStorageName')]",
+      "type": "Microsoft.Storage/storageAccounts",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2016-01-01",
+      "sku": {
+        "name": "[parameters('VsDevWorkstationStorageType')]"
+      },
+      "dependsOn": [ ],
+      "tags": {
+        "displayName": "VsDevWorkstationStorage"
+      },
+      "kind": "Storage"
+    },
+    {
+      "name": "[variables('VsDevWorkstationNicName')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2016-03-30",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/publicIPAddresses', variables('VsDevWorkstationPubIPName'))]" ],
+      "tags": {
+        "displayName": "VsDevWorkstationNic"
+      },
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('VsDevWorkstationSubnetRef')]"
+              },
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('VsDevWorkstationPubIPName'))]"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[parameters('VsDevWorkstationName')]",
+      "type": "Microsoft.Compute/virtualMachines",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2015-06-15",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', variables('VsDevWorkstationStorageName'))]",
+        "[resourceId('Microsoft.Network/networkInterfaces', variables('VsDevWorkstationNicName'))]"
+      ],
+      "tags": {
+        "displayName": "VsDevWorkstation"
+      },
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "[variables('VsDevWorkstationVmSize')]"
+        },
+        "osProfile": {
+          "computerName": "[parameters('VsDevWorkstationName')]",
+          "adminUsername": "[parameters('VsDevWorkstationAdminUsername')]",
+          "adminPassword": "[parameters('VsDevWorkstationAdminPassword')]"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "[variables('VsDevWorkstationImagePublisher')]",
+            "offer": "[variables('VsDevWorkstationImageOffer')]",
+            "sku": "[parameters('VsDevWorkstationWindowsOSVersion')]",
+            "version": "latest"
+          },
+          "osDisk": {
+            "name": "VsDevWorkstationOSDisk",
+            "vhd": {
+              "uri": "[concat(reference(resourceId('Microsoft.Storage/storageAccounts', variables('VsDevWorkstationStorageName')), '2016-01-01').primaryEndpoints.blob, variables('VsDevWorkstationStorageAccountContainerName'), '/', variables('VsDevWorkstationOSDiskName'), '.vhd')]"
+            },
+            "caching": "ReadWrite",
+            "createOption": "FromImage"
+          }
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('VsDevWorkstationNicName'))]"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "[variables('VsDevWorkstationPubIPName')]",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2016-03-30",
+      "dependsOn": [ ],
+      "tags": {
+        "displayName": "VsDevWorkstationPubIP"
+      },
+      "properties": {
+        "publicIPAllocationMethod": "Dynamic",
+        "dnsSettings": {
+          "domainNameLabel": "[variables('VsDevWorkstationPubIPDnsName')]"
+        }
+      }
+    }
+  ],
+  "outputs": {
+  }
+}

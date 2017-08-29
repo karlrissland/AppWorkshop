@@ -1,0 +1,1 @@
+C:\Users\karlriss\Source\Repos\IaaS2PaaS\WebApp\Environments\obj\Debug\Environments.deployproj.CoreCompileInputs.cache

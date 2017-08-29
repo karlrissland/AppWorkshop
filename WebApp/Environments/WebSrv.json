@@ -23,10 +23,10 @@
     },
     "WebSrvWindowsOSVersion": {
       "type": "string",
-      "defaultValue": "2012-R2-Datacenter",
+      "defaultValue": "2016-Datacenter",
       "allowedValues": [
         "2012-R2-Datacenter",
-        "Windows-Server-Technical-Preview"
+        "2016-Datacenter"
       ]
     },
     "virtualNetworkName": {
@@ -46,7 +46,7 @@
     }
   },
   "variables": {
-    "WebSrvStorageName": "[toLower(concat(substring('WebSrvStorage',0,11), uniqueString(resourceGroup().id)))]",
+    "WebSrvStorageName": "[toLower(concat(substring(parameters('WebSrvName'),0,11), uniqueString(resourceGroup().id)))]",
     "WebSrvImagePublisher": "MicrosoftWindowsServer",
     "WebSrvImageOffer": "WindowsServer",
     "WebSrvOSDiskName": "WebSrvOSDisk",

@@ -14,15 +14,6 @@
     "adminPassword": {
       "type": "securestring"
     },
-    "addressPrefix": {
-      "type": "string"
-    },
-    "subnetName": {
-      "type": "string"
-    },
-    "subnetPrefix": {
-      "type": "string"
-    },
     "SqlSrvStorageType": {
       "type": "string",
       "defaultValue": "Standard_LRS",
@@ -34,23 +25,12 @@
   },
   "variables": {
     "vnetId": "[resourceId(ResourceGroup().name,'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
-    "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]",
+    "subnetRef": "[concat(variables('vnetId'), '/subnets/', 'Subnet-1')]",
     "networkInterfaceName": "[concat(parameters('virtualMachineName'), 'NetworkInterface')]",
     "networkSecurityGroupName": "[concat(parameters('virtualMachineName'), 'NSG')]",
     "publicIpAddressName": "[concat(parameters('virtualMachineName'),'PubIp')]",
     "publicIpAddressDnsName": "[toLower(concat(parameters('virtualMachineName'),uniqueString(resourceGroup().id)))]",
-    "SqlSrvStorageName": "[toLower(concat(substring(parameters('virtualMachineName'),0,11), uniqueString(resourceGroup().id)))]",
-    "rServicesEnabled": "false",
-    "sqlConnectivityType": "Public",
-    "sqlPortNumber": "1433",
-    "sqlStorageDisksCount": "1",
-    "sqlStorageWorkloadType": "GENERAL",
-    "sqlStorageDisksConfigurationType": "NEW",
-    "sqlStorageStartingDeviceId": "2",
     "virtualMachineSize": "Standard_DS12_v2",
-    "addressPrefix": "10.0.16.0/24",
-    "subnetName": "default",
-    "subnetPrefix": "10.0.16.0/24",
     "sqlAuthenticationLogin": "sa"
   },
   "resources": [
@@ -121,33 +101,11 @@
       }
     },
     {
-      "name": "[parameters('virtualNetworkName')]",
-      "type": "Microsoft.Network/virtualNetworks",
-      "apiVersion": "2016-12-01",
-      "location": "[resourceGroup().location]",
-      "properties": {
-        "addressSpace": {
-          "addressPrefixes": [
-            "[parameters('addressPrefix')]"
-          ]
-        },
-        "subnets": [
-          {
-            "name": "[parameters('subnetName')]",
-            "properties": {
-              "addressPrefix": "[parameters('subnetPrefix')]"
-            }
-          }
-        ]
-      }
-    },
-    {
       "name": "[variables('networkInterfaceName')]",
       "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2016-09-01",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "[concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]",
         "[concat('Microsoft.Network/publicIpAddresses/', variables('publicIpAddressName'))]",
         "[concat('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroupName'))]"
       ],

@@ -13,15 +13,6 @@
     },
     "adminPassword": {
       "value": "P2ssw0rd"
-    },
-    "addressPrefix": {
-      "value": "10.0.16.0/24"
-    },
-    "subnetName": {
-      "value": "default"
-    },
-    "subnetPrefix": {
-      "value": "10.0.16.0/24"
     }
   }
 }

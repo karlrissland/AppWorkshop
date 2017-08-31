@@ -27,6 +27,7 @@
   <ItemGroup>
     <Content Include="BizTalkSrv.json" />
     <Content Include="BizTalkSrv.parameters.json" />
+    <Content Include="CustomScripts\InstallxSQLServerModule.ps1" />
     <None Include="Deployment.targets">
       <Visible>False</Visible>
     </None>
@@ -40,6 +41,7 @@
     <Content Include="SqlSrv.parameters.json" />
     <Content Include="VsDevWorkstation.json" />
     <Content Include="VsDevWorkstation.parameters.json" />
+    <Content Include="DSC\SqlSrvDscConfig.ps1" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>

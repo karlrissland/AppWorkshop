@@ -46,7 +46,6 @@
     }
   },
   "variables": {
-    "WebSrvStorageName": "[toLower(concat(substring(parameters('WebSrvName'),0,11), uniqueString(resourceGroup().id)))]",
     "WebSrvImagePublisher": "MicrosoftWindowsServer",
     "WebSrvImageOffer": "WindowsServer",
     "WebSrvOSDiskName": "WebSrvOSDisk",
@@ -62,20 +61,6 @@
     "WebSrvDscConfigArchiveFileName": "WebSrvDscConfig.zip"
   },
   "resources": [
-    {
-      "name": "[variables('WebSrvStorageName')]",
-      "type": "Microsoft.Storage/storageAccounts",
-      "location": "[resourceGroup().location]",
-      "apiVersion": "2016-01-01",
-      "sku": {
-        "name": "[parameters('WebSrvStorageType')]"
-      },
-      "dependsOn": [ ],
-      "tags": {
-        "displayName": "WebSrvStorage"
-      },
-      "kind": "Storage"
-    },
     {
       "name": "[variables('WebSrvNicName')]",
       "type": "Microsoft.Network/networkInterfaces",
@@ -107,9 +92,8 @@
       "name": "[parameters('WebSrvName')]",
       "type": "Microsoft.Compute/virtualMachines",
       "location": "[resourceGroup().location]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2016-04-30-preview",
       "dependsOn": [
-        "[resourceId('Microsoft.Storage/storageAccounts', variables('WebSrvStorageName'))]",
         "[resourceId('Microsoft.Network/networkInterfaces', variables('WebSrvNicName'))]"
       ],
       "tags": {
@@ -132,12 +116,10 @@
             "version": "latest"
           },
           "osDisk": {
-            "name": "WebSrvOSDisk",
-            "vhd": {
-              "uri": "[concat(reference(resourceId('Microsoft.Storage/storageAccounts', variables('WebSrvStorageName')), '2016-01-01').primaryEndpoints.blob, variables('WebSrvStorageAccountContainerName'), '/', variables('WebSrvOSDiskName'), '.vhd')]"
-            },
-            "caching": "ReadWrite",
-            "createOption": "FromImage"
+            "createOption": "FromImage",
+            "managedDisk": {
+              "storageAccountType": "[parameters('WebSrvStorageType')]"
+            }
           }
         },
         "networkProfile": {

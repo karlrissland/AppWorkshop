@@ -34,33 +34,17 @@
     }
   },
   "variables": {
-    "VsDevWorkstationStorageName": "[toLower(concat(substring(parameters('VsDevWorkstationName'),0,11), uniqueString(resourceGroup().id)))]",
     "VsDevWorkstationImagePublisher": "MicrosoftVisualStudio",
     "VsDevWorkstationImageOffer": "VisualStudio",
     "VsDevWorkstationOSDiskName": "VsDevWorkstationOSDisk",
     "VsDevWorkstationVmSize": "Standard_D2_v2",
     "VsDevWorkstationVnetID": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
     "VsDevWorkstationSubnetRef": "[concat(variables('VsDevWorkstationVnetID'), '/subnets/', 'Subnet-1')]",
-    "VsDevWorkstationStorageAccountContainerName": "vhds",
     "VsDevWorkstationNicName": "[concat(parameters('VsDevWorkstationName'), 'NetworkInterface')]",
     "VsDevWorkstationPubIPName": "[concat(parameters('vsDevWorkstationName'),'PubIP')]",
     "VsDevWorkstationPubIPDnsName": "[concat(parameters('VsDevWorkstationName'),uniqueString(resourceGroup().id))]"
   },
   "resources": [
-    {
-      "name": "[variables('VsDevWorkstationStorageName')]",
-      "type": "Microsoft.Storage/storageAccounts",
-      "location": "[resourceGroup().location]",
-      "apiVersion": "2016-01-01",
-      "sku": {
-        "name": "[parameters('VsDevWorkstationStorageType')]"
-      },
-      "dependsOn": [ ],
-      "tags": {
-        "displayName": "VsDevWorkstationStorage"
-      },
-      "kind": "Storage"
-    },
     {
       "name": "[variables('VsDevWorkstationNicName')]",
       "type": "Microsoft.Network/networkInterfaces",
@@ -92,9 +76,8 @@
       "name": "[parameters('VsDevWorkstationName')]",
       "type": "Microsoft.Compute/virtualMachines",
       "location": "[resourceGroup().location]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2016-04-30-preview",
       "dependsOn": [
-        "[resourceId('Microsoft.Storage/storageAccounts', variables('VsDevWorkstationStorageName'))]",
         "[resourceId('Microsoft.Network/networkInterfaces', variables('VsDevWorkstationNicName'))]"
       ],
       "tags": {
@@ -118,10 +101,9 @@
           },
           "osDisk": {
             "name": "VsDevWorkstationOSDisk",
-            "vhd": {
-              "uri": "[concat(reference(resourceId('Microsoft.Storage/storageAccounts', variables('VsDevWorkstationStorageName')), '2016-01-01').primaryEndpoints.blob, variables('VsDevWorkstationStorageAccountContainerName'), '/', variables('VsDevWorkstationOSDiskName'), '.vhd')]"
+            "managedDisk": {
+              "storageAccountType": "[parameters('VsDevWorkstationStorageType')]"
             },
-            "caching": "ReadWrite",
             "createOption": "FromImage"
           }
         },

@@ -31,6 +31,9 @@
     },
     "virtualNetworkName": {
       "type": "string"
+    },
+    "virtualNetworkResourceGroup": {
+      "type": "string"
     }
   },
   "variables": {
@@ -38,7 +41,7 @@
     "BtsSrvImageOffer": "BizTalk-Server",
     "BtsSrvOSDiskName": "BtsSrvOSDisk",
     "BtsSrvVmSize": "Standard_D2_v2",
-    "BtsSrvVnetID": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+    "BtsSrvVnetID": "[resourceId(parameters('virtualNetworkResourcegroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
     "BtsSrvSubnetRef": "[concat(variables('BtsSrvVnetID'), '/subnets/', 'Subnet-1')]",
     "BtsSrvNicName": "[concat(parameters('BtsSrvName'), 'NetworkInterface')]",
     "BtsSrvPubIPName": "[concat(parameters('BtsSrvName'),'PubIP')]",

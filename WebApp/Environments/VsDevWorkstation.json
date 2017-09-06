@@ -31,6 +31,9 @@
     },
     "virtualNetworkName": {
       "type": "string"
+    },
+    "virtualNetworkResourceGroup": {
+      "type": "string"
     }
   },
   "variables": {
@@ -38,7 +41,7 @@
     "VsDevWorkstationImageOffer": "VisualStudio",
     "VsDevWorkstationOSDiskName": "VsDevWorkstationOSDisk",
     "VsDevWorkstationVmSize": "Standard_D2_v2",
-    "VsDevWorkstationVnetID": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+    "VsDevWorkstationVnetID": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
     "VsDevWorkstationSubnetRef": "[concat(variables('VsDevWorkstationVnetID'), '/subnets/', 'Subnet-1')]",
     "VsDevWorkstationNicName": "[concat(parameters('VsDevWorkstationName'), 'NetworkInterface')]",
     "VsDevWorkstationPubIPName": "[concat(parameters('vsDevWorkstationName'),'PubIP')]",

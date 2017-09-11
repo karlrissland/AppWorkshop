@@ -28,12 +28,13 @@
     <Content Include="BizTalkSrv.json" />
     <Content Include="BizTalkSrv.parameters.json" />
     <Content Include="CustomScripts\InstallxSQLServerModule.ps1" />
+    <Content Include="CustomScripts\InstallVstsBuildAgent.ps1" />
     <None Include="Deployment.targets">
       <Visible>False</Visible>
     </None>
     <Content Include="Deploy-AzureResourceGroup.ps1" />
-    <Content Include="vNet.json" />
-    <Content Include="vNet.parameters.json" />
+    <Content Include="Lab.json" />
+    <Content Include="Lab.parameters.json" />
     <Content Include="WebSrv.json" />
     <Content Include="WebSrv.parameters.json" />
     <Content Include="DSC\WebSrvDscConfig.ps1" />

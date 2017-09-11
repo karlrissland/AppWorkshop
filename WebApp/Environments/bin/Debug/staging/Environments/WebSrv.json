@@ -32,6 +32,9 @@
     "virtualNetworkName": {
       "type": "string"
     },
+    "virtualNetworkResourceGroup": {
+      "type": "String"
+    }
     "_artifactsLocation": {
       "type": "string",
       "metadata": {
@@ -50,7 +53,7 @@
     "WebSrvImageOffer": "WindowsServer",
     "WebSrvOSDiskName": "WebSrvOSDisk",
     "WebSrvVmSize": "Standard_D2_v2",
-    "WebSrvVnetID": "[resourceId(resourceGroup().Name, 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+    "WebSrvVnetID": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
     "WebSrvSubnetRef": "[concat(variables('WebSrvVnetID'), '/subnets/', 'Subnet-1')]",
     "WebSrvStorageAccountContainerName": "vhds",
     "WebSrvNicName": "[concat(parameters('WebSrvName'), 'NetworkInterface')]",

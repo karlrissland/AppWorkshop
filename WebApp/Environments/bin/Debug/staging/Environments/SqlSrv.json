@@ -11,6 +11,9 @@
     "virtualNetworkName": {
       "type": "string"
     },
+    "virtualNetworkResourceGroup": {
+      "type": "string"
+    }
     "adminPassword": {
       "type": "securestring"
     },
@@ -36,7 +39,7 @@
     }
   },
   "variables": {
-    "vnetId": "[resourceId(ResourceGroup().name,'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+    "vnetId": "[resourceId(parameters('virtualNetworkResourceGroup'),'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetId'), '/subnets/', 'Subnet-1')]",
     "networkInterfaceName": "[concat(parameters('virtualMachineName'), 'NetworkInterface')]",
     "networkSecurityGroupName": "[concat(parameters('virtualMachineName'), 'NSG')]",

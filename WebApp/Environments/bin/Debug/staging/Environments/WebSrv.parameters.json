@@ -13,6 +13,9 @@
     },
     "virtualNetworkName": {
       "value": "vNetTest"
+    },
+    "virtualNetworkResourceGroup": {
+      "value": "LabResourceGroup"
     }
   }
 }

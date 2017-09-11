@@ -13,6 +13,9 @@
     },
     "adminPassword": {
       "value": "P2ssw0rd"
+    },
+    "virtualNetworkResourceGroup": {
+      "value": "labresourcegroup"
     }
   }
 }

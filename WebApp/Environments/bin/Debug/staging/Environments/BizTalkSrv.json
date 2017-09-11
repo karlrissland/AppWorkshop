@@ -31,36 +31,23 @@
     },
     "virtualNetworkName": {
       "type": "string"
+    },
+    "virtualNetworkResourceGroup": {
+      "type": "string"
     }
   },
   "variables": {
-    "BtsSrvStorageName": "[toLower(concat(substring(parameters('BtsSrvName'),0,11), uniqueString(resourceGroup().id)))]",
     "BtsSrvImagePublisher": "MicrosoftBizTalkServer",
     "BtsSrvImageOffer": "BizTalk-Server",
     "BtsSrvOSDiskName": "BtsSrvOSDisk",
     "BtsSrvVmSize": "Standard_D2_v2",
-    "BtsSrvVnetID": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+    "BtsSrvVnetID": "[resourceId(parameters('virtualNetworkResourcegroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
     "BtsSrvSubnetRef": "[concat(variables('BtsSrvVnetID'), '/subnets/', 'Subnet-1')]",
-    "BtsSrvStorageAccountContainerName": "vhds",
     "BtsSrvNicName": "[concat(parameters('BtsSrvName'), 'NetworkInterface')]",
     "BtsSrvPubIPName": "[concat(parameters('BtsSrvName'),'PubIP')]",
     "BtsSrvPubIPDnsName": "[toLower(concat(parameters('BtsSrvName'),uniqueString(resourceGroup().id)))]"
   },
   "resources": [
-    {
-      "name": "[variables('BtsSrvStorageName')]",
-      "type": "Microsoft.Storage/storageAccounts",
-      "location": "[resourceGroup().location]",
-      "apiVersion": "2016-01-01",
-      "sku": {
-        "name": "[parameters('BtsSrvStorageType')]"
-      },
-      "dependsOn": [ ],
-      "tags": {
-        "displayName": "BtsSrvStorage"
-      },
-      "kind": "Storage"
-    },
     {
       "name": "[variables('BtsSrvNicName')]",
       "type": "Microsoft.Network/networkInterfaces",
@@ -92,9 +79,8 @@
       "name": "[parameters('BtsSrvName')]",
       "type": "Microsoft.Compute/virtualMachines",
       "location": "[resourceGroup().location]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2016-04-30-preview",
       "dependsOn": [
-        "[resourceId('Microsoft.Storage/storageAccounts', variables('BtsSrvStorageName'))]",
         "[resourceId('Microsoft.Network/networkInterfaces', variables('BtsSrvNicName'))]"
       ],
       "tags": {
@@ -118,10 +104,9 @@
           },
           "osDisk": {
             "name": "BtsSrvOSDisk",
-            "vhd": {
-              "uri": "[concat(reference(resourceId('Microsoft.Storage/storageAccounts', variables('BtsSrvStorageName')), '2016-01-01').primaryEndpoints.blob, variables('BtsSrvStorageAccountContainerName'), '/', variables('BtsSrvOSDiskName'), '.vhd')]"
+            "managedDisk": {
+              "storageAccountType": "[parameters('BtsSrvStorageType')]"
             },
-            "caching": "ReadWrite",
             "createOption": "FromImage"
           }
         },

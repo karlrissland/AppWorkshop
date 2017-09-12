@@ -1,7 +1,7 @@
 ﻿/*
 	Target database:	PartsUnlimitedWebsite
 	Target instance:	KARLRISSSP4\LOCALDB#8DF7A4CF
-	Generated date:		9/12/2017 5:37:02 PM
+	Generated date:		9/12/2017 7:09:05 PM
 	Generated on:		KARLRISSSP4
 	Package version:	(undefined)
 	Migration version:	(n/a)

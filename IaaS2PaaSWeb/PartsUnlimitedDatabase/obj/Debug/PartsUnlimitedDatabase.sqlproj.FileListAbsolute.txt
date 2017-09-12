@@ -1,0 +1,10 @@
+C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedDatabase\bin\Debug\PartsUnlimitedDatabase_Package.sql
+C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedDatabase\bin\Debug\PartsUnlimitedDatabase_DeployPackage.ps1
+C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedDatabase\bin\Debug\
+C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedDatabase\bin\Debug\PartsUnlimitedDatabase.sql
+C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedDatabase\bin\Debug\PartsUnlimitedDatabase.dll
+C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedDatabase\bin\Debug\PartsUnlimitedDatabase.pdb
+C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedDatabase\obj\Debug\PartsUnlimitedDatabase_Package.sql
+C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedDatabase\obj\Debug\PartsUnlimitedDatabase.sql
+C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedDatabase\obj\Debug\PartsUnlimitedDatabase.dll
+C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedDatabase\obj\Debug\PartsUnlimitedDatabase.pdb

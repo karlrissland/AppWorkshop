@@ -1,5 +1,3 @@
-C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedWebsite\obj\Debug\PartsUnlimitedWebsite.csprojResolveAssemblyReference.cache
-C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedWebsite\obj\Debug\PartsUnlimitedWebsite.csproj.CoreCompileInputs.cache
 C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedWebsite\bin\ApplicationInsights.config
 C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedWebsite\bin\PartsUnlimited.dll.config
 C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedWebsite\bin\PartsUnlimited.dll
@@ -92,5 +90,7 @@ C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedWebsite\bin\
 C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedWebsite\bin\System.Web.WebPages.xml
 C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedWebsite\bin\System.Web.WebPages.Deployment.xml
 C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedWebsite\bin\System.Web.WebPages.Razor.xml
+C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedWebsite\obj\Debug\PartsUnlimitedWebsite.csprojResolveAssemblyReference.cache
+C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedWebsite\obj\Debug\PartsUnlimitedWebsite.csproj.CoreCompileInputs.cache
 C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedWebsite\obj\Debug\PartsUnlimited.dll
 C:\Users\karlriss\Source\Repos\IaaS2PaaS\IaaS2PaaSWeb\PartsUnlimitedWebsite\obj\Debug\PartsUnlimited.pdb

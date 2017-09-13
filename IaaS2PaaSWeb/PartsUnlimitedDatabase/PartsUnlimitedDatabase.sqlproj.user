@@ -4,5 +4,7 @@
     <TargetConnectionString>Data Source=(localdb)\mssqllocaldb;Initial Catalog=PartsUnlimitedWebsite;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=10;Encrypt=False;TrustServerCertificate=True</TargetConnectionString>
     <TargetDatabase>PartsUnlimitedWebsite</TargetDatabase>
     <DatabaseConnectionConfigured>True</DatabaseConnectionConfigured>
+    <StartupScript>(Blank)</StartupScript>
+    <StartAction>StartNone</StartAction>
   </PropertyGroup>
 </Project>

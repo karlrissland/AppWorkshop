@@ -1,12 +1,12 @@
 ﻿/*
 	Target database:	PartsUnlimitedWebsite
-	Target instance:	KARLRISSSP4\LOCALDB#8DF7A4CF
-	Generated date:		9/12/2017 7:09:05 PM
+	Target instance:	KARLRISSSP4\LOCALDB#DED59D0C
+	Generated date:		9/13/2017 2:19:31 PM
 	Generated on:		KARLRISSSP4
 	Package version:	(undefined)
 	Migration version:	(n/a)
 	Baseline version:	(n/a)
-	ReadyRoll version:	1.14.14.4876
+	ReadyRoll version:	1.14.15.4999
 	Migrations pending:	0
 
 	IMPORTANT! "SQLCMD Mode" must be activated prior to execution (under the Query menu in SSMS).
@@ -78,9 +78,9 @@ IF SERVERPROPERTY('EngineEdition') = 5 AND DB_NAME() != N'$(DatabaseName)'
   RAISERROR(N'Azure SQL Database does not support switching between databases. Connect to [$(DatabaseName)] and then re-run the script.', 16, 127);
 
 -- As this script has been generated for a specific server instance/database combination, stop execution if there is a mismatch
-IF (@@SERVERNAME != 'KARLRISSSP4\LOCALDB#8DF7A4CF' OR '$(DatabaseName)' != 'PartsUnlimitedWebsite')
+IF (@@SERVERNAME != 'KARLRISSSP4\LOCALDB#DED59D0C' OR '$(DatabaseName)' != 'PartsUnlimitedWebsite')
 BEGIN
-	RAISERROR(N'This script should only be executed on the following server/instance: [KARLRISSSP4\LOCALDB#8DF7A4CF] (Database: [PartsUnlimitedWebsite]). Halting deployment.', 16, 127, N'UNKNOWN') WITH NOWAIT;
+	RAISERROR(N'This script should only be executed on the following server/instance: [KARLRISSSP4\LOCALDB#DED59D0C] (Database: [PartsUnlimitedWebsite]). Halting deployment.', 16, 127, N'UNKNOWN') WITH NOWAIT;
 	RETURN;
 END
 GO

@@ -12,10 +12,10 @@
       "value": "P2ssw0rd"
     },
     "virtualNetworkName": {
-      "value": "vNetTest"
+      "value": "LabVnet"
     },
     "virtualNetworkResourceGroup": {
-      "value": "LabResourceGroup"
+      "value": "PartsUnlimitedLab"
     }
   }
 }

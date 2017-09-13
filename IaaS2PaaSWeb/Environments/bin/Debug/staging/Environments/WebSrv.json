@@ -34,7 +34,7 @@
     },
     "virtualNetworkResourceGroup": {
       "type": "String"
-    }
+    },
     "_artifactsLocation": {
       "type": "string",
       "metadata": {

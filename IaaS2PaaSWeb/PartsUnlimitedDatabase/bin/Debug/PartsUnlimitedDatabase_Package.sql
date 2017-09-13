@@ -1,12 +1,12 @@
 ﻿/*
 	Target database:	PartsUnlimitedWebsite (configurable)
 	Target instance:	(any)
-	Generated date:		9/12/2017 7:07:52 PM
+	Generated date:		9/13/2017 2:19:29 PM
 	Generated on:		KARLRISSSP4
 	Package version:	(undefined)
 	Migration version:	(n/a)
 	Baseline version:	(n/a)
-	ReadyRoll version:	1.14.14.4876
+	ReadyRoll version:	1.14.15.4999
 	Migrations pending:	(variable)
 
 	IMPORTANT! "SQLCMD Mode" must be activated prior to execution (under the Query menu in SSMS).

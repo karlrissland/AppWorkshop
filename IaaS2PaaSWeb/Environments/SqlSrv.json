@@ -13,7 +13,7 @@
     },
     "virtualNetworkResourceGroup": {
       "type": "string"
-    }
+    },
     "adminPassword": {
       "type": "securestring"
     },

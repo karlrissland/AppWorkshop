@@ -9,13 +9,13 @@
       "value": "karl"
     },
     "virtualNetworkName": {
-      "value": "sqlvnet"
+      "value": "LabVNet"
     },
     "adminPassword": {
       "value": "P2ssw0rd"
     },
     "virtualNetworkResourceGroup": {
-      "value": "labresourcegroup"
+      "value": "PartsUnlimitedLab"
     }
   }
 }

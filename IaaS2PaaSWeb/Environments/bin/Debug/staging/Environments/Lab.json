@@ -35,10 +35,10 @@
     },
     "LabBuildSrvWindowsOSVersion": {
       "type": "string",
-      "defaultValue": "2016-Datacenter",
+      "defaultValue": "VS-2017-Ent-WS2016",
       "allowedValues": [
-        "2012-R2-Datacenter",
-        "2016-Datacenter"
+        "VS-2017-Ent-Win10-N",
+        "VS-2017-Ent-WS2016"
       ]
     },
     "vstsAccount": {
@@ -70,15 +70,13 @@
     "vNetPrefix": "10.0.0.0/16",
     "vNetSubnet1Name": "Subnet-1",
     "vNetSubnet1Prefix": "10.0.0.0/24",
-    "vNetSubnet2Name": "Subnet-2",
-    "vNetSubnet2Prefix": "10.0.1.0/24",
-    "ArtifactStagingName": "[concat('staging', uniqueString(resourceGroup().id))]",
-    "LabBuildSrvImagePublisher": "MicrosoftWindowsServer",
-    "LabBuildSrvImageOffer": "WindowsServer",
+    "ArtifactStagingName": "[take(tolower(concat(resourceGroup().name,'staging', uniqueString(resourceGroup().id))),24)]",
+    "LabBuildSrvImagePublisher": "MicrosoftVisualStudio",
+    "LabBuildSrvImageOffer": "VisualStudio",
     "LabBuildSrvOSDiskName": "LabBuildSrvOSDisk",
     "LabBuildSrvVmSize": "Standard_D2_v2",
     "LabBuildSrvVnetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vNetName'))]",
-    "LabBuildSrvSubnetRef": "[concat(variables('LabBuildSrvVnetID'), '/subnets/', variables('vNetSubnet2Name'))]",
+    "LabBuildSrvSubnetRef": "[concat(variables('LabBuildSrvVnetID'), '/subnets/', variables('vNetSubnet1Name'))]",
     "LabBuildSrvStorageAccountContainerName": "vhds",
     "LabBuildSrvNicName": "[concat(parameters('LabBuildSrvName'), 'NetworkInterface')]",
     "LabBuildSrvPubIpName": "[concat(parameters('LabBuildSrvName'), 'PubIp')]",
@@ -116,12 +114,6 @@
             "name": "[variables('vNetSubnet1Name')]",
             "properties": {
               "addressPrefix": "[variables('vNetSubnet1Prefix')]"
-            }
-          },
-          {
-            "name": "[variables('vNetSubnet2Name')]",
-            "properties": {
-              "addressPrefix": "[variables('vNetSubnet2Prefix')]"
             }
           }
         ]

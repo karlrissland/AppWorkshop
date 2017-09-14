@@ -326,6 +326,7 @@ try
     }
     Write-Host '........ config: ' $config
     Install-Agent -Config $config
+
     
     Write-Host 'Done'
 }

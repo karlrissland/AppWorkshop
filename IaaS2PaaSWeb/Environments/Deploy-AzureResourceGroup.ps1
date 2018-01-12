@@ -1,15 +1,13 @@
 #Requires -Version 3.0
-#Requires -Module AzureRM.Resources
-#Requires -Module Azure.Storage
 
 Param(
     [string] [Parameter(Mandatory=$true)] $ResourceGroupLocation,
-    [string] $ResourceGroupName = 'WebApp',
+    [string] $ResourceGroupName = 'AzureResourceGroup1',
     [switch] $UploadArtifacts,
     [string] $StorageAccountName,
     [string] $StorageContainerName = $ResourceGroupName.ToLowerInvariant() + '-stageartifacts',
-    [string] $TemplateFile = 'azuredeploy.json',
-    [string] $TemplateParametersFile = 'azuredeploy.parameters.json',
+    [string] $TemplateFile = 'WindowsVirtualMachine.json',
+    [string] $TemplateParametersFile = 'WindowsVirtualMachine.parameters.json',
     [string] $ArtifactStagingDirectory = '.',
     [string] $DSCSourceFolder = 'DSC',
     [switch] $ValidateOnly

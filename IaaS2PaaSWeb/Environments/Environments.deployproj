@@ -25,24 +25,30 @@
   <Import Condition=" Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Deployment\1.1\DeploymentProject.targets') " Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Deployment\1.1\DeploymentProject.targets" />
   <!-- vertag<:>end -->
   <ItemGroup>
-    <Content Include="BizTalkSrv.json" />
-    <Content Include="BizTalkSrv.parameters.json" />
     <Content Include="CustomScripts\InstallxSQLServerModule.ps1" />
     <Content Include="CustomScripts\InstallVstsBuildAgent.ps1" />
+    <Content Include="Deploy-AzureResourceGroup.ps1" />
     <None Include="Deployment.targets">
       <Visible>False</Visible>
     </None>
-    <Content Include="Deploy-AzureResourceGroup.ps1" />
-    <Content Include="Lab.json" />
-    <Content Include="Lab.parameters.json" />
-    <Content Include="WebSrv.json" />
-    <Content Include="WebSrv.parameters.json" />
+    <Content Include="nestedtemplates\vNet.json" />
+    <Content Include="nestedtemplates\vNet.parameters.json" />
+    <Content Include="nestedtemplates\Lab.json" />
+    <Content Include="nestedtemplates\Lab.parameters.json" />
+    <Content Include="nestedtemplates\WebSrv.json" />
+    <Content Include="nestedtemplates\WebSrv.parameters.json" />
     <Content Include="DSC\WebSrvDscConfig.ps1" />
-    <Content Include="SqlSrv.json" />
-    <Content Include="SqlSrv.parameters.json" />
-    <Content Include="VsDevWorkstation.json" />
-    <Content Include="VsDevWorkstation.parameters.json" />
+    <Content Include="nestedtemplates\SqlSrv.json" />
+    <Content Include="nestedtemplates\SqlSrv.parameters.json" />
+    <Content Include="nestedtemplates\VsDevWorkstation.json" />
+    <Content Include="nestedtemplates\VsDevWorkstation.parameters.json" />
     <Content Include="DSC\SqlSrvDscConfig.ps1" />
+    <Content Include="WorkshopEnv.json" />
+    <Content Include="WorkshopEnv.parameters.json" />
+    <Content Include="nestedtemplates\testnested.json" />
+    <Content Include="nestedtemplates\testnested.parameters.json" />
+    <Content Include="test.json" />
+    <Content Include="test.parameters.json" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>

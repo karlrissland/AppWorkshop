@@ -2,17 +2,20 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "BtsSrvName": {
-      "value": "btsvm"
+    "virtualMachineName": {
+      "value": "SqlServerVM"
     },
-    "BtsSrvAdminUserName": {
+    "adminUsername": {
       "value": "karl"
     },
     "virtualNetworkName": {
-      "value": "vnettest"
+      "value": "WorkshopVnet"
+    },
+    "adminPassword": {
+      "value": "P2ssw0rd"
     },
     "virtualNetworkResourceGroup": {
-      "value": "labresourcegroup"
+      "value": "WorkshopTest"
     }
   }
 }

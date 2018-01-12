@@ -23,10 +23,10 @@
     },
     "VsDevWorkstationWindowsOSVersion": {
       "type": "string",
-      "defaultValue": "VS-2017-Ent-Win10-N",
+      "defaultValue": "VS-2017-Ent-Latest-WS2016",
       "allowedValues": [
-        "VS-2017-Ent-Win10-N",
-        "VS-2017-Ent-WS2016"
+        "VS-2017-Ent-Latest-WS2016",
+        "VS-2017-Comm-Latest-WS2016"
       ]
     },
     "virtualNetworkName": {
@@ -45,7 +45,7 @@
     "VsDevWorkstationSubnetRef": "[concat(variables('VsDevWorkstationVnetID'), '/subnets/', 'Subnet-1')]",
     "VsDevWorkstationNicName": "[concat(parameters('VsDevWorkstationName'), 'NetworkInterface')]",
     "VsDevWorkstationPubIPName": "[concat(parameters('vsDevWorkstationName'),'PubIP')]",
-    "VsDevWorkstationPubIPDnsName": "[concat(parameters('VsDevWorkstationName'),uniqueString(resourceGroup().id))]"
+    "VsDevWorkstationPubIPDnsName": "[tolower(concat(parameters('VsDevWorkstationName'),uniqueString(resourceGroup().id)))]"
   },
   "resources": [
     {

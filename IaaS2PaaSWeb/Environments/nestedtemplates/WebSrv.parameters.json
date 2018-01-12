@@ -2,20 +2,20 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "VsDevWorkstationName": {
-      "value": "vs2017Workstation"
+    "WebSrvName": {
+      "value": "WebSrv1"
     },
-    "VsDevWorkstationAdminUserName": {
+    "WebSrvAdminUserName": {
       "value": "karl"
     },
+    "WebSrvAdminPassword": {
+      "value": "P2ssw0rd"
+    },
     "virtualNetworkName": {
-      "value": "vnettest"
+      "value": "WorkshopVNet"
     },
     "virtualNetworkResourceGroup": {
-      "value": "labresourcegroup"
-    },
-    "VsDevWorkstationAdminPassword": {
-      "value": "P2ssw0rd"
+      "value": "WorkshopTest"
     }
   }
 }

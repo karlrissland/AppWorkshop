@@ -1,0 +1,140 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "ResGroupName": {
+      "type": "string"
+    },
+    "vNetName": {
+      "type": "string"
+    },
+    "AdminUserName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "AdminUserPassword": {
+      "type": "securestring"
+    },
+    "DevWorkstationOSVersion": {
+      "type": "string",
+      "defaultValue": "VS-2017-Ent-Latest-WS2016",
+      "allowedValues": [
+        "VS-2017-Ent-Latest-WS2016",
+        "VS-2017-Comm-Latest-WS2016"
+      ]
+    },
+    "DevWorkstationName": {
+      "type": "string"
+    },
+    "WebSrvName": {
+      "type": "string"
+    },
+    "SqlSrvName": {
+      "type": "string"
+    },
+    "_artifactsLocation": {
+      "type": "string"
+    },
+    "_artifactsLocationSasToken": {
+      "type": "securestring"
+    }
+  },
+   "variables": {
+    "srvStorageType": "Standard_LRS",
+    "WebSrvOSVersion": "2016-Datacenter",
+    "TemplateFolder": "nestedtemplates",
+    "vNetTemplateFileName": "vNet.json",
+    "DevWorkstationTemplateFileName": "VsDevWorkstation.json",
+    "WebSrvTemplateFileName": "WebSrv.json",
+    "SqlSrvTemplateFileName": "SqlSrv.json"
+  },
+  "resources": [
+    {
+      "name": "vNetDeploy",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('TemplateFolder'), '/', variables('vNetTemplateFileName'), parameters('_artifactsLocationSasToken'))]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "vNetName": { "value": "[parameters('vNetName')]" }
+        }
+      }
+    },
+    {
+      "name": "DevWorkstation",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [ "vNetDeploy" ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('TemplateFolder'), '/', variables('DevWorkstationTemplateFileName'), parameters('_artifactsLocationSasToken'))]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "VsDevWorkstationStorageType": { "value": "[variables('srvStorageType')]" },
+          "VsDevWorkstationName": { "value": "[parameters('DevWorkstationName')]" },
+          "VsDevWorkstationAdminUserName": { "value": "[parameters('AdminUserName')]" },
+          "VsDevWorkstationAdminPassword": { "value": "[parameters('AdminUserPassword')]" },
+          "VsDevWorkstationWindowsOSVersion": { "value": "[parameters('DevWorkstationOSVersion')]" },
+          "virtualNetworkName": { "value": "[parameters('vNetName')]" },
+          "virtualNetworkResourceGroup": { "value": "[parameters('ResGroupName')]" }
+        }
+      }
+    },
+    {
+      "name": "WebSrv",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [ "vNetDeploy" ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('TemplateFolder'), '/', variables('WebSrvTemplateFileName'), parameters('_artifactsLocationSasToken'))]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "WebSrvStorageType": { "value": "[variables('srvStorageType')]" },
+          "WebSrvName": { "value": "[parameters('WebSrvName')]" },
+          "WebSrvAdminUserName": { "value": "[parameters('AdminUserName')]" },
+          "WebSrvAdminPassword": { "value": "[parameters('AdminUserPassword')]" },
+          "WebSrvWindowsOSVersion": { "value": "[variables('WebSrvOSVersion')]" },
+          "virtualNetworkName": { "value": "[parameters('vNetName')]" },
+          "virtualNetworkResourceGroup": { "value": "[parameters('ResGroupName')]" },
+          "_artifactsLocation": { "value": "[parameters('_artifactsLocation')]" },
+          "_artifactsLocationSasToken": { "value": "[parameters('_artifactsLocationSasToken')]" }
+        }
+      }
+    },
+    {
+      "name": "SqlSrv",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [ "vNetDeploy" ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('TemplateFolder'), '/', variables('SqlSrvTemplateFileName'), parameters('_artifactsLocationSasToken'))]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "virtualMachineName": { "value": "[parameters('SqlSrvName')]" },
+          "adminUsername": { "value": "[parameters('AdminUserName')]" },
+          "virtualNetworkName": { "value": "[parameters('vNetName')]" },
+          "virtualNetworkResourceGroup": { "value": "[parameters('ResGroupName')]" },
+          "adminPassword": { "value": "[parameters('AdminUserPassword')]" },
+          "SqlSrvStorageType": { "value": "[variables('srvStorageType')]" },
+          "_artifactsLocation": { "value": "[parameters('_artifactsLocation')]" },
+          "_artifactsLocationSasToken": { "value": "[parameters('_artifactsLocationSasToken')]" }
+        }
+      }
+    }
+  ],
+  "outputs": {
+  }
+}

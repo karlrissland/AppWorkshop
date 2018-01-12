@@ -2,20 +2,20 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "virtualMachineName": {
-      "value": "SqlServerVM"
+    "VsDevWorkstationName": {
+      "value": "vs2017DevSrv"
     },
-    "adminUsername": {
+    "VsDevWorkstationAdminUserName": {
       "value": "karl"
     },
     "virtualNetworkName": {
-      "value": "LabVNet"
-    },
-    "adminPassword": {
-      "value": "P2ssw0rd"
+      "value": "WorkshopVnet"
     },
     "virtualNetworkResourceGroup": {
-      "value": "PartsUnlimitedLab"
+      "value": "WorkshopTest"
+    },
+    "VsDevWorkstationAdminPassword": {
+      "value": "P2ssw0rd"
     }
   }
 }

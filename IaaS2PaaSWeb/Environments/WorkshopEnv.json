@@ -2,9 +2,6 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "ResGroupName": {
-      "type": "string"
-    },
     "vNetName": {
       "type": "string"
     },
@@ -83,7 +80,7 @@
           "VsDevWorkstationAdminPassword": { "value": "[parameters('AdminUserPassword')]" },
           "VsDevWorkstationWindowsOSVersion": { "value": "[parameters('DevWorkstationOSVersion')]" },
           "virtualNetworkName": { "value": "[parameters('vNetName')]" },
-          "virtualNetworkResourceGroup": { "value": "[parameters('ResGroupName')]" }
+          "virtualNetworkResourceGroup": { "value": "[resourceGroup().name]" }
         }
       }
     },
@@ -105,7 +102,7 @@
           "WebSrvAdminPassword": { "value": "[parameters('AdminUserPassword')]" },
           "WebSrvWindowsOSVersion": { "value": "[variables('WebSrvOSVersion')]" },
           "virtualNetworkName": { "value": "[parameters('vNetName')]" },
-          "virtualNetworkResourceGroup": { "value": "[parameters('ResGroupName')]" },
+          "virtualNetworkResourceGroup": { "value": "[resourceGroup().name]" },
           "_artifactsLocation": { "value": "[parameters('_artifactsLocation')]" },
           "_artifactsLocationSasToken": { "value": "[parameters('_artifactsLocationSasToken')]" }
         }
@@ -126,7 +123,7 @@
           "virtualMachineName": { "value": "[parameters('SqlSrvName')]" },
           "adminUsername": { "value": "[parameters('AdminUserName')]" },
           "virtualNetworkName": { "value": "[parameters('vNetName')]" },
-          "virtualNetworkResourceGroup": { "value": "[parameters('ResGroupName')]" },
+          "virtualNetworkResourceGroup": { "value": "[resourceGroup().name]" },
           "adminPassword": { "value": "[parameters('AdminUserPassword')]" },
           "SqlSrvStorageType": { "value": "[variables('srvStorageType')]" },
           "_artifactsLocation": { "value": "[parameters('_artifactsLocation')]" },

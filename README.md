@@ -6,7 +6,9 @@
 
 This allows you to deploy the workshop environment.  When complete, you should have a Web Server and SQL server fully configured in their own vNet and Resource group.
 
-Use https://raw.githubusercontent.com/karlrissland/AppWorkshop/Workshop/IaaS2PaaSWeb/Environments for the _artifactsLocation parameter.
+Use https://raw.githubusercontent.com/karlrissland/AppWorkshop/Workshop/IaaS2PaaSWeb/Environments for the _artifacts Location parameter.
+
+Leave the _artifacts Location Sas Token parameter blank
 
 ## Prerequisites
 

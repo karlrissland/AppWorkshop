@@ -33,6 +33,7 @@
       "type": "string"
     },
     "_artifactsLocationSasToken": {
+      "defaultValue": "",
       "type": "securestring"
     }
   },

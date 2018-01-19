@@ -1,6 +1,6 @@
 # Deployment of workshop environment.
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fkarlrissland%2AppWorkshop%2FWorkshop%2FIaaS2PaaSWeb%2FEnvironments%2FWorkshopEnv.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fkarlrissland%2FAppWorkshop%2FWorkshop%2FIaaS2PaaSWeb%2FEnvironments%2FWorkshopEnv.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 

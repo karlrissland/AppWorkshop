@@ -22,6 +22,12 @@ $server = New-Object -TypeName Microsoft.SqlServer.Management.Smo.Server -Argume
 $server.Settings.LoginMode = "Mixed"
 $server.Alter()
 
+# Restart SQL Service, think this is needed to pickup the security mode change
+Restart-Service  MSSQLSERVER -Force
+
+# Create SQL Server Object
+$server = New-Object -TypeName Microsoft.SqlServer.Management.Smo.Server -ArgumentList $instanceName
+
 # Create new database
 $db = New-Object Microsoft.SqlServer.Management.Smo.Database($server,$databaseName)
 $db.Create()
@@ -53,5 +59,3 @@ $dbrole.AddMember($dbUserName)
 $dbrole.Alter()
 Write-Host("User $dbUser successfully added to $databaseRole role.")
 
-# Restart SQL Service, think this is needed to pickup the security mode change
-Restart-Service  MSSQLSERVER -Force

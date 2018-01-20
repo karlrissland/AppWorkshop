@@ -3,7 +3,8 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "vNetName": {
-      "type": "string"
+      "type": "string",
+      "defaultValue":  "workshopVnet"
     },
     "AdminUserName": {
       "type": "string",
@@ -21,16 +22,20 @@
       ]
     },
     "DevWorkstationName": {
-      "type": "string"
+      "type": "string",
+      "defaultValue":  "vmdev01"
     },
     "WebSrvName": {
-      "type": "string"
+      "type": "string",
+      "defaultValue":  "vmweb01"
     },
     "SqlSrvName": {
-      "type": "string"
+      "type": "string",
+      "defaultValue":  "vmsql01"
     },
     "_artifactsLocation": {
-      "type": "string"
+      "type": "string",
+      "defaultValue": "https://raw.githubusercontent.com/karlrissland/AppWorkshop/Workshop/IaaS2PaaSWeb/Environments"
     },
     "_artifactsLocationSasToken": {
       "defaultValue": "",

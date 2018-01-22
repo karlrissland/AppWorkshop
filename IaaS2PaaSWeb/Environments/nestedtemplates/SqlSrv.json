@@ -243,5 +243,13 @@
     }
   ],
   "outputs": {
+    "dscScriptUri": {
+      "type": "string",
+      "value": "[concat(parameters('_artifactsLocation'), '/', variables('SqlSrvDscConfigArchiveFolder'), '/', variables('SqlSrvDscConfigArchiveFileName'))]"
+    },
+    "ps1ScriptUri": {
+      "type": "string",
+      "value": "[concat(parameters('_artifactsLocation'), '/', variables('InstallxSQLServerModuleScriptFolder'), '/', variables('InstallxSQLServerModuleScriptFileName'), parameters('_artifactsLocationSasToken'))]"
+    }
   }
 }

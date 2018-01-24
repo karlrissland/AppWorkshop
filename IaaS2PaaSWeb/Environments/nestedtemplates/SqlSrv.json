@@ -151,7 +151,7 @@
               "fileUris": [
                 "[concat(parameters('_artifactsLocation'), '/', variables('InstallxSQLServerModuleScriptFolder'), '/', variables('InstallxSQLServerModuleScriptFileName'), parameters('_artifactsLocationSasToken'))]"
               ],
-              "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ', variables('InstallxSQLServerModuleScriptFolder'), '/', variables('InstallxSQLServerModuleScriptFileName'))]"
+              "commandToExecute": "[variables('powerShellExecuteCommand')]"
             }
           }
         }

@@ -50,7 +50,10 @@
     "SqlSrvDscConfigArchiveFolder": "DSC",
     "SqlSrvDscConfigArchiveFileName": "SqlSrvDscConfig.zip",
     "InstallxSQLServerModuleScriptFolder": "CustomScripts",
-    "InstallxSQLServerModuleScriptFileName": "InstallxSQLServerModule.ps1"
+    "InstallxSQLServerModuleScriptFileName": "InstallxSQLServerModule.ps1",
+    "powerShellExecuteCommandForBlobStorage": "[concat('powershell -ExecutionPolicy Unrestricted -File ', variables('InstallxSQLServerModuleScriptFolder'), '/', variables('InstallxSQLServerModuleScriptFileName'))]",
+    "powerShellExecuteCommandForURI": "[concat('powershell -ExecutionPolicy Unrestricted -File ', variables('InstallxSQLServerModuleScriptFileName'))]",
+    "powerShellExecuteCommand": "[if(contains(parameters('_artifactsLocation'),'.blob.core.windows.net'),variables('powerShellExecuteCommandForBlobStorage'),variables('powerShellExecuteCommandForURI'))]"
   },
   "resources": [
     {

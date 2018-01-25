@@ -22,6 +22,9 @@
     },
     "SqlSrvName": {
       "value": "SqlSrv"
+    },
+    "_artifactsLocation": {
+      "value": ""
     }
   }
 }

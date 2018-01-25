@@ -25,6 +25,21 @@
         "Premium_LRS"
       ]
     },
+    "dbLoginName": {
+      "type": "string"
+    },
+    "dbUserName": {
+      "type": "string"
+    },
+    "dbUserPassword": {
+      "type": "string"
+    },
+    "databaseName": {
+      "type": "string"
+    },
+    "dbUserDatabaseRole": {
+      "type": "string"
+    },
     "_artifactsLocation": {
       "type": "string",
       "metadata": {
@@ -51,6 +66,7 @@
     "SqlSrvDscConfigArchiveFileName": "SqlSrvDscConfig.zip",
     "InstallxSQLServerModuleScriptFolder": "CustomScripts",
     "InstallxSQLServerModuleScriptFileName": "InstallxSQLServerModule.ps1",
+    "powerShellExecuteCommandParams": "[concat(' -dbLoginName ',parameters('dbLoginName'),' -dbUserName ',parameters('dbUserName'),' -dbUserPassword ',parameters('dbUserPassword'),' -databaseName ',parameters('databaseName'),' -dbUserDatabaseRole ',parameters('dbUserDatabaseRole'))]",
     "powerShellExecuteCommandForBlobStorage": "[concat('powershell -ExecutionPolicy Unrestricted -File ', variables('InstallxSQLServerModuleScriptFolder'), '/', variables('InstallxSQLServerModuleScriptFileName'))]",
     "powerShellExecuteCommandForURI": "[concat('powershell -ExecutionPolicy Unrestricted -File ', variables('InstallxSQLServerModuleScriptFileName'))]",
     "powerShellExecuteCommand": "[if(contains(parameters('_artifactsLocation'),'.blob.core.windows.net'),variables('powerShellExecuteCommandForBlobStorage'),variables('powerShellExecuteCommandForURI'))]"
@@ -246,13 +262,5 @@
     }
   ],
   "outputs": {
-    "dscScriptUri": {
-      "type": "string",
-      "value": "[concat(parameters('_artifactsLocation'), '/', variables('SqlSrvDscConfigArchiveFolder'), '/', variables('SqlSrvDscConfigArchiveFileName'))]"
-    },
-    "ps1ScriptUri": {
-      "type": "string",
-      "value": "[concat(parameters('_artifactsLocation'), '/', variables('InstallxSQLServerModuleScriptFolder'), '/', variables('InstallxSQLServerModuleScriptFileName'), parameters('_artifactsLocationSasToken'))]"
-    }
   }
 }

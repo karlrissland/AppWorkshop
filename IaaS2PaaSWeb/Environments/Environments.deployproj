@@ -26,15 +26,12 @@
   <!-- vertag<:>end -->
   <ItemGroup>
     <Content Include="CustomScripts\InstallxSQLServerModule.ps1" />
-    <Content Include="CustomScripts\InstallVstsBuildAgent.ps1" />
     <Content Include="Deploy-AzureResourceGroup.ps1" />
     <None Include="Deployment.targets">
       <Visible>False</Visible>
     </None>
     <Content Include="nestedtemplates\vNet.json" />
     <Content Include="nestedtemplates\vNet.parameters.json" />
-    <Content Include="nestedtemplates\Lab.json" />
-    <Content Include="nestedtemplates\Lab.parameters.json" />
     <Content Include="nestedtemplates\WebSrv.json" />
     <Content Include="nestedtemplates\WebSrv.parameters.json" />
     <Content Include="DSC\WebSrvDscConfig.ps1" />
@@ -45,10 +42,6 @@
     <Content Include="DSC\SqlSrvDscConfig.ps1" />
     <Content Include="WorkshopEnv.json" />
     <Content Include="WorkshopEnv.parameters.json" />
-    <Content Include="nestedtemplates\testnested.json" />
-    <Content Include="nestedtemplates\testnested.parameters.json" />
-    <Content Include="test.json" />
-    <Content Include="test.parameters.json" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>

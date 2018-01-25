@@ -31,17 +31,38 @@
     },
     "SqlSrvName": {
       "type": "string",
-      "defaultValue":  "vmsql01"
+      "defaultValue": "vmsql01"
+    },
+    "dbLoginName": {
+      "type": "string",
+      "defaultValue": "workshopServiceAcc"
+    },
+    "dbUserName": {
+      "type": "string",
+      "defaultValue": "workshopServiceAcc"
+    },
+    "dbUserPassword": {
+      "type": "string",
+      "defaultValue": "P2ssw0rd"
+    },
+    "databaseName": {
+      "type": "string",
+      "defaultValue": "partsUnlimitedDB"
+    },
+    "dbUserDatabaseRole": {
+      "type": "string",
+      "defaultValue": "db_owner"
     },
     "_artifactsLocation": {
-      "type": "string"
+      "type": "string",
+      "defaultValue": "[uri(deployment().properties.templateLink.uri, '.')]"
     },
     "_artifactsLocationSasToken": {
       "defaultValue": "",
       "type": "securestring"
     }
   },
-   "variables": {
+  "variables": {
     "srvStorageType": "Standard_LRS",
     "WebSrvOSVersion": "2016-Datacenter",
     "TemplateFolder": "nestedtemplates",
@@ -131,6 +152,11 @@
           "virtualNetworkResourceGroup": { "value": "[resourceGroup().name]" },
           "adminPassword": { "value": "[parameters('AdminUserPassword')]" },
           "SqlSrvStorageType": { "value": "[variables('srvStorageType')]" },
+          "dbLoginName": {"value": "[parameters('dbLoginName')]"},
+          "dbUserName": { "value": "[parameters('dbUserName')]" },
+          "dbUserPassword": { "value": "[parameters('dbUserPassword')]" },
+          "databaseName": { "value": "[parameters('databaseName')]" },
+          "dbUserDatabaseRole": { "value": "[parameters('dbUserDatabaseRole')]" },
           "_artifactsLocation": { "value": "[parameters('_artifactsLocation')]" },
           "_artifactsLocationSasToken": { "value": "[parameters('_artifactsLocationSasToken')]" }
         }

@@ -40,6 +40,12 @@
     "dbUserDatabaseRole": {
       "type": "string"
     },
+    "sqlSchemaScript": {
+      "type": "string"
+    },
+    "sqlDataScript": {
+      "type": "string"
+    },
     "_artifactsLocation": {
       "type": "string",
       "metadata": {
@@ -66,9 +72,9 @@
     "SqlSrvDscConfigArchiveFileName": "SqlSrvDscConfig.zip",
     "InstallxSQLServerModuleScriptFolder": "CustomScripts",
     "InstallxSQLServerModuleScriptFileName": "InstallxSQLServerModule.ps1",
-    "powerShellExecuteCommandParams": "[concat(' -dbLoginName ',parameters('dbLoginName'),' -dbUserName ',parameters('dbUserName'),' -dbUserPassword ',parameters('dbUserPassword'),' -databaseName ',parameters('databaseName'),' -dbUserDatabaseRole ',parameters('dbUserDatabaseRole'))]",
-    "powerShellExecuteCommandForBlobStorage": "[concat('powershell -ExecutionPolicy Unrestricted -File ', variables('InstallxSQLServerModuleScriptFolder'), '/', variables('InstallxSQLServerModuleScriptFileName'))]",
-    "powerShellExecuteCommandForURI": "[concat('powershell -ExecutionPolicy Unrestricted -File ', variables('InstallxSQLServerModuleScriptFileName'))]",
+    "powerShellExecuteCommandParams": "[concat(' -loginName ',parameters('dbLoginName'),' -dbUserName ',parameters('dbUserName'),' -password ',parameters('dbUserPassword'),' -databaseName ',parameters('databaseName'),' -databaseRole ',parameters('dbUserDatabaseRole'), ' -sqlSchemaScript ', parameters('sqlSchemaScript'), ' -sqlDataScript ', parameters('sqlDataScript'))]",
+    "powerShellExecuteCommandForBlobStorage": "[concat('powershell -ExecutionPolicy Unrestricted -File ', variables('InstallxSQLServerModuleScriptFolder'), '/', variables('InstallxSQLServerModuleScriptFileName'), ' ', variables('powerShellExecuteCommandParams'))]",
+    "powerShellExecuteCommandForURI": "[concat('powershell -ExecutionPolicy Unrestricted -File ', variables('InstallxSQLServerModuleScriptFileName'), ' ', variables('powerShellExecuteCommandParams'))]",
     "powerShellExecuteCommand": "[if(contains(parameters('_artifactsLocation'),'.blob.core.windows.net'),variables('powerShellExecuteCommandForBlobStorage'),variables('powerShellExecuteCommandForURI'))]"
   },
   "resources": [

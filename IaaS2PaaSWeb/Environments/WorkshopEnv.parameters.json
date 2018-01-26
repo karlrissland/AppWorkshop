@@ -23,8 +23,8 @@
     "SqlSrvName": {
       "value": "SqlSrv"
     },
-    "_artifactsLocation": {
-      "value": ""
+    "databaseName": {
+      "value": "partsUnlimitedDB"
     }
   }
 }

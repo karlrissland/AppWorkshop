@@ -53,6 +53,14 @@
       "type": "string",
       "defaultValue": "db_owner"
     },
+    "sqlSchemaScript": {
+      "type": "string",
+      "defaultValue": "https://raw.githubusercontent.com/karlrissland/AppWorkshop/master/IaaS2PaaSWeb/PartsUnlimitedDatabase/Migrations/0001_20170912-1438_karlriss.sql"
+    },
+    "sqlDataScript": {
+      "type": "string",
+      "defaultValue": "https://raw.githubusercontent.com/karlrissland/AppWorkshop/master/IaaS2PaaSWeb/PartsUnlimitedDatabase/Post-Deployment/01_Finalize_Deployment.sql"
+    },
     "_artifactsLocation": {
       "type": "string",
       "defaultValue": "[uri(deployment().properties.templateLink.uri, '.')]"
@@ -152,11 +160,13 @@
           "virtualNetworkResourceGroup": { "value": "[resourceGroup().name]" },
           "adminPassword": { "value": "[parameters('AdminUserPassword')]" },
           "SqlSrvStorageType": { "value": "[variables('srvStorageType')]" },
-          "dbLoginName": {"value": "[parameters('dbLoginName')]"},
+          "dbLoginName": { "value": "[parameters('dbLoginName')]" },
           "dbUserName": { "value": "[parameters('dbUserName')]" },
           "dbUserPassword": { "value": "[parameters('dbUserPassword')]" },
           "databaseName": { "value": "[parameters('databaseName')]" },
           "dbUserDatabaseRole": { "value": "[parameters('dbUserDatabaseRole')]" },
+          "sqlSchemaScript": { "value": "[parameters('sqlSchemaScript')]" },
+          "sqlDataScript": { "value": "[parameters('sqlDataScript')]" },
           "_artifactsLocation": { "value": "[parameters('_artifactsLocation')]" },
           "_artifactsLocationSasToken": { "value": "[parameters('_artifactsLocationSasToken')]" }
         }

@@ -1,15 +1,32 @@
+Param(
+	[string]$loginName,
+	[string]$dbUserName,
+	[string]$password,
+	[string]$databaseName,
+	[string]$databaseRole,
+	[string]$sqlSchemaScript,
+	[string]$sqlDataScript
+)
+
 # Variables
 $instanceName = $env:COMPUTERNAME
-$loginName = "TestUser1"
-$dbUserName = "TestUser1"
-$password = "P2ssw0rd"
-$databaseName = "testDB"
-$databaseRole = "db_owner"
+
+Write-Host("loginName  $loginName")
+Write-Host("dbUserName  $dbUserName")
+Write-Host("password  $password")
+Write-Host("databaseName  $databaseName")
+Write-Host("databaseRole  $databaseRole")
+Write-Host("sqlSchemaScript  $sqlSchemaScript")
+Write-Host("sqlDataScript  $sqlDataScript")
 
 # Install Nuget, needed to install DSC modules via PowerShellGet
 Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
 
 # Install DSC modules used by DSC Scripts run via DSC Extension
+# - Note, was told this is not a best practice.  It was suggested
+# - that the module should be zipped with the script, downloaded
+# - then installed.  This is to ensure you have the same version 
+# - of the module to prevent your script from breaking.
 install-module -name xSqlServer -Force
 
 # Import SQL Server module
@@ -58,3 +75,12 @@ $dbrole = $server.Databases[$databaseName].Roles[$databaseRole]
 $dbrole.AddMember($dbUserName)
 $dbrole.Alter()
 Write-Host("User $dbUser successfully added to $databaseRole role.")
+
+# Download SQL Scripts
+mkdir "c:\sqlScripts"
+Invoke-WebRequest -Uri $sqlSchemaScript -OutFile 'C:\sqlScripts\Schema.ps1'
+Invoke-WebRequest -Uri $sqlDataScript -OutFile 'C:\sqlScripts\Data.ps1'
+
+# Execute SQL Scripts
+Invoke-sqlcmd -InputFile 'C:\sqlScripts\Schema.ps1' -Database $databaseName -Username $dbUserName -Password $password 
+Invoke-sqlcmd -InputFile 'C:\sqlScripts\Data.ps1' -Database $databaseName -Username $dbUserName -Password $password 

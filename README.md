@@ -6,14 +6,16 @@
 
 This allows you to deploy the workshop environment.  When complete, you should have a Web Server and SQL server fully configured in their own vNet and Resource group.
 
-Use https://raw.githubusercontent.com/karlrissland/AppWorkshop/Workshop/IaaS2PaaSWeb/Environments for the _artifacts Location parameter.
-
-Leave the _artifacts Location Sas Token parameter blank
-
 ## Prerequisites
 
 There are no prerequistes for the deployment.
 
 ## Deployment steps
 
-You can click the "deploy to Azure" button at the beginning of this document.
+Click the "deploy to Azure" button at the beginning of this document.
+
+Enter vm admin username and password
+
+You can leave default values for the other parameters
+
+NOTE: do not change the value of _artifactsLocation or _artifactsLocationSas as the deployment will fail.

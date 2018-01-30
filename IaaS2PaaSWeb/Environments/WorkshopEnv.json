@@ -3,7 +3,8 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "vNetName": {
-      "type": "string"
+      "type": "string",
+      "defaultValue":  "workshopVnet"
     },
     "AdminUserName": {
       "type": "string",
@@ -21,22 +22,59 @@
       ]
     },
     "DevWorkstationName": {
-      "type": "string"
+      "type": "string",
+      "defaultValue":  "vmdev01"
     },
     "WebSrvName": {
-      "type": "string"
+      "type": "string",
+      "defaultValue":  "vmweb01"
     },
     "SqlSrvName": {
-      "type": "string"
+      "type": "string",
+      "defaultValue": "vmsql01"
+    },
+    "dbLoginName": {
+      "type": "string",
+      "defaultValue": "workshopServiceAcc"
+    },
+    "dbUserName": {
+      "type": "string",
+      "defaultValue": "workshopServiceAcc"
+    },
+    "dbUserPassword": {
+      "type": "string",
+      "defaultValue": "P2ssw0rd"
+    },
+    "databaseName": {
+      "type": "string",
+      "defaultValue": "partsUnlimitedDB"
+    },
+    "dbUserDatabaseRole": {
+      "type": "string",
+      "defaultValue": "db_owner"
+    },
+    "sqlSchemaScript": {
+      "type": "string",
+      "defaultValue": "https://raw.githubusercontent.com/karlrissland/AppWorkshop/master/IaaS2PaaSWeb/PartsUnlimitedDatabase/Migrations/0001_20170912-1438_karlriss.sql"
+    },
+    "sqlDataScript": {
+      "type": "string",
+      "defaultValue": "https://raw.githubusercontent.com/karlrissland/AppWorkshop/master/IaaS2PaaSWeb/PartsUnlimitedDatabase/Post-Deployment/01_Finalize_Deployment.sql"
+    },
+    "repoUri": {
+      "type": "string",
+      "defaultValue": "https://github.com/karlrissland/AppWorkshop.git"
     },
     "_artifactsLocation": {
-      "type": "string"
+      "type": "string",
+      "defaultValue": "[uri(deployment().properties.templateLink.uri, '.')]"
     },
     "_artifactsLocationSasToken": {
+      "defaultValue": "",
       "type": "securestring"
     }
   },
-   "variables": {
+  "variables": {
     "srvStorageType": "Standard_LRS",
     "WebSrvOSVersion": "2016-Datacenter",
     "TemplateFolder": "nestedtemplates",
@@ -66,7 +104,7 @@
       "name": "DevWorkstation",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2016-09-01",
-      "dependsOn": [ "vNetDeploy" ],
+      "dependsOn": [ "vNetDeploy", "WebSrv", "SqlSrv" ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -76,11 +114,19 @@
         "parameters": {
           "VsDevWorkstationStorageType": { "value": "[variables('srvStorageType')]" },
           "VsDevWorkstationName": { "value": "[parameters('DevWorkstationName')]" },
-          "VsDevWorkstationAdminUserName": { "value": "[parameters('AdminUserName')]" },
-          "VsDevWorkstationAdminPassword": { "value": "[parameters('AdminUserPassword')]" },
+          "AdminUserName": { "value": "[parameters('AdminUserName')]" },
+          "AdminUserPassword": { "value": "[parameters('AdminUserPassword')]" },
           "VsDevWorkstationWindowsOSVersion": { "value": "[parameters('DevWorkstationOSVersion')]" },
           "virtualNetworkName": { "value": "[parameters('vNetName')]" },
-          "virtualNetworkResourceGroup": { "value": "[resourceGroup().name]" }
+          "virtualNetworkResourceGroup": { "value": "[resourceGroup().name]" },
+          "repoUri": { "value": "[parameters('repoUri')]" },
+          "webSrvUri" : { "value": "[ reference('WebSrv').outputs.webSrvUri.value ]" },
+          "dbSrvUri": { "value": "[ reference('SqlSrv').outputs.sqlSrvUri.value ]" },
+          "dbName": {"value": "[parameters('databaseName')]"},
+          "dbUserName": {"value": "[parameters('dbUserName')]"},
+          "dbUserPassword": {"value": "[parameters('dbUserPassword')]"},
+          "_artifactsLocation": { "value": "[parameters('_artifactsLocation')]" },
+          "_artifactsLocationSasToken": { "value": "[parameters('_artifactsLocationSasToken')]" }
         }
       }
     },
@@ -126,6 +172,13 @@
           "virtualNetworkResourceGroup": { "value": "[resourceGroup().name]" },
           "adminPassword": { "value": "[parameters('AdminUserPassword')]" },
           "SqlSrvStorageType": { "value": "[variables('srvStorageType')]" },
+          "dbLoginName": { "value": "[parameters('dbLoginName')]" },
+          "dbUserName": { "value": "[parameters('dbUserName')]" },
+          "dbUserPassword": { "value": "[parameters('dbUserPassword')]" },
+          "databaseName": { "value": "[parameters('databaseName')]" },
+          "dbUserDatabaseRole": { "value": "[parameters('dbUserDatabaseRole')]" },
+          "sqlSchemaScript": { "value": "[parameters('sqlSchemaScript')]" },
+          "sqlDataScript": { "value": "[parameters('sqlDataScript')]" },
           "_artifactsLocation": { "value": "[parameters('_artifactsLocation')]" },
           "_artifactsLocationSasToken": { "value": "[parameters('_artifactsLocationSasToken')]" }
         }

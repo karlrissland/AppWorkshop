@@ -12,4 +12,10 @@ There are no prerequistes for the deployment.
 
 ## Deployment steps
 
-You can click the "deploy to Azure" button at the beginning of this document.
+Click the "deploy to Azure" button at the beginning of this document.
+
+Enter vm admin username and password
+
+You can leave default values for the other parameters
+
+NOTE: do not change the value of _artifactsLocation or _artifactsLocationSas as the deployment will fail.

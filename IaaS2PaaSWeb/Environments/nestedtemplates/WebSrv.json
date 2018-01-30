@@ -172,7 +172,7 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "location": "[variables('virtualNetworkLocation')]",
       "apiVersion": "2016-03-30",
-      "dependsOn": [ ],
+      "dependsOn": [],
       "tags": {
         "displayName": "WebSrvPubIp"
       },
@@ -185,5 +185,9 @@
     }
   ],
   "outputs": {
+    "webSrvUri": {
+      "value": "[parameters('WebSrvName')]",
+      "type": "string"
+    }
   }
 }

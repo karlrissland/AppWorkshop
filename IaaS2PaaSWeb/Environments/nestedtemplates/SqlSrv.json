@@ -25,6 +25,27 @@
         "Premium_LRS"
       ]
     },
+    "dbLoginName": {
+      "type": "string"
+    },
+    "dbUserName": {
+      "type": "string"
+    },
+    "dbUserPassword": {
+      "type": "string"
+    },
+    "databaseName": {
+      "type": "string"
+    },
+    "dbUserDatabaseRole": {
+      "type": "string"
+    },
+    "sqlSchemaScript": {
+      "type": "string"
+    },
+    "sqlDataScript": {
+      "type": "string"
+    },
     "_artifactsLocation": {
       "type": "string",
       "metadata": {
@@ -50,7 +71,11 @@
     "SqlSrvDscConfigArchiveFolder": "DSC",
     "SqlSrvDscConfigArchiveFileName": "SqlSrvDscConfig.zip",
     "InstallxSQLServerModuleScriptFolder": "CustomScripts",
-    "InstallxSQLServerModuleScriptFileName": "InstallxSQLServerModule.ps1"
+    "InstallxSQLServerModuleScriptFileName": "InstallxSQLServerModule.ps1",
+    "powerShellExecuteCommandParams": "[concat(' -loginName ',parameters('dbLoginName'),' -dbUserName ',parameters('dbUserName'),' -password ',parameters('dbUserPassword'),' -databaseName ',parameters('databaseName'),' -databaseRole ',parameters('dbUserDatabaseRole'), ' -sqlSchemaScript ', parameters('sqlSchemaScript'), ' -sqlDataScript ', parameters('sqlDataScript'))]",
+    "powerShellExecuteCommandForBlobStorage": "[concat('powershell -ExecutionPolicy Unrestricted -File ', variables('InstallxSQLServerModuleScriptFolder'), '/', variables('InstallxSQLServerModuleScriptFileName'), ' ', variables('powerShellExecuteCommandParams'))]",
+    "powerShellExecuteCommandForURI": "[concat('powershell -ExecutionPolicy Unrestricted -File ', variables('InstallxSQLServerModuleScriptFileName'), ' ', variables('powerShellExecuteCommandParams'))]",
+    "powerShellExecuteCommand": "[if(contains(parameters('_artifactsLocation'),'.blob.core.windows.net'),variables('powerShellExecuteCommandForBlobStorage'),variables('powerShellExecuteCommandForURI'))]"
   },
   "resources": [
     {
@@ -148,7 +173,7 @@
               "fileUris": [
                 "[concat(parameters('_artifactsLocation'), '/', variables('InstallxSQLServerModuleScriptFolder'), '/', variables('InstallxSQLServerModuleScriptFileName'), parameters('_artifactsLocationSasToken'))]"
               ],
-              "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ', variables('InstallxSQLServerModuleScriptFolder'), '/', variables('InstallxSQLServerModuleScriptFileName'))]"
+              "commandToExecute": "[variables('powerShellExecuteCommand')]"
             }
           }
         }
@@ -187,6 +212,7 @@
       "name": "[variables('publicIpAddressName')]",
       "type": "Microsoft.Network/publicIPAddresses",
       "apiVersion": "2016-11-01",
+      "dependsOn": [],
       "location": "[resourceGroup().location]",
       "properties": {
         "publicIPAllocationMethod": "Dynamic"
@@ -243,5 +269,9 @@
     }
   ],
   "outputs": {
+    "sqlSrvUri": {
+      "value": "[parameters('virtualMachineName')]",
+      "type": "string"
+    }
   }
 }

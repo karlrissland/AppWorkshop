@@ -14,11 +14,11 @@
       "type": "string",
       "minLength": 1
     },
-    "VsDevWorkstationAdminUserName": {
+    "AdminUserName": {
       "type": "string",
       "minLength": 1
     },
-    "VsDevWorkstationAdminPassword": {
+    "AdminUserPassword": {
       "type": "securestring"
     },
     "VsDevWorkstationWindowsOSVersion": {
@@ -34,6 +34,36 @@
     },
     "virtualNetworkResourceGroup": {
       "type": "string"
+    },
+    "repoUri": {
+      "type": "string"
+    },
+    "webSrvUri": {
+      "type": "string"
+    },
+    "dbSrvUri": {
+      "type": "string"
+    },
+    "dbName": {
+      "type": "string"
+    },
+    "dbUserName": {
+      "type": "string"
+    },
+    "dbUserPassword": {
+      "type": "string"
+    },
+    "_artifactsLocation": {
+      "type": "string",
+      "metadata": {
+        "description": "Auto-generated container in staging storage account to receive post-build staging folder upload"
+      }
+    },
+    "_artifactsLocationSasToken": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Auto-generated token to access _artifactsLocation"
+      }
     }
   },
   "variables": {
@@ -45,7 +75,13 @@
     "VsDevWorkstationSubnetRef": "[concat(variables('VsDevWorkstationVnetID'), '/subnets/', 'Subnet-1')]",
     "VsDevWorkstationNicName": "[concat(parameters('VsDevWorkstationName'), 'NetworkInterface')]",
     "VsDevWorkstationPubIPName": "[concat(parameters('vsDevWorkstationName'),'PubIP')]",
-    "VsDevWorkstationPubIPDnsName": "[tolower(concat(parameters('VsDevWorkstationName'),uniqueString(resourceGroup().id)))]"
+    "VsDevWorkstationPubIPDnsName": "[tolower(concat(parameters('VsDevWorkstationName'),uniqueString(resourceGroup().id)))]",
+    "vsDevWorkstationConfigScriptFolder": "CustomScripts",
+    "vsDevWorkstationConfigScriptFileName": "vsDevWorkstationConfig.ps1",
+    "powerShellExecuteCommandParams": "[concat(' -repoUri ',parameters('repoUri'), ' -adminUserName ', parameters('adminUserName'), ' -adminUserPassword ', parameters('adminUserPassword'), ' -webSrvUri ', parameters('webSrvUri'), ' -dbSrvUri ', parameters('dbSrvUri'), ' -dbName ', parameters('dbName'), ' -dbUserName ', parameters('dbUserName'), ' -dbUserPassword ', parameters('dbUserPassword'))]",
+    "powerShellExecuteCommandForBlobStorage": "[concat('powershell -ExecutionPolicy Unrestricted -File ', variables('vsDevWorkstationConfigScriptFolder'), '/', variables('vsDevWorkstationConfigScriptFileName'), ' ', variables('powerShellExecuteCommandParams'))]",
+    "powerShellExecuteCommandForURI": "[concat('powershell -ExecutionPolicy Unrestricted -File ', variables('vsDevWorkstationConfigScriptFileName'), ' ', variables('powerShellExecuteCommandParams'))]",
+    "powerShellExecuteCommand": "[if(contains(parameters('_artifactsLocation'),'.blob.core.windows.net'),variables('powerShellExecuteCommandForBlobStorage'),variables('powerShellExecuteCommandForURI'))]"
   },
   "resources": [
     {
@@ -92,8 +128,8 @@
         },
         "osProfile": {
           "computerName": "[parameters('VsDevWorkstationName')]",
-          "adminUsername": "[parameters('VsDevWorkstationAdminUsername')]",
-          "adminPassword": "[parameters('VsDevWorkstationAdminPassword')]"
+          "adminUsername": "[parameters('AdminUserName')]",
+          "adminPassword": "[parameters('AdminUserPassword')]"
         },
         "storageProfile": {
           "imageReference": {
@@ -117,7 +153,33 @@
             }
           ]
         }
-      }
+      },
+      "resources": [
+        {
+          "name": "vsDevWorkstationConfig",
+          "type": "extensions",
+          "location": "[resourceGroup().location]",
+          "apiVersion": "2016-03-30",
+          "dependsOn": [
+            "[resourceId('Microsoft.Compute/virtualMachines', parameters('VsDevWorkstationName'))]"
+          ],
+          "tags": {
+            "displayName": "vsDevWorkstationConfig"
+          },
+          "properties": {
+            "publisher": "Microsoft.Compute",
+            "type": "CustomScriptExtension",
+            "typeHandlerVersion": "1.4",
+            "autoUpgradeMinorVersion": true,
+            "settings": {
+              "fileUris": [
+                "[concat(parameters('_artifactsLocation'), '/', variables('vsDevWorkstationConfigScriptFolder'), '/', variables('vsDevWorkstationConfigScriptFileName'), parameters('_artifactsLocationSasToken'))]"
+              ],
+              "commandToExecute": "[variables('powerShellExecuteCommand')]"
+            }
+          }
+        }
+      ]
     },
     {
       "name": "[variables('VsDevWorkstationPubIPName')]",
@@ -137,5 +199,6 @@
     }
   ],
   "outputs": {
+
   }
 }

@@ -16,6 +16,9 @@
     },
     "virtualNetworkResourceGroup": {
       "value": "WorkshopTest"
+    },
+    "AdminUserPassword": {
+      "value": "P2ssw0rd"
     }
   }
 }

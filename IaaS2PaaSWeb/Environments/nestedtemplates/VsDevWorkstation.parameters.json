@@ -16,6 +16,9 @@
     },
     "VsDevWorkstationAdminPassword": {
       "value": "P2ssw0rd"
+    },
+    "repoUri": {
+      "value": ""
     }
   }
 }

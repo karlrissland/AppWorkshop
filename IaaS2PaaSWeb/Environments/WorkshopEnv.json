@@ -61,6 +61,10 @@
       "type": "string",
       "defaultValue": "https://raw.githubusercontent.com/karlrissland/AppWorkshop/master/IaaS2PaaSWeb/PartsUnlimitedDatabase/Post-Deployment/01_Finalize_Deployment.sql"
     },
+    "repoUri": {
+      "type": "string",
+      "defaultValue": "https://github.com/karlrissland/AppWorkshop.git"
+    },
     "_artifactsLocation": {
       "type": "string",
       "defaultValue": "[uri(deployment().properties.templateLink.uri, '.')]"
@@ -100,7 +104,7 @@
       "name": "DevWorkstation",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2016-09-01",
-      "dependsOn": [ "vNetDeploy" ],
+      "dependsOn": [ "vNetDeploy", "WebSrv", "SqlSrv" ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -110,11 +114,19 @@
         "parameters": {
           "VsDevWorkstationStorageType": { "value": "[variables('srvStorageType')]" },
           "VsDevWorkstationName": { "value": "[parameters('DevWorkstationName')]" },
-          "VsDevWorkstationAdminUserName": { "value": "[parameters('AdminUserName')]" },
-          "VsDevWorkstationAdminPassword": { "value": "[parameters('AdminUserPassword')]" },
+          "AdminUserName": { "value": "[parameters('AdminUserName')]" },
+          "AdminUserPassword": { "value": "[parameters('AdminUserPassword')]" },
           "VsDevWorkstationWindowsOSVersion": { "value": "[parameters('DevWorkstationOSVersion')]" },
           "virtualNetworkName": { "value": "[parameters('vNetName')]" },
-          "virtualNetworkResourceGroup": { "value": "[resourceGroup().name]" }
+          "virtualNetworkResourceGroup": { "value": "[resourceGroup().name]" },
+          "repoUri": { "value": "[parameters('repoUri')]" },
+          "webSrvUri" : { "value": "[ reference('WebSrv').outputs.webSrvUri.value ]" },
+          "dbSrvUri": { "value": "[ reference('SqlSrv').outputs.sqlSrvUri.value ]" },
+          "dbName": {"value": "[parameters('databaseName')]"},
+          "dbUserName": {"value": "[parameters('dbUserName')]"},
+          "dbUserPassword": {"value": "[parameters('dbUserPassword')]"},
+          "_artifactsLocation": { "value": "[parameters('_artifactsLocation')]" },
+          "_artifactsLocationSasToken": { "value": "[parameters('_artifactsLocationSasToken')]" }
         }
       }
     },

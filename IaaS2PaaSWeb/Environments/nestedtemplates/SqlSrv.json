@@ -212,6 +212,7 @@
       "name": "[variables('publicIpAddressName')]",
       "type": "Microsoft.Network/publicIPAddresses",
       "apiVersion": "2016-11-01",
+      "dependsOn": [],
       "location": "[resourceGroup().location]",
       "properties": {
         "publicIPAllocationMethod": "Dynamic"
@@ -268,5 +269,9 @@
     }
   ],
   "outputs": {
+    "sqlSrvUri": {
+      "value": "[parameters('virtualMachineName')]",
+      "type": "string"
+    }
   }
 }

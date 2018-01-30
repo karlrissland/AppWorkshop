@@ -27,6 +27,7 @@
   <ItemGroup>
     <Content Include="CustomScripts\InstallxSQLServerModule.ps1" />
     <Content Include="Deploy-AzureResourceGroup.ps1" />
+    <Content Include="CustomScripts\vsDevWorkstationConfig.ps1" />
     <None Include="Deployment.targets">
       <Visible>False</Visible>
     </None>
@@ -44,4 +45,9 @@
     <Content Include="WorkshopEnv.parameters.json" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties nestedtemplates_4SqlSrv_1json__JSONSchema="WebSrv.json" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

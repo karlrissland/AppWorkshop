@@ -2,29 +2,12 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "vNetName": {
-      "value": "workshopVnet"
-    },
     "AdminUserName": {
       "value": "karl"
     },
     "AdminUserPassword": {
-      "value": "P0pp1ngZ1ts2"
-    },
-    "DevWorkstationName": {
-      "value": "DevSrv"
-    },
-    "DevWorkstationOSVersion": {
-      "value": "VS-2017-Ent-Latest-WS2016"
-    },
-    "WebSrvName": {
-      "value": "WebSrv"
-    },
-    "SqlSrvName": {
-      "value": "SqlSrv"
-    },
-    "databaseName": {
-      "value": "partsUnlimitedDB"
+      "value": "P2ssw0rd"
     }
+
   }
 }

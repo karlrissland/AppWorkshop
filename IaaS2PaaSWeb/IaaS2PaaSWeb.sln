@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartsUnlimitedWebsite", "Pa
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "PartsUnlimitedDatabase", "PartsUnlimitedDatabase\PartsUnlimitedDatabase.sqlproj", "{3736CBC6-B5F6-4858-9126-B3421738C171}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartsUnlimitedModels", "PartsUnlimitedModels\PartsUnlimitedModels.csproj", "{C3B7ACD5-B38E-4ED3-BA76-6D7CF183C03E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{3736CBC6-B5F6-4858-9126-B3421738C171}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3736CBC6-B5F6-4858-9126-B3421738C171}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3736CBC6-B5F6-4858-9126-B3421738C171}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C3B7ACD5-B38E-4ED3-BA76-6D7CF183C03E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3B7ACD5-B38E-4ED3-BA76-6D7CF183C03E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3B7ACD5-B38E-4ED3-BA76-6D7CF183C03E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3B7ACD5-B38E-4ED3-BA76-6D7CF183C03E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

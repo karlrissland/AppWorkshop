@@ -475,27 +475,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hubs\AnnouncementHub.cs" />
-    <Compile Include="Models\CommunityPost.cs" />
-    <Compile Include="Models\ILineItem.cs" />
-    <Compile Include="Models\OrderCostSummary.cs" />
     <Compile Include="Utils\DefaultShippingTaxCalculator.cs" />
     <Compile Include="Utils\IShippingTaxCalculator.cs" />
     <Compile Include="Utils\LayoutDataAttribute.cs" />
     <Compile Include="Utils\PartsUnlimitedDbInitializer.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Models\CartItem.cs" />
-    <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\IPartsUnlimitedContext.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Manufacturer.cs" />
-    <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\OrderDetail.cs" />
-    <Compile Include="Models\PartsUnlimitedContext.cs" />
-    <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\Raincheck.cs" />
-    <Compile Include="Models\ShoppingCart.cs" />
-    <Compile Include="Models\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Recommendations\AzureMLFrequentlyBoughtTogetherRecommendationEngine.cs" />
     <Compile Include="Recommendations\IRecommendationEngine.cs" />
@@ -530,6 +513,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PartsUnlimitedModels\PartsUnlimitedModels.csproj">
+      <Project>{c3b7acd5-b38e-4ed3-ba76-6d7cf183c03e}</Project>
+      <Name>PartsUnlimitedModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

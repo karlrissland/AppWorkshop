@@ -1,53 +1,63 @@
 ﻿using PartsUnlimited.Models;
 using System;
-using System.Data.Entity;
-using System.Linq;
 using System.Runtime.Caching;
 using System.Web.Mvc;
 using PartsUnlimited.Utils;
 using PartsUnlimited.ViewModels;
+using System.Net.Http;
+using System.Configuration;
+using System.Net.Http.Headers;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PartsUnlimited.Controllers
 {
     public class StoreController : Controller
     {
-        private readonly IPartsUnlimitedContext db;
+        public StoreController() { }
 
-        public StoreController(IPartsUnlimitedContext context)
+        private static async Task<T> GetFromStoreService<T>(string path)
         {
-            db = context;
+            using (var client = new HttpClient())
+            {
+                var baseAddress = ConfigurationManager.AppSettings["StoreServiceBaseAddress"];
+                var key = ConfigurationManager.AppSettings["StoreServiceKey"];
+
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var uri = new Uri(baseAddress + path + key);
+
+                HttpResponseMessage response = await client.GetAsync(uri);
+                return await response.Content.ReadAsAsync<T>();
+            }
         }
 
         //
         // GET: /Store/
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var genres = db.Categories.ToList();
-
-            return View(genres);
+            return View(await GetFromStoreService<List<Category>>("categories"));
         }
 
         //
         // GET: /Store/Browse?genre=Disco
-        public ActionResult Browse(int categoryId)
+        public async Task<ActionResult> Browse(int categoryId)
         {
-            // Retrieve Category genre and its Associated associated Products products from database
-            var genreModel = db.Categories.Include("Products").Single(g => g.CategoryId == categoryId);
-
-            return View(genreModel);
+            return View(await GetFromStoreService<Category>($"categories/{categoryId}"));
         }
 
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-
             var productCacheKey = string.Format("product_{0}", id);
             var product = MemoryCache.Default[productCacheKey] as Product;
             if (product == null)
             {
-                product = db.Products.Single(a => a.ProductId == id);
+                product = await GetFromStoreService<Product>($"product/{id}");
                 //Remove it from cache if not retrieved in last 10 minutes
                 MemoryCache.Default.Add(productCacheKey, product, new CacheItemPolicy { SlidingExpiration = TimeSpan.FromMinutes(10) });
             }
+
             var viewModel = new ProductViewModel
             {
                 Product = product,
@@ -56,6 +66,5 @@ namespace PartsUnlimited.Controllers
 
             return View(viewModel);
         }
-
     }
 }

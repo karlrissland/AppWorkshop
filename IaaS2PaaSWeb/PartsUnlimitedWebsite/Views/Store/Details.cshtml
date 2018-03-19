@@ -24,7 +24,7 @@
                 <div class="details-panel">
 
                     <div class="zoom" id="product-image">
-                        <img src="/Images/@Model.Product.ProductArtUrl" alt="@Model.Product.Title" />
+                        <img src="@ConfigurationHelpers.GetString("CDNUrl")/Images/@Model.Product.ProductArtUrl" alt="@Model.Product.Title" />
                     </div>
 
                 </div>

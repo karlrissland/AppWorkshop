@@ -8,7 +8,7 @@
                 
                     <div class="product-image-container hover-over hidden-xs">
                         <div class="image">
-                            <img src="/images/@product.ProductArtUrl" alt="@product.Title" />
+                            <img src="@ConfigurationHelpers.GetString("CDNUrl")/images/@product.ProductArtUrl" alt="@product.Title" />
                         </div>
                         <div class="detail">
                             <h4>@product.Title</h4>
@@ -16,7 +16,7 @@
                         </div>
                         <div class="mouse-over hidden-xs">
                             <div class="image-second">
-                                <img src="/images/@product.ProductArtUrl" alt="@product.Title zoom" />
+                                <img src="@ConfigurationHelpers.GetString("CDNUrl")/images/@product.ProductArtUrl" alt="@product.Title zoom" />
                             </div>
 
                             <div class="shop-now">
@@ -27,7 +27,7 @@
 
                     <div class="row visible-xs">
                         <div class="col-xs-4 col-sm-12 col-md-12 no-gutter-sm no-gutter image">
-                            <img src="/images/@product.ProductArtUrl" alt="@product.Title" />
+                            <img src="@ConfigurationHelpers.GetString("CDNUrl")/images/@product.ProductArtUrl" alt="@product.Title" />
                         </div>
                         <div class="col-xs-8 col-sm-12 col-md-12 detail">
                             <h4>@product.Title</h4>

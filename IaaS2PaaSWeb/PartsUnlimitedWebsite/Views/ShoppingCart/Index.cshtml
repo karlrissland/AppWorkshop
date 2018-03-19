@@ -84,7 +84,7 @@
                                 <div class="item-label item-inventory">@item.Count</div>
                             </div>
                             <div class="col-xs-3 col-sm-3 col-sm-pull-2 col-md-2">
-                                <img src="/Images/@item.Product.ProductArtUrl" alt="@item.Product.Title"/>
+                                <img src="@ConfigurationHelpers.GetString("CDNUrl")/Images/@item.Product.ProductArtUrl" alt="@item.Product.Title"/>
                             </div>
                             <div class="col-xs-6 col-sm-2 col-sm-push-5 text-center-sm col-md-push-6">
                                 <div class="visible-xs item-label">@item.Product.Title</div>

@@ -57,6 +57,7 @@ $env:Path += ";C:\Program Files\Git\cmd"
 
 #this will build the debug configuration
 #app package will be located at; C:\Source\AppWorkshop\IaaS2PaaSWeb\PartsUnlimitedWebsite\obj\Debug\Package\partsunlimitedwebsite.zip
+& "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\ReadyRoll\OctoPack\build\NuGet.exe" restore C:\Source\AppWorkshop\IaaS2PaaSWeb\PartsUnlimitedWebsite\partsunlimitedwebsite.csproj -SolutionDirectory C:\Source\AppWorkshop\IaaS2PaaSWeb
 msbuild C:\Source\AppWorkshop\IaaS2PaaSWeb\PartsUnlimitedWebsite\partsunlimitedwebsite.csproj /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true
 
 ## Deploy Webapp

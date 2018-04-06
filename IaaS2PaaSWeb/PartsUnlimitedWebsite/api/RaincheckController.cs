@@ -17,19 +17,19 @@ namespace PartsUnlimited.Api
             _query = query;
         }
 
-        [System.Web.Http.HttpGet, System.Web.Mvc.Route]
+        [System.Web.Http.HttpGet, System.Web.Mvc.Route, System.Web.Http.ActionName("GetAll")]
         public Task<IEnumerable<Raincheck>> Get()
         {
             return _query.GetAllAsync();
         }
 
-        [System.Web.Http.HttpGet, System.Web.Mvc.Route("{id}")]
+        [System.Web.Http.HttpGet, System.Web.Mvc.Route("{id}"), System.Web.Http.ActionName("GetOne")]
         public Task<Raincheck> Get(int id)
         {
             return _query.FindAsync(id); 
         }
 
-        [System.Web.Http.HttpPost, System.Web.Mvc.Route]
+        [System.Web.Http.HttpPost, System.Web.Mvc.Route, System.Web.Http.ActionName("Save")]
         public Task<int> Post([FromBody]Raincheck raincheck)
         {
             return _query.AddAsync(raincheck);

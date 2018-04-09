@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace PartsUnlimited.Api
 {
-    [System.Web.Mvc.RoutePrefix("api/raincheck")]
+    [System.Web.Http.RoutePrefix("api/raincheck")]
     public class RaincheckController : ApiController
     {
         private readonly IRaincheckQuery _query;
@@ -17,19 +17,19 @@ namespace PartsUnlimited.Api
             _query = query;
         }
 
-        [System.Web.Http.HttpGet, System.Web.Mvc.Route, System.Web.Http.ActionName("GetAll")]
+        [System.Web.Http.HttpGet, System.Web.Http.Route, System.Web.Http.ActionName("GetAll")]
         public Task<IEnumerable<Raincheck>> Get()
         {
             return _query.GetAllAsync();
         }
 
-        [System.Web.Http.HttpGet, System.Web.Mvc.Route("{id}"), System.Web.Http.ActionName("GetOne")]
+        [System.Web.Http.HttpGet, System.Web.Http.Route("{id}"), System.Web.Http.ActionName("GetOne")]
         public Task<Raincheck> Get(int id)
         {
             return _query.FindAsync(id); 
         }
 
-        [System.Web.Http.HttpPost, System.Web.Mvc.Route, System.Web.Http.ActionName("Save")]
+        [System.Web.Http.HttpPost, System.Web.Http.Route, System.Web.Http.ActionName("Save")]
         public Task<int> Post([FromBody]Raincheck raincheck)
         {
             return _query.AddAsync(raincheck);

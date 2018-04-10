@@ -16,8 +16,7 @@ namespace PartsUnlimited
             container.RegisterType<IOrdersQuery, OrdersQuery>();
             container.RegisterType<IRaincheckQuery, RaincheckQuery>();
             container.RegisterType<IRecommendationEngine, AzureMLFrequentlyBoughtTogetherRecommendationEngine>();
-            //TODO Application Insights - Uncomment
-            //container.RegisterType<ITelemetryProvider, TelemetryProvider>();
+            container.RegisterType<ITelemetryProvider, TelemetryProvider>();
             container.RegisterType<IProductSearch, StringContainsProductSearch>();
             container.RegisterType<IShippingTaxCalculator, DefaultShippingTaxCalculator>();
 

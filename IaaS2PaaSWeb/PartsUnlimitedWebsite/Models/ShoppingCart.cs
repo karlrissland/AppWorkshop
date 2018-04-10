@@ -163,20 +163,15 @@ namespace PartsUnlimited.Models
         // We're using HttpContextBase to allow access to cookies.
         public string GetCartId(HttpContextBase context)
         {
-            var sessionCookie = context.Request.Cookies.Get("Session");
-            string cartId = null;
+            string cartId = context.Session["CartID"] as string;
 
-            if (sessionCookie == null)
+            if (cartId == null)
             {
                 //A GUID to hold the cartId. 
                 cartId = Guid.NewGuid().ToString();
 
                 // Send cart Id as a cookie to the client.
-                context.Response.Cookies.Add(new HttpCookie("Session", cartId));
-            }
-            else
-            {
-                cartId = sessionCookie.Value;
+                context.Session["CartID"] = cartId;
             }
 
             return cartId;

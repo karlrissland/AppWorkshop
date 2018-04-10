@@ -15,16 +15,21 @@ namespace PartsUnlimited.Controllers
     public class ShoppingCartController : Controller
     {
         private readonly IPartsUnlimitedContext db;
-        private readonly ITelemetryProvider telemetry;
+        //private readonly ITelemetryProvider telemetry;
         private readonly IShippingTaxCalculator shippingTaxCalculator;
 
-		public ShoppingCartController(IPartsUnlimitedContext context, ITelemetryProvider telemetryProvider, 
-			IShippingTaxCalculator shippingTaxCalc)
+        public ShoppingCartController(IPartsUnlimitedContext context, IShippingTaxCalculator shippingTaxCalc)
         {
             db = context;
-            telemetry = telemetryProvider;
-			shippingTaxCalculator = shippingTaxCalc;
+            shippingTaxCalculator = shippingTaxCalc;
         }
+
+   //     public ShoppingCartController(IPartsUnlimitedContext context, ITelemetryProvider telemetryProvider, IShippingTaxCalculator shippingTaxCalc)
+   //     {
+   //         db = context;
+   //         telemetry = telemetryProvider;
+			//shippingTaxCalculator = shippingTaxCalc;
+   //     }
 
         //
         // GET: /ShoppingCart/
@@ -58,7 +63,7 @@ namespace PartsUnlimited.Controllers
 
 
             // Track cart review event with measurements
-            telemetry.TrackTrace("Cart/Server/Index");
+            //telemetry.TrackTrace("Cart/Server/Index");
 
             // Return the view
             return View(viewModel);
@@ -88,7 +93,7 @@ namespace PartsUnlimited.Controllers
             {
                 {"ElapsedMilliseconds", DateTime.Now.Subtract(startTime).TotalMilliseconds }
             };
-            telemetry.TrackEvent("Cart/Server/Add", null, measurements);
+            //telemetry.TrackEvent("Cart/Server/Add", null, measurements);
 
             // Go back to the main store page for more shopping
             return RedirectToAction("Index");
@@ -123,7 +128,7 @@ namespace PartsUnlimited.Controllers
             {
                 {"ElapsedMilliseconds", DateTime.Now.Subtract(startTime).TotalMilliseconds }
             };
-            telemetry.TrackEvent("Cart/Server/Remove", null, measurements);
+            //telemetry.TrackEvent("Cart/Server/Remove", null, measurements);
 
             // Display the confirmation message
             var items = cart.GetCartItems();

@@ -14,15 +14,21 @@ namespace PartsUnlimited.Controllers
     public class OrdersController : Controller
     {
         private readonly IOrdersQuery _ordersQuery;
-        private readonly ITelemetryProvider _telemetry;
+        
 		private readonly IShippingTaxCalculator _shippingTaxCalc;
 
-		public OrdersController(IOrdersQuery ordersQuery, ITelemetryProvider telemetryProvider,
-			IShippingTaxCalculator shippingTaxCalc)
+        //private readonly ITelemetryProvider _telemetry;
+        //public OrdersController(IOrdersQuery ordersQuery, ITelemetryProvider telemetryProvider,
+        //	IShippingTaxCalculator shippingTaxCalc)
+        //      {
+        //          _ordersQuery = ordersQuery;
+        //          _telemetry = telemetryProvider;
+        //	_shippingTaxCalc = shippingTaxCalc;
+        //      }
+        public OrdersController(IOrdersQuery ordersQuery, IShippingTaxCalculator shippingTaxCalc)
         {
             _ordersQuery = ordersQuery;
-            _telemetry = telemetryProvider;
-			_shippingTaxCalc = shippingTaxCalc;
+            _shippingTaxCalc = shippingTaxCalc;
         }
 
         public async Task<ActionResult> Index(DateTime? start, DateTime? end, string invalidOrderSearch)
@@ -36,7 +42,7 @@ namespace PartsUnlimited.Controllers
         {
             if (id == null)
             {
-                _telemetry.TrackTrace("Order/Server/NullId");
+                //_telemetry.TrackTrace("Order/Server/NullId");
                 return RedirectToAction("Index", new { invalidOrderSearch = Request.QueryString["id"] });
             }
 
@@ -46,7 +52,7 @@ namespace PartsUnlimited.Controllers
             // If the username isn't the same as the logged in user, return as if the order does not exist
             if (order == null || !String.Equals(order.Username, username, StringComparison.Ordinal))
             {
-                _telemetry.TrackTrace("Order/Server/UsernameMismatch");
+                //_telemetry.TrackTrace("Order/Server/UsernameMismatch");
                 return RedirectToAction("Index", new { invalidOrderSearch = id.ToString() });
             }
 
@@ -65,7 +71,7 @@ namespace PartsUnlimited.Controllers
             };
             if (order.OrderDetails == null)
             {
-                _telemetry.TrackEvent("Order/Server/NullDetails", eventProperties, null);
+                //_telemetry.TrackEvent("Order/Server/NullDetails", eventProperties, null);
             }
             else
             {
@@ -73,7 +79,7 @@ namespace PartsUnlimited.Controllers
                 {
                     {"LineItemCount", order.OrderDetails.Count }
                 };
-                _telemetry.TrackEvent("Order/Server/Details", eventProperties, eventMeasurements);
+                //_telemetry.TrackEvent("Order/Server/Details", eventProperties, eventMeasurements);
 
 				costSummary = _shippingTaxCalc.CalculateCost(order.OrderDetails, order.PostalCode);
 				//var itemsCount = order.OrderDetails.Sum(x => x.Count);

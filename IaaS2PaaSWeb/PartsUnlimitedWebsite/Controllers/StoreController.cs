@@ -6,6 +6,8 @@ using System.Runtime.Caching;
 using System.Web.Mvc;
 using PartsUnlimited.Utils;
 using PartsUnlimited.ViewModels;
+using System.Threading;
+using System.Configuration;
 
 namespace PartsUnlimited.Controllers
 {
@@ -16,6 +18,11 @@ namespace PartsUnlimited.Controllers
         public StoreController(IPartsUnlimitedContext context)
         {
             db = context;
+            var configdelay = ConfigurationManager.AppSettings["SiteDelayMilliseconds"];
+            int delay = 0;
+            int.TryParse(configdelay, out delay);
+
+            Thread.Sleep(delay);
         }
 
         //

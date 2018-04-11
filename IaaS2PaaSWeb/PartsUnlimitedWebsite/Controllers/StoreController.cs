@@ -36,6 +36,7 @@ namespace PartsUnlimited.Controllers
 
         //
         // GET: /Store/Browse?genre=Disco
+        [OutputCache(Duration = 30, VaryByParam = "*")]
         public ActionResult Browse(int categoryId)
         {
             // Retrieve Category genre and its Associated associated Products products from database
@@ -43,7 +44,7 @@ namespace PartsUnlimited.Controllers
 
             return View(genreModel);
         }
-
+        [OutputCache(Duration = 30, VaryByParam = "id")]
         public ActionResult Details(int id)
         {
 

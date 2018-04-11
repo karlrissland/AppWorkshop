@@ -536,6 +536,7 @@
     <Compile Include="Utils\OrdersQuery.cs" />
     <Compile Include="Utils\PartsUnlimitedTelemetryInitializer.cs" />
     <Compile Include="Utils\RaincheckQuery.cs" />
+    <Compile Include="Utils\RedisHelper.cs" />
     <Compile Include="Utils\SignalRDependencyResolver.cs" />
     <Compile Include="Utils\TelemetryProvider.cs" />
     <Compile Include="ViewModels\AlbumData.cs" />

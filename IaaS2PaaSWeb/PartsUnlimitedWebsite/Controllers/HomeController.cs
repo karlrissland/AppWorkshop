@@ -23,18 +23,18 @@ namespace PartsUnlimited.Controllers
         public ActionResult Index()
         {
             // Get most popular products
-            var topSellingProducts = MemoryCache.Default["topselling"] as List<Product>;
+            var topSellingProducts = Utils.RedisHelper.GetList<Product>("topselling");
             if (topSellingProducts == null)
             {
                 topSellingProducts = GetTopSellingProducts(4);
-                MemoryCache.Default.Add("topselling", topSellingProducts, new CacheItemPolicy { AbsoluteExpiration = DateTimeOffset.UtcNow.AddMinutes(10) });
+                Utils.RedisHelper.SetList("topselling", topSellingProducts);
             }
 
-            var newProducts = MemoryCache.Default["newarrivals"] as List<Product>;
+            var newProducts = Utils.RedisHelper.GetList<Product>("newarrivals");
             if (newProducts == null)
             {
                 newProducts = GetNewProducts(4);
-                MemoryCache.Default.Add("newarrivals", newProducts, new CacheItemPolicy { AbsoluteExpiration = DateTimeOffset.UtcNow.AddMinutes(10) });
+                Utils.RedisHelper.SetList("newarrivals", newProducts);
             }
 
             var viewModel = new HomeViewModel

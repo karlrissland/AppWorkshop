@@ -84,5 +84,6 @@ Set-ItemProperty -Path $UserKey -Name "IsInstalled" -Value 0
 
 #Install Chocolatey and packages
 Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) 
-choco feature enable -n allowGlobalConfirmation
-choco install postman -y
+Start-Sleep -Seconds 3
+& choco feature enable -n allowGlobalConfirmation
+& choco install postman -y

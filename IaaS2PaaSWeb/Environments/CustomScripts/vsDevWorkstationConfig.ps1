@@ -17,8 +17,7 @@ Param (
 	[string]$repoUri,
 	[string]$adminUserName,
 	[string]$adminUserPassword,
-	[string]$webSrvUri,
-	[string]$dbSrvUri,
+	[string]$webSrvUr	[string]$dbSrvUri,
 	[string]$dbName,
 	[string]$dbUserName,
 	[string]$dbUserPassword
@@ -86,4 +85,10 @@ Set-ItemProperty -Path $UserKey -Name "IsInstalled" -Value 0
 Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) 
 Start-Sleep -Seconds 3
 & choco feature enable -n allowGlobalConfirmation
-& choco install postman -y
+& choco install -y postman
+
+#Enable IE File Download
+$HKLM = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3"
+$HKCU = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3"
+Set-ItemProperty -Path $HKLM -Name "1803" -Value 0
+Set-ItemProperty -Path $HKCU -Name "1803" -Value 0

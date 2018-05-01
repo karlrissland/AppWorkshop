@@ -17,7 +17,8 @@ Param (
 	[string]$repoUri,
 	[string]$adminUserName,
 	[string]$adminUserPassword,
-	[string]$webSrvUr	[string]$dbSrvUri,
+	[string]$webSrvUri,
+	[string]$dbSrvUri,
 	[string]$dbName,
 	[string]$dbUserName,
 	[string]$dbUserPassword

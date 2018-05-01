@@ -81,5 +81,6 @@ Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey
 Start-Sleep -Seconds 3
 & choco feature enable -n allowGlobalConfirmation
 & choco install -y googlechrome
+New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" -ErrorAction Ignore
 New-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" -Name "!InstallPostman" -Value 'choco install -y -f postman'
 

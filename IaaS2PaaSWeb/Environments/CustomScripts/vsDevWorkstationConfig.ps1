@@ -79,8 +79,10 @@ C:\Source\AppWorkshop\IaaS2PaaSWeb\PartsUnlimitedWebsite\obj\Debug\Package\parts
 #Install Chocolatey and packages
 Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) 
 Start-Sleep -Seconds 3
-& choco feature enable -n allowGlobalConfirmation
+#Add RunOnce task to install Postman on sign in
+$RunOncePath = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"
+New-Item -Path $RunOncePath -ErrorAction Ignore
+New-ItemProperty -Path $RunOncePath -Name "!InstallPostman" -Value 'C:\ProgramData\chocolatey\bin\choco.exe install -y -f postman'
+#Install Google Chrome browser
 & choco install -y googlechrome
-New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" -ErrorAction Ignore
-New-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" -Name "!InstallPostman" -Value 'choco install -y -f postman'
 

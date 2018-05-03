@@ -4,6 +4,7 @@ Configuration Main
   Param ( [string] $nodeName )
 
   Import-DscResource -ModuleName PSDesiredStateConfiguration
+  Import-DscResource -ModuleName cChoco
 
   Node $nodeName
   {
@@ -81,21 +82,19 @@ Configuration Main
       State       = "Running"
       DependsOn   = "[Package]InstallWebDeploy"
     }
-    Registry DisableIEEnhancedConfigurationForAdmins
-    {
-      Key = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}"
-      ValueName = "IsInstalled"
-      ValueType = "DWord"
-      ValueData = "0"
-      Force = $true
+    cChocoInstaller installChoco
+    { 
+      InstallDir = "C:\choco" 
     }
-    Registry DisableIEEnhancedConfigurationForUsers
-    {
-      Key = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8-37EF-4b3f-8CFC-4F3A74704073}"
-      ValueName = "IsInstalled"
-      ValueType = "DWord"
-      ValueData = "0"
-      Force = $true
+    cChocoPackageInstaller googlechrome
+    {            
+        Name = "googlechrome"
+        DependsOn = "[cChocoInstaller]installChoco"
+    }
+    cChocoPackageInstaller webpi
+    {            
+        Name = "webpi"
+        DependsOn = "[cChocoInstaller]installChoco"
     }
   }
 }

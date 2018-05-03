@@ -79,9 +79,9 @@ C:\Source\AppWorkshop\IaaS2PaaSWeb\PartsUnlimitedWebsite\obj\Debug\Package\parts
 #Install Chocolatey and packages
 Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) 
 Start-Sleep -Seconds 3
-#Add RunOnce task to install Postman on sign in
-$RunPath = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
-New-ItemProperty -Path $RunPath -Name "InstallPostman" -Value 'C:\ProgramData\chocolatey\bin\choco.exe install -y postman'
+#Add startup bat to install Postman on sign in
+$install_postman_bat = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\install_postman.bat"
+Set-Content -Path $install_postman_bat -Value 'C:\ProgramData\chocolatey\bin\choco.exe install -y postman'
 #Install Google Chrome browser
 & choco install -y googlechrome
 

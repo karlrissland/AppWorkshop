@@ -8,10 +8,11 @@
     },
     "AdminUserName": {
       "type": "string",
-      "minLength": 1
+      "defaultValue":  "sysadmin"
     },
     "AdminUserPassword": {
-      "type": "securestring"
+      "type": "securestring",
+      "defaultValue":  "Password$123"
     },
     "DevWorkstationOSVersion": {
       "type": "string",

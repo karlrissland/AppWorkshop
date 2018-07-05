@@ -1,4 +1,5 @@
-﻿using StackExchange.Redis;
+﻿using Newtonsoft.Json;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,6 +10,16 @@ namespace PartsUnlimited.Utils
 {
     static class RedisHelper
     {
+        private static JsonSerializerSettings serializerSettings;
+
+        static RedisHelper()
+        {
+            serializerSettings = new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+        }
+
         private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
         {
             string redisHost = ConfigurationManager.AppSettings["RedisCacheConnectionString"];
@@ -32,7 +43,7 @@ namespace PartsUnlimited.Utils
 
         public static List<T> GetList<T>(string key)
         {
-            return (List<T>)Get(key);
+            return Get<List<T>>(key);
         }
 
         public static void SetList<T>(string key, List<T> list)
@@ -40,45 +51,29 @@ namespace PartsUnlimited.Utils
             Set(key, list);
         }
 
-        public static object Get(string key)
-        {
-            return Deserialize<object>(Connection.GetDatabase().StringGet(key));
-        }
-
         public static void Set(string key, object value)
         {
             Connection.GetDatabase().StringSet(key, Serialize(value));
         }
 
-        static byte[] Serialize(object o)
+        static string Serialize(object o)
         {
             if (o == null)
             {
                 return null;
             }
 
-            BinaryFormatter binaryFormatter = new BinaryFormatter();
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                binaryFormatter.Serialize(memoryStream, o);
-                byte[] objectDataAsStream = memoryStream.ToArray();
-                return objectDataAsStream;
-            }
+            return JsonConvert.SerializeObject(o, serializerSettings);
         }
 
-        static T Deserialize<T>(byte[] stream)
+        static T Deserialize<T>(string value)
         {
-            if (stream == null)
+            if (value == null)
             {
                 return default(T);
             }
 
-            BinaryFormatter binaryFormatter = new BinaryFormatter();
-            using (MemoryStream memoryStream = new MemoryStream(stream))
-            {
-                T result = (T)binaryFormatter.Deserialize(memoryStream);
-                return result;
-            }
+            return JsonConvert.DeserializeObject<T>(value, serializerSettings);
         }
     }
 }

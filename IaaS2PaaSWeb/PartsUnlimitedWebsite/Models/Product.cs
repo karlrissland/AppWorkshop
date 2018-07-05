@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 
 namespace PartsUnlimited.Models
 {
-    [Serializable]
     public class Product
     {
         [ScaffoldColumn(false)]

@@ -82,12 +82,8 @@ Start-Sleep -Seconds 3
 #Add startup bat to install additional packages on sign in
 $choco_exe = "C:\ProgramData\chocolatey\bin\choco.exe"
 $install_packages_bat = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\install_packages.bat"
-@('postman') | ForEach-Object {
+@('postman', 'visualstudio2017community', 'visualstudio2017-workload-netweb', 'visualstudio2017-workload-azure') | ForEach-Object {
 	Add-Content -Path $install_packages_bat -Value "$choco_exe install -y $_"
 }
 #Install Google Chrome browser
 & choco install -y googlechrome
-#Install Visual Studio 2017 Community with ASP.NET and Azure workloads
-& choco install -y visualstudio2017community
-& choco install -y visualstudio2017-workload-netweb
-& choco install -y visualstudio2017-workload-azure

@@ -79,10 +79,12 @@ C:\Source\AppWorkshop\IaaS2PaaSWeb\PartsUnlimitedWebsite\obj\Debug\Package\parts
 #Install Chocolatey and packages
 Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) 
 Start-Sleep -Seconds 3
-#Add startup bat to install Postman on sign in
-$install_postman_bat = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\install_postman.bat"
-Set-Content -Path $install_postman_bat -Value 'C:\ProgramData\chocolatey\bin\choco.exe install postman -y'
+#Add startup bat to install additional packages on sign in
+$choco_exe = "C:\ProgramData\chocolatey\bin\choco.exe"
+$install_packages_bat = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\install_packages.bat"
+@('postman', 'visualstudio2017community', 'visualstudio2017-workload-netweb', 'visualstudio2017-workload-azure') | ForEach-Object {
+	Add-Content -Path $install_packages_bat -Value "$choco_exe install -y $_"
+}
+Set-Content -Path  -Value $packages
 #Install Google Chrome browser
-& choco install googlechrome -y
-#Install VS 2017 Community with Azure & ASP.NET development workloads
-& choco install visualstudio2017community visualstudio2017-workload-netweb visualstudio2017-workload-azure -y
+& choco install -y googlechrome

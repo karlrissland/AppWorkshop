@@ -85,6 +85,5 @@ $install_packages_bat = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\St
 @('postman', 'visualstudio2017community', 'visualstudio2017-workload-netweb', 'visualstudio2017-workload-azure') | ForEach-Object {
 	Add-Content -Path $install_packages_bat -Value "$choco_exe install -y $_"
 }
-Set-Content -Path  -Value $packages
 #Install Google Chrome browser
 & choco install -y googlechrome

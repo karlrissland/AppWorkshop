@@ -81,7 +81,8 @@ Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey
 Start-Sleep -Seconds 3
 #Add startup bat to install Postman on sign in
 $install_postman_bat = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\install_postman.bat"
-Set-Content -Path $install_postman_bat -Value 'C:\ProgramData\chocolatey\bin\choco.exe install -y postman'
+Set-Content -Path $install_postman_bat -Value 'C:\ProgramData\chocolatey\bin\choco.exe install postman -y'
 #Install Google Chrome browser
-& choco install -y googlechrome
-
+& choco install googlechrome -y
+#Install VS 2017 Community with Azure & ASP.NET development workloads
+& choco install visualstudio2017community visualstudio2017-workload-netweb visualstudio2017-workload-azure -y

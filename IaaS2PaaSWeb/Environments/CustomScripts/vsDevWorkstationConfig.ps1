@@ -28,6 +28,12 @@ mkdir 'c:\Source'
 cd 'c:\Source'
 git clone $repoUri
 
+#Install Chocolatey and packages
+Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) 
+Start-Sleep -Seconds 3
+#Install NuGet
+& choco install nuget.commandline 
+
 ## Build App##
 
 #Set Path Variables for build
@@ -57,7 +63,7 @@ $env:Path += ";C:\Program Files\Git\cmd"
 
 #this will build the debug configuration
 #app package will be located at; C:\Source\AppWorkshop\IaaS2PaaSWeb\PartsUnlimitedWebsite\obj\Debug\Package\partsunlimitedwebsite.zip
-& "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\ReadyRoll\OctoPack\build\NuGet.exe" restore C:\Source\AppWorkshop\IaaS2PaaSWeb\PartsUnlimitedWebsite\partsunlimitedwebsite.csproj -SolutionDirectory C:\Source\AppWorkshop\IaaS2PaaSWeb
+nuget restore C:\Source\AppWorkshop\IaaS2PaaSWeb\IaaS2PaaSWeb.sln
 msbuild C:\Source\AppWorkshop\IaaS2PaaSWeb\PartsUnlimitedWebsite\partsunlimitedwebsite.csproj /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true
 
 ## Deploy Webapp
@@ -76,13 +82,10 @@ Add-Content C:\Source\AppWorkshop\IaaS2PaaSWeb\PartsUnlimitedWebsite\obj\Debug\P
 #Deploy Website
 C:\Source\AppWorkshop\IaaS2PaaSWeb\PartsUnlimitedWebsite\obj\Debug\Package\partsunlimitedwebsite.deploy.cmd /Y /M:$webSrvUri/MSDeployAgentService /U:$adminUserName /P:$adminUserPassword
 
-#Install Chocolatey and packages
-Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) 
-Start-Sleep -Seconds 3
 #Add startup bat to install additional packages on sign in
 $choco_exe = "C:\ProgramData\chocolatey\bin\choco.exe"
 $install_packages_bat = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\install_packages.bat"
-@('postman', 'visualstudio2017community', 'visualstudio2017-workload-netweb', 'visualstudio2017-workload-azure') | ForEach-Object {
+@('postman') | ForEach-Object {
 	Add-Content -Path $install_packages_bat -Value "$choco_exe install -y $_"
 }
 #Install Google Chrome browser

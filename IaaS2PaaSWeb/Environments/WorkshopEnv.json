@@ -16,9 +16,9 @@
     },
     "DevWorkstationOSVersion": {
       "type": "string",
-      "defaultValue": "VS-2017-Ent-Latest-WS2016",
+      "defaultValue": "VS-2017-Comm-Latest-WS2016",
       "allowedValues": [
-        "VS-2017-Ent-Latest-WS2016"
+        "VS-2017-Comm-Latest-WS2016"
       ]
     },
     "DevWorkstationName": {

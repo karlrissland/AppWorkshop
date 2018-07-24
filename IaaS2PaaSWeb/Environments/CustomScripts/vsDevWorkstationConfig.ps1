@@ -28,14 +28,16 @@ Start-Sleep -Seconds 3
 nuget restore C:\Source\AppWorkshop\IaaS2PaaSWeb\IaaS2PaaSWeb.sln
 
 #Build App using VS Tools
-$build_bat_file = Join-Path -Path $PSScriptRoot -ChildPath "doBuild.bat"
+$current_dir = $PSScriptRoot
+if (!$current_dir) { $current_dir = Get-Location }
+$build_bat_file = Join-Path -Path $current_dir -ChildPath "doBuild.bat"
 if (!(Test-Path $build_bat_file)) {
     Add-Content -Path $build_bat_file -Value "call `"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\vsdevcmd\core\vsdevcmd_start.bat`""
     Add-Content -Path $build_bat_file -Value "call `"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\vsdevcmd\core\dotnet.bat`""
     Add-Content -Path $build_bat_file -Value "call `"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\vsdevcmd\core\msbuild.bat`""
-    Add-Content -Path $build_bat_file -Value "msbuild C:\Source\AppWorkshop\IaaS2PaaSWeb\PartsUnlimitedWebsite\partsunlimitedwebsite.csproj /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true"
+    Add-Content -Path $build_bat_file -Value "msbuild `"C:\Source\AppWorkshop\IaaS2PaaSWeb\PartsUnlimitedWebsite\partsunlimitedwebsite.csproj`" /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true"
 }
-Start-Process "cmd.exe" "/c $build_bat_file" -Wait
+cmd.exe /c $build_bat_file
 Remove-Item -Path $build_bat_file
 
 ## Deploy Webapp

@@ -18,9 +18,9 @@ git clone $repoUri
 
 #Install Chocolatey and packages
 Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) 
-Start-Sleep -Seconds 3
+Start-Sleep -Seconds 5
 #Install NuGet
-& choco install nuget.commandline 
+& choco install -y nuget.commandline 
 
 #Build and Package App
 
@@ -28,6 +28,7 @@ Start-Sleep -Seconds 3
 nuget restore C:\Source\AppWorkshop\IaaS2PaaSWeb\IaaS2PaaSWeb.sln
 
 #Build App using VS Tools
+Start-Sleep -Seconds 5
 $current_dir = $PSScriptRoot
 if (!$current_dir) { $current_dir = Get-Location }
 $build_bat_file = Join-Path -Path $current_dir -ChildPath "doBuild.bat"

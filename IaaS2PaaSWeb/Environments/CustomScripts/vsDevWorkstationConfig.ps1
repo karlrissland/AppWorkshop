@@ -65,10 +65,9 @@ C:\Source\AppWorkshop\IaaS2PaaSWeb\PartsUnlimitedWebsite\obj\Debug\Package\parts
 
 ## Install Chocolatey and packages
 Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) 
-& choco install googlechrome -y
 ## Add startup bat to install additional packages on sign in
 $choco_exe = "C:\ProgramData\chocolatey\bin\choco.exe"
 $install_packages_bat = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\install_packages.bat"
 if (!(Test-Path $install_packages_bat)) {
-	Set-Content -Path $install_packages_bat -Value "$choco_exe install postman -y"
+	Set-Content -Path $install_packages_bat -Value "$choco_exe install postman googlechrome -y"
 }

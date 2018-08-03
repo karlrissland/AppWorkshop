@@ -307,6 +307,7 @@
       <Link>DependencyValidation1.layerdiagram</Link>
       <Visible>False</Visible>
     </AdditionalFiles>
+    <None Include="Properties\PublishProfiles\BartPartsUnlimited - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\partsunlimited-vcurrent.pubxml" />
     <None Include="Properties\PublishProfiles\partsunlimitedcus07.pubxml" />

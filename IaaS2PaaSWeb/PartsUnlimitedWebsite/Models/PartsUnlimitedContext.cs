@@ -5,9 +5,9 @@ namespace PartsUnlimited.Models
 {
     public class PartsUnlimitedContext : IdentityDbContext<ApplicationUser>, IPartsUnlimitedContext
     {
-        public PartsUnlimitedContext()
-            : base("name=DefaultConnectionString")
+        public PartsUnlimitedContext() : base("name=DefaultConnectionString")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
 
         public IDbSet<Product> Products { get; set; }

@@ -61,7 +61,13 @@
     "WebSrvPubIpName": "[concat(parameters('WebSrvName'),'PubIp')]",
     "WebSrvPubIpDnsName": "[toLower(concat(parameters('WebSrvName'),uniqueString(resourceGroup().id)))]",
     "WebSrvDscConfigArchiveFolder": "DSC",
-    "WebSrvDscConfigArchiveFileName": "WebSrvDscConfig.zip"
+    "WebSrvDscConfigArchiveFileName": "WebSrvDscConfig.zip",
+    "InstallWebServerModulesScriptFolder": "CustomScripts",
+    "InstallWebServerModulesScriptFileName": "InstallWebServerModules.ps1",
+    "powerShellExecuteCommandParams": "",
+    "powerShellExecuteCommandForBlobStorage": "[concat('powershell -ExecutionPolicy Unrestricted -File ', variables('InstallWebServerModulesScriptFolder'), '/', variables('InstallWebServerModulesScriptFileName'), ' ', variables('powerShellExecuteCommandParams'))]",
+    "powerShellExecuteCommandForURI": "[concat('powershell -ExecutionPolicy Unrestricted -File ', variables('InstallWebServerModulesScriptFileName'), ' ', variables('powerShellExecuteCommandParams'))]",
+    "powerShellExecuteCommand": "[if(contains(parameters('_artifactsLocation'),'.blob.core.windows.net'),variables('powerShellExecuteCommandForBlobStorage'),variables('powerShellExecuteCommandForURI'))]"
   },
   "resources": [
     {
@@ -135,12 +141,37 @@
       },
       "resources": [
         {
-          "name": "Microsoft.Powershell.DSC",
+          "name": "InstallWebServerModules",
           "type": "extensions",
           "location": "[resourceGroup().location]",
           "apiVersion": "2016-03-30",
           "dependsOn": [
             "[resourceId('Microsoft.Compute/virtualMachines', parameters('WebSrvName'))]"
+          ],
+          "tags": {
+            "displayName": "InstallxSQLServerModule"
+          },
+          "properties": {
+            "publisher": "Microsoft.Compute",
+            "type": "CustomScriptExtension",
+            "typeHandlerVersion": "1.9",
+            "autoUpgradeMinorVersion": true,
+            "settings": {
+              "fileUris": [
+                "[concat(parameters('_artifactsLocation'), '/', variables('InstallWebServerModulesScriptFolder'), '/', variables('InstallWebServerModulesScriptFileName'), parameters('_artifactsLocationSasToken'))]"
+              ],
+              "commandToExecute": "[variables('powerShellExecuteCommand')]"
+            }
+          }
+        },
+        {
+          "name": "Microsoft.Powershell.DSC",
+          "type": "extensions",
+          "location": "[resourceGroup().location]",
+          "apiVersion": "2016-03-30",
+          "dependsOn": [
+            "[resourceId('Microsoft.Compute/virtualMachines', parameters('WebSrvName'))]",
+            "[resourceId('Microsoft.Compute/virtualMachines/extensions', parameters('WebSrvName'), 'InstallWebServerModules')]"
           ],
           "tags": {
             "displayName": "WebSrvDscConfig"

@@ -8,17 +8,18 @@
     },
     "AdminUserName": {
       "type": "string",
-      "minLength": 1
+      "defaultValue":  "sysadmin"
     },
     "AdminUserPassword": {
-      "type": "securestring"
+      "type": "securestring",
+      "defaultValue":  "Password$123"
     },
     "DevWorkstationOSVersion": {
       "type": "string",
-      "defaultValue": "VS-2017-Ent-Latest-WS2016",
+      "defaultValue": "VS-2017-Comm-Latest-WS2016",
       "allowedValues": [
-        "VS-2017-Ent-Latest-WS2016",
-        "VS-2017-Comm-Latest-WS2016"
+        "VS-2017-Comm-Latest-WS2016",
+        "VS-2017-Ent-Latest-WS2016"
       ]
     },
     "DevWorkstationName": {
@@ -43,7 +44,7 @@
     },
     "dbUserPassword": {
       "type": "string",
-      "defaultValue": "P2ssw0rd"
+      "defaultValue": "Password$123"
     },
     "databaseName": {
       "type": "string",

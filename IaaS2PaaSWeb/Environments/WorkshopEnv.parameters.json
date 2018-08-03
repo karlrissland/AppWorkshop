@@ -3,10 +3,10 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "AdminUserName": {
-      "value": "karl"
+      "value": "sysadmin"
     },
     "AdminUserPassword": {
-      "value": "P2ssw0rd"
+      "value": "Password$123"
     }
 
   }

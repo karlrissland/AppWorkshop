@@ -5,34 +5,39 @@ using System.Collections.Generic;
 
 namespace PartsUnlimited.Utils
 {
-    //TODO Application Insights - Uncomment
-    //public class TelemetryProvider : ITelemetryProvider
-    //{
-    //    public TelemetryClient AppInsights { get; set; }
+    public class TelemetryProvider : ITelemetryProvider
+    {
+        //TODO Application Insights - Uncomment
+        //public TelemetryClient AppInsights { get; set; }
 
-    //    public TelemetryProvider()
-    //    {
-    //        AppInsights = new TelemetryClient();
-    //    }
+        public TelemetryProvider()
+        {
+            //TODO Application Insights - Uncomment
+            //AppInsights = new TelemetryClient();
+        }
 
-    //    public void TrackEvent(string message)
-    //    {
-    //        AppInsights.TrackEvent(message);
-    //    }
+        public void TrackEvent(string message)
+        {
+            //TODO Application Insights - Uncomment
+            //AppInsights.TrackEvent(message);
+        }
 
-    //    public void TrackEvent(string message, Dictionary<string, string> properties, Dictionary<string, double> measurements)
-    //    {
-    //        AppInsights.TrackEvent(message, properties, measurements);
-    //    }
+        public void TrackEvent(string message, Dictionary<string, string> properties, Dictionary<string, double> measurements)
+        {
+            //TODO Application Insights - Uncomment
+            //AppInsights.TrackEvent(message, properties, measurements);
+        }
 
-    //    public void TrackTrace(string message)
-    //    {
-    //        AppInsights.TrackTrace(message);
-    //    }
+        public void TrackTrace(string message)
+        {
+            //TODO Application Insights - Uncomment
+            //AppInsights.TrackTrace(message);
+        }
 
-    //    public void TrackException (Exception exception)
-    //    {
-    //        AppInsights.TrackException(exception);
-    //    }
-//}
+        public void TrackException(Exception exception)
+        {
+            //TODO Application Insights - Uncomment
+            //AppInsights.TrackException(exception);
+        }
+    }
 }

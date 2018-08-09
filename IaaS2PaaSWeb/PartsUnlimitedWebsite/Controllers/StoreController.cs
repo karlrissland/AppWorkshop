@@ -26,7 +26,12 @@ namespace PartsUnlimited.Controllers
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var uri = new Uri(baseAddress + path + key);
+                if (!string.IsNullOrWhiteSpace(key))
+                {
+                    client.DefaultRequestHeaders.Add("x-functions-key", key);
+                }
+
+                var uri = new Uri(baseAddress + path);
 
                 HttpResponseMessage response = await client.GetAsync(uri);
                 return await response.Content.ReadAsAsync<T>();

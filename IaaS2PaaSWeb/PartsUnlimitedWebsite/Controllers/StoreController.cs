@@ -9,6 +9,7 @@ using System.Configuration;
 using System.Net.Http.Headers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Net;
 
 namespace PartsUnlimited.Controllers
 {
@@ -19,7 +20,7 @@ namespace PartsUnlimited.Controllers
         private static async Task<T> GetFromStoreService<T>(string path)
         {
             //specify to use TLS 1.2 as default connection
-            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
             
             using (var client = new HttpClient())
             {

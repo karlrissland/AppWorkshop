@@ -12,7 +12,7 @@ namespace PartsUnlimitedStoreService
     public static class BrowseCategory
     {
         [FunctionName("BrowseCategory")]
-        public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "categories/{id:int}")]HttpRequestMessage req, int? id, TraceWriter log)
+        public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "categories/{id:int}")]HttpRequestMessage req, int? id, TraceWriter log)
         {
             GlobalConfiguration.SetConfiguration(req);
 

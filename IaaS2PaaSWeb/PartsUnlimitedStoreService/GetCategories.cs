@@ -12,7 +12,7 @@ namespace PartsUnlimitedStoreService
     public static class GetCategories
     {
         [FunctionName("GetCategories")]
-        public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "categories")]HttpRequestMessage req, TraceWriter log)
+        public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "categories")]HttpRequestMessage req, TraceWriter log)
         {
             GlobalConfiguration.SetConfiguration(req);
 

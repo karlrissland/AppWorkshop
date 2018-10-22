@@ -12,7 +12,7 @@ namespace PartsUnlimitedStoreService
     public static class GetProductDetails
     {
         [FunctionName("GetProductDetails")]
-        public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "product/{id:int}")]HttpRequestMessage req, int? id, TraceWriter log)
+        public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "product/{id:int}")]HttpRequestMessage req, int? id, TraceWriter log)
         {
             GlobalConfiguration.SetConfiguration(req);
 

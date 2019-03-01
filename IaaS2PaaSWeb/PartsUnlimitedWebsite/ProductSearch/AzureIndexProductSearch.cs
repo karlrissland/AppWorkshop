@@ -34,12 +34,11 @@ namespace PartsUnlimited.ProductSearch
                 {
                     products.Add(r.Document);
                 }
-
-                return products;
             }
             catch (Exception)
             {
-                //eat it 
+                // Throw exception for easier troubleshooting
+                throw;
             }
 
             return products;

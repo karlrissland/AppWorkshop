@@ -31,101 +31,77 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
   - [Exercise 2: Implementing DevOps Continuous Integration / Continuous Deployment (CI/CD)](#exercise-2-implementing-devops-continuous-integration--continuous-deployment-cicd)
     - [Task 1: Add a new project to Azure DevOps and upload the code](#task-1-add-a-new-project-to-azure-devops-and-upload-the-code)
     - [Task 2: Upload Code to Git Repository in Azure DevOps](#task-2-upload-code-to-git-repository-in-azure-devops)
-    - [Task 3: Use Deployment Center to create CI/CD](#task-3-use-deployment-center-to-create-cicd)
+    - [Task 3: Use App Service Deployment Center to create CI/CD](#task-3-use-app-service-deployment-center-to-create-cicd)
     - [Task 3 (Alternative): Use Azure DevOps to create CI/CD](#task-3-alternative-use-azure-devops-to-create-cicd)
   - [Exercise 3: Detect, Diagnose, Monitor Application Performance with Application Insights](#exercise-3-detect-diagnose-monitor-application-performance-with-application-insights)
-      - [Help references](#help-references)
-      - [Prerequisites](#prerequisites)
-      - [Task 1: Create an Application Insights Instance](#task-1-create-an-application-insights-instance)
-      - [Task 2: Update your Web Application to use Application Insights](#task-2-update-your-web-application-to-use-application-insights)
-      - [Task 3: Update your application to provide more telemetry](#task-3-update-your-application-to-provide-more-telemetry)
-      - [Task 4: Implement the Custom Event Telemetry Provider](#task-4-implement-the-custom-event-telemetry-provider)
-      - [Task 5: Push your code to production](#task-5-push-your-code-to-production)
-      - [Task 5: Review the data](#task-5-review-the-data)
-      - [Task 6: Web Test](#task-6-web-test)
+    - [Task 1: Create an Application Insights Instance](#task-1-create-an-application-insights-instance)
+    - [Task 2: Update your Web Application to use Application Insights](#task-2-update-your-web-application-to-use-application-insights)
+    - [Task 3: Update your application to provide more telemetry](#task-3-update-your-application-to-provide-more-telemetry)
+    - [Task 4: Implement the Custom Event Telemetry Provider](#task-4-implement-the-custom-event-telemetry-provider)
+    - [Task 5: Push your code to production](#task-5-push-your-code-to-production)
+    - [Task 5: Review the data](#task-5-review-the-data)
   - [Exercise 4: Optimize and Protect Azure Web Application](#exercise-4-optimize-and-protect-azure-web-application)
-      - [Help references](#help-references-1)
-      - [Prerequisites](#prerequisites-1)
-      - [Task 1: Configure Backups](#task-1-configure-backups)
-      - [Task 2: Configure Storage Account for Backups](#task-2-configure-storage-account-for-backups)
-      - [Task 3: Schedule Backup](#task-3-schedule-backup)
-      - [Task 4: Backup Database](#task-4-backup-database)
-          - [Partial Backups](#partial-backups)
-          - [Restore Backup](#restore-backup)
-          - [Automate Backup](#automate-backup)
-      - [Task 5: Viewing Health by Reviewing the Response Time and Errors](#task-5-viewing-health-by-reviewing-the-response-time-and-errors)
-      - [Task 6: Setting Alerts](#task-6-setting-alerts)
-      - [Task 7: Configuration App Diagnostics](#task-7-configuration-app-diagnostics)
-      - [Task 8: Viewing Application CPU/Memory](#task-8-viewing-application-cpumemory)
-      - [Task 9: Viewing Disk space](#task-9-viewing-disk-space)
-      - [Task 10: Configuring Auto Scale Up](#task-10-configuring-auto-scale-up)
-      - [Task 11: Creating an Auto Scaling Out](#task-11-creating-an-auto-scaling-out)
-      - [Task 12: Prepare for scaling in another region](#task-12-prepare-for-scaling-in-another-region)
-      - [Task 13: Viewing Resource Health and History](#task-13-viewing-resource-health-and-history)
-      - [Task 14: View Auto Scale Run History](#task-14-view-auto-scale-run-history)
-      - [Task 15: Setting up auto scaling notifications](#task-15-setting-up-auto-scaling-notifications)
+    - [Task 1: Configure Backups](#task-1-configure-backups)
+    - [Task 2: Configure Storage Account for Backups](#task-2-configure-storage-account-for-backups)
+    - [Task 3: Schedule Backup](#task-3-schedule-backup)
+    - [Task 4: Backup Database](#task-4-backup-database)
+    - [Task 5: Viewing Health by Reviewing the Response Time and Errors](#task-5-viewing-health-by-reviewing-the-response-time-and-errors)
+    - [Task 6: Setting Alerts](#task-6-setting-alerts)
+    - [Task 7: Configuration App Diagnostics](#task-7-configuration-app-diagnostics)
+    - [Task 8: Viewing Application CPU/Memory](#task-8-viewing-application-cpumemory)
+    - [Task 9: Viewing Disk space](#task-9-viewing-disk-space)
+    - [Task 10: Configuring Auto Scale Up](#task-10-configuring-auto-scale-up)
+    - [Task 11: Creating an Auto Scaling Out](#task-11-creating-an-auto-scaling-out)
+    - [Task 12: Prepare for scaling in another region](#task-12-prepare-for-scaling-in-another-region)
+    - [Task 13: Viewing Resource Health and History](#task-13-viewing-resource-health-and-history)
+    - [Task 14: View Auto Scale Run History](#task-14-view-auto-scale-run-history)
+    - [Task 15: Setting up auto scaling notifications](#task-15-setting-up-auto-scaling-notifications)
   - [Exercise 5: Optimize and Secure Azure SQL Database](#exercise-5-optimize-and-secure-azure-sql-database)
-      - [Help references](#help-references-2)
-      - [Prerequisites](#prerequisites-2)
-      - [Task 1: Resource Locking](#task-1-resource-locking)
-      - [Task 2: Enable Transparent Data Encryption](#task-2-enable-transparent-data-encryption)
-      - [Task 3: Scale Up Database Performance](#task-3-scale-up-database-performance)
-      - [Task 4: Configure Firewall and virtual networks](#task-4-configure-firewall-and-virtual-networks)
-      - [Task 5: Threat Detection and Vulnerability Assessment](#task-5-threat-detection-and-vulnerability-assessment)
-      - [Task 6: Turn on SQL Server Auditing](#task-6-turn-on-sql-server-auditing)
-      - [Task 7: Automatic Tuning](#task-7-automatic-tuning)
-      - [Task 8: Enable Database Diagnostics](#task-8-enable-database-diagnostics)
-      - [Task 9: Configure Long-term backup retention for database](#task-9-configure-long-term-backup-retention-for-database)
+    - [Task 1: Resource Locking](#task-1-resource-locking)
+    - [Task 2: Enable Transparent Data Encryption](#task-2-enable-transparent-data-encryption)
+    - [Task 3: Scale Up Database Performance](#task-3-scale-up-database-performance)
+    - [Task 4: Configure Firewall and virtual networks](#task-4-configure-firewall-and-virtual-networks)
+    - [Task 5: Threat Detection and Vulnerability Assessment](#task-5-threat-detection-and-vulnerability-assessment)
+    - [Task 6: Turn on SQL Server Auditing](#task-6-turn-on-sql-server-auditing)
+    - [Task 7: Automatic Tuning](#task-7-automatic-tuning)
+    - [Task 8: Enable Database Diagnostics](#task-8-enable-database-diagnostics)
+    - [Task 9: Configure Long-term backup retention for database](#task-9-configure-long-term-backup-retention-for-database)
   - [Exercise 6: Optimize Entire Web Application Performance with Content Distributed Network (CDN)](#exercise-6-optimize-entire-web-application-performance-with-content-distributed-network-cdn)
-      - [Help references](#help-references-3)
-      - [Prerequisites](#prerequisites-3)
-      - [Task 1: Configure CDN for the whole web application](#task-1-configure-cdn-for-the-whole-web-application)
-      - [Task 2: Configure Caching Rules](#task-2-configure-caching-rules)
-      - [Task 3: Improve performance by adding compression](#task-3-improve-performance-by-adding-compression)
+    - [Task 1: Configure CDN for the whole web application](#task-1-configure-cdn-for-the-whole-web-application)
+    - [Task 2: Configure Caching Rules](#task-2-configure-caching-rules)
+    - [Task 3: Improve performance by adding compression](#task-3-improve-performance-by-adding-compression)
   - [Exercise 7: Optimize Partial Web Application Performance with Content Distributed Network (CDN)](#exercise-7-optimize-partial-web-application-performance-with-content-distributed-network-cdn)
-      - [Prerequisites](#prerequisites-4)
-      - [Task 1: Create a Resource Group & Storage Account](#task-1-create-a-resource-group--storage-account)
-      - [Task 2: Provision](#task-2-provision)
-      - [Task 3: Add a CDN Endpoint](#task-3-add-a-cdn-endpoint)
-      - [Task 4: Copy images to storage account](#task-4-copy-images-to-storage-account)
-      - [Task 5: Integrate into web application](#task-5-integrate-into-web-application)
-      - [Task 6: Explore Enhancements](#task-6-explore-enhancements)
+    - [Task 1: Create a Resource Group & Storage Account](#task-1-create-a-resource-group--storage-account)
+    - [Task 2: Provision](#task-2-provision)
+    - [Task 3: Add a CDN Endpoint](#task-3-add-a-cdn-endpoint)
+    - [Task 4: Copy images to storage account](#task-4-copy-images-to-storage-account)
+    - [Task 5: Integrate into web application](#task-5-integrate-into-web-application)
+    - [Task 6: Explore Enhancements](#task-6-explore-enhancements)
   - [Exercise 8: Increase Application / Database Performance with Redis Cache](#exercise-8-increase-application--database-performance-with-redis-cache)
-      - [Help references](#help-references-4)
-      - [Prerequisites](#prerequisites-5)
-      - [Task 1: Provisioning the Redis Cache Service](#task-1-provisioning-the-redis-cache-service)
-      - [Task 2: Improve Session Performance](#task-2-improve-session-performance)
-      - [Task 4: Speed Up Output and Reduce Memory Footprint](#task-4-speed-up-output-and-reduce-memory-footprint)
-      - [Task 5: Reducing database utilization](#task-5-reducing-database-utilization)
+    - [Task 1: Provisioning the Redis Cache Service](#task-1-provisioning-the-redis-cache-service)
+    - [Task 2: Improve Session Performance](#task-2-improve-session-performance)
+    - [Task 4: Speed Up Output and Reduce Memory Footprint](#task-4-speed-up-output-and-reduce-memory-footprint)
+    - [Task 5: Reducing database utilization](#task-5-reducing-database-utilization)
   - [Exercise 9: Improve Quality & Performance of Search with Azure Search](#exercise-9-improve-quality--performance-of-search-with-azure-search)
-      - [Help references](#help-references-5)
-      - [Prerequisites](#prerequisites-6)
-      - [Task 1: Create Azure Search Service](#task-1-create-azure-search-service)
-      - [Task 2: Configure Azure Search](#task-2-configure-azure-search)
-      - [Task 3: Integrate search into application](#task-3-integrate-search-into-application)
-      - [Task 4: Verify Search Results](#task-4-verify-search-results)
-      - [Task 5: Commit & Sync Code](#task-5-commit--sync-code)
+    - [Task 1: Create Azure Search Service](#task-1-create-azure-search-service)
+    - [Task 2: Configure Azure Search](#task-2-configure-azure-search)
+    - [Task 3: Integrate search into application](#task-3-integrate-search-into-application)
+    - [Task 4: Verify Search Results](#task-4-verify-search-results)
+    - [Task 5: Commit & Sync Code](#task-5-commit--sync-code)
   - [Exercise 10: Accelerate development and take advantage of serverless using Azure Functions](#exercise-10-accelerate-development-and-take-advantage-of-serverless-using-azure-functions)
-      - [Help references](#help-references-6)
-      - [Prerequisites](#prerequisites-7)
-      - [Task 1: Refactor](#task-1-refactor)
-      - [Task 2: Modernize](#task-2-modernize)
-          - [GlobalConfiguration.cs](#globalconfigurationcs)
-          - [GetCategories.cs](#getcategoriescs)
-          - [BrowseCategory.cs](#browsecategorycs)
-          - [GetProductDetails.cs](#getproductdetailscs)
-      - [Task 3: Integrate](#task-3-integrate)
-      - [Task 4: Publish the Service](#task-4-publish-the-service)
-      - [Task 5: Configure Function Database Connection](#task-5-configure-function-database-connection)
-      - [Task 5: Configure Function Application Insights](#task-5-configure-function-application-insights)
-      - [Task 6: Modify App Service CI/CD Task](#task-6-modify-app-service-cicd-task)
+    - [Task 1: Refactor](#task-1-refactor)
+    - [Task 2: Modernize](#task-2-modernize)
+    - [Task 3: Integrate](#task-3-integrate)
+    - [Task 4: Publish the Service](#task-4-publish-the-service)
+    - [Task 5: Configure Function Database Connection](#task-5-configure-function-database-connection)
+    - [Task 5: Configure Function Application Insights](#task-5-configure-function-application-insights)
+    - [Task 6: Modify App Service CI/CD Task](#task-6-modify-app-service-cicd-task)
   - [Exercise 11: Monetize your data and services, and open new channels to customers using Azure API Management](#exercise-11-monetize-your-data-and-services-and-open-new-channels-to-customers-using-azure-api-management)
     - [Task 1: Create Azure API Management](#task-1-create-azure-api-management)
     - [Task 2: Set up new a new API in the Azure Portal](#task-2-set-up-new-a-new-api-in-the-azure-portal)
-      - [Task 3: Enable Application Insights](#task-3-enable-application-insights)
-      - [Task 4: Explore the API Management (APIM) Developer Portal](#task-4-explore-the-api-management-apim-developer-portal)
+    - [Task 3: Enable Application Insights](#task-3-enable-application-insights)
+    - [Task 4: Explore the API Management (APIM) Developer Portal](#task-4-explore-the-api-management-apim-developer-portal)
   - [After the hands-on workshop](#after-the-hands-on-workshop)
-      - [Task 1: Delete the Resource Group in which you placed your Azure resources.](#task-1-delete-the-resource-group-in-which-you-placed-your-azure-resources)
 
 <!-- /TOC -->
 
@@ -425,12 +401,12 @@ Currently, there is no automated deployment process.  has been chosen as the ALM
 
 **References**
 
-- [Azure DevOps Services](https://www.visualstudio.com/team-services/)               - [Azure DevOps Services CI/CD](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/tutorial-vsts-iis-cicd)
-- [Azure DevOps Services Creation](https://docs.microsoft.com/en-us/vsts/accounts/create-account-msa-or-work-student?view=vsts)
+- [Azure DevOps Services](https://www.visualstudio.com/team-services/)
+- [Azure DevOps Services CI/CD](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/tutorial-vsts-iis-cicd)
 
 **Prerequisites**
 
-You must also have a Azure DevOps Services Account and be able to create new projects within that account. If you don’t, you will need to [Setup a new Account](https://app.vsaex.visualstudio.com/go/signup?account=true&campaign=o~msft~vsts~orghome).
+You must also have a Azure DevOps Services Organization Account and be able to create new projects within that account. If you don’t, you will need to [create one](https://docs.microsoft.com/en-us/vsts/accounts/create-account-msa-or-work-student?view=vsts).
 
 **Note**: Setup Azure DevOps with the same user account you use to log into the Azure Portal.  If you do not, the CI/CD wizard will not find your subscription automatically\!
 
@@ -479,164 +455,90 @@ You must also have a Azure DevOps Services Account and be able to create new pro
     C:\Source\AppWorkshop> git push -u origin --all
     ```
 
-    **Note**: 
-
+    > **Note**:
+    >
+    > The <REPO URL> must be replaced with:
+    >
     > ![Azure Repos](images/media/image54.png)
 
-The command will look like git remote set-url origin
-**https://rissland……**..
+3. You’ll be prompted for your credentials.
 
-Type in the command and hit enter to change the origin from GitHub to
-Azure DevOps
+    > ![Sign into Azure DevOps](images/media/image55.png)
 
-Next, execute **git push -u origin --all**
+4. After you have entered your credentials, your commit will be pushed to Azure DevOps.
 
-You’ll be prompted for your credentials.
+    > ![Commit progress](images/media/image56.png)
 
-> ![](images/media/image55.png)
+5. Once you entered the commands, refresh the browser.  You should now see the workshop code in your Azure DevOps repository.
 
-After you have entered your credentials, your commit will be pushed to
-Azure DevOps
+    > ![Azure Repos](images/media/image57.png)
 
-> ![](images/media/image56.png)
+### Task 3: Use App Service Deployment Center to create CI/CD
 
-Once you entered the commands, refresh the browser.  You should now see
-the workshop code in your Azure DevOps repository.
+1. Go back to the Azure portal and open the Azure App Service Web Site you created when you used the Migration Tool. It will be in the **Server-Migration-XXXX** resource group.
 
->  
-> 
-> ![](images/media/image57.png)
+2. You will want to pick the "Deployment Center”
 
-### Task 3: Use Deployment Center to create CI/CD
+    > ![App Service Deployment Center](images/media/image58.png)
 
-Go back to the Azure portal and open the Azure App Service Web Site you
-created when you used the Migration Tool. It will be in the
-Server-Migration-XXXX Resource Group.
+3. Next, you will see an overview page, click **Azure Repos** and click **continue**.
 
-You will want to pick the "Deployment Center (Preview)”
+    > ![Source Control](images/media/image59.png)
 
-> ![](images/media/image58.png)
+4. Next, you’ll have a choice of Build Providers, App Service Kudu build server or Azure Pipelines. Click on **Azure Pipelines (Preview)**
 
-Next, you will see an overview page, click Azure DevOps
+    > ![Build Provider](images/media/image60.png)
 
-> ![](images/media/image59.png)
+5. Configure where the source code is located and which Web Application Framework to use for your Build, in this case use ASP.NET.
 
-Next, you’ll have a choice of Build Providers, App Service Kudu build
-server or Azure DevOps Continuous Delivery.
+    > ![Configure](images/media/image61.png)
+    >
+    >  **Note**:
+    >
+    >  If you don't click on each dropdown, the OK button won't enable.
 
-> ![](images/media/image60.png)
+6. In the **Deploy to staging** step, select **Yes** to enable deployment slot and **New** to create a new slot, provide the name **Staging** and click **continue**.
 
- Click on **Azure DevOps Continuous Delivery**
+    > ![Deploy to Staging](images/media/image62.png)
 
-Configure where the source code is located and which Web Application
-Framework to use for your Build
+7. You should see a summary like the following:
 
-> ![](images/media/image61.png)
+    > ![Summary](images/media/image65.png)
 
-**Note**:
+8. Verify the configuration and then click **Finish**.
 
-If you don't click on each dropdown, the OK button won't enable.
+The service will create the Build and Release Pipelines in Azure DevOps, create a new Web Application for Staging and trigger a build.
 
-> ![](images/media/image62.png)
+This process may take a few minutes. When its complete, you’ll see a summary screen like the following:
 
-While you can setup Load Testing here, we are going to leave this option
-set to On change leave the default values.
+![Deployment Center configured](images/media/image66.png)
 
-Web apps have a feature called deployment slots.  This helps you deploy
-to a test environment prior to going to production.  We are going to
-click Yes and let the wizard set this up for us.
+Going back to Azure DevOps, click on Pipelines, then click on Builds. You should see the build definition that was generated for you.
 
-> ![](images/media/image63.png)
-
-Click yes, choose to create a **New** Deployment Slot, and name the slot
-'Staging'
-
->  
-> 
-> ![](images/media/image64.png)
-
- 
-
-Click Continue
-
-You should see a summary like the following:
-
-> ![](images/media/image65.png)
-> 
->  
-
-Verify the configuration and then click **Finish**.
-
-The service will trigger a Build in Azure DevOps, create a new Web Application
-for Test environment and create a new staging Slot.
-
-This process may take a few minutes. When its complete, you’ll see a
-summary screen like the following:
-
-> ![](images/media/image66.png)
-
-Going back to Azure DevOps, click on Build and Release, then click on Builds. 
-You should see the build definition that was generated for you.
-
-> ![WorkshopPrj Builds Releases Library v Build and Release Search work
-> items in this project Task Groups Dep loyment Groups\* Build ID or
-> build number Build Definitions Mine Definitions Requested by me p
-> Status •-7 succeeded + Import O Security O Help Queued Triggered by
-> initial commit 4ccfg6a in History vmweb01DefaultWebSite - Cl :
-> \#20180213.1 Karl Rissland requested 4 minutes
-> ago](images/media/image67.jpeg)
-> 
->  
+![Azure DevOps - Build Pipeline](images/media/image67.jpeg)
 
 Next, click on the Releases tab to see the release that was generated
 for you.
 
-> ![WorkshopPrj Builds Releases Library Search release definitions...
-> Release Definitions All release definitions vmweb01 Defa ultWebSite v
-> Build and Release Task Groups Deployment Groups\* All release
-> definitions Overview Releases Deleted Title Release- 1 Search work
-> items in this project Release Definition vmweb01 DefaultWebSite
-> Environments](images/media/image68.jpeg)
-> 
->  
+![Azure DevOps - Releases](images/media/image68.jpeg)
 
 After a little time, the release should complete.
 
- ![](images/media/image69.png)
+![Azure DevOps - Releases ](images/media/image69.png)
 
 **Note**:
 
-Looks like there is a bug in the migration tool.  It doesn't property
-put the connection string in the app settings correctly. Remember how we
-fixed this before?
+Looks like there is a bug in the migration tool.  It doesn't property put the connection string in the app settings correctly. Remember how we fixed this before?
 
->  
-> 
-> ![C Secure https://vmweb01defaultwebslte.azurewebsites.net Server
-> Error in '/' Application. Runtime Error Description: An application
-> error occurred on the server The current custom error settings for
-> this application prevent the de could, hwever, be viewed by browsers
-> running on the local server machine. Details: To enable the details of
-> this specific error message to be viewable on remote machines, please
-> create a \<custom current web application. This tag should then have
-> its "mode" attribute set to "Offt](images/media/image70.jpeg)
-> 
->   
+![Deployment error](images/media/image70.jpeg)
 
-**Note**: This is an opportunity to see how you can troubleshoot the
-environment using Kudu, diagnostics, deployment slots, etc. Navigation
-with your web browser to https://\[webname\].scm.azurewebsites.net.
+**Note**: This is an opportunity to see how you can troubleshoot the environment using Kudu, diagnostics, deployment slots, etc. Navigation with your web browser to https://\[webname\].scm.azurewebsites.net.
 
 To Avoid the error……….
 
-Note that the name of the connection string is
-"DefaultConnectionString", which we captured before starting the CI/CD
-pipeline creation.
+Note that the name of the connection string is "DefaultConnectionString", which we captured before starting the CI/CD pipeline creation.
 
-> ![(add (connectionstrings\> -\<add (add (system. web\> \<customErrors
-> mode= \<compilation debug-"true](images/media/image71.jpeg)
-> 
->  
+![Connection String Error](images/media/image71.jpeg)
 
 When the migration tools moved the application, it doesn't correctly add
 the connection string name.  Note that the connection string is simply
@@ -649,551 +551,125 @@ the connection string name.  Note that the connection string is simply
 > Application settings Authentication / Authorization Default documents
 > Managed service identity Hidden value. Click to
 > show.](images/media/image72.jpeg)
-> 
->  
 
-To avoid an error, simply edit the connection string name in both the
-production website and the staging slot to read
-"DefaultConnectionString" and save your settings. For the Database, use
-**SQLAzure**.
+To avoid an error, simply edit the connection string name in both the production website and the staging slot to read "DefaultConnectionString" and save your settings. For the Database, use **SQLAzure**.
 
 **Note**:
 
-If you’re using Azure DevOps, consider managing ConnectionString values in
-Release using the appropriate task.
+If you’re using Azure DevOps, consider managing ConnectionString values in Release using the appropriate task.
 
-### Task 3 (Alternative): Use Azure DevOps to create CI/CD 
+### Task 3 (Alternative): Use Azure DevOps to create CI/CD
 
-Go back to the Azure portal and open the Azure App Service Web Site you
-created when you used the Migration Tool. It will be in the
-Server-Migration-XXXX Resource Group.
+Go back to the Azure portal and open the Azure App Service Web Site you created when you used the Migration Tool. It will be in the Server-Migration-XXXX Resource Group.
 
 **Part A - Setup A Deployment Slot**
 
-Open the Server-Migration-\*\*\*\* resource group and click on the web
-application
+1. Open the Server-Migration-\*\*\*\* resource group and click on the web application
 
- 
+    > ![Server Migration Resource Group](images/media/image73.jpeg)
 
-![Server-Migration Search \[Ctrl Overview Activty log Access control (IA
-M) Tags Q nts SETTINGS -EastUS2 + Add Edit columns Delete resource group
-Subscription Microsoft Azure Internal Consum... Tags (cunge) Click here
-to add tags Filter by name.„ Show hidden types O 4 items Subscription ID
-4126860-242b- c e Quickstart Resource costs Depl oyments Policies
-ServerMigrationFarmStandard781f61cdO vmwebOIDefauItWebSite679
-wottat227yrz4 vmwebOIDefauItWebSite679db (wottat227yz4
-](images/media/image73.jpeg)
+2. In the web application, click on Deployment Slots
 
- 
+    > ![Web App Deployment Slots](images/media/image74.jpeg)
 
- 
+    > At this time, there are no deployment slots configured for your website.  A deployment slot is used to setup a staging environment for your application, so you can test new changes easily prior to rolling them to production.
 
-In the web application, click on Deployment Slots
+3. Click the Add Slot option to add a new deployment slot.
 
- 
+    > ![Add Deployment Slot](images/media/image75.jpeg)
 
-![Home \> Resource groups \> Server-Migration-EastUS2 \>
-vmwebOIDefauItWebSite679 vmweb01DefaultWebSite679 App Service Search
-\[Ctrl Ove rview Activty log Access control (IA M) Tags Diagnose and
-solve problems DEPLOYMENT Quickstart Deployment credentials Nii
-Deployment slots Deployment options c Deployment Center (Preview) Browse
-Stop Resource group Server-Migration-EastUS2 Status Running Location
-East US 2 Subscription Swap Restart Microsoft Azure Internal Consumption
-Subscription ID 4126860-242b-452c-8273-a4da78837adc Diagnose and solve
-problems Our and with Http 5xx ](images/media/image74.jpeg)
+4. On the "Add a Slot" dialog, name the slot "staging" and choose the configuration source as the current production slot, then click ok.
 
- 
+    > ![Staging Deployment Slot](images/media/image76.png)
 
- 
+5. When done, you should have a new deployment slot named "staging".
 
-At this time, there are no deployment slots configured for your
-website.  A deployment slot is used to setup a staging environment for
-your application, so you can test new changes easily prior to rolling
-them to production.
-
-Click the Add Slot option to add a new deployment slot.
-
-![Home \> Resource groups \> Server-Migration-EastUS2 \> vmwebOI
-DefaultWebSite679 - Deployment slots vmweb01DefaultWebSite679 -
-Deployment slots App Service Search \[Ctrl Overview Activty log Access
-control (IA M) Tags Diagnose and solve problems DEPLOYMENT Swap Add Slot
-NAME STATUS APP SERVICE PLAN You haven't added any deployment slots.
-Click ADD SLOT to get started. Nii Quickstart Deployment credentials
-Deployment slots Deployment options ](images/media/image75.jpeg)
-
- 
-
-On the "Add a Slot" dialog, name the slot "staging" and choose the
-configuration source as the current production slot, then click ok.
-
- 
-
-![Home \> Resource groups \> Server-Migration-EastUS2 \> Add a slot
-Deploymnent slots let pu deploy different versions of your web app to
-different URLs. You can test a certain version and then swap content and
-configuration between \* Name O Staging Configuration Source vmwebO I
-defaultwebsite67g ](images/media/image76.png)
-
- 
-
-When done, you should have a new deployment slot named "staging".
-
- 
-
-![vmweb01DefaultWebSite679 - Deployment slots ADO Service + Add Slot
-Swap Search \[Ctrl +0 Overview NAME Activty log v m we
-bOIdefauItwebsite679-staging Access control (IA M) Tags Diagnose and
-solve problems DEPLOYMENT STATUS Running APP SER... Niii Quickstart
-Deployment credentials Deployment slots ](images/media/image77.jpeg)
-
- 
+    > ![Staging Deployment Slot](images/media/image77.jpeg)
 
 **Part B - Setup CI/CD**
 
-Open your new Team Services Account \*\*\*\*.VisualStudio.Com and view
-the "Overview".  You should be presented with summary information about
-your project with a very prominent "Set up Build" Button….. Click it.
+1. Open your new Team Services Account \*\*\*\*.VisualStudio.Com and view the "Overview".  You should be presented with summary information about your project with a very prominent "Set up Build" Button….. Click it.
 
- 
+    > ![Setup CI/CD](images/media/image78.jpeg)
 
-![karlriss Workshop0717 Overview Summary Dashboards Analytics views Wiki
-work Code Build and release Test / Workshop0717 / Overview / Summary
-Workshop0717 Briefly describe your project„. JavaScript css Add tags Use
-continuous integration Improve code quality by dete anges as soon as
-they happen. Set up Build Learn more about co Inuous Integration
-](images/media/image78.jpeg)
+2. The Next Dialog will ask you to choose where your source code is, your project, repository, and branch.  These options should be defaulted to the correct values.  Click continue.
 
- 
+    > ![Choose source control provider](images/media/image79.jpeg)
 
-The Next Dialog will ask you to choose where your source code is, your
-project, repository, and branch.  These options should be defaulted to
-the correct values.  Click continue.
+3. The next dialog will present you with a few canned build templates.Select the **ASP.NET** template and click Apply.
 
- 
+    > ![Select build template](images/media/image80.jpeg)
 
-![karlriss Workshop0717 Build and release Select a source Azure DevOps Git
-Bitbucket Cloud Team project o GitHub External Git o GitHub Enterprise
-Subversion Select your repository Tell us where your sources are. You
-can customize how to get these sources from the repository later.
-Workshop0717 Repository Workshop0717 Default branch for manual and
-scheduled builds P master Continue ](images/media/image79.jpeg)
+4. Next, you will be shown the build process with some options that need to be configured.  First, in the "Azure Subscription" drop down, pick the Azure subscription which is hosting your migrated web application and then click the "Authorize" button.
 
- 
+    > ![Authorize service connection](images/media/image81.jpeg)
+    >
+    > **Note:** It is assumed that you are using the same login for your Azure DevOps account and your azure subscription.  If this is not the case, the Azure subscription may not be shown in the drop down and you will need to manually add it to Azure DevOps.  If this is the case, simply ask your instructor or proctor to assist you.  Should take no more than a few minutes to setup.
 
-The next dialog will present you with a few canned build templates. 
-Select the Azure Web App for ASP.NET template and click Apply.
+5. Once the subscription has been Authorized, Azure DevOps is able to enumerate the App Services in your subscription and populate the drop down.  Simply pick the App Service you wish to deploy to.
 
- 
+    > ![Select App Service Name](images/media/image82.jpeg)
 
-![karlriss Workshop0717
-https://karlriss.visualstudio.com/Workshop0717/\_apps/hub/ms.vss-ciworkflow.build-ci-hub?
-a Build and release Select a template Or start with an Empty process
-Featured .NET Desktop p Search Choose a template Choose a template that
-builds your kind of app. Don't worry if it's not an exact match; you can
-add and customize the tasks later, Build and test a .NET or Windows
-classic desktop solution. Android Build, test, sign, and align an
-Android APK. ASP.NET Build and test an ASP.NETweb application. Azure Web
-App for ASP.NET Build, package, test, and deploy an ASP.NET Azure Web
-App. Docker container Build a Docker image and push it to a container
-registry. Maven Build and test a Java project with Apache Maven. Apply
-](images/media/image80.jpeg)
+6. One last setting.  Notice that the "Triggers" tab is showing an error. Click the triggers tab and select your master branch.
 
- 
+    > ![Branch filters](images/media/image83.jpeg)
+    > ![master branch filter](images/media/image84.jpeg)
 
- 
+7. Lastly, save and queue your build to verify it works correctly.
 
-Next, you will be shown the build process with some options that need to
-be configured.  First, in the "Azure Subscription" drop down, pick the
-Azure subscription which is hosting your migrated web application and
-then click the "Authorize" button.
+    > ![Save and queue build pipeline](images/media/image85.jpeg)
 
- 
+8. Add a comment to note the changes made to the build definition and click the "Save & Queue" button.
 
-![karlriss Workshop0717 / Build and release Workshop0717-Azure Web A \>
-OTasks Variables OTriggers Options Process O Some settings need
-attention Retention History Name \* El Save queue Discard ¯ Summary Get
-sources workshop0717 Phase 1 Run on agent p master Workshop0717-Azure
-Web App for ASP.NET-CI Agent queue\* O Hosted VS2017 Parameters O
-Solution Azure subscription Pool information I Manage Qa Unlink all I
-Manage CD Use NuGet 4.4.1 NuGet Tool Installer NuGet restore Build
-solution Visual Studio Build VsTest - testAssemblies Visual Studio Test
-Azure App Sewice Deploy: OSome settings need attention Publish symbols
-path Index Sources & Publish Symbols Publish Artifact: drop Publish auld
-Artifacts Microsoft Azure Internal Consumption (412b C) Click Authorize
-to configure an Azure sevice connection This field is linked to I
-setting in 'Azure App Service Deploy. App service name \* c" C) This
-setting is required. CD Authorize ](images/media/image81.jpeg)
+    > ![Add comment to save and queue build](images/media/image86.jpeg)
+    > You will see that the build was successfully saved and a new build has been queued.
 
- 
+9. Click the new build link so you can watch the progress.
 
- 
+    > ![New build link](images/media/image87.jpeg)
 
-**Note:** It is assumed that you are using the same login for your Azure DevOps
-account and your azure subscription.  If this is not the case, the Azure
-subscription may not be shown in the drop down and you will need to
-manually add it to Azure DevOps.  If this is the case, simply ask your
-instructor or proctor to assist you.  Should take no more than a few
-minutes to setup.
+10. Clicking on the "Logs" tab will let you review detailed, real time, build information.
 
- 
-
-Once the subscription has been Authorized, Azure DevOps is able to enumerate the
-App Services in your subscription and populate the drop down.  Simply
-pick the App Service you wish to deploy to.
-
- 
-
-![karlriss Tasks / Workshop0717 Build and release Workshop0717-Azure Web
-A \> Variables OTriggers Options p master Retention History Name \* El
-Save queue Discard ¯ Summary Process Build process Get sources
-Workshop0717 Phase 1 Run on agent Workshop0717-Azure Web App for
-ASP.NET-CI Use NuGet 4.4.1 NuGet Tool Installer NuGet restore Build
-solution Visual Studio Build VsTest - testAssemblies Visual Studio Test
-Azure App Sewice Deploy: vmw... Azure App Service Deploy Publish symbols
-path Index Sources & Publish Symbols Publish Artifact: drop Publish auld
-Artifacts Agent queue\* O Hosted VS2017 Parameters O Solution Azure
-subscription Pool information I Manage Qa Unlink all I Manage CD CD
-Microsoft Azure Internal Consumption (412b86d9-242b-452c-8Z This field
-is linked to I setting in 'Azure App Service Deploy. App service name \*
-c" vmweb01DefauItWebSite679 CD This field is linked to I setting in
-'Azure App Service Deploy. ](images/media/image82.jpeg)
-
- 
-
-One last setting.  Notice that the "Triggers" tab is showing an error. 
-Click the triggers tab and select your master branch.
-
- 
-
-![karlriss Tasks Workshop0717 Build and release Workshop0717-Azure Web
-App for A \> Variables OTriggers Options Retention History c,) Discard
-Save queue Workshop0717 Summary Continuous integration Workshop0717 O
-Some settings need attention Scheduled No builds scheduled Build
-completion Build when aru'ther build completes Enable continuous
-integration Batch changes while a build is in progress Add Branch
-filters + Add C) You must add at least one branch filter. Path filters +
-Add ](images/media/image83.jpeg)
-
- 
-
- 
-
-![karlriss Tasks Workshop0717 Build and release Workshop0717-Azure Web
-App for A \> Variables Triggers Options Retention History Save & queue
-c,) Discard Summary \> Queue Continuous integration Workshop0717 Enabled
-Scheduled No builds scheduled Build completion Build when aru'ther build
-completes Workshop0717 Enable continuous integration Batch changes while
-a build is in progress Add Add Branch filters Type Include + Add Path
-filters + Add Branch specification P master fi
-](images/media/image84.jpeg)
-
- 
-
- 
-
-Lastly, save and queue your build to verify it works correctly.
-
- 
-
-![karlriss Tasks Workshop0717 / Build and release Workshop0717-Azure Web
-App for A \> Variables Triggers Options Retention History Save & queue
-c,) Discard Summary \> Queue Continuous integration Workshop0717 Enabled
-Scheduled No builds scheduled Build completion Build when aru'ther build
-completes Workshop0717 Enable continuous integration Batch changes while
-a build is in progress Add Add Branch filters Type Include + Add Path
-filters + Add Branch specification P master fi
-](images/media/image85.jpeg)
-
- 
-
- 
-
-Add a comment to note the changes made to the build definition and click
-the "Save & Queue" button.
-
-![Save build pipeline and queue Save comment Initial Build Definition
-Agent queue Hosted VS2017 Branch master Commit Variables Demands
-BuildConfiguration BuildPlatform system.debug + Add release any cpu
-false Save & queue Cancel ](images/media/image86.jpeg)
-
- 
-
- 
-
-You will see that the build was successfully saved and a new build has
-been queued.  Click the new build link so you can watch the progress.
-
- 
-
-![karlriss O Tasks / Workshop0717 Build and release Workshop0717-Azure
-Web App for A \> ild \#20180718.1 has been ueued. Variables Triggers
-Options Retention History Save queue c,) Discard Summary Queue
-Continuous integration Workshop0717 Enabled Scheduled No builds
-scheduled Build completion Build when aru'ther build completes
-Workshop0717 Enable continuous integration Batch changes while a build
-is in progress .4- Add Add Branch filters Type Include + Add Path
-filters + Add Branch specification P master fi
-](images/media/image87.jpeg)
-
- 
-
- 
-
-Clicking on the "Logs" tab will let you review detailed, real time,
-build information.
-
- 
-
-![O karlriss Logs Workshop0717 / Build and release Workshop0717-Azure
-Web App for ASP.NET-CI 20180718.1 Workshop0717 • master . O Add tag
-ad56a29 : Update WorkshopEnv.parameters.json . Manual build Timeline
-Code coverage\* Tests Database diff report Database script Edit O Stop
-build Phase 1 Job Agent: Hosted Agent v/ v/ Initialize agent • succeeded
-Initialize job • succeeded Get sources Started: 7/18/2018 7:43 PM é
-39.865 52.273 14.360 é 24.489 Receiving Receiving Receiving Receiving
-Receiving Receiving Receiving Receiving Receiving Receiving Receiving
-Receiving Receiving Receiving Receiving Receiving objects : objects :
-objects : objects : objects : objects : objects : objects : objects :
-objects : objects : objects : objects : objects : objects : objects : 1
-ex (55/1811) (73/1811) (91/1811) (109/1811) (127/1811) (145/1811)
-(163/1811) (182/1811) (20€/1811) (218/1811) (236/1811) (254/1811)
-(272/1811) (29e/1811) (308/1811) (326/1811) ](images/media/image88.jpeg)
-
- 
-
- 
-
-![karlriss Workshop0717 Build and release Workshop0717-Azure Web App for
-ASP.NET-CI 20180718.1 Workshop0717 . X-D master . ad56a29 : Update
-WorkshopEnv.parameters.json . Manual build O Add tag Logs Timeline Code
-coverage\* Tests Database diff report Database script \[i\] Artifacts v
-Create release Edit Queue Phase 1 Job Queue: Hosted VS2017 Initialize
-phase Initialize agent • Initialize job • succeeded Get sources •
-succeeded use nuget 4.4.1 • succeeded Nuget restore • succeeded Build
-solution • succeeded 1 warning Vstest - testassemblies • succeeded 2
-warnings Azure app ser.•ice deploy: vmweb01 defaultwebsite679 Publish
-symbols path • succeeded Publish artifact: drop • succeeded Post job
-cleanup • succeeded Report build status • succeeded • Agent: Hosted
-Agent • succeeded succeeded • succeeded Started: 7/18/2018 7:43 PM
-3:33.360 0.000 52.273 14.360 27.190 11.787 1:12.387 41.183 1.650 31.383
-7.624 4.226 0.087 0.127 ](images/media/image89.jpeg)
-
- 
+    > ![New build progress](images/media/image88.jpeg)
+    > ![Build success](images/media/image89.jpeg)
 
 **Part C - Leverage the Deployment Slot and implementing a Release**
 
-While we are deploying our application as part of a build, it may be a
-better option to leave the creation of artifacts to the build and move
-deployment of said artifacts to a release.  To quickly create a new
-release, click the "Create Release" option.
+1. While we are deploying our application as part of a build, it may be a better option to leave the creation of artifacts to the build and move deployment of said artifacts to a release.  To quickly create a new release, click the "Create Release" option.
 
- 
+    > ![Create release](images/media/image90.jpeg)
 
-![karlriss Workshop0717 Build and release Workshop0717-Azure Web App for
-ASP.NET-CI 20180718.1 Workshop0717 . X-D master . ad56a29 : Update
-WorkshopEnv.parameters.json . Manual build O Add tag Logs Timeline Code
-coverage\* Tests Database diff report Database script \[i\] Artifacts v
-Create release Edit Queue Phase 1 Job Queue: Hosted VS2017 Initialize
-phase Initialize agent • Initialize job • succeeded Get sources •
-succeeded use nuget 4.4.1 • succeeded Nuget restore • succeeded Build
-solution • succeeded 1 warning Vstest - testassemblies • succeeded 2
-warnings Azure app ser.•ice deploy: vmweb01 defaultwebsite679 Publish
-symbols path • succeeded Publish artifact: drop • succeeded Post job
-cleanup • succeeded Report build status • succeeded • Agent: Hosted
-Agent • succeeded succeeded • succeeded Started: 7/18/2018 7:43 PM
-3:33.360 0.000 52.273 14.360 27.190 11.787 1:12.387 41.183 1.650 31.383
-7.624 4.226 0.087 0.127 ](images/media/image90.jpeg)
+2. Just like when creating a new build, you are presented with a selection of templates to use as your starting point.  Select the "Azure App Service Deployment" template and click "Apply".
 
- 
+    > ![Select release pipeline template](images/media/image91.jpeg)
 
-Just like when creating a new build, you are presented with a selection
-of templates to use as your starting point.  Select the "Azure App
-Service Deployment" template and click "Apply".
+3. Just like the build, we need to configure the task to deploy to our Website.  Click the error showing for "1 phase, 1 task" to get started.
 
- 
+    > ![Pipeline stages](images/media/image92.jpeg)
 
-![a karlriss Workshop0717 Build and release x All pipelines Pipeline
-Tasks v Workshop0717 Variables Retention -Azure Web App for A Select a
-template Or start with an Empty process Featu red Azure App Service
-deployment Deploy your application to Azure App Service. Choose from Web
-App on Windows, Linux, containers, Function Apps, or W ebJobs. Deploy a
-Java app to Azure App Service Deploy a Java application to an Azure Web
-App. Deploy a Node.js app to Azure App Service Deploy a Node.js
-application to an Azure Web App. Deploy a PHP app to Azure App Service
-and Azure MySQL Deploy a PHP application to an Azure Web App and
-database to Azure Database for MySQL. p Search Options Artifacts -k Add
-Workshop0717- Azure Web App Schedule not set Environments History
-Environment 1 Select template Apply ](images/media/image91.jpeg)
+4. Next you are shown options to configure the subscription, app type, and app service name.  These should all be available in the drop downs.
 
- 
+    > ![Stage details](images/media/image93.jpeg)
 
- 
+5. Almost done, we just want to make a couple of additional modifications to take advantage of the deployment slot we configured earlier. Click the "Deploy Azure App Service" task so we get access to all the configuration options.  We will want to check the "Deploy to Slot" check box, pick the resource group, then select the "staging" slot that we configured earlier.
 
-Just like the build, we need to configure the task to deploy to our
-Website.  Click the error showing for "1 phase, 1 task" to get started.
+    > ![Deploy Azure App Service](images/media/image94.jpeg)
 
- 
+6. At this point, the release will simply deploy to our staging slot and nothing will be changed in production until we swap production with staging.  We can do this as part of our release by adding another task. Click on the "+" to add a new task.  Search for "Swap" and add the "Azure App Service Manage" task to your release process.
 
-![karlriss Workshop0717 Build and release All pipelines \>
-Workshop0717-Azure Web App for A O Tasks v Variables Retention Options
-History Pipeline Artifacts + Add Environments + Add v Environment 1 0 1
-phase, 1 task Workshop0717- Azure Web App Schedule not set
-](images/media/image92.jpeg)
+    > ![Add Azure App Service Manage Task](images/media/image95.jpeg)
 
- 
+7. Once added it will need a little configuration.
 
-Next you are shown options to configure the subscription, app type, and
-app service name.  These should all be available in the drop downs.
+    > ![Swap Slots Task](images/media/image96.jpeg)
 
- 
+8. You will want to select your subscription, pick the app service, pick the resource group, and pick the source slot.  Finally click "Save"
 
-![karlriss Workshop0717 Build and release Workshop0717-Azure Web App for
-A All pipelines \> Pipeline Tasks v Environment 1 Deployment process Run
-on agent Run on agent IR Save + Release ¯ View releases Variables
-Retention Options History Deploy Azure App Service Azure App Service
-Deploy Environment name Environment 1 Parameters O I Unlink all Azure
-subscription \* I Manage Microsoft Azure Internal Consumption
-(412b86d9-242b-452c-8273-a4da78837adc) App type Web App App serv•ice
-name \* vmweb01 DefaultWebSite679 CD CD ](images/media/image93.jpeg)
+    > ![Swap Slots Task](images/media/image97.jpeg)
 
- 
+The CI/CD pipeline is complete.  Queue a new build and follow the build/release to verify it works correctly.  Follow the build process and then follow the release process.
 
- 
-
-Almost done, we just want to make a couple of additional modifications
-to take advantage of the deployment slot we configured earlier.
-
-Click the "Deploy Azure App Service" task so we get access to all the
-configuration options.  We will want to check the "Deploy to Slot" check
-box, pick the resource group, then select the "staging" slot that we
-configured earlier.
-
- 
-
-![karlriss Workshop0717 Build and release All pipelines \>
-Workshop0717-Azure Web App for A save + Release ¯ View releases Pipeline
-Tasks v Environment 1 Deployment process Run on agent Run on agent
-Variables Retention Options History Deploy Azure App Service Azure App
-Service Deploy Azure App Service Deploy O Fb Version 3.\* Display name
-Deploy Azure App Service Azure subscription \* 1 Manage e Microsoft
-Azure Internal Consumption (412b86d9-242b-452c-8273-a4da78837adc) App
-type \* Web App App Service name \* vmweb01 DefaultWebSite679 Deploy to
-slot Resource group \* Server-Migration Slot O Staging -EastUS2 X Remove
-CD CD Virtual application O Package or folder \* O S (System.
-DefaultWorkingDirectory)BP.zip File Transforms & Variable Substitution
-Options v Additional Deployment Options v ](images/media/image94.jpeg)
-
- 
-
- 
-
-At this point, the release will simply deploy to our staging slot and
-nothing will be changed in production until we swap production with
-staging.  We can do this as part of our release by adding another task.
-
-Click on the "+" to add a new task.  Search for "Swap" and add the
-"Azure App Service Manage" task to your release process.
-
-![karlriss Workshop0717 Build and release All pipelines \>
-Workshop0717-Azure Web App for A IR Save + Release Pipeline Tasks v
-Environment 1 Deployment process Run on agent Run on agent Variables
-Retention Options History Add tasks CD Refresh ¯ View releases p swap
-Deploy Azure App Service Azure App Service Deploy Azure App Service
-Manage Start, Stop, Restart, Slot swap, Install site extensions or
-Enable Continuous Monitoring for an Azure App Service by Microsoft
-Corporation Marketplace A Web App Swap Task Task for performing swap
-operation between slots of an azure web app. x Add O Learn more
-](images/media/image95.jpeg)
-
- 
-
-Once added it will need a little configuration.
-
- 
-
-![/ Workshop0717 karlriss All pipelines \> Pipeline O Tasks v
-Environment 1 Deployment process Run on agent Run on agent Build and
-release Workshop0717-Azure Web App for A Variables Retention Options
-History R save Release ¯ View releases Azure App Service Manage O Deploy
-Azure App Service Azure App Service Deploy Swap Slots: O Some settings
-need attention Version Display name Swap Slots: Azure subscription \* C)
-This setting is required. O I Manage e Action O Swap Slots App Service
-name \* o C) This setting is required. Resource group \* O C) This
-setting is required. Source Slot O C) This setting is required. Swap
-with Production Preserve Vnet O X Remove CD CD CD CD
-](images/media/image96.jpeg)
-
- 
-
-You will want to select your subscription, pick the app service, pick
-the resource group, and pick the source slot.  Finally click "Save"
-
- 
-
-![Machine generated alternative text: karlriss Workshop0717 Build and
-release All pipelines \> Workshop0717-Azure Web App for A IR Save +
-Release ¯ View releases Pipeline Tasks Environment 1 Deployment process
-Run on agent Run on agent Variables Retention Options History Deploy
-Azure App Service Azure App Service Deploy Swap Slots: vmweb01
-DefaultWebSite679 Azure App Service Manage Azure App Service Manage O
-Version Display name Swap Slots: vmweb01DefaultWebSite679 Azure
-subscription \* O I Manage Microsoft Azure Internal Consumption
-(412b86d9-242b-452c-8273-a4da78837adc) Action O Swap Slots App Service
-name \* O vmwebO 1 DefaultWebSite679 Resource group O
-Server-Migration-EastUS2 Source Slot O Staging Swap with Production
-Preserve Vnet O Control Options v Output Variables v X Remove CD CD CD
-CD ](images/media/image97.jpeg)
-
- 
-
-Lastly, we need to clean up the build definition a little since
-deployment is now handled by the release.  Go back and edit the build
-definition.
-
- 
-
-![Machine generated alternative text: / Workshop0717 karlriss Build and
-release Builds Build pipelines Mine Definitions Requested by me .
-\*20180718.1 X X -F Build ID or build number Status •-7 succeeded View
-build results Queue new build... Edit pipeline Pause View builds Add to
-my favorites Add to team favorites Clone... Export Rename... Save as a
-template... Retain indefinitely Delete build Delete pipeline Security.„
-Add to dashboard p Queued Workshop0717-Azure Web App for ASP.NET-CI Karl
-Rissland requested 18 hours ago ](images/media/image98.jpeg)
-
- 
-
-Select the "Azure App Service Deploy" task and remove it.
-
- 
-
-![Machine generated alternative text: karlriss Tasks Workshop0717 Build
-and release Workshop0717-Azure Web App for A \> Variables Triggers
-Options p master Retention History Save & queue Discard Summary Queue
-Process Build process Get sources workshop0717 Phase 1 Run on agent
-Azure App Service Deploy O Fb Version 3.\* Display name Azure App
-Service Deploy: vmweb01 DefaultWebSite679 Azure subscription \* 1 Manage
-e QD Link settings X Remove Use NuGet 4.4.1 NuGet Tool Installer NuGet
-restore Build solution Visual Studio Build VsTest - testAssemblies
-Visual Studio Test Azure App Sewice Deploy: vmweb01 Default... Azure App
-Service Deploy Publish symbols path Index Sources & Publish Symbols
-Publish Artifact: drop Publish auld Artifacts Microsoft Azure Internal
-Consumption (412b86d9-242b-452c-8273-a4da78837adc) App type \* O Web App
-App Service name \* vmweb01 DefaultWebSite679 Deploy to slot O Virtual
-application O Package or folder \* O S (build.
-](images/media/image99.jpeg)
-
- 
-
- 
-
-The CI/CD pipeline is complete.  Queue a new build and follow the
-build/release to verify it works correctly.  Follow the build process
-and then follow the release process.
-
- 
-
-Note: While we are moving the deployment capabilities to the release and
+**Note:** While we are moving the deployment capabilities to the release and
 using deployment slots, we did not create multiple environments to save
 time.  If you like, you could create a new environment in the release
 and move the "Swap Slots" task to the second environment and add
@@ -1202,58 +678,28 @@ processes.
 
 ## Exercise 3: Detect, Diagnose, Monitor Application Performance with Application Insights
 
-Duration: 45 minutes
+**Duration:** 45 minutes
 
-Parts Unlimited understands that bad experiences online will quickly
-drive a customer to your competitor. With that in mind, they want to
-gain better visibility into issues customers are experiencing while
-using their site.
+Parts Unlimited understands that bad experiences online will quickly drive a customer to your competitor. With that in mind, they want to gain better visibility into issues customers are experiencing while using their site.
 
-In addition to gaining better insights into the sites health, they are
-also interested in better understanding how customers are using the site
-and the sites effectiveness.
+In addition to gaining better insights into the sites health, they are also interested in better understanding how customers are using the site and the sites effectiveness.
 
-As there is no instrumentation on the site today, they have decided to
-add Application Insights telemetry.
+As there is no instrumentation on the site today, they have decided to add Application Insights telemetry.
 
-Timely actionable telemetry is an important aspect of any modern
-application. Actionable information is a vital component of any DevOps
-practice.
+Timely actionable telemetry is an important aspect of any modern application. Actionable information is a vital component of any DevOps practice.
 
-  - Add Application Insights to the web app
+- Add Application Insights to the web app
+- Modify the code to instrument the app
+- Test locally to verify the app works
+- Push the changes to kick off a release
+- Test that the production application works
+- Review App Insights Data
 
-  - Modify the code to instrument the app
+**References**
 
-  - Test locally to verify the app works
+- [Azure Application Insights](https://docs.microsoft.com/en-us/azure/application-insights/app-insights-overview)
 
-  - Push the changes to kick off a release
-
-  - Test that the production application works
-
-  - Review App Insights
-Data
-
-#### Help references
-
-|                            |                                                                                     |
-| -------------------------- | ----------------------------------------------------------------------------------- |
-| Azure Application Insights | <https://docs.microsoft.com/en-us/azure/application-insights/app-insights-overview> |
-
-#### Prerequisites
-
-To complete this task, you should have provisioned the Parts Unlimited
-IaaS and PaaS environments (Exercise 1). You will use the Developer
-Workstation deployed as part of the IaaS environment for your
-development work.  
-  
-You must also have a Azure DevOps Services Account and be able to
-create new projects within that account. If you don’t, you will need to
-setup a new Account.
-
-*  
-*
-
-#### Task 1: Create an Application Insights Instance
+### Task 1: Create an Application Insights Instance
 
 Go to the resource group created by the migration tool.  You should see
 your application services.
@@ -1326,7 +772,7 @@ now see your App Insights Instance
 > 
 >  
 
-#### Task 2: Update your Web Application to use Application Insights
+### Task 2: Update your Web Application to use Application Insights
 
 Remote into the vmdev01 using the User Name and Password used when
 creating the environment.
@@ -1348,20 +794,7 @@ On your developer workstation, open the solution.
 Right click on the web application and choose to add Application
 Insights telemetry
 
-> ![Area... New Item... Existing Item... New Scaffolded Item... New
-> Folder Add ASP.NET Folder From Cookiecutter... REST API Client...
-> Application Insights Telemetry... Docker Support New Azure WebJob
-> Project Existing Project as Azure WebJob Reference... Service
-> Reference... Connected Service Analyzer... HTML Page JavaScript File
-> Style Sheet Web Form MVC 5 View Page (Razor) Web API Controller Class
-> (v2.I) Class... Ctrl+Shift+A Shift\* A A Build Rebuild Clean Analyze
-> Convert Publish... Publish Stored Procedures Ove Mew Scope to This New
-> Solution Explorer View Show on Code Map Build Dependencies Manage
-> NuGet Packages... Manage Bower Packages... Quick Launch (Ctrl+Q Search
-> Solution Explorer (Ctrl+;) Solution 'laaS2PaaSWeb' (3 projects
-> Environments PartsUnIimitedDatabase ected Services ences Data Stat
-> rollers JctSearch Team Explorer lebsite Project Properties Karl
-> Rissland •](images/media/image105.jpeg)
+> ![](images/media/image105.jpeg)
 > 
 >  
 > 
@@ -1404,16 +837,7 @@ This should leave you 100% configured
 We need to update a package, so right click on the project in visual
 studio and select "Manage NuGet Packages.."
 
-> ![Build Rebuild Clean Analyze Convert Publish... Publish Stored
-> Procedures Ove Niew Scope to This New Solution Explorer View Show on
-> Code Map Build Dependencies Manage NuGet Packages... Manage Bower
-> Packages... Set as StartUp Project Debug Initialize Interactive with
-> Project Search Solution Explorer (Ctrl+;) Solution 'laaS2PaaSWeb' (3
-> projects) Environments PartsUnIimitedDatabase Connected Services
-> Application Insights Getting Started + ConnectedServicejson Properties
-> References Ap p\_Data Ap p\_Start Areas Content Controllers fonts Hubs
-> Images Models ProductSearch Recommendations Scripts Security Utils n
-> Explorer Team Explorer](images/media/image111.jpeg)
+> ![](images/media/image111.jpeg)
 > 
 >  
 
@@ -1423,29 +847,7 @@ going to update one package.
 We are looking for System.Diagnostics.DiagnosticSource.  Select that
 package and click the update button.
 
-> ![NuGet PartsUnIimitedWebsite -E Application Insights Configuration
-> Browse Search (Ctrl+E) Installed Include prerelease Select all
-> packages Microsoft.Owin.Security by Microsoft Common types which are
-> shared by the various authentication middleware components.
-> Microsoft.Owin.Security.Cookies by Microsoft Middleware that enables
-> an application to use cookie based authentication, similar to ASP
-> .NET's forms authentication. Microsoft.Owin.Security.Facebook by
-> Microsoft Middleware that enables an application to suppot Facebook's
-> OAuth 2.0 authentication workflow. Microsoft.Owin.Security.Google by
-> Microsoft Contains middlewares to support Google's OAuth 2.0
-> authentication workflow. Microsoft.Owin.Security.MicrosoftAccount by
-> Microsoft Middleware that enables an application to suppot the
-> Microsoft Account authentication workflow.
-> Microsoft.Owin.Security.OAuth by Microsoft Middleware that enables an
-> application to suppot any standard OAuth 2.0 authentication workflow.
-> Microsoft.Owin.Security.Twitter by Microsoft Middleware that enables
-> an application to suppot Twitter's OAuth 2.0 authentication workflow.
-> System.Diagnostics.DiagnosticSource by Microsoft Provides Classes that
-> allow you to decouple code logging rich (unserializable)
-> diagnostics/telemetry (e.g. framework) from code that consumes it
-> (e.g. tools) Unity by Microsoft.Practices.Unit,' Unit/ Container
-> Library as single package U pdate v4D.o v4D.o v4D.o v4D.o v4D.o v4D.o
-> v4D.o @ v4A.o v4A.1 '.'40.1 v5.6.o](images/media/image112.jpeg)
+> ![](images/media/image112.jpeg)
 > 
 >  
 > 
@@ -1465,17 +867,7 @@ file.
 
 >  
 > 
-> ![We b.config\* E \< configuration \> - - - \< configSections\>
-> \<section For more information on Entity Framework configuration,
-> visit http://go.microsoft.com/f \< / configSections\> \<add \<add
-> \<add \<add \<add \<add \<add \<add \<add \<add \<add \<add \<add
-> \<add \<add value=" / Images key="ShowRecommendations" .
-> Administrator.LlserName" . Administrator. Password" " Key" value="" .
-> Facebook.Secret" value="" .600gIe.Key" .GoogIe.Secret" value=""
-> .microsoft. Key" value=" ' .Microsoft.Secret" value="" . Twitter. Key"
-> value="" . Twitter.Secret" value="" value="" \<add \< I --\<add \< /
-> connectionstrings\> \< system. web) \<customErrors .com ilation debu
-> "true tar etFramework= "4.5.1](images/media/image113.jpeg)
+> ![](images/media/image113.jpeg)
 > 
 >   
 
@@ -1487,7 +879,7 @@ keys.  This blog has a nice post on how to do that;
 [https://blogs.msdn.microsoft.com/devops/2015/01/07/application-insights-support-for-multiple-environments-stamps-and-app-versions/](mhtml:file://C:\\Users\\danshue\\Desktop\\Workshop\\AppMigrationAndModernizationWorkshopPresenter.mht!https://blogs.msdn.microsoft.com/devops/2015/01/07/application-insights-support-for-multiple-environments-stamps-and-app-versions/)
   
 
-#### Task 3: Update your application to provide more telemetry
+### Task 3: Update your application to provide more telemetry
 
 Azure Application Insights gives you a lot of information without doing
 anything else.  However, we want a little more, so we are going to make
@@ -1495,12 +887,7 @@ some changes. 
 
 Open the \_Layout.cshtml file located in the views\\shared folder.
 
-> ![Utils View Models Views Account Checkout Home Manage Orders Search
-> Shared AdminMenu.cshtmI Announcement.cshtml CartSummary.cshtmI
-> CategoryMenu.cshtmI \_ CommunityList.cshtmI \_Layout.cshtmI
-> Login.cshtml Order.cshtml \_OrderCostSummary.cshtmI
-> OrdersSearch.cshtmI
-> ProductList.cshtmI](images/media/image114.jpeg)** **
+> ![](images/media/image114.jpeg)** **
 
 There is a section commented out that will send telemetry from the web
 page.  We are going to replace this code with code we get from the app
@@ -1508,94 +895,26 @@ insights portal.
 
 >  
 > 
-> ![html) E\<html \<meta \<meta \<title \>tView3ag.TitIe — Parts
-> Unlimited \< / title \> (Styles . Render ( "N/Content/css (Scripts .
-> Render ( "w/bundles 'modernizr (Scripts . Render ("w/ bundles/jquey")
-> (Scripts . Render ( "N/ bundles / bootstrap") "N/ bundles/ signalr" )
-> \*'script Esc ripts . Render( "N/bundles/site \<\!-- Applnsights -
-> \<script initial-sce var applnsights=rxindow.applnsightsl function
-> r(config) in st rume nt at ion Key : "\>ystem. Web. Configuration.
-> WebConfigu re n; window. applnsights=applnsights; applnsights .
-> trackPageView() ; \< / script) E \<
-> body)](images/media/image115.jpeg)** **
+> ![](images/media/image115.jpeg)** **
 
 Next, go to Azure, open your resource group, then open Application
 Insights.
 
-> ![Server-Migration group Search \[Ctrl +0 t) Overview Activty log
-> Access control (IA M) Tags SETTINGS Quickstart c Resource costs
-> Deployments Policies — Properties -EastUS2 + Add Edit columns Delete
-> resource group Subscription Microsoft Azure Internal Consumption
-> Subscription ID 4126860-242b-452c-8273-a4da78837adc Filter by name.„
-> Show hidden types O 6 items karlrisspartsdbsrv partsunlimiteddb
-> ServerMigrationFarmStandardb9fd4bc60 vmwebOI DefaultWebSite staging
-> workshop App Insightsl nst](images/media/image116.jpeg)
+> ![](images/media/image116.jpeg)
 > 
 >  
 
 With Application Insights open, scroll down and click the "Getting
 Started".
 
-> ![Machine generated alternative text: Home \> Server-Migration-EastUS2
-> \> workshopAppInsightsInst 'W workshopApplnsightslnst rs and 39
-> Appliation Insights - Last 2 hou Search (Ctrl +0 Workbooks (preview)
-> USAGE (PREVIEW) Sessions Q nts Funnels User Flows @ Impact Cohorts
-> Funnels (preview) CONFIGURE Getting started Properties Alerts utes (S
-> mimte granuluity) - ASP\_NET web application Q, Search Please try some
-> of the new experiences we have in store for such as the new Composite
-> Application Map, before they become the default experience. Essentials
-> v o Alerts Health 1 Servers 2 Users 12:30 PM (76) Availability App mag
-> Overview timeline WORKSHOPAPPINSIGHTSINST savER RESPONSE T' \_ \_ 2.7,
-> PAGE VIEW LOAD TIME O savER REQUESTS O 7 FAILED REQUESTS O 11 AM 1
-> 1:30 AM 12 PM](images/media/image117.jpeg)
+> ![](images/media/image117.jpeg)
 > 
 >  
 
 From here, click to monitor client-side operations then copy the
 JavaScript code.
 
-> ![Machine generated alternative text: Home \> Server-Migration-EasWS2
-> \> workshopAppInsightsInst - Getting started \> Client application
-> monitoring and diagr•is '0 workshopAppInsightslnst - Getting started
-> Application Insights Search (Ctn +0 Workbooks (preview) USAGE
-> (PREVIEW) Sessions Q nts Funnels User Flows @ Impact Cohorts Funnels
-> (preview) CONFIGURE Getting started Properties Alerts Smart Detection
-> settings c Features \* pricing Data volume management What is
-> Application Insights? Application Insights is an extensible analytics
-> service that monitors the clients, server and dependencies of your
-> live web application. Detect, triage and diagnose performance issues
-> and failures in the clients, server or dependencies of pur
-> application. Write own events, metrics and traces for even more
-> detailed usage analysis and diagnostic power. Application Insights is
-> designed for developers, to help you continuously improve the
-> availability, performance and usability of your app. What can
-> Application Insights do? MONITOR AND DIAGNOSE SERVER SIDE APPLICATION
-> Detect server side performance issues and failures. Diagnose with
-> correlated exceptions, dependency calls and pur application traces.
-> MONITOR AND DIAGNOSE CLIENT SIDE APPLICATION Add our JavaScript
-> snippet to analyze usage patterns and to detect and diagnose client
-> side performance issues and failures. ENRICH TELEMETRY WITH CUSTOM
-> METRICS AND EVENTS How many red apples were sold today? How many users
-> clicked the •Try-Now" button? How good is the new feature? Client
-> application monitoring and diagnosis Client side telemetry Detect and
-> diagnose performance issues and failures in web pages. Understand how
-> your application is being used. • See correlated client side, server
-> side and custom telemetry, in the context of a user session, all in
-> one place. • Set up alerts on the client side metrics collected by
-> default or custom metrics reported using the JavaScript SDK. • Slice
-> and dice client side metrics alongside server and custom telemetry to
-> trace the causes of performance issues and failures. Leam more
-> Application insights client side monitoring Privacy statement \[4
-> Guidance Easy to get started. Simply paste the following into your
-> master page To collect end-user usage analytics about your
-> application, insert the following script into each page you want to
-> track. Place this code immediately before the closing \</head\> tag,
-> and before any other scripts. Your first data will appear
-> automatically in just a few seconds. (script type="text/javascript"\>
-> var applnsights=window.applnsightsl Ifunction(a){ function
-> b=arguments;c.queue.push(func instrumentationKey : " c81fee8f
-> -2653-4c87-b76e-738c3287c88c " wi ndow. applnsights=applnsights ,
-> applnsights. queue&\&e-—=applnsights](images/media/image118.jpeg)
+> ![](images/media/image118.jpeg)
 > 
 >  
 > 
@@ -1609,12 +928,7 @@ like the following
 
 >  
 > 
-> ![crlpts. Render( w/ bund Les/modernlzr (Scripts. Render ( "m/
-> bundles/jquey") (Scripts . Render ( "N/ bundles / bootstrap") "N/
-> bundles/ signalr " ) \*'script Esc ripts . Render( "N/bundles/site
-> \<\!-- Applnsights - \<script \< / head\> E \< body \> var applnsights
-> = window. applnsights function (a) { function b(a) { cCa\] function {
-> c.queue.p](images/media/image119.jpeg)
+> ![](images/media/image119.jpeg)
 > 
 >   
 
@@ -1626,7 +940,7 @@ this code has been commented out if you want to add it.
 **Note:** This project is .NET Framework 4.5.1.  More capabilities light
 up if you change the target framework to at least .NET Framework 4.6. 
 
-#### Task 4: Implement the Custom Event Telemetry Provider
+### Task 4: Implement the Custom Event Telemetry Provider
 
 A custom Event Telemetry Provider has been written, but the
 implementation needs to be uncommented before it can be used. Navigate
@@ -1639,43 +953,25 @@ the **OrdersController.cs** or **ShoppingCartController.cs** classes.
 
 ![](images/media/image120.png)
 
-#### Task 5: Push your code to production
+### Task 5: Push your code to production
 
 With everything running locally, time to push our changes to production.
 
 In Visual Studio, go to the team explorer, then go to changes.
 
-> ![Team Explorer - Home Search V.icrk Item', (Ctrl\* I) Home Source O
-> Welcome to GitHub for Visual Studio\! Why not take a look at our
-> training or documentation? Don't show this again Project Changes
-> New... Open... I Show Folder View Branches Settings laaS2PaaSWeb.sIn
-> AppWorkshop\\IaaS2PaaSWeb](images/media/image121.jpeg)
+> ![](images/media/image121.jpeg)
 > 
 >  
 
 Add a comment and then commit and push
 
-> ![Team Explorer - Changes Search V.icrk Item', (Ctrl\* Changes Source
-> Branch: master n AA-A Application Insights Actions Commit All Commit
-> All and Push PaaSWeb\\PartsUn... Commit All and Sync c\*
-> FilterConfig.cs Connected Services\\AppIication Insights
-> ConnectedServicejson \[add\] Content bootstrap-grid.css \[add\]
-> bootstrap-grid.css.map \[add\] bootstrap-grid.min.css \[add\]
-> bootstrap-grid.min.css.map \[add\] bootstrap- reboot.css \[add\]
-> bootstrap-reboot.css.map \[add\] bootstrap-reboot.min.css \[add\]
-> bootstrap-reboot.min.css.map \[add\] ErrorHandIer c\*
-> AiHandIeErrorAttribute.cs \[addl Solution Explorer Team
-> Explorer](images/media/image122.jpeg)
+> ![](images/media/image122.jpeg)
 > 
 >  
 
 After a few moments you should get a success dialog
 
-> ![Team Explorer - Synchronization Search V.icrk Item', (Ctrl\* I)
-> Synchronization Source O Successfully pushed to origin/master. Branch:
-> master Sync Fetch Pull Push Actions Incoming Commits There are no
-> incoming commits. Outgoing Commits Push View Summary There are no
-> outgoing commits.](images/media/image123.jpeg)
+> ![](images/media/image123.jpeg)
 > 
 >  
 
@@ -1684,55 +980,21 @@ will automatically kick off.
 
 >  
 > 
-> ![WorkshopPrj Builds Releases Library v Dash boards Code Work Build
-> and Release Test Status Wiki Task Groups Dep loyment Groups\* Build
-> Definitions Mine Definitions Requested by me Build Il Queued
-> vmweb01DefaultWebSite - Cl : \#20180215.1 Karl Rissland requested just
-> riff." in progress](images/media/image124.jpeg)
+> ![](images/media/image124.jpeg)
 > 
 >  
 > 
-> ![v Builds WorkshopPrj Releases Library Dashboards Code Work Build and
-> Release Test Wiki Task Groups Deployment Groups\*
-> vmweb01DefauItWebSite - CI / Build 20180215.1 / Build Build 20180215 1
-> v Build Initialize Agent Initialize Job Get Sources NuGet restore
-> Build solution Test Assemblies Publish symbols path Publish Artifact
-> Post Job Cleanup Edit build definition Queue new build... Build
-> succeeded Build & Download all logs as zip Ran for 2.2 minutes (Hosted
-> Agent), completed 1 seconds ago Console Logs Timeline Code coverage\*
-> Unable to index one or more source files for symbols file n\\AntIr3.
-> Runtime . pdb' Unable to index one or more source files for symbols
-> file n\\Microsoft . Practices .ServiceLocation.pdb . \\ s \\ AppWo
-> rkshop \\ laaS2P aaSWeb \\ Pa rtsUn \\obj Release \\ Pac kage \\ P
-> ackageTmg -i: "C: \\ Temp\\tmp65D2 .tmp" -s: Finishing: Starting:
-> Publish symbols path Publish Artifact](images/media/image125.jpeg)
+> ![](images/media/image125.jpeg)
 > 
 >  
 > 
 >  
 > 
-> ![WorkshopPrj Builds Releases Library Search release definitions...
-> Release Definitions All release definitions vmweb01 Defa ultWebSite v
-> Dash boards Code Work Build and Release Test Wiki Task Groups
-> Deployment Groups\* All release definitions Overview Releases Deleted
-> Title Release-4 Release-3 Search work items Environments Release
-> Definition vmweb01 DefaultWebSite vmweb01
-> DefaultWebSite](images/media/image126.jpeg)
+> ![](images/media/image126.jpeg)
 > 
 >  
 > 
-> ![WorkshopPrj Builds Releases Library Search release definitions...
-> Release Definitions All release definitions vmweb01 Defa ultWebSite v
-> Dash boards Code Work Build and Release Test Wiki Search work items in
-> this Task Groups Dep loyment Groups\* vmweb01DefauItWebSite - CD /
-> Release-4 Summary Environments Artifacts Variables •h • Deploy R save
-> Abandon Details General Commits E Send Email Work items Tests Logs
-> History Triggered by vmwebOIDefauItWebSite - CI 20180215.1. Continuous
-> deplcyment requested for Karl Rissland 2 minutes ago
-> vmwebOIDefauItWebSite - CI / 20180215.1 (Build) p master Work items No
-> associated work items found. Tags Environments Enviro... Actions
-> Issues Deployment status Triggered Compl... Tests just now No tests No
-> issues reported in this release.](images/media/image127.jpeg)
+> ![](images/media/image127.jpeg)
 > 
 >  
 
@@ -1744,18 +1006,11 @@ code and look for Application Insights instrumentation key in the \<head
 /\> block. Move around the site to generate data that will be used in
 the next activity.
 
-#### Task 5: Review the data
+### Task 5: Review the data
 
 Go back to your resource group and open Application Insights.
 
-> ![Server-Migration group Search \[Ctrl +0 t) Overview Activty log
-> Access control (IA M) Tags SETTINGS Quickstart c Resource costs
-> Deployments Policies — Properties -EastUS2 + Add Edit columns Delete
-> resource group Subscription Microsoft Azure Internal Consumption
-> Subscription ID 4126860-242b-452c-8273-a4da78837adc Filter by name.„
-> Show hidden types O 6 items karlrisspartsdbsrv partsunlimiteddb
-> ServerMigrationFarmStandardb9fd4bc60 vmwebOI DefaultWebSite staging
-> workshop App Insightsl nst](images/media/image116.jpeg)
+> ![](images/media/image116.jpeg)
 > 
 >  
 
@@ -1771,24 +1026,11 @@ Responsiveness, and the Browser.
 
 Click the **App Map**
 
-> ![Machine generated alternative text: Home \> Server-Migration-EasWS2
-> \> workshopAppInsightsInst - Application map workshopAppInsightsInst -
-> Application map Application Insights - Last hours Search (Ctn +0
-> Overview Activty log Access control (IA M) Tags Diagnose and solve
-> problems INVESTIGATE Application map Smart Detection Live Metrics
-> Strea m Metrics Explorer Metrics (prev-ew) p Search Availability
-> Failures (preview) Performance (preview) workshopApplnsightsInst Time
-> range Filters Opt Refresh Restore defaults Learn more Feedback Warning
-> thresholds: A O faile Client: workshopAp...••• 16 page views 693.88 ms
-> O errors p workshopApplnsig... ••• 21 requests 1.56 s 0% failures SQL
-> 276 calls 3.51 ms 1.4% failures tcp:karlrisspartsdbs... 152 calls 2.33
-> ms 1.3% failures tcp:karlrisspartsdbs... 72 calls 4.86 ms 0% failures
-> 40 calls 548 ms 5% failures 12 calls 3.92 ms 0%
-> failures](images/media/image130.jpeg)
+> ![](images/media/image130.jpeg)
 > 
 >   
 
-####  Task 6: Web Test
+### Task 6: Web Test
 
 Now we want to monitor the web application from different locations and
 get a better understanding of what other users in different regions are
@@ -1862,20 +1104,13 @@ collection information about your application, has the ability of
 scaling up/down and notifying you when it
 does.
 
-#### Help references
+**References**
 
 | Web Site Backup | <https://docs.microsoft.com/en-us/azure/app-service/web-sites-backup>             |
 | --------------- | --------------------------------------------------------------------------------- |
 | Auto Scaling    | <https://docs.microsoft.com/en-us/azure/architecture/best-practices/auto-scaling> |
 
-#### Prerequisites
-
-To complete this task, you should have provisioned the Parts Unlimited
-IaaS and PaaS environments and have a working CI/CD process and have
-installed & configure Azure Application Insights. You have logged in and
-have configured Visual Studio and able to modify code.
-
-#### Task 1: Configure Backups
+### Task 1: Configure Backups
 
 We need to “start right” by getting the backups going before we move
 forward with too much code changes. Backups will be stored in defined
@@ -1896,7 +1131,7 @@ If we had a Premium App Service Plan, we would be able to run Snapshots.
 Since we’re running a Standard account, we’ll configure our back up to
 be performed when the traffic and volume is the lowest.
 
-#### Task 2: Configure Storage Account for Backups
+### Task 2: Configure Storage Account for Backups
 
 We need to define which Azure BLOB storage account to be used for
 backups. Since we don’t have an account, we’ll create one. Click
@@ -1933,7 +1168,7 @@ you have the right setting on the Backup Configuration pane.
 
 ![](images/media/image139.png)
 
-#### Task 3: Schedule Backup
+### Task 3: Schedule Backup
 
 Next, since we want the backup to be performed nightly, we need to turn
 on the scheduled backups by clicking “Scheduled backup” to “On”.
@@ -1948,7 +1183,7 @@ Retention area.
 
 ![](images/media/image141.png)
 
-#### Task 4: Backup Database
+### Task 4: Backup Database
 
 Azure App Service has detected a database in use, so we’ll want to
 include that in the back up as well. Click the **Include** checkmark to
@@ -1976,22 +1211,22 @@ ZIP file containing the files.
 
 ![](images/media/image145.png)
 
-###### Partial Backups
+**Partial Backups**
 
 You can also configure Partial backups if you would like to exclude data
 to limit how much you’re backing up such as logs and image files. 10 GB
 is the max size available for backups currently.
 
-###### Restore Backup
+**Restore Backup**
 
 This is the same page you’ll come to Restore a previous backup.
 
-###### Automate Backup
+**Automate Backup**
 
 Like many services in Azure, Application Service backups can also be
 automated with scripts using either the Azure CLI or Azure PowerShell.
 
-#### Task 5: Viewing Health by Reviewing the Response Time and Errors
+### Task 5: Viewing Health by Reviewing the Response Time and Errors
 
 Navigate to the Application in the Azure Portal. The Overview section
 gives you essential information about how your application is performing
@@ -2000,7 +1235,7 @@ Http 5xx. What is the average Response Time for the application?
 
 ![](images/media/image146.png)
 
-#### Task 6: Setting Alerts
+### Task 6: Setting Alerts
 
 Now you’ve seen basic performance information, let’s setup an early
 warning system. Under the **Monitoring** section for the Web App, click
@@ -2016,7 +1251,7 @@ email address.
 
 ![](images/media/image147.png)
 
-#### Task 7: Configuration App Diagnostics
+### Task 7: Configuration App Diagnostics
 
 Once we have the alerting and monitoring in place, we want to be able to
 record issues as the arise. To enable diagnostics, under the Monitoring
@@ -2043,20 +1278,20 @@ For each log setting, set the retention period (days) to 120.
 
 When everything is all set, click **Save**.
 
-#### Task 8: Viewing Application CPU/Memory
+### Task 8: Viewing Application CPU/Memory
 
 We need to ensure that we’re “ok” right now. From a CPU/Mem standpoint.
 
 ![](images/media/image150.png)
 
-#### Task 9: Viewing Disk space
+### Task 9: Viewing Disk space
 
 It’s important that we have room to grow. On the navigation, under the
 App Service Plan, click on Quotas.
 
 ![](images/media/image151.png)
 
-#### Task 10: Configuring Auto Scale Up
+### Task 10: Configuring Auto Scale Up
 
 We know that the site runs poorly on a single CPU box. Let’s fix that
 first. Navigate to the App Service Plan and **Scale Up** the application
@@ -2064,7 +1299,7 @@ to at least to a P2 instance.
 
 ![](images/media/image152.png)
 
-#### Task 11: Creating an Auto Scaling Out
+### Task 11: Creating an Auto Scaling Out
 
 An advantage to running in Azure is auto-scaling the application up and
 down based off the demand. In this lab, we’re going to create an auto
@@ -2092,7 +1327,7 @@ back in.
 
 Save the changes
 
-#### Task 12: Prepare for scaling in another region 
+### Task 12: Prepare for scaling in another region 
 
 Are you getting heavy traffic from another region or want to improve the
 high available of your application? Now that we have a Premium App Plan,
@@ -2107,7 +1342,7 @@ time to set the Clone Settings.
 
 > ![](images/media/image158.png)
 
-#### Task 13: Viewing Resource Health and History
+### Task 13: Viewing Resource Health and History
 
 Now we want to see the overall health history of our resource. Perhaps
 there was an event that happen that made the application slow to respond
@@ -2118,14 +1353,14 @@ two weeks for the application.
 
 ![](images/media/image159.png)
 
-#### Task 14: View Auto Scale Run History
+### Task 14: View Auto Scale Run History
 
 To view the history on how often the web application is scaling up /
 down, click on the **Run History** link.
 
 ![](images/media/image160.png)
 
-#### Task 15: Setting up auto scaling notifications
+### Task 15: Setting up auto scaling notifications
 
 If you want to be notified how when the application is scaled up / down,
 Navigate to Notify.
@@ -2165,7 +1400,7 @@ database and make it available by:
   - Database vulnerabilities are automatically
 discovered
 
-#### Help references
+**References**
 
 | SQL Azure                                                       | <https://docs.microsoft.com/en-us/azure/sql-database/>                                                                                        |
 | --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2176,14 +1411,7 @@ discovered
 | Database Transaction Unit (DTU)                                 | https://docs.microsoft.com/en-us/azure/sql-database/sql-database-what-is-a-dtu                                                                |
 | Failover Groups and active geo-replication                      | https://docs.microsoft.com/en-us/azure/sql-database/sql-database-geo-replication-overview                                                     |
 
-#### Prerequisites
-
-To complete this task, you should have provisioned the Parts Unlimited
-IaaS and PaaS environments and have a working CI/CD process. You will
-use the Developer Workstation deployed as part of the IaaS environment
-for your development work.
-
-#### Task 1: Resource Locking
+### Task 1: Resource Locking
 
 We want to make sure than nobody accidentally deletes this footprint.
 Unlike role-based access control, you use management locks to apply a
@@ -2221,7 +1449,7 @@ available options
 
 ![](images/media/image166.png)
 
-#### Task 2: Enable Transparent Data Encryption
+### Task 2: Enable Transparent Data Encryption
 
 If we have sensitive data, we can encrypt the data without impacting the
 application. Transparent data encryption encrypts your database,
@@ -2236,7 +1464,7 @@ Vault.
 
 ![](images/media/image168.png)
 
-#### Task 3: Scale Up Database Performance
+### Task 3: Scale Up Database Performance
 
 When our database was migrated, only a Standard S0, 10 DTUs, 250 GB
 database was provisioned, the minimum DTUs for a Standard subscription.
@@ -2247,7 +1475,7 @@ click **Apply**.
 
 ![](images/media/image169.png)
 
-#### Task 4: Configure Firewall and virtual networks
+### Task 4: Configure Firewall and virtual networks
 
 Under the **Security** blade, navigate to **Firewalls and virtual
 networks.** We want to seal off any access from anyone except us. To
@@ -2255,7 +1483,7 @@ allow access to Azure services, click on **ON**.
 
 ![](images/media/image170.png)
 
-#### Task 5: Threat Detection and Vulnerability Assessment
+### Task 5: Threat Detection and Vulnerability Assessment
 
 We want to help protect our database sever again threats. This service
 includes Threat Detection, Data Discovery & Classification, and
@@ -2273,7 +1501,7 @@ services.
 
 ![](images/media/image171.png)
 
-#### Task 6: Turn on SQL Server Auditing
+### Task 6: Turn on SQL Server Auditing
 
 Navigate to the SQL Server. Located under the Security section, click on
 Auditing. In this section we will enable the SQL Server. Specify which
@@ -2282,7 +1510,7 @@ Storage Account you want the logs to be exported too and click on
 
 ![](images/media/image172.png)
 
-#### Task 7: Automatic Tuning
+### Task 7: Automatic Tuning
 
 In the SQL Server blade, select **Support+Troubleshooting** section.
 Azure SQL Database has built-in intelligence to automatically tune your
@@ -2293,7 +1521,7 @@ or off for your database. Click on **Azure defaults** and click
 
 ![](images/media/image173.png)
 
-#### Task 8: Enable Database Diagnostics
+### Task 8: Enable Database Diagnostics
 
 If we need to troubleshoot or get a better understanding of what’s going
 on with our database and server, be sure to turn on the Database
@@ -2311,7 +1539,7 @@ hub.
 
 ![](images/media/image175.png)
 
-#### Task 9: Configure Long-term backup retention for database
+### Task 9: Configure Long-term backup retention for database
 
 SQL Database automatically creates database backup and uses Azure
 read-access geo redundant storage (RA-GRS) to provide geo redundancy.
@@ -2363,43 +1591,21 @@ the service is quick, usually around a few minutes, and billing is based
 on use as opposed to a
 contract.
 
-#### Help references
+**References**
 
 | Azure CDN               | <https://azure.microsoft.com/en-us/services/cdn/>                    |
 | ----------------------- | -------------------------------------------------------------------- |
 | CDN Overview            | <https://docs.microsoft.com/en-us/azure/cdn/cdn-overview>            |
 | Creating a new Endpoint | <https://docs.microsoft.com/en-us/azure/cdn/cdn-create-new-endpoint> |
 
-#### Prerequisites
-
-To complete this task, you should have provisioned the Parts Unlimited
-IaaS and PaaS environments and have a working CI/CD process. You will
-use the Developer Workstation deployed as part of the IaaS environment
-for your development work.
-
-#### Task 1: Configure CDN for the whole web application
+### Task 1: Configure CDN for the whole web application
 
 Using the **Networking** tab in the **Web App** blade and clicking on
 the **Configure Azure CDN for your app** link:
 
  
 
-![Machine generated alternative text: Microsoft Azure Home \>
-partsunimited \> PartsUnIimited \> pa305 - Networking + pa305 -
-Networking Search \[Ctrl +0 Overview Activty log Access control (IA M)
-Tags Diagnose and solve problems DEPLOYMENT Quickstart Deployment
-credentials Nii Deployment slots Deployment options Continuous Delivery
-(Preview) SETTINGS Application settings Authentication / Authorization
-Managed service identity Backups Custom domains SSL certificates
-Networking Scale up (App Service plan) VNET Integration Not Configured
-Securely access resources available in or through your Azure VNET Learn
-More Setup Hybrid connections Securely access applications in private
-networks Learn More Configure your hybrid connection endpoints Azure CDN
-Secure, reliable content delivery with broad global reach and rich
-feature set Learn More Configure Azure CDN for •your app IP Restrictions
-Define and manage rules that control access to your app for specific IP
-address Learn More Configure IP Restrictions
-](images/media/image178.png)
+![](images/media/image178.png)
 
  
 
@@ -2408,19 +1614,7 @@ for the app:
 
  
 
-![Machine generated alternative text: Microsoft Azure Home \>
-partsunimited \> PartsUnIimited \> pa305 - Networking \> Azure CDN Azure
-CDN Azure Content Delivery Network The Azure Content Delivery Network
-(CDN) is designed to send audio, video, images, and other files faster
-and more reliably to customers using servers that are closest to the
-users. This dramatically increases speed and availability, resulting in
-significant user experience improvements. Learn more Endpoints Click on
-your erdpoind below to manage CDN and configure different features.
-HOSTNAME Create new CDN endpoints below. Migrate custom domains to CDN
-New endpoint CDN profile O C) use existing • Create new partsunlimited
-Pricing tier (View full pricing details) Standard Akamai CDN endpoint
-name pa305 .azureedge.net Origin hostname O pa305.azurewebsites.net
-Create STATUS PROTOCOL ](images/media/image179.png)
+![](images/media/image179.png)
 
 After services are created, browse the website in the edge URL to make
 sure it is working.
@@ -2429,7 +1623,7 @@ Navigate through the product categories and notice that the same page is
 being displayed for all categories, must be a problem with the query
 string parameters, let's fix that.
 
-#### Task 2: Configure Caching Rules
+### Task 2: Configure Caching Rules
 
 Click on the **CDN Endpoint** in the portal and then on the **Caching
 Rules** property to see what is available. We can see there is a global
@@ -2438,34 +1632,7 @@ To fix the problem, change it to **Cache every unique URL**.
 
  
 
-![Machine generated alternative text: MSW Home Page Caching rules -
-Microsc X co Home Page — Parts unlimitE + v https:// ps/PartslJ nlim
-ited/p MSW Sales CRM Azure AppDevTSP O MyAzure DevOps + CADD General Learning
-TODO Blogs Office Locator - Conr Presentations Report a bug Microsoft
-Azure Home \> partsunimited \> PartsUnIimited \> pa305- Networking \>
-Azure CDN \> paB05 - Caching rules -F pa305 - Caching rules Ends nint
-Search (Ctrl +0 Overview Activity log Access control (IA M) Tags
-Diagnose and solve problems SETTINGS Origin Custom domains Compression
-Caching rules Geo-filtering Optimization Automation script MONITORING
-Diagnostics logs SUPPORT + TROUBLESHOOTING New support request Save X
-Discard About This Feature Control how CDN caches your content,
-including how unique query strings are handled and whether origin cache
-directive headers are used to decide caching duration. You can set
-global rules which affect all requests, as well as custom rules for more
-specific conditions such as a folder or file. Learn more Optimized for O
-Default caching behavior O General web delivery Set if missing Default
-cache expiration duration 0 7 days Global caching rules These rules
-affect the CDN caching behavior for all requests, and can be overridden
-using Custom Cache Rules below for certain scenarios. Note that the
-Query string caching behavior setting does not affect files that are not
-cached by the CDN. Caching behavior Cache expiration duration O Query
-string caching behavior Custom caching rules Create caching rules based
-on sp Not set Days Hours Minutes Seconds Ignore query strings Ignore
-query strings Bypass caching for query strings Cache every unique URL
-makes more sense to have more speci rues s t Move up Move down Move to
-top MATCH CONDITION ottom top to down. This e 1st so ey are not
-overwritten a genera ru e un er them. For example Move to bottom MATCH
-VALUE(S) Insert Delete CACHING BEHAVIOR ](images/media/image180.png) 
+![](images/media/image180.png) 
 
 Next, under the custom caching rules, set up a new rule to exclude the
 shopping cart. For the Match Condition, choose **Url Path,** Matching
@@ -2477,7 +1644,7 @@ category product pages and the problem should be fixed now, any
 subsequent visits will be faster because data is cached in the CDN for
 all pages.
 
-#### Task 3: Improve performance by adding compression
+### Task 3: Improve performance by adding compression
 
 We can improve the CDN performance even further with compression rules
 for some types of files, specially text. Click on the **Compression**
@@ -2486,26 +1653,7 @@ added if desired:
 
  
 
-![Machine generated alternative text: MSW Home Page Compression -
-Microso X co Home Page — Parts unlimitE + v https:// ps/PartslJ nlim
-ited/provider\! MSW Sales CRM Azure AppDevTSP O MyAzure DevOps + CADD General
-Learning TODO Blogs Office Locator - Conr Presentations Report a bug
-Microsoft Azure Home \> partsunimited \> PartsUnIimited \> pa305 -
-Networking \> Azure CDN \> pa305 - Compression p Search re pa305 -
-Compression Ends nint Search (Ctrl +0 Overview Activity log Access
-control (IA M) Tags Diagnose and solve problems SETTINGS Origin Custom
-domains Compression Caching rules Geo-filtering Optimization Automation
-script MONITORING Diagnostics logs R save x Discard About This Feature
-Compress files on the ffy via CDN to reduce size and improve
-performance. After the feature is on, you may modify the MIME types list
-to fine tune which content formats to compress. Already compressed files
-such as jpeg images or mp3 audio may not see much additional gain from
-compression. Note that files are only compressed on the fly by the CDN
-if it is served from CDN cache. Compressed by the origin can still be
-delivered compressed to the client without being cached. Learn more
-Configure Compression Off Formats to compress text/ plain text/html
-text/css text/javascript application/x-javascript application/javascript
-application/json application/xml ](images/media/image181.png)
+![](images/media/image181.png)
 
  
 
@@ -2540,14 +1688,8 @@ content to a CDN.
 
   - Explore additional features
 
-#### Prerequisites
 
-To complete this task, you should have provisioned the Parts Unlimited
-IaaS and PaaS environments and have a working CI/CD process. You will
-use the Developer Workstation deployed as part of the IaaS environment
-for your development work.
-
-#### Task 1: Create a Resource Group & Storage Account
+### Task 1: Create a Resource Group & Storage Account
 
 **Note:** If you already created a Storage Group for the web app logs,
 you can skip this step. If you already created a CDN Profile in the
@@ -2560,14 +1702,7 @@ resource and look for Storage Account:
 
  
 
-![Machine generated alternative text: Everything Y Filter earch
-Everything cloudera Cloudera Director Cloudera Cloudera Director is the
-fastest, easiest way to manage the lifecycle of enterprise Apache Hadoop
-clusters on Azure. The Director VM includes a template for deploying CDH
-and Cloudera Manager, enabling you to run high-value big data workloads
-on Azure. Web App Microsoft Function App Microsoft API App Microsoft
-Create Storage account - blob, file, table, Microsoft Logic App
-Microsoft SQL Database Microsoft ](images/media/image182.png)
+![](images/media/image182.png)
 
  
 
@@ -2575,15 +1710,7 @@ Click on the create button to start:
 
  
 
-![Machine generated alternative text: Storage account - blob, file,
-table, queue Microsoft Microsoft Azure provides scalable, durable cloud
-storage, backup, and recovery solutions for any data, big or small. It
-works with the infrastructure you already have to cost-effectively
-enhance your existing applications and business continuity strategy, and
-provide the storage required by your cloud applications, including
-unstructured text or binary data such as video, audio, and images. x
-PUBLISHER USEFUL LINKS Create Microsoft Documentation Service overview
-Pricing ](images/media/image183.png)
+![](images/media/image183.png)
 
  
 
@@ -2592,33 +1719,16 @@ deployment model & storage V2 for kind, select standard performance and
 LRS for replication, Hot for tier and disabled for secure transfer
 required and select the resource group where to create:
 
-![Machine generated alternative text: Create storage account The cost of
-your storage account depends on the usage and the options you choose
-below. Learn more \* Name O partsunlimited Deployment model O Resource
-manager Account kind O .core.windows.net Classic StorageV2 (general
-purpose v2) Performance O Standard Premium Replication O
-Locally-redundant storage (LRS) Access tier (default) O Cool Hot \*
-Secure transfer required O Disabled Enabled \* Subscription Visual
-Studio Enterprise (ca4f2f4a-1d81-4f3V \* Resource group O Create new Use
-existing PartsUnlimited \* Location East US Virtual networks Pin to
-dashboard Create Automation options ](images/media/image184.png)
+![](images/media/image184.png)
 
  
 
-#### Task 2: Provision
+### Task 2: Provision
 
 In the Azure Portal, click to add a resource and select the "Web +
 Mobile" area and "CDN" should be immediately available:
 
-![Machine generated alternative text: Home \> New New p Search the
-Marketplace Azure Marketplace Get started Recently created Compute
-Networking Storage Web + Mobile Containers Databases Data + Analytics Al
-+ Cognitive Services See all Featured Web App Quickstart tutorial Mobile
-App Learn more Logic App Learn more Web App for Containers Learn more
-CDN 0 Learn more Media Services Learn more Azure Search Learn more
-Mobile Engagement Learn more See all Internet of Things Enterprise
-Integration Security + Identity Developer tools Monitoring + Management
-Add-ons Blockchain ](images/media/image185.png)
+![](images/media/image185.png)
 
  
 
@@ -2626,32 +1736,18 @@ Enter a name for the profile, select a resource group and
 
  
 
-![Machine generated alternative text: CDN profile partsunlimited \*
-Subscription Visual Studio Enterprise (ca4f2f4a-1d81-4f3V \* Resource
-group O Create new Use existing PartsUnlimited \* Resource group
-location O East US \* Pricing tier (View full pricing details) Standard
-Akamai Create a new CDN endpoint now Pin to dashboard Create Automation
-options ](images/media/image186.png)
+![](images/media/image186.png)
 
  
 
  
 
-#### Task 3: Add a CDN Endpoint
+### Task 3: Add a CDN Endpoint
 
 After the CDN profile is created, you should be able to see the CDN
 resource and click on the **Add Endpoint** link:
 
-![Machine generated alternative text: partsunlimited CDN profile p
-Search (Ctrl+/) -a Overview Activity log Access control (IAM) Tags
-Diagnose and solve problems SETTINGS Locks Automation script GENERAL
-Quickstart Properties Endpoints SUPPORT + TROUBLESHOOTING Resource
-health New support request Endpoin Manage purge Essentials A Resource
-group (change) PartsUnlimited Status Active Location East US
-Subscription name (change) Visual Studio Enterprise Subscription ID
-ca4f2f4a-1d81-4f32-af97-849d45806dec Endpoints HOSTNAME No endpoints are
-associated with this profile Del STATUS PROTOCOL Pricing tier Standard
-Akamai ORIGIN TYPE CUSTOM DOMAINS ](images/media/image187.png)
+![](images/media/image187.png)
 
  
 
@@ -2659,17 +1755,11 @@ In the dropdown, notice the available options for **Optimized for**….
 Enter "{web-host}-images" name for the endpoint, select Storage as
 origin and click on Add:
 
-![Machine generated alternative text: Add an endpoint Allows configuring
-content delivery behavior an... partsunlimited .azureedge.net \* Origin
-type Storage \* Origin hostname O partsunlimited.blob.core.windows.net
-Origin path O (Path Origin host header O
-partsunlimited.blob.core.windows.net Protocol O @ HTTp Optimized for O
-General web delivery Origin port O 80 443 Add Automation options
-](images/media/image188.png)
+![](images/media/image188.png)
 
  
 
-#### Task 4: Copy images to storage account
+### Task 4: Copy images to storage account
 
 Use the Azure Storage Explorer in the Portal or [download
 it](https://azure.microsoft.com/en-us/features/storage-explorer/) to
@@ -2677,20 +1767,7 @@ connect to the storage account previously created:
 
  
 
-![Machine generated alternative text: partsunlimited Storage account p
-Search (Ctrl +7) Overview Activity log Access control (IAM) Tags
-Diagnose and solve problems SETTINGS Storage Explorer (preview) Access
-keys Configuration Encryptio Event Grid Shared access signature
-Firewalls and virtual networks Open in Explorer Move Resource group
-(change) PartsUnlimited Status Primary: Available Location East US
-Subscription (change) Visual Studio Enterprise Subscription ID
-ca4f2f4a-1 Services Delete storage account Blobs Object storage for
-understanding data View metrics Configure CORS rules Setup custom domain
-Tables Tabular data storage View metrics Performance Standard
-Replication Locally-redundant storage (LRS) Account kind StorageV2
-(general purpose v2) Files File shares that use SMB 3.0 protocol View
-metrics Configure CORS rules Queues Scale apps depending on traffic View
-metrics ](images/media/image189.png)
+![](images/media/image189.png)
 
  
 
@@ -2704,85 +1781,36 @@ If you’re using the Portal’s Storage explorer, Set the permission to
 
 If you’re using the Microsoft Azure Storage Explorer for Windows:
 
-![Machine generated alternative text: Microsoft Azure Storage Explorer
-File Edit View Help EXPLORER Search for resources Collapse All Quick
-Access (Local and Attached) Refresh All e Agile-Bl-Cloud-Subscription
-(romarden@micro e Microsoft Azure Internal Consumption (romard e
-Microsoft Azure Internal Consumption -jostel e Visual Studio Enterprise
-(romarden@microsoft. Storage Accounts partsunlimited \[é\] Blob Containe
-File Shares Queues Tables e Visual Studio Enterprise (ro Create Blob
-Container Paste Blob Container Configure CORS Settings... Search From
-Here Refresh ](images/media/image191.png)
+![](images/media/image191.png)
 
 Change the "Public Access Level" for the "images" container:
 
-![Machine generated alternative text: Microsoft Azure Storage Explorer
-Eile Edit Yiew Help EXPLORER Search for resources Collapse All Quick
-Access (Local and Attached) e Agile-Bl-Cloud-Subscription
-(romarden@microsoft.com) e Microsoft Azure Internal Consumption
-(romarden@microsoft.com) Refresl e Microsoft Azure Internal Consumption
-- jostelma (romarden@microsoft.com) e Visual Studio Enterprise
-(romarden@microsoft.com) Storage Accounts partsunlimited Blob Containers
-images File S Open Queu Open New Tab Tables Delete Visual Studio Enter
-Rename... Copy Blob Container Copy Direct Link to Blob Container Get
-Shared Access Signature... Manage Access Policies... o Set Public Access
-Level... Acquire Lease Break Lease Add to Quick Access Refresh
-](images/media/image192.png)
+![](images/media/image192.png)
 
  
 
 Set the permission to "Public read access for blobs only" to allow them
 to be accessible:
 
-![Machine generated alternative text: Microsoft Azure Storage Explorer
-File Edit View Help EXPLORER Search for resources Collapse All Quick
-Access (Local and Attached) images Refresh All Upload Download Open (-1
-copy URL New Folder Blob Type Select All Copy Size Paste Rename e
-Agile-Bl-Cloud-Subscription (romarden@micro e Microsoft Azure Internal
-Consumption (romard e Microsoft Azure Internal Consumption -jostel e
-Visual Studio Enterprise (romarden@microsoft. Storage Accounts
-partsunlimited Blob Containers images 60 File Shares tm Queues Tables e
-Visual Studio Enterprise (romarden@microsoft. Ima es Last Modified x
-Delete Disk Nar Ine x Name Showing 0 Content Type Lease State Microsoft
-Azure Storage Explorer - Set Container Public Access Level Set Container
-Public Access Level Choose the access level for container 'images': O No
-public access O Public read access for container and blobs Public read
-access for blobs only Apply Cancel ](images/media/image193.png)
+![](images/media/image193.png)
 
  
 
 Then proceed to copy all the files in the "/images" folder inside of the
 PartsUnlimitedWebsite
 
-![Machine generated alternative text: Microsoft Azure Storage Explorer
-File Edit View Help EXPLORER Search for resources Collapse All Quick
-Access (Local and Attached) Refresh All images X U load Download Upload
-Folder... Open o Upload Files... Name Last Modified New Folde Blob T, e
-Agile-Bl-Cloud-Subscription (romarden@micro e Microsoft Azure Internal
-Consumption (romard e Microsoft Azure Internal Consumption -jostel e
-Visual Studio Enterprise (romarden@microsoft. Storage Accounts
-partsunlimited Blob Containers images File Shares tm Queues Tables e
-Visual Studio Enterprise (romarden@microsoft.
-](images/media/image194.png)
+![](images/media/image194.png)
 
  
 
 You can test now by requesting in a browser the URL of the endpoint +
 /images/ + any of the file names and the image should be displayed:
 
-![Machine generated alternative text: partsunlimited Endpoint p Search
-(Ctrl +7) verwew Activity log Access control (IAM) Tags Diagnose and
-solve problems Custom domain Essentials A Resource group PartsUnlimited
-Status Running Location East US Subscription name purge Load • stop
-Endpoint hostname o https://partsunlimited.azureedge.net Origin hostname
-https://partsunlimited.blob.core.windows.net Protocols HTTP, HTTPS
-Optimization type General web delivery Visual Studio Enterprise
-Subscription ID ca4f2f4a-1d81-4f32-af97-849d45806dec
-](images/media/image195.png)
+![](images/media/image195.png)
 
  
 
-#### Task 5: Integrate into web application
+### Task 5: Integrate into web application
 
 We now need to add an Application Setting to use as source for the
 images, say we call it CDNUrl, add it to the web.config file with no
@@ -2790,31 +1818,7 @@ value:
 
  
 
-![Machine generated alternative text: Web.config 1 2 3 4 5 6 7 8 9 10 11
-12 13 14 15 16 17 18 19 20 21 22 23 24 251 26 Details.cshtml \<?xml
-version-"1.0" 8 \<configuration\> Index.cshtml encoding=" utf-8" ? \>
-\<configSections\> \<section name="entityFramework" ProductList.cshtml .
-Entity . Internal. ConfigFi1e. EntityFrameworkSection, Ent - - For more
-information on Entity Framework configuration, visit
-http://go.microsoft.com/fw1ink/?LinkI \</configSections\>
-\<appSettings\> \<add \<add \<add \<add \<add \<add \<add \<add \<add
-\<add \<add \<add \<add \<add \<add \<add \<add \<add key="ImagePath"
-value="/lmages" / \> key="ShowRecommendations" value="true" / \> key= "
-Authentication . Administrator . UserName "
-value="Administrator@test.com" / \> Password"
-value="YouShou1dChangeThisPassword1\! " Facebook. Key" value=" "
-key="Authentication.Facebook.Secret" value=" "
-key="Authentication.Goog1e. Key" value="yourinfo.apps .
-googleusercontent.com" / \> key="Authentication.Goog1e.Secret" value=" "
-key="Authentication.Microsoft. Key" value=" "
-key="Authentication.Microsoft.Secret" value=" " key="Authentication.
-Twitter . Key" value=" " key="Authentication. Twitter . Secret" value="
-" . ModelName" value="sampletest" / \> key="MachineLearning.AccountKey"
-value=" " key="Keys : Applicationlnsights : InstrumentationKey"
-value="0839cc6f-b99b-44b1-9d74-4e408b7aee29" key="
-StoreServiceBaseAddress " value="http://10ca1host:7071/api/" / \>
-key="StoreServiceKey" value=" " key- -"CDNUr1" value= \</appSettings\>
-](images/media/image196.png)
+![](images/media/image196.png)
 
  
 
@@ -2827,18 +1831,7 @@ will shorten using this class in all places where we need it.
 
  
 
-![Machine generated alternative text: Web.config -B X
-ConfigurationHelpers.cs Web.config Details.c 1 2 3 4 5 6 7 8 9 10 11 12
-13 14 15 16 17 18 19 20 21 22 23 - - - - - \<?xml \<configSections\>
-\<sectionGroup . razor" ty \<section name:" host"
-type="System.Web.WebPages. \<section name="pages"
-type="System.Web.WebPages \</sectionGroup\> \</configSections\> \<system
-. web . webPages . razor\> \<host .Mvc .MvcWebRazorHost \<pages .Mvc .
-WebViewPage"\> \<namespaces\> \<add \<add \<add \<add \<add \<add \<add
-\</namespaces\> \</pages\> \</system . web . webPages . .Mvc" / \> .Mvc
-. Ajax" / \> .Mvc . Html" / \> Routing" / \> . Optimization" / \>
-namespace="PartsUn1imited" / \> . Utils" / \> razor\>
-](images/media/image197.png)
+![](images/media/image197.png)
 
  
 
@@ -2846,25 +1839,7 @@ Now let's find the views that need to use the CDN for images, say we
 only concentrate on the product images, so find the pattern **images/@**
 in the **PartsUnlimitedWebsite** project:
 
-![Machine generated alternative text: Find Results 1 \[+JFind all x
-'images/@", Subfolders, Find Results 1, Current Project:
-PartsUn1imitedWebsite\\PartsUn1imitedWebsite.csproj, C :
-\\Source\\GitHub\\kar1riss1and\\AppWorkshop\\IaaS2PaaSWeb\\PartsUn1imitedWebsite\\Views
-\\Shared\\\_CommunityList. cshtml (11) : C :
-\\Source\\GitHub\\kar1riss1and\\AppWorkshop\\IaaS2PaaSWeb\\PartsUn1imitedWebsite\\Views
-\\Shared\\\_ProductList. cshtml (11) : C :
-\\Source\\GitHub\\kar1riss1and\\AppWorkshop\\IaaS2PaaSWeb\\PartsUn1imitedWebsite\\Views
-\\Shared\\\_ProductList. cshtml ( 19) : C :
-\\Source\\GitHub\\kar1riss1and\\AppWorkshop\\IaaS2PaaSWeb\\PartsUn1imitedWebsite\\Views
-\\Shared\\\_ProductList. cshtml ( 30) : C : \\Source ite \\Views
-\\ShoppingCart\\Index. c s html (87) : C :
-\\Source\\GitHub\\kar1riss1and\\AppWorkshop\\IaaS2PaaSWeb\\PartsUn1imitedWebsite\\Views
-\\Store\\Detai1s . cshtml (27) : Matching lines: 6 Matching files: 4
-Total files searched: 211 \<div class="c01-sm-12"\>\<img
-src="/lmages/@post.lmage" \<img alt="@prc \< img alt=" \<img alt="@prc
-\< img src= \<img Product. ProductArtUr1" a
-"/Images/@Mode1.Product.ProductArtUr1" alt="@Mode1.P
-](images/media/image198.png)
+![](images/media/image198.png)
 
  
 
@@ -2874,16 +1849,7 @@ the quickest way would be to simply using the
 **ConfigurationHelpers.GetString** method, like the following screenshot
 shows in the **Views/Store/Details.cshtml** file:
 
-![Machine generated alternative text: Details.cshtml 7 8 9 10 11 12 13
-14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 - - - @section
-scripts @Scripts . Render( "N/bundles/jquery . zoom" ) \<script
-type="text/javascript"\> $(function ( ) { if ($ && $ . fn. zoom) { $(
-'\#product-image' ) . zoom({ magnify: \</script\> 1.5 Y); 8\<div
-id="store-details"\> - - - - - \<section\> \<h2\>@Mode1. Product.
-Title\</h2\> \<div \<div class="c01-md-4"\> \<div
-class="details-panel"\> \<div class="zoom" id="product-image"\> \<img .
-GetString( "CDNUr1" )/Images/@Mode1.Product.ProductArtUr1" \</div\>
-\</div\> alt="@Mode1. Product . Title" ](images/media/image199.png)
+![](images/media/image199.png)
 
  
 
@@ -2894,15 +1860,7 @@ correctly.
 Now add the value of the **CDNUrl** application setting using the name
 of the endpoint from the Azure Portal:
 
-![Machine generated alternative text: partsunlimited Endpoint p Search
-(Ctrl +7) verwew Activity log Access control (IAM) Tags Diagnose and
-solve problems Custom domain Essentials A Resource group PartsUnlimited
-Status Running Location East US Subscription name purge Load • stop
-Endpoint hostname o https://partsunlimited.azureedge.net Origin hostname
-https://partsunlimited.blob.core.windows.net Protocols HTTP, HTTPS
-Optimization type General web delivery Visual Studio Enterprise
-Subscription ID ca4f2f4a-1d81-4f32-af97-849d45806dec
-](images/media/image195.png)
+![](images/media/image195.png)
 
  
 
@@ -2932,7 +1890,7 @@ will start a CI/CD.
 
  
 
-#### Task 6: Explore Enhancements
+### Task 6: Explore Enhancements
 
  
 
@@ -2961,20 +1919,13 @@ slow.
   - Reduce database usage by using Redis as Data
 Cache
 
-#### Help references
+**References**
 
 | Redis Cache Quick Start | <https://docs.microsoft.com/en-us/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache> |
 | ----------------------- | ---------------------------------------------------------------------------------------------- |
 | No Cache Anti Pattern   | https://docs.microsoft.com/en-us/azure/architecture/antipatterns/no-caching/                   |
 
-#### Prerequisites
-
-To complete this task, you should have provisioned the Parts Unlimited
-IaaS and PaaS environments and have a working CI/CD process. You will
-use the Developer Workstation deployed as part of the IaaS environment
-for your development work.
-
-#### Task 1: Provisioning the Redis Cache Service
+### Task 1: Provisioning the Redis Cache Service
 
 Create a new Redis Cache service to use with the Parts Unlimited
 Website. Click to create a new resource and search for **Redis Cache**,
@@ -2982,40 +1933,7 @@ once found highlight and click on the **Create** button:
 
  
 
-![Machine generated alternative text: MSW Redis Cache - Microsoft Sales
-CRM https:// red Menultem Blade/selectedMenultem d81-4f32-af97-84gd4f
-Azure AppDevTSP O MyAzure DevOps + CADD General Learning PUBLISHER Microsoft
-CloudHub Technologies Cognosys Inc. Cognosys Inc. Heimdall Data Heimdall
-Data Alachisoft Heimdall Data Alachisoft TODO Microsoft Azure Home \>
-PartsUnIimitedRedis \> Everything \> Redis Cache Everything Redis cache
-Results Redis Cache Redis 3.0 on Ubuntu Redis on Ubuntu 16.04 L TS
-Redis4.O on Ubuntu Hardened Redis on CentCentOS 7.3 Redis 3.2 on Ubuntu
-Hardened Redis on Ubuntu 14.04 LTS-Basic LIC Heimdall Data Premium
-Edition (Per Hour) Heimdall Data Enterprise Edition (Per Hour) NCache
-Community 4.8 Server Heimdall Data Developer Edition NCache Community
-4.9 Server Related to your search v Website \* SQL \* Redis Cache Azure
-Cosmos DB (preview) n Blogs Office Locator - Conr Presentations Report a
-bug Redis Cache p Search resources, sewices, and docs CATEGORY Da
-tabases Compute Compute Compute Compute Compute Compute Compute Compute
-Compute Compute Compute Database as a service for MongoD3 Microsoft
-Azure Redis Cache is based on the popular ppe\!-' soprge Redis Cache. It
-gives users access to a secure, dedicated Redis Cache, managed by
-Microsoft. Users get the best of both worlds, the rich Redis feature set
-and ecosystem, and reliable hosting and monitoring from Microsoft.
-Microsoft Azure Redis Cache is available in the follcnving tiers: •
-Basic— Single node, multiple sizes, ideal for development/test and
-non-critical workloads. The basic tier has no SLA • Standard — A
-replicated cache in a two node Primary/Secondary configuration managed
-by Microsoft, with a high availability SLA. Premium - The new Premium
-tier includes all the Standard-tier features and more, such as better
-performance compared to Basic or Standard-tier Caches, bigger workloads,
-data persistence, and enhanced network security. Microsoft Azure Redis
-Cache helps your application stay responsive even as user load
-increases. It does so by leveraging the low latency, high-throughput
-capabilities of the Redis engine. This separate distributed cache layer
-allows your data tier to scale independently for more efficient use of
-compute resources in your application layer. 102.28K 128.35K liéo.63,
-](images/media/image201.png)
+![](images/media/image201.png)
 
  
 
@@ -3031,35 +1949,7 @@ features, clustering capabilities, size, SLA, connectivity limits, etc.
 
  
 
-![Machine generated alternative text: Choose your pricing tie X -+- v
-MSW Sales CRM https:// ms.portal.azure.com/\#createnvlicrosoft.cache
-Azure AppDevTSP O MyAzure DevOps + CADD General Learning TODO Presentations n
-Blogs Office Microsoft Azure Home \> PartsUnIimitedRedis \> Everything
-\> Redis Cache \> New RedisCache \> Choose your pricing tier New Redis
-Cache \* DNS name partsunlimited S ubscription X Choose your pricing
-tier uailable Recommended I View all .redis.cache.windows.net PI 6
-Premium Cache Replication Moderate network ba... All Standard features
-Data Persistence Virtual Network Redis Cluster 99.9% 412.92 13 Premium
-Cache Replication Moderate network ba... All Standard features Data
-Persistence Virtual Network Redis Cluster 99.9% 825.84 P3 26 Visual
-Studio Enterprise - romarden Resource group O o Create new use existing
-PartsUnIimitedRedis East US Pricing tier (View full pricing details)
-Standard CI (I G8 Cache, Replication) (PREVIEW) Availability zone
-Requires Premium tier RES's Cluster O Requires Premium tier RES's
-oersistence O Requires Premium tier Requires Premium tier Unblock port
-6379 (not SSL encrypted) Pin to dashboard Automation options Premium
-Cache Replication High network bandwi.„ All Standard features Data
-Persistence Virtual Network Redis Cluster 99.9% 1,650.94 LISO/MONTH
-(ESTIMATED) PER SH\_ . LISO/MONTH (ESTIMATED) PER SH\_ . LISO/MONTH
-(ESTIMATED) PER SH\_ . P4 53 Premium Cache Replication Highest network
-ban„. All Standard features Data Persistence Virtual Network Redis
-Cluster 99.9% 3,303.36 LISO/MONTH (ESTIMATED) PER SH\_ . C2 2.5 Standard
-Cache CO 250 6 Standard MB Cache Replication Low network bandwi...
-Shared infrastructure Up to 256 connections Configure Redis (key„. 99.9%
-40.92 usD'MONTH (ESTIMATED) Standard Cache Cl 13 Standard Cache
-Replication Low network bandwi... Dedicated service Up to 1,000
-connectio... Configure Redis (key„. 99.9% 102.67 usD'MONTH (ESTIMATED)
-Standard Cache ](images/media/image202.png)
+![](images/media/image202.png)
 
  
 
@@ -3069,25 +1959,9 @@ to the Redis Cache:
 
  
 
-![Machine generated alternative text: MSW Manage keys - Microsof Sales
-CRM
-ms.portal.azure.com/\#@microsoft.onmicrosoft.com/resource/subscriptions/ca4f2f4a-1
-https:// Azure AppDevTSP O MyAzure DevOps CADD General Learning TODO
-Presentations n Blogs p Search resources, services, and docs Microsoft
-Azure Report a bug Home \> PartsUnIimitedRedis \> partsunlimited -
-Access keys partsunlimited - Access keys O romarden@microsoft.. Redis
-Search (Ctn +0 Overview Activty log Access control (IA M) Tags Diagnose
-and solve problems SETTINGS Access keys Advanced settings Redis Cache
-Advisor Scale Redis Cluster size Regenerate Primary Primary Regenerate
-Secondary h7/Rf4B21vRJryw.04jVqKQkOQ+eu6NjJlOWvvL3w Secondary Primary
-connection string (StackExchange.Redis) partsunlimited.
-redis.cache.windows. 7/Rf4821 vRJ rm + 04JVq KQkOQ+ eu6NjJIOVJvvL3wE = ,
-SSI... Secondary connection string (StackExchange.Redis) partsunlimited.
-redis.cache.windows. 16/GVDca5 c8dMh40qQcj 16DjMaFH8szMCtApbY = , s...
-For information on other clients see: http://aka.ms/redisclients
-](images/media/image203.png)
+![](images/media/image203.png)
 
-#### Task 2: Improve Session Performance
+### Task 2: Improve Session Performance
 
 Remote into the vmdev01 using the User Name and Password used when
 creating the environment.
@@ -3168,7 +2042,7 @@ site and everything should work without any data being lost.
 
  
 
-#### Task 4: Speed Up Output and Reduce Memory Footprint
+### Task 4: Speed Up Output and Reduce Memory Footprint
 
 The next thing we want to do is reduce the memory footprint and speed up
 the output when customers browse the store front. While we have some
@@ -3227,7 +2101,7 @@ You can verify by adding a breakpoint inside the methods and visiting a
 product in the website, the first time you visit the page the code will
 hit the breakpoint, subsequent visits to the page will not.
 
-#### Task 5: Reducing database utilization
+### Task 5: Reducing database utilization
 
 This next section, we will demonstrate how to reduce the amount of
 database utilization by using Redis as a custom caching provider. This
@@ -3430,85 +2304,39 @@ implemented.
 
   - Test in production
 
-#### Help references
+**References**
 
 |              |                                                  |
 | ------------ | ------------------------------------------------ |
 | Azure Search | <https://docs.microsoft.com/en-us/azure/search/> |
 
-#### Prerequisites
-
-To complete this task, you should have provisioned the Parts Unlimited
-IaaS and PaaS environments and have a working CI/CD process. You will
-use the Developer Workstation deployed as part of the IaaS environment
-for your development work.
-
-#### Task 1: Create Azure Search Service
+### Task 1: Create Azure Search Service
 
 Current search is based on SQL queries and prone to bad results. Doing a
 search like "jumper" or "leads" will return a product match like the
 following:
 
-![Machine generated alternative text: — Parts unlimited l' MSW Sales CRM
-(j) localhost: 5001/Search?q Azure AppDevTSP O My Azure DevOps —Jumper CADD
-General Leaming TODO Jumper More Presentat ions O Parts Unlimited a
-Fabrikam subsidiary Brakes Lighting Wheels & Tires Batteries New Arrival
-: Bugeye Headlights (2 Pack) Search results Oil Jumper Leads $16.99 Site
-Menu Home Browse Account Manage Account Shopping Cart View Orders
-Additional Info Privacy Policy Terms and Conditions Blogs Office Locator
-- Conr 0000 Search Home Cart Log in Develop GitHub Source License
-Agreement ASP NET Deploy to Azure ](images/media/image205.png)
+![](images/media/image205.png)
 
  
 
 Clicking on the Product, we can see a lot more text that could be
 searched for:
 
-![Machine generated alternative text: Product - Jumper Leads X + v MSW
-Sales CRM (j) localhost: 5001 'Store/Details/15 Azure AppDevTSP O MyAzure DevOps
-CADD General O Parts Unlimited a Fabrikam subsidiary Leaming Oil TODO
-More Blogs Office Locator - Conr Presentat ions 0000 Search Home Cart
-Log in Brakes Lighting Wheels & Tires Batteries New Arrival : Bugeye
-Headlights (2 Pack) Jumper Leads USD $16.99 In Stock (Ships 1-3 days)
-Description Battery Jumper Leads have a built in surge protector and e
-includes a plastic carry case to keep Site Menu Account them safe
-froncorrosioo/l length Connection Type Max Amp's ADD TO CART Additional
-Info 6ft\_ Alligator Clips Universal 750 Develop
-](images/media/image206.png)
+![](images/media/image206.png)
 
  
 
 But doing a search on text within the Product's description or details,
 like "corrosion" would not return any matches:
 
-![Machine generated alternative text: l' MSW — Parts unlimited (j)
-localhost: 5001/Search7q . —corrosion Azure AppDevTSP O My Azure DevOps Sales
-CRM CADD General Leaming TODO Presentat ions O @ Parts Unlimited a
-Fabrikam subsidiary Brakes Lighting Wheels & Tires Batteries New Arrival
-: Bugeye Headlights (2 Pack) Oil corrosion More Search results Site Menu
-Home Browse Account Manage Account Shopping Cart View Orders Additional
-Info Privacy Policy Terms and Conditions Blogs Office Locator - Conr
-0000 Search Home Cart Log in Develop GitHub Source License Agreement ASP
-NET Deploy to Azure 0 2018 Microsoft Based on The Phoenix Project by
-Gene Kim. All rights reserved. Your payments are safe and secure.
-](images/media/image207.png)
+![](images/media/image207.png)
 
  
 
 In the Azure Portal, create a new instance of **Azure Search**:
 
-![Machine generated alternative text: New - Microsoft Azure MSW Sales
-CRM https:// ms.portal.azure.com/\#create/hub Azure AppDevTSP O MyAzure DevOps +
-CADD General Microsoft Azure Home \> New New Search the M Azure
-Marketplace Get started Recently created Compute Networking Storage Web
-+ Mobile Containers Databases Data + Analytics See all Learning See all
-Al + Cognitive Services Internet of Things Enterprise Integration
-Security + Identity Developer tools Monitoring + Management Add-ons
-Blockchain Featured Web App Quickstart tutorial Mobile App Quickstart
-tutorial Logic App Quickstart tutorial Web App for Containers Quickstart
-tutorial CDN Quickstart tutorial Media Services Quickstart tutorial
-Azure Search Quickstart tutorial Mobile Engagement Learn more
-](images/media/image208.png)
+![](images/media/image208.png)
 
  
 
@@ -3517,38 +2345,15 @@ create:
 
  
 
-![Machine generated alternative text: New Search Service - M MSW Sales
-CRM https:// ms.portal.azure.co Azure AppDevTSP O My Azure DevOps Microsoft
-Azure Home \> New \> New Search Service New Search Service \* URL O
-partsunlimited .search.windows.net Subscription Visual Studio Enterprise
-- romarden Resource group C) use existing Create new Workshop Location
-East US Pricing tier Standard Pin to dashboard Create Automation options
-](images/media/image209.png)
+![](images/media/image209.png)
 
-#### Task 2: Configure Azure Search
+### Task 2: Configure Azure Search
 
 After the service is created, we must proceed to create an index and
 populate it with data. To start this process, we will take advantage of
 the existing database and use the **Import Data** wizard:
 
-![Machine generated alternative text: partsunlimited - Micros https://
-Azure AppDevTSP O MyAzure DevOps + CADD General MSW Sales CRM Microsoft Azure
-Learning Search explorer TODO Delete n Blogs Office Locator - Conr
-Presentations Report a bug DOCUMENT COUNT Feedback nlim
-itedSearch/providers/Microsoft.Search/searchServices/partsunli p Search
-resources, sewices, and docs Home \> partsunlimited pansunlimited Search
-(Ctrl +0 Overview Access control (IA M) Tags SETTINGS Quick start Scale
-Search traffic analytics Properti es MONITORING Metrics Alert rules
-Diagnostics logs e Enable monitoring SUPPORT + TROUBLESHOOTING Resource
-health New suooort request + Add index Essentials Import data
-https://partsunlimited.search.windows.net Pricing tier Resource group
-PartslJnlimitedSearch Indexes NAME You haven't created any indexes.
-Click "Add index' to create one. Running Location East US Subscription
-name Visual Studio Enterprise - romarden Data sources No data sources
-found STORAGE SIZE Help Documentation usage Service Statistics COUNT
-Documents Storage Samples LIMIT Unlimited 50 MiB Scale Replicas
-Partitions Search units Indexers Create an indexer to get started Shared
-](images/media/image210.png)
+![](images/media/image210.png)
 
  
 
@@ -3572,39 +2377,13 @@ Default DB User Password: P2ssw0rd
 
 Default Database Name: partsUnlimitedDB
 
-![Machine generated alternative text: New data source - Micn MSW Sales
-CRM https:// Azure AppDevTSP O MyAzure DevOps + CADD General Learning TODO n
-Blogs Office Locator - Conr Presentations Report a bug nlim
-itedSearch/providers/Microsoft.Search/s p Search resources, sewices, and
-doc Microsoft Azure Home \> partsunlimited \> Import data \> Data Source
-\> New data source X I Import data Data Source Connect to your data
-Customize target index Indexer Import your data X Data Source Existing
-data source Samples Azure SQL Database SQL Server on Azure VMS Cosmos DB
-Azure 810b Storage Azure Table Storage X a New data source Name
-partsunlimiteddb \* SQL Database O pu305/PartsUnlimited Or input a
-connection string User Id sysadmin@pu305 \* Password Test connection
-Connection validated. \* Table/View Products Description (optional)
-](images/media/image211.png)
+![](images/media/image211.png)
 
 Configure the index, name it **products-index**, select all fields to be
 retrievable and select as *searchable* **Title**, **Description** and
 **ProductDetails**:
 
-![Machine generated alternative text: Index - Microsoft Azure https://
-ps/PartslJ nlim itedSearch/providers/M MSW Sales CRM Azure AppDevTSP O
-MyAzure DevOps + CADD General Learning TODO Blogs Office Locator - Conr
-Presentations Report a bug Microsoft Azure Home \> partsunlimited \>
-Import data \> Index Impon data Data Source partsunlimiteddb Customize
-target index Indexer Import your data p Search resources, s X Index We
-provided a default index for you. You can delete the fields you don't
-need. Everything is editable, but once the index is built, deleting or
-changing existing fields will require re-indexing your documents. Index
-name O products-index Productld Basic Analyzer Delete FIELD NAME
-Product' d SkuNumber Categoryld Recommendation Id Title Price Saleprice
-Produ rl Description Created Inventory LeadTIme Suggester Edm.String
-Edm.String Edm.Int32 Edm.Int32 Edm.String Edm.String Edm.String
-Edm.String Edm.String Edm.DateTim... Edm.Int32 Edm.Int32 RETRIEVABLE
-FILTERABLE SORTABLE FACEABLE ](images/media/image212.png)
+![](images/media/image212.png)
 
 Define the indexer property to update the data in the index, in this
 case we will select **Once** and click **Ok**. To setup recurring
@@ -3614,14 +2393,7 @@ time the product fields are updated would work.
 
  
 
-![Machine generated alternative text: Create an Indexer - Mic https://
-ms.portal.azure.com/\#@microsoft.onmicrosoft.com/resource/subscriptior
-MSW Sales CRM Azure AppDevTSP O MyAzure DevOps + CADD General Learning Microsoft
-Azure Home \> partsunlimited \> Import data \> Create an Indexer Impon
-data Data Source partsunlimiteddb products-index Indexer Import your
-data X \> Create an Indexer Name products-indexer Schedule O Once Hourly
-Advanced options Description (optional) Daily Custom
-](images/media/image213.png)
+![](images/media/image213.png)
 
 Clicking Ok on the Import Data blade after all details are provided
 would trigger the indexer to run and it should look like the screenshot
@@ -3629,16 +2401,11 @@ below indicating all documents have been indexed.
 
  
 
-![Machine generated alternative text: products-indexer - Micr MSW Sales
-CRM https:// Azure AppDevTSP O MyAzure DevOps + CADD General Learning Microsoft
-Azure Home \> products-indexer products-indexer Run Reset Edit Indexer
-summary Execution history Execution details 0 LAST RUN 4/5 18:40 GMT
-Delete STATUS Success SUCCEEDED FAILED Docs succEEDED 18/18
-](images/media/image214.png)
+![](images/media/image214.png)
 
  
 
-#### Task 3: Integrate search into application
+### Task 3: Integrate search into application
 
  Remote into the vmdev01 using the User Name and Password used when
 creating the environment.
@@ -3775,24 +2542,16 @@ with:
 
  
 
-#### Task 4: Verify Search Results
+### Task 4: Verify Search Results
 
 Running the application should allow us to perform the same search as
 before for "jumper" or "leads" and obtain the same results. However, it
 is possible now to obtain results by searching by the word "corrosion"
 and getting as expected the Product with that text in the Description:
 
-![Machine generated alternative text: — Parts unlimited l' MSW Sales CRM
-(j) localhost: 5001/Search7q . —corrosion Azure AppDevTSP O My Azure DevOps CADD
-General Leaming TODO corrosion More Presentat ions O Parts Unlimited a
-Fabrikam subsidiary Brakes Lighting Wheels & Tires Batteries New Arrival
-: Bugeye Headlights (2 Pack) Search results Oil Jumper Leads $16.99 Site
-Menu Home Browse Account Manage Account Shopping Cart View Orders
-Additional Info Privacy Policy Terms and Conditions Blogs Office Locator
-- Conr 0000 Search Home Cart Log in Develop GitHub Source License
-Agreement ASP NET Deploy to Azure ](images/media/image217.png)
+![](images/media/image217.png)
 
-#### Task 5: Commit & Sync Code
+### Task 5: Commit & Sync Code
 
 When you’re all done verifying the search is working on your local
 machine, comment, commit, and sync your code. This will kick off the
@@ -3816,56 +2575,23 @@ this class. Next, the Parts Unlimited website will be modified to use
 the Azure functions as opposed to accessing the database
 directly.
 
-#### Help references
+**References**
 
 | Azure Functions                              | <https://docs.microsoft.com/en-us/azure/azure-functions/>                                      |
 | -------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | Creating a Function through the Azure Portal | <https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function> |
 
-#### Prerequisites
-
-To complete this task, you should have provisioned the Parts Unlimited
-IaaS and PaaS environments and have a working CI/CD process. You will
-use the Developer Workstation deployed as part of the IaaS environment
-for your development work.
-
-#### Task 1: Refactor 
+### Task 1: Refactor 
 
 Add a new **PartsUnlimitedModels** Class Library (.Net Framework)
 project to the Visual Studio solution to move all models classes, make
 sure to select **.Net Framework 4.5.2**:
 
-![Machine generated alternative text: New Project... Existing Project...
-Existing Web Site... New Item... Existing Item... New Solution Folder
-Ctrl+Shift+A Shift+Alt+A Build Solution Rebuild Solution Deploy Solution
-Clean Solution Analyze Batch Build... Live Unit Testing Configuration
-Manager... Manage NuGet Packages for Solution... Restore NuGet Packages
-Configure Continuous Delivery... New Solution Explorer View Calculate
-Code Metrics Project Dependencies... Project Build Order... Add Set
-StartUp Projects... View History... Compare with Unmodified... Blame
-(Annotate) Paste Rename Open Folder in File Explorer Properties Solution
-Explorer Search Solution Explorer (Ctrl+,•) Solution 'laaS2PaaSWeb' (3
-projects) Ctrl+Shift+B Environments Ge PartsUnlimitedDatabase
-PartsUnlimitedWebsite Ctrl+V Alt+Enter ](images/media/image218.png)
+![](images/media/image218.png)
 
  
 
-![Machine generated alternative text: Add New Project Recent Installed
-Visual C++ Visual C\# Windows Universal Windows Classic Desktop Web
-Office/SharePoint .NET Core .NET Standard Android Cloud Cross-Platform
-iOS Test tvOS WCF Workflow Visual Basic Visual F\# SQL Server Azure Data
-Lake Not finding what you are looking for? Open Visual Studio Installer
-x Blank App (Universal Windows) Cross-Platform App (Xamarin.Forms) WPF
-App (.NET Framework) Windows Forms App (.NET Framework) Console App
-(.NET Core) Console App (.NET Framework) Class Library (.NET Standard)
-Class Library (.NET Framework) ASP.NET Core Web Application ASP.NET Web
-Application (.NET Framework) Shared Project Class Library (Legacy
-Portable) Class Library (Universal Windows) Visual C\# Visual C\# Visual
-C\# Visual C\# Visual C\# Visual C\# Visual C\# Visual C\# Visual C\#
-Visual C\# Visual C\# Visual C\# Visual C\# Name: Location:
-PartsUnlimitedModels C:\\Source\\GitHub\\karlrissland\\A Worksho
-\\laaS2PaaSWeb Search (Ctrl+E) Type: Visual C\# A project for creating a
-C\# class library (.dll) Browse... ](images/media/image219.png)
+![](images/media/image219.png)
 
  
 
@@ -3889,34 +2615,14 @@ Add an assembly reference to **System.Web:**
 
  
 
-![Machine generated alternative text: Reference Manager - ClassLibrary1
-Framework Extensions Recent Search Result Projects Shared Projects COM
-Browse x Name S stem.Web System.Web.Abstractions
-System.Web.ApplicationServices System.Web.DataVisualization
-System.Web.DataVisualization.Design System.Web.DynamicData
-System.Web.DynamicData.Design System.Web.Entity System.Web.Entity.Design
-System.Web.Extensions System.Web.Extensions.Design System.Web.Mobile
-System.Web.Mvc System.Web.RegularExpressions System.Web.Routing
-System.Web.Services Version 4.0.0.0 4.0.0.0 4.0.0.0 4.0.0.0 4.0.0.0
-4.0.0.0 4.0.0.0 4.0.0.0 4.0.0.0 4.0.0.0 4.0.0.0 4.0.0.0 2.0.o.o 4.0.0.0
-4.0.0.0 4.0.0.0 system.web Name: System.Web Created by: Microsoft
-Corporation Version: 4.0.0.0 File Version: 4.6.1055.0 built by:
-NETFXREL2 ](images/media/image220.png)
+![](images/media/image220.png)
 
  
 
 Move the **Models** directory and all files within it to the
 **PartsUnlimitedModels** project:
 
-![Machine generated alternative text: Solution Explorer Search Solution
-Explorer (Ctrl+,•) Solution 'laaS2PaaSWeb' (5 projects) Environments
-PartsUnlimitedDatabase PartsUnlimitedModels Properties References Models
-AccountViewModels.cs ApplicationUser.cs Cartltem.cs Category.cs
-CommunityPost.cs ILineltem.cs IPartsUnlimitedContext.cs
-ManageViewModels.cs Manufacturer.cs Order.cs OrderCostSummary.cs
-OrderDetail.cs PartsUnlimitedContext.cs Product.cs Raincheck.cs
-ShoppingCart.cs Store.cs App.config packages.config
-PartsUnlimitedWebsite ](images/media/image221.png)
+![](images/media/image221.png)
 
  
 
@@ -3938,25 +2644,14 @@ Add a project reference in **PartsUnlimitedWebsite** to
 
 Build and run the solution to ensure everything compiles and runs okay.
 
-#### Task 2: Modernize
+### Task 2: Modernize
 
 Add a new **Azure Functions** project to the solution called
 **PartsUnlimitedStoreService** using the **Cloud** templates:
 
  
 
-![Machine generated alternative text: Add New Project Recent Installed
-Visual C++ Visual C\# Windows Universal Windows Classic Desktop Web
-Office/SharePoint .NET Core .NET Standard Android Cloud Cross-Platform
-iOS Test tvOS WCF Workflow Visual Basic Visual F\# SQL Server Azure Data
-Lake Not finding what you are looking for? Open Visual Studio Installer
-x ASP.NET Core Web Application Azure Functions Service Fabric
-Application ASP.NET Web Application (.NET Framework) Azure WebJob (.NET
-Framework) Azure Cloud Service Azure Resource Group Visual C\# Visual
-C\# Visual C\# Visual C\# Visual C\# Visual C\# Visual C\# Name:
-Location: PartsUnlimitedStoreService C:\\Source\\GitHub\\karlrissland\\A
-Worksho \\laaS2PaaSWeb Search (Ctrl+E) Type: Visual C\# A template to
-create an Azure Function project. Browse... ](images/media/image224.png)
+![](images/media/image224.png)
 
  
 
@@ -4025,7 +2720,7 @@ set in the **local.settings.json** file:
 Create a new class called **GlobalConfiguration.cs** and replace its
 contents with the snippet below:
 
-###### GlobalConfiguration.cs
+**GlobalConfiguration.cs**
 
 <table>
 <tbody>
@@ -4056,7 +2751,7 @@ Replaces the contents of the GetCategories.cs from below.
 Create a new class called **GetCategories.cs** and replace its contents
 with the snippet below:
 
-###### GetCategories.cs
+**GetCategories.cs**
 
 <table>
 <tbody>
@@ -4097,7 +2792,7 @@ namespace PartsUnlimitedStoreService<br />
 Create a new class called **BrowseCategory.cs** and replace its contents
 with the snippet below:
 
-###### BrowseCategory.cs
+**BrowseCategory.cs**
 
 <table>
 <tbody>
@@ -4141,7 +2836,7 @@ namespace PartsUnlimitedStoreService<br />
 Create a new class called **GetProductDetails.cs** and replace its
 contents with the snippet below:
 
-###### GetProductDetails.cs
+**GetProductDetails.cs**
 
 <table>
 <tbody>
@@ -4202,7 +2897,7 @@ Run Postman from the Desktop and issue a GET against the
 
 ![](images/media/image233.png)
 
-#### Task 3: Integrate
+### Task 3: Integrate
 
 Replace the code in **StoreController.cs** in the
 **PartsUnlimitedWebsite** project to retrieve data from the Function App
@@ -4326,7 +3021,7 @@ Functions getting executed.
 
 ![](images/media/image234.png)
 
-#### Task 4: Publish the Service
+### Task 4: Publish the Service
 
 Now that we have a working Function App with the website, it is time to
 deploy to Azure, which can be accomplished using the Publish feature in
@@ -4340,20 +3035,13 @@ and Web Jobs Tools in Visual Studio.
 Once Visual Studio has restarted, reload the project and begin
 publishing.
 
-![Machine generated alternative text: Solution Explorer Search Solution
-Explorer (Ctrl+,•) Solution 'laaS2PaaSWeb' (5 projects) Environments
-PartsUnlimitedDatabase G PartsUnlimitedModels PartsUnlimitedStoreService
-PartsUnlimitedWebsite Rebuild Clean Pack Publish... Publish Stored
-Procedures ](images/media/image237.png)
+![](images/media/image237.png)
 
  
 
 Select the **Function App** target and **Create new** option:
 
-![Machine generated alternative text: x Pick a publish target What
-publishing targets can you deploy your app to? Targets Azure Function
-App @ Create New O Select Existing Folder Import profile Publish Cancel
-](images/media/image238.png)
+![](images/media/image238.png)
 
 Enter or select the appropriate values for the publish profile,
 selecting the Consumption for the hosting plan and your existing Storage
@@ -4376,7 +3064,7 @@ deployment to that will begin.
 
 ![](images/media/image241.png)
 
-#### Task 5: Configure Function Database Connection
+### Task 5: Configure Function Database Connection
 
 Once the Function is complete, using the Azure Portal, navigate to the
 newly created Function **App Service**. Notice the Function Icon.
@@ -4396,25 +3084,7 @@ After publishing the Function App, we need to add the required
 Connection String for the database, which can be done via the Azure
 portal:
 
-![Machine generated alternative text: Microsoft Azure -EastlJS \> Report
-a bug FunctionApp20180216094841 Search resources, services and docs O O
-romarden@microsoft.... MICROSOFT e Home \> Resource groups \>
-Server-Migration FunctionApp20180216094841 Function Apps p
-"FunctionApp20180216094841 " x Visual Studio Enterprise Function Apps O
-FunctionApp20180216094... C \>\> Functions (Read Only) f BrowseCategory
-f GetCategories f GetProductDetails Proxies Slots (preview) Remote
-debugging Remote Visual Studio version Application settings FUNCTIONS
-EXTENSION VERSION Off 2012 On 2013 2015 2017 WEBSITE
-CONTENTAZUREFILECONNECTIO... WEBSITE CONTENTSHARE AzureWebJobsDashboard
-AzureWebJobsStorage + Add new setting Connection strings
-DefaultConnectionString Defau ltEnd poi ntsP rotocol= https;Accou
-ntName= a4462a 1 b4e52 b41 149c16deb;Accou ntKey =f..
-functionapp20180216094841 Defau ltEnd poi ntsP rotocol= https;Accou
-ntName= a4462a 1 b4e52 b41 149c16deb;Accou ntKey =f.. Defau ltEnd poi
-ntsP rotocol= https;Accou ntName= a4462a 1 b4e52 b41 149c16deb;Accou
-ntKey =f.. Hidden value. Click to show. SQLAzure \[3 Slot Setting \[3
-Slot Setting \[3 Slot Setting \[3 Slot Setting \[3 Slot Setting \[3 Slot
-Setting x x x x x x ](images/media/image245.png)
+![](images/media/image245.png)
 
  
 
@@ -4443,7 +3113,7 @@ exception ‘Keyword not supported: 'userid'’. This is a known issue with
 the version of Entity Framework being used and has been corrected in a
 later version.
 
-#### Task 5: Configure Function Application Insights 
+### Task 5: Configure Function Application Insights 
 
 ![](images/media/image246.png)
 
@@ -4472,7 +3142,7 @@ Instead of configuring our web application to use the Function directly,
 in our next Exercise, we’ll configure our website to go through API
 Management instead.
 
-#### Task 6: Modify App Service CI/CD Task
+### Task 6: Modify App Service CI/CD Task
 
 The solution file will now produce artifacts for the web application,
 **PartsUnlimitedWebsite.zip**, and one for the store,
@@ -4536,116 +3206,33 @@ definition (Swagger) from our web application.
 
 Add a new API using the Azure Portal:
 
-![Machine generated alternative text: Microsoft Azure Report a bug
-Search resources, services and docs Home \> Resource groups \>
-Server-Migration-EastUS \> partsunlimitedapi partsunlimitedapi API
-Management service Search (Ctrl+D Overview Access control (IAM) Tags
-Diagnose and solve problems API MANAGEMENT Quick start APIs Products
-Tags - PREVIEW Named values Users Publisher portal Essentials Developer
-portal Delete Resource group (change) Server-Migration-EastUS Status
-Online Location East US Subscription name (change) Visual Studio
-Enterprise Subscription ID ca4f2f4a-1d81-4f32-af97-849d45806dec
-Monitoring FailedRequests, OtherRequests and 3 more metrics past week
-100 80 ](images/media/image251.png)
+![](images/media/image251.png)
 
  
 
-![Machine generated alternative text: partsunlimitedapi - APIs API
-Management service Publisher portal Developer portal Search my APIs Add
-tags to query + Add API All APIs Echo API Add a new API Blank API Create
-an empty API Logic App Scalable hybrid integrations and workflows.
-OpenAPI specification Standard, language-agnostic interface to REST APIs
-API App API hosted on App Service. WADL Standard XML representation of
-your RESTful API \<f\> Functions App Serverless, event driven experience
-on App Service. WSDL Standard XML representation of your SOAP API
-](images/media/image252.png)
+![](images/media/image252.png)
 
 Click **Browse** to select the new function to Add.
 
-![Machine generated alternative text: Create from Function App Function
-App \* Display name \* Name Description API URL suffix Tags PREVIEW
-Products Version this API? FunctionApp20180216094841 Store Service
-store-service store Base URL https : / /partsunlimitedapi . azure -api .
-net/ store e.g. Booking Browse The Function App does not have an OpenAPI
-(Swagger) definition or the URL of the definition is inaccessible. See
-this document to learn how to create an OpenAPI definition for your App
-(https://docs.microsoft.com/en-us/azure/azure-functions/functions-api-definition-getting-started)
-Create Cancel ](images/media/image253.png)
+![](images/media/image253.png)
 
  
 
 To add an OpenAPI definition, go to the Function App and use the
 Platform Features tab to add an API definition:
 
-![Machine generated alternative text: FunctionApp20180216094841 Function
-Apps p "FunctionApp20180216094841" X Visual Studio Enterprise Function
-Apps O FunctionApp20180216094... v Functions (Read Only) f
-BrowseCategory f GetCategories f GetProductDetails Proxies Slots
-(preview) Overview p Search features GENERAL SETTINGS Function app
-settings Application settings -—- Properties Backups All settings CODE
-DEPLOYMENT Deployment options Deployment credentials DEVELOPMENT TOOLS
-Logic Apps -A- Console Platform features NETWORKING Networking Custom
-domains Authentication / Authorization Managed service identity Push
-notifications MONITORING Diagnostic logs Log streaming Process explorer
-API API definition CORS APP SERVICE PLAN pa APP Service plan RESOURCE
-MANAGEMENT Activity log Access control (IAM) Tags a Locks Automation
-script o ](images/media/image254.png)
+![](images/media/image254.png)
 
  
 
 It might fail at first:
 
-![Machine generated alternative text: FunctionApp20180216094841 Function
-Apps p "FunctionApp20180216094841 " Visual Studio Enterprise Function
-Apps O FunctionApp20180216094... C Functions (Read Only) f
-BrowseCategory f GetCategories f GetProductDetails Proxies Slots
-(preview) x Overview Function API definition (Swagger) Platform features
-API definition Revert to last save x Generate API definition template O
-1 2 Save ' \#C1ick "Generate started ' API definition template" to get
-Expand Collapse Consume your HTTP triggered Functions in a variety of
-services using an OpenAPl 2.0 (Swagger) definition Use your API
-definition O Export to PowerApps + Flow API definition URL O https : /
-/functionapp2018Ø216Ø 94841. azurewebsites . net/ admi n/ host/
-iLGvwOSWOmjqFpXc1LKWBZg8tYGE + API definition key O API definition
-source O Copy Function (preview) + Documentation External URL Error
-Unknown Error obj must be an Array or an Object Jump to line Details
-Object Version Paths 1 ](images/media/image255.png)
+![](images/media/image255.png)
 
 Click on the **Generate API definition template** button to generate it
 from code and then click the **Save** button:
 
-![Machine generated alternative text: FunctionApp20180216094841 Function
-Apps p "FunctionApp20180216094841 " Visual Studio Enterprise Function
-Apps O FunctionApp20180216094... C Functions (Read Only) f
-BrowseCategory f GetCategories f GetProductDetails Proxies Slots
-(preview) x Overview Function API definition (Swagger) Platform features
-API definition Revert to last save x Generate API definition template
-Save • '2.0' wagger . info: title: O Expanc Consume your HTTP triggered
-Functions in a variety of services using an OpenAPl 2.0 1 3 4 5 6 8 9 10
-11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 • 26 27 28 29 30 • 31 32 33
-34 35 • 36 38 39 40 41 42 43 44 functionapp20180216Ø94841 .
-azurewebsites . net version: I.e. 0 host: functionapp2Ø180216094841.
-azurewebsites . net basePath: / schemes : - https - http paths: '
-/api/categories/{id}' : get : operationld : ' /api/categories/{id}/get '
-produces: \[ ) consumes: \[ ) parameters : name: id in: path required :
-true type: integer description: Replace with Operation Object \#http : /
-/ swagger . io/ specification /\#operationObject responses: '200':
-description: Success operation security : apikeyQuery: \[ \] /api/
-categories : get : operationld: /api/categories/get produces: \[ )
-consumes: \[ ) parameters : description: Replace with Operation Object
-\#http : / / swagger . io/ specification /\#operationObject
-functionapp20180216094841 .az (Swagger) definition Use your API
-definition O Export to PowerApps + Flow API definition URL O https : /
-/functionapp2018Ø216Ø 94841. azurewebsites . net/ admi n/ host/
-iLGvwOSWOmjqFpXc1LKWBZg8tYGE + API definition key O API definition
-source O Copy Version 1.0.0 Security apikeyQuery (API Key) Name In Paths
-/api/categories/{id} Authenticate code query Function (preview) +
-Documentation External URL GET /api/categories/{id} Description Replace
-with Operation Object \#http://swagger.io/specification/\#operationObje
-ct Parameters Name Located in responses: '200': description : security :
-apikeyQue ry : ' /api/product/{id} ' : get : operationld : Required Yes
-Schema Success operation id path Responses ' /api/product/ Code
-Description ](images/media/image256.png)
+![](images/media/image256.png)
 
  
 
@@ -4732,38 +3319,11 @@ After your selections, click **Create**.
 You can now test each of the methods of API in API Management, like the
 following test with get categories:
 
-![Machine generated alternative text: partsunlimitedapi - APIs API
-Management service Publisher portal Developer portal REVISION 1 Search
-my APIs Design Add tags to query UPDATED Feb 20, 2018, PM V Settings
-Test Revisions Change log Search my operations + Add API Add tags to
-query All APIs GET Echo API GET Store Service GET /api/categories/{i...
-/api/categories/get /api/product/{id}/... Store Service \>
-/api/categories/get /api/categories/get Retrieves all available
-categories Query parameters NAME + Add parameter Headers NAME + Add
-header Authorization Subscription key Send VALUE VALUE Console TYPE TYPE
-string bool string DESCRIPTION DESCRIPTION Disable caching. Enable
-request tracing. Subscription key. Primary-71d5 v
-](images/media/image258.png)
+![](images/media/image258.png)
 
  
 
-![Machine generated alternative text: partsunlimitedapi - APIs API
-Management service Publisher portal Developer portal REVISION 1 Search
-my APIs Design Add tags to query UPDATED Feb 20, 2018, PM V Settings
-Test Revisions Change log Search my operations + Add API Add tags to
-query Store Service \> /api/categories/get HTTP response All APIs GET
-Echo API GET Store Service GET /api/categories/{i... /api/categories/get
-/api/product/{id}/... Message Trace HTTP/I.1 20 OK Cache-control:
-no-cache Pragma: no-cache Content-Type: application/json; Expires .
-Vary: Origin x-Powered-By: ASP .NET Console charset=utf-8
-Ocp-Apim-Trace-Location:
-https://apimgmtst1rasvzi1te9t7mo.b10b.core.windows.net/apiinspectorcontainer/RnnjyF-dYgasthx
-aC%2FGm3ZViKiMu race1d=1c6c0244994c466c9bac18997dddb57f Date: Tue, 20
-Feb 2018 GMT Content-Length: 330 "Categoryld" : 1, "Name": "Brakes" ,
-"Description": "Brakes description" , "ImageUr1": . jpg" , "Products" :
-"Categoryld" : 2, "Name": "Lighting" , "Description": "Lighting
-description" , "ImageUr1": jpg" , "Products" : "Categoryld" : 3, "Name":
-"Wheels & Tires" , ](images/media/image259.png)
+![](images/media/image259.png)
 
 Update the web project GetFromStoreService method to pass the
 StoreServiceKey value in the HTTP header request. Change the
@@ -4799,7 +3359,7 @@ your code to the repository. After the build has complete.
 </tbody>
 </table>
 
-#### Task 3: Enable Application Insights
+### Task 3: Enable Application Insights
 
 Now that the API is set, we want to further monitor application
 performance and be able to easily trace down exceptions when this
@@ -4816,25 +3376,12 @@ to the Azure Portal and explore Application Insight. Look at the
 different dependencies being called Database, Function, and API
 Management.
 
-#### Task 4: Explore the API Management (APIM) Developer Portal
+### Task 4: Explore the API Management (APIM) Developer Portal
 
 From the APIM resource in the Azure Portal, click on the link to the
 Developer Portal:
 
-![Machine generated alternative text: Parts Unlimited API HOME APIS
-PRODUCTS APPLICATIONS ISSUES ADMINISTRATOR Welcome to the developer
-portal\! Administrators can manage the APIs and customize the content in
-this portal. Learn more Developers can discover and learn about Parts
-Unlimited API. Just sign up for an API key and start consuming this
-sample API right away\! Sign up API Documentation Check out the
-automatically generated API Documentation that describes how to use the
-APIs and includes code samples in multiple languages. The API Console
-allows you to directly interact with the API right here in the developer
-portal. Developer Support API publishers can engage directly with their
-API community, keeping them up to date via the integrated blog.
-Developers can log and discuss issues and even submit their applications
-to the application gallery. powered by Microsoft Azure
-](images/media/image261.png)
+![](images/media/image261.png)
 
  
 
@@ -4847,27 +3394,19 @@ and feel of the developer portal:
 
  
 
-![Machine generated alternative text: STYLES TEMPLATES PUBLISH x Select
-template to edit from the list below: APIs API list API list (grouped)
-Operation Operation list Operation list (grouped) • Code samples CURL
-C\# Java Java Script Objective C PH p Python Ruby Products Product list
-Product Applications Application list Issues • Issue list Restore
-default templates ](images/media/image262.png)
+![](images/media/image262.png)
 
-## After the hands-on workshop 
+## After the hands-on workshop
 
-Duration: 10 minutes
+**Duration:** 10 minutes
 
 In this exercise, attendees will deprovision any Azure resources that
 were created in support of the
 lab.
 
-#### Task 1: Delete the Resource Group in which you placed your Azure resources.
+**Delete the Resource Group in which you placed your Azure resources.**
 
-1.  From the Portal, navigate to the blade of your Resource Group and
-    click Delete in the command bar at the top
-
-2.  Confirm the deletion by re-typing the resource group name and
-    clicking Delete
+1. From the Portal, navigate to the blade of your Resource Group and click Delete in the command bar at the top
+2. Confirm the deletion by re-typing the resource group name and clicking Delete
 
 You should follow all steps provided *after* attending the hands-on lab.

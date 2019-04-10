@@ -51,7 +51,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 8: Viewing Application CPU/Memory](#task-8-viewing-application-cpumemory)
     - [Task 9: Viewing Disk space](#task-9-viewing-disk-space)
     - [Task 10: Configuring Auto Scale Up](#task-10-configuring-auto-scale-up)
-    - [Task 11: Creating an Auto Scaling Out](#task-11-creating-an-auto-scaling-out)
+    - [Task 11: Enable App Service Auto Scale Out](#task-11-enable-app-service-auto-scale-out)
     - [Task 12: Prepare for scaling in another region](#task-12-prepare-for-scaling-in-another-region)
     - [Task 13: Viewing Resource Health and History](#task-13-viewing-resource-health-and-history)
     - [Task 14: View Auto Scale Run History](#task-14-view-auto-scale-run-history)
@@ -864,153 +864,91 @@ In a few minutes, the Availability Test Summary will be updated, and you will se
 
 ## Exercise 4: Optimize and Protect Azure Web Application
 
-Duration: 45 minutes
+**Duration**: 45 minutes
 
-While the default settings for deploying web application may work in
-many situations, we want to examine our Azure App Service Web
-Application and ensure its secure, optimized, and able to meet the
-demands of our customers. We will use the Azure portal to configure the
-ensure backups, logging is enabled, and the application is sized and can
-scale as need.
+While the default settings for deploying web application may work in any situations, we want to examine our Azure App Service Web Application and ensure its secure, optimized, and able to meet the demands of our customers. We will use the Azure portal to configure the ensure backups, logging is enabled, and the application is sized and can scale as need.
 
-This lab will demonstrate how to safe guard and protect your application
-and make it available by:
+This lab will demonstrate how to safe guard and protect your application and make it available by:
 
-  - Resource Group cannot be deleted by creating a lock
+- Resource Group cannot be deleted by creating a lock
+- Configure backups are setup with 120-day retention
+- Ensure the average response time is \< 2 seconds
+- Configure alerts exist for CPU \< 90 secs
+- Configure diagnostics and exception logging is configured
+- Ensure the average CPU \< 20%
+- Verify that there’s 35 GB free space available
+- Scale up to a premium hosting model with \> 3GB RAM available
 
-  - Configure backups are setup with 120-day retention
-
-  - Ensure the average response time is \< 2 seconds
-
-  - Configure alerts exist for CPU \< 90 secs
-
-  - Configure diagnostics and exception logging is configured
-
-  - Ensure the average CPU \< 20%
-
-  - Verify that there’s 35 GB free space available
-
-  - Scale up to a premium hosting model with \> 3GB RAM available
-
-Azure App Service services keeps you informed about the state of your
-application. It provides the ability to safe guard the application by
-performing automatic backups, provides a consolidate method for
-collection information about your application, has the ability of
-scaling up/down and notifying you when it
-does.
+Azure App Service services keeps you informed about the state of your application. It provides the ability to safe guard the application by performing automatic backups, provides a consolidate method for collection information about your application, has the ability of scaling up/down and notifying you when it does.
 
 **References**
 
-| Web Site Backup | <https://docs.microsoft.com/en-us/azure/app-service/web-sites-backup>             |
-| --------------- | --------------------------------------------------------------------------------- |
-| Auto Scaling    | <https://docs.microsoft.com/en-us/azure/architecture/best-practices/auto-scaling> |
+- [Web Site Backup](https://docs.microsoft.com/en-us/azure/app-service/web-sites-backup)
+- [Auto Scaling](https://docs.microsoft.com/en-us/azure/architecture/best-practices/auto-scaling)
 
 ### Task 1: Configure Backups
 
-We need to “start right” by getting the backups going before we move
-forward with too much code changes. Backups will be stored in defined
-Azure storage account as ZIP files and contain an XML manifest of the
-ZIP contents. SQL databases will be stored in a BACPAC file that can be
-imported.
+We need to “start right” by getting the backups going before we move forward with too much code changes. Backups will be stored in defined Azure storage account as ZIP files and contain an XML manifest of the ZIP contents. SQL databases will be stored in a BACPAC file that can be imported.
 
-**Note**: Although the ZIP file and BACPAC file can be accessed,
-altering any of the files will invalided the backup.
+**Note**: Although the ZIP file and BACPAC file can be accessed, altering any of the files will invalidate the backup.
 
-Navigation to the web application in the Azure Portal. Navigate to the
-“**Backups**” under the settings section. Click the **Configure**
-link.
+Navigation to the web application in the Azure Portal. Navigate to the **Backups** under the settings section. Click the **Configure** link.
 
-![](images/media/image135.png)
+> ![App Service Backups](images/media/image135.png)
 
-If we had a Premium App Service Plan, we would be able to run Snapshots.
-Since we’re running a Standard account, we’ll configure our back up to
-be performed when the traffic and volume is the lowest.
+If we had a Premium App Service Plan, we would be able to run Snapshots. Since we’re running a Standard account, we’ll configure our back up to be performed when the traffic and volume is the lowest.
 
 ### Task 2: Configure Storage Account for Backups
 
-We need to define which Azure BLOB storage account to be used for
-backups. Since we don’t have an account, we’ll create one. Click
-“Storage not configured” and then on the Storage accounts pane, click
-the **+Storage Account** to create a new storage account.
+We need to define which Azure BLOB storage account to be used for backups. Since we don’t have an account, we’ll create one. Click “Storage not configured” and then on the Storage accounts pane, click the **+ Storage Account** to create a new storage account.
 
-For ease of use, type of same name you use for the application as the
-name of the storage account. Since this is just a backup account, keep
-the default **Standard** for Performance and select the same “Location”
-for the region where the application is being hosted. For Replication,
-change the setting over to “Geo-redundant storage (GRS)”. Click **OK**
-and it will take a few moments to provision the new storage account.
+For ease of use, type of same name you use for the application as the name of the storage account. Since this is just a backup account, keep the default **Standard** for Performance and select the same “Location” for the region where the application is being hosted. For Replication, change the setting over to “Geo-redundant storage (GRS)”. Click **OK** and it will take a few moments to provision the new storage account.
 
-![](images/media/image136.png)
+> ![Create Storage Account](images/media/image136.png)
 
-Once provisioned, select the new storage account from the list. Next, we
-need to define where the backup will be written. Click **+Container**
-and type in the name of the container, such as ‘backup’. The name must
-be lowercase, at least 3 characters long and no more than 63 in length.
-Each hypen must be followed by a non-hypen character. We don’t want the
-container/backups accessible externally, so make sure Public Access
-level is set to Private, No anonymouse access.
+Once provisioned, select the new storage account from the list. Next, we need to define where the backup will be written. Click **+ Container** and type in the name of the container, such as ‘backup’. The name must be lowercase, at least 3 characters long and no more than 63 in length. Each hypen must be followed by a non-hypen character. We don’t want the container/backups accessible externally, so make sure Public Access level is set to Private, No anonymouse access.
 
-![](images/media/image137.png)
+> ![Add backups Container to Storage Account](images/media/image137.png)
 
-Click **OK** and the in the Containers list, click on the container to
-use and click **Select** to pick the container that will be used for the
-backups.
+Click **OK** and the in the Containers list, click on the container to use and click **Select** to pick the container that will be used for the backups.
 
-![](images/media/image138.png)
+> ![Select backups Container in Storage Account](images/media/image138.png)
 
-Now that our Storage Account and Container has been selected, validate
-you have the right setting on the Backup Configuration pane.
+Now that our Storage Account and Container has been selected, validate you have the right setting on the Backup Configuration pane.
 
-![](images/media/image139.png)
+> ![Confirm storage account configuration](images/media/image139.png)
 
 ### Task 3: Schedule Backup
 
-Next, since we want the backup to be performed nightly, we need to turn
-on the scheduled backups by clicking “Scheduled backup” to “On”.
+Next, since we want the backup to be performed nightly, we need to turn on the scheduled backups by clicking “Scheduled backup” to “On”.
 
-![](images/media/image140.png)
+![Enable scheduled backup](images/media/image140.png)
 
-The next steps are to define how often we want to perform the back up
-and how many days we want to retain the backups. We only need to back up
-daily, so select “1” for Days. We want our backup to kick off at 3:00
-AM, type in 3:00 AM. We backups from the last 120 days, type that in the
-Retention area.
+The next steps are to define how often we want to perform the back up and how many days we want to retain the backups. We only need to back up daily, so select “1” for Days. We want our backup to kick off at 3:00 AM, type in 3:00 AM. We backups from the last 120 days, type that in the Retention area.
 
-![](images/media/image141.png)
+![Define Backup Schedule](images/media/image141.png)
 
 ### Task 4: Backup Database
 
-Azure App Service has detected a database in use, so we’ll want to
-include that in the back up as well. Click the **Include** checkmark to
-also have it backed it. Database backups are available for SQL Database,
-Azure Database for MySQL (Preview), Azure Database for PostgreSQL
-(Preview), and MySQL in-app.
+Azure App Service has detected a database in use, so we’ll want to include that in the back up as well. Click the **Include** checkmark to also have it backed it. Database backups are available for SQL Database, Azure Database for MySQL, Azure Database for PostgreSQL, and MySQL in-app.
 
-![](images/media/image142.png)
+> ![Include database in backups](images/media/image142.png)
 
-Validate the backup settings on more time and when you’ve confirmed
-everything meets your organizations policies, click **Save**.
+Validate the backup settings on more time and when you’ve confirmed everything meets your organizations policies, click **Save**.
 
-![](images/media/image143.png)
+> ![Confirm database backup settings](images/media/image143.png)
 
-Once the backup is defined, Azure will automatically preform its first
-backup. It may take some time for the backup to appear, it depends on
-the size of the application and database. For our application, this
-should take only a few minutes to appear.
+Once the backup is defined, Azure will automatically preform its first backup. It may take some time for the backup to appear, it depends on the size of the application and database. For our application, this should take only a few minutes to appear.
 
-![](images/media/image144.png)
+> ![Confirm database backup execution](images/media/image144.png)
 
-Once a backup has completed, we can use the Azure Portal to navigate to
-the Container in the Storage Account and see the LOG, XML manifest, and
-ZIP file containing the files.
+Once a backup has completed, we can use the Azure Portal to navigate to the Container in the Storage Account and see the LOG, XML manifest, and ZIP file containing the files.
 
-![](images/media/image145.png)
+> ![Verify backup in storage account](images/media/image145.png)
 
 **Partial Backups**
 
-You can also configure Partial backups if you would like to exclude data
-to limit how much you’re backing up such as logs and image files. 10 GB
-is the max size available for backups currently.
+You can also configure Partial backups if you would like to exclude data to limit how much you’re backing up such as logs and image files. 10 GB is the max size available for backups currently.
 
 **Restore Backup**
 
@@ -1018,58 +956,39 @@ This is the same page you’ll come to Restore a previous backup.
 
 **Automate Backup**
 
-Like many services in Azure, Application Service backups can also be
-automated with scripts using either the Azure CLI or Azure PowerShell.
+Like many services in Azure, Application Service backups can also be automated with scripts using either the Azure CLI or Azure PowerShell.
 
 ### Task 5: Viewing Health by Reviewing the Response Time and Errors
 
-Navigate to the Application in the Azure Portal. The Overview section
-gives you essential information about how your application is performing
-such the Average Response Time, number of Requests, Data In/Out, and
-Http 5xx. What is the average Response Time for the application?
+Navigate to the Application in the Azure Portal. The Overview section gives you essential information about how your application is performing such the Average Response Time, number of Requests, Data In/Out, and Http 5xx. What is the average Response Time for the application?
 
-![](images/media/image146.png)
+> ![App Service Metrics](images/media/image146.png)
 
 ### Task 6: Setting Alerts
 
-Now you’ve seen basic performance information, let’s setup an early
-warning system. Under the **Monitoring** section for the Web App, click
-**Alerts (Classic).** This allows Azure to notify you when certain
-conditions are of your resources are reached.
+Now you’ve seen basic performance information, let’s setup an early warning system. Under the **Monitoring** section for the Web App, click **Alerts (Classic)**. This allows Azure to notify you when certain conditions are of your resources are reached.
 
-We want to create an alert when the CPU raises beyond 70% for a period
-and be notified. Click **+Add alert metric (classic).** This as a new
-rule that will be trigged when the condition is reached. Type the name
-of the rule such as **High Average CPU**, next set the metric to CPU
-Time, set the threshold to 70, check the email owners, and type in your
-email address.
+We want to create an alert when the CPU raises beyond 70% for a period and be notified. Click **+ Add alert metric (classic).** This as a new rule that will be trigged when the condition is reached. Type the name of the rule such as **High Average CPU**, next set the metric to CPU Time, set the threshold to 70, check the email owners, and type in your email address.
 
-![](images/media/image147.png)
+> ![Create alert rule](images/media/image147.png)
 
 ### Task 7: Configuration App Diagnostics
 
-Once we have the alerting and monitoring in place, we want to be able to
-record issues as the arise. To enable diagnostics, under the Monitoring
-section, click on **Diagnostics Logs**. Turn on Application Logging
-(Filesystem) and Application Logging (Blob), select the level of logging
-to **Error** for both**. **
+Once we have the alerting and monitoring in place, we want to be able to record issues as the arise. To enable diagnostics, under the Monitoring section, click on **Diagnostics Logs**. Turn on Application Logging (Filesystem) and Application Logging (Blob), select the level of logging to **Error** for both.
 
 **Note**: To view the Stream Log, logs must be written to local storage.
 
-Next, we select the Storage Account you previously created for backups,
-create a new container called **app-logs** and select it.
+Next, we select the Storage Account you previously created for backups, create a new container called **app-logs** and select it.
 
-![](images/media/image148.png)
+> ![Create logs container in Storage Account](images/media/image148.png)
 
-Create another new container called **web-server-logs** and turn on
-**storage** for the Web server logging.
+Create another new container called **web-server-logs** and turn on **storage** for the Web server logging.
 
-**Note**: Make sure each container has its access set to private (no
-anonymous access).
+**Note**: Make sure each container has its access set to private (no anonymous access).
 
 For each log setting, set the retention period (days) to 120.
 
-![](images/media/image149.png)
+> ![Diagnostics logs settings](images/media/image149.png)
 
 When everything is all set, click **Save**.
 
@@ -1077,90 +996,70 @@ When everything is all set, click **Save**.
 
 We need to ensure that we’re “ok” right now. From a CPU/Mem standpoint.
 
-![](images/media/image150.png)
+> ![Application CPU/Memory metrics](images/media/image150.png)
 
 ### Task 9: Viewing Disk space
 
-It’s important that we have room to grow. On the navigation, under the
-App Service Plan, click on Quotas.
+It’s important that we have room to grow. On the navigation, under the App Service Plan, click on Quotas.
 
-![](images/media/image151.png)
+> ![App Service File System Storage Usage](images/media/image151.png)
 
 ### Task 10: Configuring Auto Scale Up
 
-We know that the site runs poorly on a single CPU box. Let’s fix that
-first. Navigate to the App Service Plan and **Scale Up** the application
-to at least to a P2 instance.
+We know that the site runs poorly on a single CPU box. Let’s fix that first. Navigate to the App Service Plan and **Scale Up** the application to at least to a P2 instance.
 
-![](images/media/image152.png)
+> ![App Service Scale Up](images/media/image152.png)
 
-### Task 11: Creating an Auto Scaling Out
+### Task 11: Enable App Service Auto Scale Out
 
-An advantage to running in Azure is auto-scaling the application up and
-down based off the demand. In this lab, we’re going to create an auto
-scale rule to handle peak loads.
+An advantage to running in Azure is auto-scaling the application up and down based off the demand. In this lab, we’re going to create an auto scale rule to handle peak loads.
 
-In the search dialog in the Azure Portal, type ‘Monitor’ to navigate to
-the Azure Monitor Service.
+In the search dialog in the Azure Portal, type ‘Monitor’ to navigate to the Azure Monitor Service.
 
-![](images/media/image153.png)
+> ![Find resource](images/media/image153.png)
 
-Under the Settings section, click on **AutoScale**. From the list of
-services, select the App Plan to enable.
+Under the Settings section, click on **AutoScale**. From the list of services, select the App Plan to enable.
 
-![](images/media/image154.png)
+> ![Enable autoscale](images/media/image154.png)
 
-Verify you have the correct **App Plan** and click **Enable** auto
-scale.
+Verify you have the correct **App Plan** and click **Enable** auto scale.
 
-![](images/media/image155.png)
+> ![Verify app service plan](images/media/image155.png)
 
-Next, set the rules for which the application will scale out and scale
-back in.
+Next, set the rules for which the application will scale out and scale back in.
 
-![](images/media/image156.png)
+> ![Create autoscale rule](images/media/image156.png)
 
 Save the changes
 
-### Task 12: Prepare for scaling in another region 
+### Task 12: Prepare for scaling in another region
 
-Are you getting heavy traffic from another region or want to improve the
-high available of your application? Now that we have a Premium App Plan,
-we can clone the application and all its settings into a new App Service
-Plan. That plan can be in the same Resource Group or a new Resource
-Group.
+Are you getting heavy traffic from another region or want to improve the high available of your application? Now that we have a Premium App Plan, we can clone the application and all its settings into a new App Service Plan. That plan can be in the same Resource Group or a new Resource Group.
 
-![](images/media/image157.png)
+> ![Clone App Service to another region](images/media/image157.png)
 
-Once you’ve set up a new App Service Plan and Resource Group, now it’s
-time to set the Clone Settings.
+Once you’ve set up a new App Service Plan and Resource Group, now it’s time to set the Clone Settings.
 
-> ![](images/media/image158.png)
+> ![Configure settings to clone](images/media/image158.png)
 
 ### Task 13: Viewing Resource Health and History
 
-Now we want to see the overall health history of our resource. Perhaps
-there was an event that happen that made the application slow to respond
-or simply want to make sure everything is going already. Navigate to
-**Resource Health** under the Support + Troubleshooting section. Here
-you can the current available and the last health events over the last
-two weeks for the application.
+Now we want to see the overall health history of our resource. Perhaps there was an event that happen that made the application slow to respond or simply want to make sure everything is going already. Navigate to **Resource Health** under the Support + Troubleshooting section. Here you can the current available and the last health events over the last two weeks for the application.
 
-![](images/media/image159.png)
+> ![Resource Health](images/media/image159.png)
 
 ### Task 14: View Auto Scale Run History
 
-To view the history on how often the web application is scaling up /
-down, click on the **Run History** link.
+To view the history on how often the web application is scaling up / down, click on the **Run History** link.
 
-![](images/media/image160.png)
+> ![](images/media/image160.png)
 
 ### Task 15: Setting up auto scaling notifications
 
 If you want to be notified how when the application is scaled up / down,
 Navigate to Notify.
 
-![](images/media/image161.png)
+> ![Autoscale Run History](images/media/image161.png)
 
 ## Exercise 5: Optimize and Secure Azure SQL Database
 

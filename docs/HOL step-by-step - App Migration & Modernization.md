@@ -36,7 +36,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
   - [Exercise 3: Detect, Diagnose, Monitor Application Performance with Application Insights](#exercise-3-detect-diagnose-monitor-application-performance-with-application-insights)
     - [Task 1: Create an Application Insights Instance](#task-1-create-an-application-insights-instance)
     - [Task 2: Update your Web Application to use Application Insights](#task-2-update-your-web-application-to-use-application-insights)
-    - [Task 3: Update your application to provide more telemetry](#task-3-update-your-application-to-provide-more-telemetry)
+    - [Task 3: Update your application to provide client side telemetry](#task-3-update-your-application-to-provide-client-side-telemetry)
     - [Task 4: Implement the Custom Event Telemetry Provider](#task-4-implement-the-custom-event-telemetry-provider)
     - [Task 5: Push your code to production](#task-5-push-your-code-to-production)
     - [Task 5: Review the data](#task-5-review-the-data)
@@ -457,7 +457,7 @@ You must also have a Azure DevOps Services Organization Account and be able to c
 
     > **Note**:
     >
-    > The <REPO URL> must be replaced with:
+    > The \<REPO URL\> must be replaced with:
     >
     > ![Azure Repos](images/media/image54.png)
 
@@ -538,19 +538,13 @@ To Avoid the error……….
 
 Note that the name of the connection string is "DefaultConnectionString", which we captured before starting the CI/CD pipeline creation.
 
-![Connection String Error](images/media/image71.jpeg)
+> ![Connection String Error](images/media/image71.jpeg)
 
 When the migration tools moved the application, it doesn't correctly add
 the connection string name.  Note that the connection string is simply
 "DefaultConnection"
 
-> ![DEPLOYMENT Application settings Quickstart WEBSITE NODE DEFAULT
-> VERSION 6.9.1 Deployment credentials \* Add new setting Nii Deployment
-> slots Deployment options Connection strings Continuous Delivery
-> (Preview) DefaultConnection SETTINGS \* Add new connection string
-> Application settings Authentication / Authorization Default documents
-> Managed service identity Hidden value. Click to
-> show.](images/media/image72.jpeg)
+> ![App Service - Applicagion Settings - Connection String](images/media/image72.jpeg)
 
 To avoid an error, simply edit the connection string name in both the production website and the staging slot to read "DefaultConnectionString" and save your settings. For the Database, use **SQLAzure**.
 
@@ -571,7 +565,7 @@ Go back to the Azure portal and open the Azure App Service Web Site you created 
 2. In the web application, click on Deployment Slots
 
     > ![Web App Deployment Slots](images/media/image74.jpeg)
-
+    >
     > At this time, there are no deployment slots configured for your website.  A deployment slot is used to setup a staging environment for your application, so you can test new changes easily prior to rolling them to production.
 
 3. Click the Add Slot option to add a new deployment slot.
@@ -669,12 +663,7 @@ Go back to the Azure portal and open the Azure App Service Web Site you created 
 
 The CI/CD pipeline is complete.  Queue a new build and follow the build/release to verify it works correctly.  Follow the build process and then follow the release process.
 
-**Note:** While we are moving the deployment capabilities to the release and
-using deployment slots, we did not create multiple environments to save
-time.  If you like, you could create a new environment in the release
-and move the "Swap Slots" task to the second environment and add
-approval
-processes.
+**Note:** While we are moving the deployment capabilities to the release and using deployment slots, we did not create multiple environments to save time.  If you like, you could create a new environment in the release and move the "Swap Slots" task to the second environment and add approval processes.
 
 ## Exercise 3: Detect, Diagnose, Monitor Application Performance with Application Insights
 
@@ -701,257 +690,106 @@ Timely actionable telemetry is an important aspect of any modern application. Ac
 
 ### Task 1: Create an Application Insights Instance
 
-Go to the resource group created by the migration tool.  You should see
-your application services.
+Go to the resource group created by the migration tool.  You should see your application services.
 
 Click on the Application Insights Menu Item to create a new instance 
 
-> ![Home \> Server-Migration-EastUS2 • Server-Migration-EastUS2 Search
-> \[Ctrl Overview Activty log Access control (IA M) Tags SETTINGS
-> Quickstart c Resource costs Deployments Policies — Properties
-> Automation script MONITORING + Add Edit columns Delete resource group
-> Subscription Microsoft Azure Internal Consumption Subscription ID
-> 4126860-242b-452c-8273-a4da78837adc Refresh Filter by name.„ Show
-> hidden types O 5 items karlrisspartsdbsrv partsunlimiteddb All O' pes
-> ServerMigrationFarmStandardb9fd4bc60 vmwebOI DefaultWebSite staging
-> 11.1 Metrics Alert rules Diagnostics log Application insights Log
-> analytics (OMS)](images/media/image100.jpeg)
+> ![Resoure Group - Application Insights](images/media/image100.jpeg)
+>
+> ![Create Application Insights](images/media/image101.jpeg)
 > 
->  
-> 
-> ![Home \> Server-Migration-EastLlS2 - Application insights
-> Server-Migration-EastUS2 - Application insights Search \[Ctrl +0 (t)
-> Overview Activty log Access control (IA M) Tags SETTINGS Quickstart c
-> Resource costs Deployments Policies — Properties Automation script
-> MONITORING Alert rules Diagnostics logs Application insights + Add
-> Edit columns Filter by nGme... O items Refresh Assign Tags All
-> locations RESOURCE GROUP LOCATION No Application Insights to display
-> Try changing your ilters f you don't see Hat looking far. Create
-> Application Insights](images/media/image101.jpeg)
-> 
->  
-> 
->  
-> 
-> ![](images/media/image102.png)
+> ![Create Application Insights - New Resource](images/media/image102.png)
 
-Enter a name for the Azure Application Insights instance and choose the
-region where it should be deployed. Choose the runtime/framework your
-application is using. In this case, choose ASP.NET. Click OK to create.
+Enter a name for the Azure Application Insights instance and choose the region where it should be deployed. Choose the runtime/framework your application is using. In this case, choose ASP.NET. Click OK to create.
 
-> ![](images/media/image103.png)
-> 
->  
+> ![Apply monitoring settings](images/media/image103.png)
 
-At the top of the pane, you’ll see a notice telling you the application
-will modify your Application Settings and will restart your site.
-
- 
-
->  
+At the top of the pane, you’ll see a notice telling you the application will modify your Application Settings and will restart your site.
 
 Deployment should only take a few moments.
 
-When deployment is finished, go back to your resource group.  You should
-now see your App Insights Instance
+When deployment is finished, go back to your resource group.  You should now see your App Insights Instance.
 
->  
-> 
-> ![Home \> Resource groups \> Server-Migration-EastUS2 •
-> Server-Migration-EastUS2 Search \[Ctrl Overview Activty log Access
-> control (IA M) Tags SETTINGS Quickstart c Resource costs Deployments
-> Policies — Properties + Add Edit columns Delete resource group
-> Subscription Microsoft Azure Internal Consumption Subscription ID
-> 4126860-242b-452c-8273-a4da78837adc Refresh Assign Tags Filter by
-> name.„ 6 items Show hidden types O All O'pes karlrisspartsdbsrv
-> partsunlimiteddb ServerMigrationFarmStandardb9fd4bc60 v m webOI
-> DefaultWebSite staging workshop App Insightsl nst Deployments 3
-> Succeeded All locations SQL server SQL data base App Seæice plan App
-> Seæice Web App Application Insights LOCATION East US 2 East US 2 East
-> US 2 East US 2 East US 2 East LIS](images/media/image104.jpeg)
-> 
->  
+> ![Application Insights Resource](images/media/image104.jpeg)
 
 ### Task 2: Update your Web Application to use Application Insights
 
-Remote into the vmdev01 using the User Name and Password used when
-creating the environment.
+Remote into the vmdev01 using the User Name and Password used when creating the environment.
 
-> ![](images/media/image52.png)
+> ![Remote Desktop Connection to vmdev01](images/media/image52.png)
 
 **Note**:
 
 Default Admin: sysadmin
-
 Default Password: Password$123
 
-> ![](images/media/image11.png)
-> 
-> ![](images/media/image53.png)
+> ![Remote Desktop Connection Certificate Warning](images/media/image11-vm-credentials.png)
+> ![Remote Desktop Connection Certificate Warning](images/media/image53.png)
 
 On your developer workstation, open the solution.
 
-Right click on the web application and choose to add Application
-Insights telemetry
+Right click on the web application and choose to add Application Insights telemetry
 
-> ![](images/media/image105.jpeg)
-> 
->  
-> 
+> ![Remote Desktop Connection Certificate Warning](images/media/image105.jpeg)
 > ![](images/media/image106.png)
 
 You will be presented with a dialog, click **Get Started** to continue.
 
 This will bring up the Registration Dialog.
 
-> ![](images/media/image107.png)
-> 
->  
+> ![Application Insights Visual Studio Registration Dialog](images/media/image107.png)
 
-You will want to select your subscription and select the Application
-Insights resource we just created and click **Register**
+You will want to select your subscription and select the Application Insights resource we just created and click **Register**
 
-> ![](images/media/image108.png)
-> 
->  
+> ![Application Insights Visual Studio Registration Dialog](images/media/image108.png)
 
 In a few moments, your application will be instrumented and registered.
 
-Lastly, we will enable trace collection.  Simply click the "**Collect
-traces from System.Diagnostics**" to enable.
+Lastly, we will enable trace collection.  Simply click the "**Collect traces from System.Diagnostics**" to enable.
 
->  
-> 
-> ![](images/media/image109.png)
-> 
->   
+> ![Application Insights - Enable Trace Collection](images/media/image109.png)
 
 This should leave you 100% configured
 
-> ![](images/media/image110.png)
+> ![Application Insights - Configured 100%](images/media/image110.png)
 > 
->  
-> 
->  
+We need to update a package, so right click on the project in visual studio and select "Manage NuGet Packages.."
 
-We need to update a package, so right click on the project in visual
-studio and select "Manage NuGet Packages.."
+> ![Update Application Insights NuGet Dependency](images/media/image111.jpeg)
 
-> ![](images/media/image111.jpeg)
-> 
->  
+There are a lot of packages that need to be updated, but we are only going to update one package.
 
-There are a lot of packages that need to be updated, but we are only
-going to update one package.
+We are looking for **System.Diagnostics.DiagnosticSource**. Select that package and click the update button.
 
-We are looking for System.Diagnostics.DiagnosticSource.  Select that
-package and click the update button.
+> ![Update System.Diagnostics.DiagnosticSource NuGet Package](images/media/image112.jpeg)
 
-> ![](images/media/image112.jpeg)
-> 
->  
-> 
->  
+Run your web application and verify everything runs correctly.
 
-Before checking in our code, we are going to want to test the
-application locally.  To do this, verify that your connection string is
-pointed to localDB. 
+**Note:** You want to move the instrumentation key to the Web.Config. This lets you override the key in production and easily use multiple keys. This blog has a nice post on how to do that:
 
-\<add name="DefaultConnectionString"
-connectionString="Server=(localdb)\\mssqllocaldb;Database=PartsUnlimitedWebsite;Integrated
-Security=True;" providerName="System.Data.SqlClient" /\>
+[https://blogs.msdn.microsoft.com/devops/2015/01/07/application-insights-support-for-multiple-environments-stamps-and-app-versions/](https://blogs.msdn.microsoft.com/devops/2015/01/07/application-insights-support-for-multiple-environments-stamps-and-app-versions/)
 
-Open the **WebConfig** file, uncomment the localDB connection string and
-comment out the connection string pointing to a server and then save the
-file.
+### Task 3: Update your application to provide client side telemetry
 
->  
-> 
-> ![](images/media/image113.jpeg)
-> 
->   
+Azure Application Insights gives you a lot of information without doing anything else.  However, we want a little more, so we are going to make some changes.
 
-Run your web application and verify everything runs correctly. 
+Open the **\_Layout.cshtml** file located in the **views\\shared** folder.
 
-**Note:** You want to move the instrumentation key to the Web.Config. 
-This lets you override the key in production and easily use multiple
-keys.  This blog has a nice post on how to do that;
-[https://blogs.msdn.microsoft.com/devops/2015/01/07/application-insights-support-for-multiple-environments-stamps-and-app-versions/](mhtml:file://C:\\Users\\danshue\\Desktop\\Workshop\\AppMigrationAndModernizationWorkshopPresenter.mht!https://blogs.msdn.microsoft.com/devops/2015/01/07/application-insights-support-for-multiple-environments-stamps-and-app-versions/)
-  
+> ![Enable Client Side Telemetry](images/media/image114.jpeg)
 
-### Task 3: Update your application to provide more telemetry
+There is a section commented out that will send telemetry from the web page. We are going to simply enable this code to allow capturing client side telemetry.
 
-Azure Application Insights gives you a lot of information without doing
-anything else.  However, we want a little more, so we are going to make
-some changes. 
-
-Open the \_Layout.cshtml file located in the views\\shared folder.
-
-> ![](images/media/image114.jpeg)** **
-
-There is a section commented out that will send telemetry from the web
-page.  We are going to replace this code with code we get from the app
-insights portal.
-
->  
-> 
-> ![](images/media/image115.jpeg)** **
-
-Next, go to Azure, open your resource group, then open Application
-Insights.
-
-> ![](images/media/image116.jpeg)
-> 
->  
-
-With Application Insights open, scroll down and click the "Getting
-Started".
-
-> ![](images/media/image117.jpeg)
-> 
->  
-
-From here, click to monitor client-side operations then copy the
-JavaScript code.
-
-> ![](images/media/image118.jpeg)
-> 
->  
-> 
->  
-> 
->  
-
-Go back to Visual Studio and replace the commented Application Insights
-script with the script from the portal.  When done, you code should look
-like the following
-
->  
-> 
-> ![](images/media/image119.jpeg)
-> 
->   
+> ![Enable Client Side Telemetry](images/media/image115.jpeg)
 
 If you want, you can rerun the application to ensure it works correctly.
 
-**Note**: There are other areas where you can add telemetry.  Some of
-this code has been commented out if you want to add it.
-
-**Note:** This project is .NET Framework 4.5.1.  More capabilities light
-up if you change the target framework to at least .NET Framework 4.6. 
-
 ### Task 4: Implement the Custom Event Telemetry Provider
 
-A custom Event Telemetry Provider has been written, but the
-implementation needs to be uncommented before it can be used. Navigate
-to the **Utils** folder and edit the **TelemetryProvider.cs** file by
-uncommenting the code and add to the top of the class “**using
-Microsoft.ApplicationInsights;**”. This provider wraps the Azure
-Application Insights SDK TelemetryClient and is used to record custom
-events such as messages, traces, and exceptions. Its use can be found in
-the **OrdersController.cs** or **ShoppingCartController.cs** classes.
+A custom Event Telemetry Provider has been written, but the implementation needs to be uncommented before it can be used. Navigate to the **Utils** folder and edit the **TelemetryProvider.cs** file by uncommenting the code and add to the top of the class **using Microsoft.ApplicationInsights;**. This provider wraps the Azure Application Insights SDK TelemetryClient and is used to record custom events such as messages, traces, and exceptions. Its use can be found in the **OrdersController.cs** or **ShoppingCartController.cs** classes.
 
-![](images/media/image120.png)
+> ![TelemetryProvider.cs](images/media/image120.png)
+
+**Note**: You can find all the code that needs to be uncommented by using the **View -> Task List** menu in Visual Studio and filtering by the phrase "Application Insights - Uncomment".
 
 ### Task 5: Push your code to production
 
@@ -959,113 +797,70 @@ With everything running locally, time to push our changes to production.
 
 In Visual Studio, go to the team explorer, then go to changes.
 
-> ![](images/media/image121.jpeg)
-> 
->  
+> ![Team Explorer](images/media/image121.jpeg)
 
 Add a comment and then commit and push
 
-> ![](images/media/image122.jpeg)
-> 
->  
+> ![Commit changes](images/media/image122.jpeg)
 
 After a few moments you should get a success dialog
 
-> ![](images/media/image123.jpeg)
-> 
->  
+> ![Changes Sync](images/media/image123.jpeg)
 
-You shouldn't have to do anything at this point, the build and release
-will automatically kick off.
+You shouldn't have to do anything at this point, the build and release will automatically kick off.
 
->  
-> 
-> ![](images/media/image124.jpeg)
-> 
->  
-> 
-> ![](images/media/image125.jpeg)
-> 
->  
-> 
->  
-> 
-> ![](images/media/image126.jpeg)
-> 
->  
-> 
-> ![](images/media/image127.jpeg)
-> 
->  
+> ![Azure Pipelines - Build Triggered](images/media/image124.jpeg)
+>
+> ![Azure Pipelines - Build Success](images/media/image125.jpeg)
+>
+> ![Azure Pipelines - Release Triggered](images/media/image126.jpeg)
+>
+> ![Azure Pipelines - Release Success](images/media/image127.jpeg)
 
-Before moving to the next step, open a browser and navigate to the site.
-Verify that your release was successful by viewing the source code in
-the browser to ensure the Application Insights key was deployed to the
-Web Application in Azure. You can do this by viewing the HTML source
-code and look for Application Insights instrumentation key in the \<head
-/\> block. Move around the site to generate data that will be used in
-the next activity.
+Before moving to the next step, open a browser and navigate to the site. Verify that your release was successful by viewing the source code in the browser to ensure the Application Insights key was deployed to the Web Application in Azure. You can do this by viewing the HTML source code and look for Application Insights instrumentation key in the ```<head />``` block. Move around the site to generate data that will be used in the next activity.
 
 ### Task 5: Review the data
 
 Go back to your resource group and open Application Insights.
 
-> ![](images/media/image116.jpeg)
-> 
->  
+> ![Applicatin Insights Resource](images/media/image116.jpeg)
 
-Now let’s create a dashboard for this application. Click on the
-**Application Dashboard** link.
+Now let’s create a dashboard for this application. Click on the **Application Dashboard** link.
 
-![](images/media/image128.png)
+> ![Applicatin Insights - Create Dashboard](images/media/image128.png)
 
-This will give us some core information around Usage, Reliability,
-Responsiveness, and the Browser.
+This will give us some core information around Usage, Reliability, Responsiveness, and the Browser.
 
-![](images/media/image129.png)
+> ![Applicatin Insights Dashboard](images/media/image129.png)
 
 Click the **App Map**
 
-> ![](images/media/image130.jpeg)
-> 
->   
+> ![Applicatin Insights - Application Map](images/media/image130.jpeg)
 
 ### Task 6: Web Test
 
-Now we want to monitor the web application from different locations and
-get a better understanding of what other users in different regions are
-experiencing. Under the Investigate pane, click on **Availability**.
-This will bring up a new blade that will allow you to add the new test.
-Click on **Add Test**.
+Now we want to monitor the web application from different locations and get a better understanding of what other users in different regions are experiencing. Under the Investigate pane, click on **Availability**. This will bring up a new blade that will allow you to add the new test. Click on **Add Test**.
 
-> ![](images/media/image131.png)
+> ![Applicatin Insights - Add Availability Test](images/media/image131.png)
 
-Type “Monitor Application” for the “Test Name” and click on the **Test
-Locations** and choose where you would like the application to be
-monitored.
+Type “Monitor Application” for the “Test Name” and click on the **Test Locations** and choose where you would like the application to be monitored.
 
-> ![](images/media/image132.png)
+> ![Applicatin Insights - Add Availability Test](images/media/image132.png)
 
 At this point, we’re only going to do a simple **URL ping test** to
 verify that we’re getting a HTTP 200 returned from the application.
 
-![](images/media/image133.png)
+![Applicatin Insights - Add Availability Test Alerts](images/media/image133.png)
 
-Last, before we create this new test, we want to set how we will be
-alerting if we do get something other than a HTTP 200 response. In the
-“send alerts emails to these email address” textbox, type in your
-email address. At this time, no Webhook will be called and this can be
-left blank. We done, click OK to continue.
+Last, before we create this new test, we want to set how we will be alerting if we do get something other than a HTTP 200 response. In the “send alerts emails to these email address” textbox, type in your email address. At this time, no Webhook will be called and this can be left blank. We done, click OK to continue.
 
-**Note**: There are many alerts possible and Azure Application Insights
-is integrated with Azure Monitor.
+**Note**: There are many alerts possible and Azure Application Insights is integrated with Azure Monitor.
 
 Click **Create** to create the test.
 
-In a few minutes, the Availability Test Summary will be updated, and you
-will see test results from the of the locations you’ve chosen.
+In a few minutes, the Availability Test Summary will be updated, and you will see test results from the of the locations you’ve chosen.
 
-![](images/media/image134.png)
+![Applicatin Insights - Availability Test Summary](images/media/image134.png)
 
 ## Exercise 4: Optimize and Protect Azure Web Application
 

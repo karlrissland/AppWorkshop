@@ -1063,201 +1063,120 @@ Navigate to Notify.
 
 ## Exercise 5: Optimize and Secure Azure SQL Database
 
-Duration: 45 minutes
+**Duration**: 45 minutes
 
-While the default settings for deploying SQL database may work in many
-situations, we want to examine the database and ensure its secure,
-optimized, and able to meet the demands of our customers. We will use
-the Azure portal to configure the ensure tuned, diagnostics is enabled,
-and the database is sized and can scale as need.
+While the default settings for deploying SQL database may work in many situations, we want to examine the database and ensure its secure, optimized, and able to meet the demands of our customers. We will use the Azure portal to configure the ensure tuned, diagnostics is enabled, and the database is sized and can scale as need.
 
-This exercise will demonstrate how to safe guard and protect your
-database and make it available by:
+This exercise will demonstrate how to safe guard and protect your database and make it available by:
 
-  - Database DTU utilization is \< 20%
-
-  - \>= 3000 DTUs are available for the database
-
-  - Database is accessible only from Azure (not externally)
-
-  - Database is failover-ready to another region (without app code
-    change)
-
-  - Threat Detection is enabled
-
-  - Automatic Tuning is enabled
-
-  - Diagnostics are enabled
-
-  - Alerts anytime DTU usage is \> 60%
-
-  - Database vulnerabilities are automatically
-discovered
+- Database DTU utilization is \< 20%
+- \>= 3000 DTUs are available for the database
+- Database is accessible only from Azure (not externally)
+- Database is failover-ready to another region (without app code change)
+- Threat Detection is enabled
+- Automatic Tuning is enabled
+- Diagnostics are enabled
+- Alerts anytime DTU usage is \> 60%
+- Database vulnerabilities are automatically discovered
 
 **References**
 
-| SQL Azure                                                       | <https://docs.microsoft.com/en-us/azure/sql-database/>                                                                                        |
-| --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Resource Group Locking                                          | https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-lock-resources                                                   |
-| Transparent data encryption for SQL database and Data Warehouse | <https://docs.microsoft.com/en-us/sql/relational-databases/security/encryption/transparent-data-encryption-azure-sql?view=azuresqldb-current> |
-| Advanced Threat Protection for Azure SQL Database               | <https://docs.microsoft.com/en-us/azure/sql-database/sql-advanced-threat-protection>                                                          |
-| Firewall & virtual network rules                                | <https://docs.microsoft.com/en-us/azure/sql-database/sql-database-vnet-service-endpoint-rule-overview>                                        |
-| Database Transaction Unit (DTU)                                 | https://docs.microsoft.com/en-us/azure/sql-database/sql-database-what-is-a-dtu                                                                |
-| Failover Groups and active geo-replication                      | https://docs.microsoft.com/en-us/azure/sql-database/sql-database-geo-replication-overview                                                     |
+- [SQL Azure](https://docs.microsoft.com/en-us/azure/sql-database/)
+- [Resource Group Locking](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-lock-resources)
+- [Transparent data encryption for SQL database and Data Warehouse](https://docs.microsoft.com/en-us/sql/relational-databases/security/encryption/transparent-data-encryption-azure-sql?view=azuresqldb-current)
+- [Advanced Threat Protection for Azure SQL Database](https://docs.microsoft.com/en-us/azure/sql-database/sql-advanced-threat-protection)
+- [Firewall & virtual network rules](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-vnet-service-endpoint-rule-overview)
+- [Database Transaction Unit (DTU)](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-what-is-a-dtu)
+- [Failover Groups and active geo-replication](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-geo-replication-overview)
 
 ### Task 1: Resource Locking
 
-We want to make sure than nobody accidentally deletes this footprint.
-Unlike role-based access control, you use management locks to apply a
-restriction across all users and roles. There are two settings:
-**CanNotDelete** and **ReadOnly**. Locks are only limited to the
-management of the resource itself, not the function of the resource. For
-example, a ReadOnly lock on a SQL Database prevents you from deleting or
-modifying the database, but does not prevent you from creating,
-updating, or deleting data in the database. Only **Owner** and **User
-Access Administrator** can create or delete management locks.
+We want to make sure than nobody accidentally deletes this footprint. Unlike role-based access control, you use management locks to apply a restriction across all users and roles. There are two settings: **CanNotDelete** and **ReadOnly**. Locks are only limited to the management of the resource itself, not the function of the resource. For example, a ReadOnly lock on a SQL Database prevents you from deleting or modifying the database, but does not prevent you from creating, updating, or deleting data in the database. Only **Owner** and **User Access Administrator** can create or delete management locks.
 
-Navigate to the SQL Server database in the Azure Portal. In the Settings
-blade for the SQL server database, select **Locks**.
+Navigate to the SQL Server database in the Azure Portal. In the Settings blade for the SQL server database, select **Locks**.
 
-**Note**: Locks can be applied at a resource, resource group, or
-subscription that you wish to lock.
+**Note**: Locks can be applied at a resource, resource group, or subscription that you wish to lock.
 
-![](images/media/image162.png)
+> ![Management Locks](images/media/image162.png)
 
-Next, in the Management locks, click on **Add**. If you want to create a
-lock at the parent level, select the parent. The currently selected
-resource inherits the lock from the parent. For example, you can lock
-the resource group to apply a lock to all its resources.
+Next, in the Management locks, click on **Add**. If you want to create a lock at the parent level, select the parent. The currently selected resource inherits the lock from the parent. For example, you can lock the resource group to apply a lock to all its resources.
 
-![](images/media/image163.png)
+> ![Add Management Lock](images/media/image163.png)
 
 Give the lock a name and lock level.
 
-![](images/media/image164.png)
+> ![Add Name](images/media/image164.png)
 
-To delete the lock, select the ellipsis and **Delete** from the
-available options
+To delete the lock, select the ellipsis and **Delete** from the available options
 
-![](images/media/image165.png)
-
-![](images/media/image166.png)
+> ![Delete Lock](images/media/image165.png)
+>
+> ![](images/media/image166.png)
 
 ### Task 2: Enable Transparent Data Encryption
 
-If we have sensitive data, we can encrypt the data without impacting the
-application. Transparent data encryption encrypts your database,
-backups, and logs at rest without any changes to your application. For
-newer databases, this service is automatically turned on. You may need
-to be manually enabled for older databases.
+If we have sensitive data, we can encrypt the data without impacting the application. Transparent data encryption encrypts your database, backups, and logs at rest without any changes to your application. For newer databases, this service is automatically turned on. You may need to be manually enabled for older databases.
 
-![](images/media/image167.png)
+> ![Enable Transparent Data Encryption](images/media/image167.png)
 
-If you want to supply your own key (BYOK), you can store it on Azure Key
-Vault.
+If you want to supply your own key (BYOK), you can store it on Azure Key Vault.
 
-![](images/media/image168.png)
+> ![Enable Transparent Data Encryption BYOK](images/media/image168.png)
 
 ### Task 3: Scale Up Database Performance
 
-When our database was migrated, only a Standard S0, 10 DTUs, 250 GB
-database was provisioned, the minimum DTUs for a Standard subscription.
-We need to scale out our database to at least 100 DTUs or Standard S3:
-100 DTUs, 250 GB database configuration. In the blade for your database,
-click on the **Configure** section and slide the DTU slider to 100, then
-click **Apply**.
+When our database was migrated, only a Standard S0, 10 DTUs, 250 GB database was provisioned, the minimum DTUs for a Standard subscription. We need to scale out our database to at least 100 DTUs or Standard S3: 100 DTUs, 250 GB database configuration. In the blade for your database, click on the **Configure** section and slide the DTU slider to 100, then click **Apply**.
 
-![](images/media/image169.png)
+> ![Scale database performance](images/media/image169.png)
 
 ### Task 4: Configure Firewall and virtual networks
 
-Under the **Security** blade, navigate to **Firewalls and virtual
-networks.** We want to seal off any access from anyone except us. To
-allow access to Azure services, click on **ON**.
+Under the **Security** blade, navigate to **Firewalls and virtual networks.** We want to seal off any access from anyone except us. To allow access to Azure services, click on **ON**.
 
-![](images/media/image170.png)
+> ![Configure Firewall and virtual networks](images/media/image170.png)
 
 ### Task 5: Threat Detection and Vulnerability Assessment
 
-We want to help protect our database sever again threats. This service
-includes Threat Detection, Data Discovery & Classification, and
-Vulnerability Assessment. There is a small fee per server/month to run
-this service. Enable these settings by navigating to the Security
-section in the SQL Server blade and select **Advanced Threat
-Protection**.
+We want to help protect our database sever again threats. This service includes Threat Detection, Data Discovery & Classification, and Vulnerability Assessment. There is a small fee per server/month to run this service. Enable these settings by navigating to the Security section in the SQL Server blade and select **Advanced Threat Protection**.
 
-In the storage details section, select the same storage account used for
-the web application.
+In the storage details section, select the same storage account used for the web application.
 
-**Note**: For performance purposes, consider using a different storage
-account in the same region as the database, but different from other
-services.
+**Note**: For performance purposes, consider using a different storage account in the same region as the database, but different from other services.
 
-![](images/media/image171.png)
+> ![Enabled advanced threat detection](images/media/image171.png)
 
 ### Task 6: Turn on SQL Server Auditing
 
-Navigate to the SQL Server. Located under the Security section, click on
-Auditing. In this section we will enable the SQL Server. Specify which
-Storage Account you want the logs to be exported too and click on
-**Save.**
+Navigate to the SQL Server. Located under the Security section, click on Auditing. In this section we will enable the SQL Server. Specify which Storage Account you want the logs to be exported too and click on **Save.**
 
-![](images/media/image172.png)
+> ![Turn on SQL Server Auditing](images/media/image172.png)
 
 ### Task 7: Automatic Tuning
 
-In the SQL Server blade, select **Support+Troubleshooting** section.
-Azure SQL Database has built-in intelligence to automatically tune your
-databases to optimize performance. At the server level, you can enable
-the Azure defaults. You can set the inherit state or force to be applied
-or off for your database. Click on **Azure defaults** and click
-**Apply.**
+In the SQL Server blade, select **Support+Troubleshooting** section. Azure SQL Database has built-in intelligence to automatically tune your databases to optimize performance. At the server level, you can enable the Azure defaults. You can set the inherit state or force to be applied or off for your database. Click on **Azure defaults** and click **Apply.**
 
-![](images/media/image173.png)
+> ![Automatic Tuning](images/media/image173.png)
 
 ### Task 8: Enable Database Diagnostics
 
-If we need to troubleshoot or get a better understanding of what’s going
-on with our database and server, be sure to turn on the Database
-diagnostics. In the blade, navigate to the database you want Diagnostics
-turn on and click **Turn on Diagnostics**.
+If we need to troubleshoot or get a better understanding of what’s going on with our database and server, be sure to turn on the Database diagnostics. In the blade, navigate to the database you want Diagnostics turn on and click **Turn on Diagnostics**.
 
-![](images/media/image174.png)
+> ![Enable Database Diagnostics](images/media/image174.png)
 
-Next, to identify the diagnostics, type in the name. such as the name
-and location of the database. If you want the logs to be saved to
-Archived to a Storage Account, select the existing storage account.
-Next, toggle the retention days you want to keep each log. **Note**: you
-have the option to send the logs to Log Analytics or Stream to event
+Next, to identify the diagnostics, type in the name. such as the name and location of the database. If you want the logs to be saved to Archived to a Storage Account, select the existing storage account. Next, toggle the retention days you want to keep each log. **Note**: you have the option to send the logs to Log Analytics or Stream to event
 hub.
 
-![](images/media/image175.png)
+> ![Configure Database Diagnostics Settings](images/media/image175.png)
 
 ### Task 9: Configure Long-term backup retention for database
 
-SQL Database automatically creates database backup and uses Azure
-read-access geo redundant storage (RA-GRS) to provide geo redundancy.
-These backups are created automatically and at no additional cost. You
-don’t need to do anything to make it happen. SQL backup create full,
-differential, and transaction log backups for Point-in-time restore
-(PITR). The transaction log backups generally every 5-10 minutes,
-depending on the performance level and database activity. Logs are kept
-based off the DTI purchased vCore-based purchasing model. You can change
-the default retention using either REST API or PowerShell. The default
-values are 7, 14, 21, 28 or 35 days.
+SQL Database automatically creates database backup and uses Azure read-access geo redundant storage (RA-GRS) to provide geo redundancy. These backups are created automatically and at no additional cost. You don’t need to do anything to make it happen. SQL backup create full, differential, and transaction log backups for Point-in-time restore (PITR). The transaction log backups generally every 5-10 minutes, depending on the performance level and database activity. Logs are kept based off the DTI purchased vCore-based purchasing model. You can change the default retention using either REST API or PowerShell. The default values are 7, 14, 21, 28 or 35 days.
 
-![](images/media/image176.png)
+> ![Configure Long-term backup retention for database](images/media/image176.png)
 
-Our business requirements us to have 120 days back up, therefore, we
-need to configure the Long-term backup retention. Navigation to the SQL
-Server and under the Settings section, click on **Long-term backup
-retention.** Select the **PartsUnlimitedDB** from the available
-databases. In the Configure Policies, click **Weekly Backups**, type
-**120** for the length and change the drown down interval to **Days**.
-When done, click
-**Apply.**
+Our business requirements us to have 120 days back up, therefore, we need to configure the Long-term backup retention. Navigation to the SQL Server and under the Settings section, click on **Long-term backup retention.** Select the **PartsUnlimitedDB** from the available databases. In the Configure Policies, click **Weekly Backups**, type **120** for the length and change the drown down interval to **Days**. When done, click **Apply.**
 
-![](images/media/image177.png)
+> ![Configure database retention policies](images/media/image177.png)
 
 ## Exercise 6: Optimize Entire Web Application Performance with Content Distributed Network (CDN)
 

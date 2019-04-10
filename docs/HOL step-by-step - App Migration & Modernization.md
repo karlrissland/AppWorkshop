@@ -1180,103 +1180,58 @@ Our business requirements us to have 120 days back up, therefore, we need to con
 
 ## Exercise 6: Optimize Entire Web Application Performance with Content Distributed Network (CDN)
 
-Duration: 30 minutes
+**Duration**: 30 minutes
 
-As the improvements have been rolling out to the Parts Unlimited site,
-marketing has been ramping up its advertising causing an uptick in
-traffic. While this is exactly what the company wants, it has caused
-some latency issues. Improvements need to be made to the Parts Unlimited
-site to reduce latency and improve end user experience. This must be
-done quickly as there are additional marketing campaigns on the horizon.
+As the improvements have been rolling out to the Parts Unlimited site, marketing has been ramping up its advertising causing an uptick in traffic. While this is exactly what the company wants, it has caused some latency issues. Improvements need to be made to the Parts Unlimited site to reduce latency and improve end user experience. This must be done quickly as there are additional marketing campaigns on the horizon.
 
-To solve the performance issues as quickly as possible, we are going to
-implement a Content Delivery Network for our site. It has been decided
-that the entire site will be cached with CDN.
+To solve the performance issues as quickly as possible, we are going to implement a Content Delivery Network for our site. It has been decided that the entire site will be cached with CDN.
 
-  - Create a CDN endpoint to Web App
+- Create a CDN endpoint to Web App
+- Configure for correct behavior of when using Query String
+- Change for even faster performance by adding compression
 
-  - Configure for correct behavior of when using Query String
-
-  - Change for even faster performance by adding compression
-
-With Azure CDN you have a choice of different CDN providers. Configuring
-the service is quick, usually around a few minutes, and billing is based
-on use as opposed to a
+With Azure CDN you have a choice of different CDN providers. Configuring the service is quick, usually around a few minutes, and billing is based on use as opposed to a
 contract.
 
 **References**
 
-| Azure CDN               | <https://azure.microsoft.com/en-us/services/cdn/>                    |
-| ----------------------- | -------------------------------------------------------------------- |
-| CDN Overview            | <https://docs.microsoft.com/en-us/azure/cdn/cdn-overview>            |
-| Creating a new Endpoint | <https://docs.microsoft.com/en-us/azure/cdn/cdn-create-new-endpoint> |
+- [Azure CDN](https://azure.microsoft.com/en-us/services/cdn/)
+- [CDN Overview](https://docs.microsoft.com/en-us/azure/cdn/cdn-overview)
+- [Creating a new Endpoint](https://docs.microsoft.com/en-us/azure/cdn/cdn-create-new-endpoint)
 
 ### Task 1: Configure CDN for the whole web application
 
-Using the **Networking** tab in the **Web App** blade and clicking on
-the **Configure Azure CDN for your app** link:
+Using the **Networking** tab in the **Web App** blade and clicking on the **Configure Azure CDN for your app** link:
 
- 
+> ![App Service Networking](images/media/image178.png)
 
-![](images/media/image178.png)
+Fill out the form to create a new **CDN Profile** and **CDN Endpoint** for the app:
 
- 
+> ![Configure Azure CDN Endpoint](images/media/image179.png)
 
-Fill out the form to create a new **CDN Profile** and **CDN Endpoint**
-for the app:
+After services are created, browse the website in the edge URL to make sure it is working.
 
- 
-
-![](images/media/image179.png)
-
-After services are created, browse the website in the edge URL to make
-sure it is working.
-
-Navigate through the product categories and notice that the same page is
-being displayed for all categories, must be a problem with the query
-string parameters, let's fix that.
+Navigate through the product categories and notice that the same page is being displayed for all categories, must be a problem with the query string parameters, let's fix that.
 
 ### Task 2: Configure Caching Rules
 
-Click on the **CDN Endpoint** in the portal and then on the **Caching
-Rules** property to see what is available. We can see there is a global
-rule for **Query String caching behavior**, which is set to be ignored.
-To fix the problem, change it to **Cache every unique URL**.
+Click on the **CDN Endpoint** in the portal and then on the **Caching Rules** property to see what is available. We can see there is a global rule for **Query String caching behavior**, which is set to be ignored. To fix the problem, change it to **Cache every unique URL**.
 
- 
+> ![Azure CDN Caching Rules](images/media/image180.png) 
 
-![](images/media/image180.png) 
+Next, under the custom caching rules, set up a new rule to exclude the shopping cart. For the Match Condition, choose **Url Path,** Matching Value(s), type **/Shopping Cart**, and **Caching Behavior,** choose **Bypass Cache.** When you’re done, click **Save**.
 
-Next, under the custom caching rules, set up a new rule to exclude the
-shopping cart. For the Match Condition, choose **Url Path,** Matching
-Value(s), type **/Shopping Cart**, and **Caching Behavior,** choose
-**Bypass Cache.** When you’re done, click **Save**.
-
-Now browse the website on the edge URL and do a fresh reload on the
-category product pages and the problem should be fixed now, any
-subsequent visits will be faster because data is cached in the CDN for
-all pages.
+Now browse the website on the edge URL and do a fresh reload on the category product pages and the problem should be fixed now, any subsequent visits will be faster because data is cached in the CDN for all pages.
 
 ### Task 3: Improve performance by adding compression
 
-We can improve the CDN performance even further with compression rules
-for some types of files, specially text. Click on the **Compression**
-property, enable it, and click **Save**, additional MIME types can be
-added if desired:
+We can improve the CDN performance even further with compression rules for some types of files, specially text. Click on the **Compression** property, enable it, and click **Save**, additional MIME types can be added if desired:
 
- 
+> ![Azure CDN Compression](images/media/image181.png)
 
-![](images/media/image181.png)
+Now browse the website after these changes and load time should be faster\!
 
- 
-
-Now browse the website after these changes and load time should be
-faster\!
-
-Custom CDN usage could be added only for portions of the site if this
-approach is not desirable. In addition, custom domain and SSL
-certificates can be added to an CDN
-endpoint.
+Custom CDN usage could be added only for portions of the site if this approach is not desirable. In addition, custom domain and SSL certificates can be added to an CDN endpoint.
 
 ## Exercise 7: Optimize Partial Web Application Performance with Content Distributed Network (CDN)
 

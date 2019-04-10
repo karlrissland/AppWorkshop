@@ -1235,211 +1235,117 @@ Custom CDN usage could be added only for portions of the site if this approach i
 
 ## Exercise 7: Optimize Partial Web Application Performance with Content Distributed Network (CDN)
 
-Duration: 45 minutes
+**Duration**: 45 minutes
 
-In the previous CDN exercise, we showed how you can turn on CDN for the
-whole entire site. However, for some sites with special content such as
-large files (e.g. large documents, video, etc.), we may want to optimize
-the delivery for that specific type of content. This lab will show you
-how to take a directory where your content in stored offload that
-content to a CDN.
+In the previous CDN exercise, we showed how you can turn on CDN for the whole entire site. However, for some sites with special content such as large files (e.g. large documents, video, etc.), we may want to optimize the delivery for that specific type of content. This lab will show you how to take a directory where your content in stored offload that content to a CDN.
 
-  - Create Resource Group & Storage Account
-
-  - Create a CDN Profile
-
-  - Create a CDN Endpoint
-
-  - ouPublish Content: Copy images to storage account
-
-  - Change code to use CDN
-
-  - Explore additional features
-
+- Create Resource Group & Storage Account
+- Create a CDN Profile
+- Create a CDN Endpoint
+- Publish Content: Copy images to storage account
+- Change code to use CDN
+- Explore additional features
 
 ### Task 1: Create a Resource Group & Storage Account
 
-**Note:** If you already created a Storage Group for the web app logs,
-you can skip this step. If you already created a CDN Profile in the
-previous lab, you can also skip this step and go to **Add CDN
-Endpoint**.
+**Note:** If you already created a Storage Group for the web app logs, you can skip this step. If you already created a CDN Profile in the previous lab, you can also skip this step and go to **Add CDN Endpoint**.
 
-Create a resource group called CDN to place all the resources to be used
-for the Content Delivery Network. In the Azure Portal, click to add a
-resource and look for Storage Account:
+Create a resource group called CDN to place all the resources to be used for the Content Delivery Network. In the Azure Portal, click to add a resource and look for Storage Account:
 
- 
-
-![](images/media/image182.png)
-
- 
+> ![Create storage account](images/media/image182.png)
 
 Click on the create button to start:
 
- 
-
-![](images/media/image183.png)
-
- 
+> ![Create storage account](images/media/image183.png)
 
 Enter a name for the storage account, select resource manager for
 deployment model & storage V2 for kind, select standard performance and
 LRS for replication, Hot for tier and disabled for secure transfer
 required and select the resource group where to create:
 
-![](images/media/image184.png)
-
- 
+> ![Configure storage account settings](images/media/image184.png)
 
 ### Task 2: Provision
 
-In the Azure Portal, click to add a resource and select the "Web +
-Mobile" area and "CDN" should be immediately available:
+In the Azure Portal, click to add a resource and select the "Web + Mobile" area and "CDN" should be immediately available:
 
-![](images/media/image185.png)
+> ![Create Azure CDN](images/media/image185.png)
 
- 
+Enter a name for the profile, select a resource group and a pricing tier:
 
-Enter a name for the profile, select a resource group and
-
- 
-
-![](images/media/image186.png)
-
- 
-
- 
+> ![Create Azure CDN](images/media/image186.png)
 
 ### Task 3: Add a CDN Endpoint
 
-After the CDN profile is created, you should be able to see the CDN
-resource and click on the **Add Endpoint** link:
+After the CDN profile is created, you should be able to see the CDN resource and click on the **Add Endpoint** link:
 
-![](images/media/image187.png)
+> ![Create Azure CDN Endpoint](images/media/image187.png)
 
- 
+In the dropdown, notice the available options for **Optimized for**…. Enter "{web-host}-images" name for the endpoint, select Storage as origin and click on Add:
 
-In the dropdown, notice the available options for **Optimized for**….
-Enter "{web-host}-images" name for the endpoint, select Storage as
-origin and click on Add:
-
-![](images/media/image188.png)
-
- 
+> ![Create Azure CDN Endpoint on Storage Account](images/media/image188.png)
 
 ### Task 4: Copy images to storage account
 
-Use the Azure Storage Explorer in the Portal or [download
-it](https://azure.microsoft.com/en-us/features/storage-explorer/) to
-connect to the storage account previously created:
+Use the Azure Storage Explorer in the Portal or [download it](https://azure.microsoft.com/en-us/features/storage-explorer/) to connect to the storage account previously created:
 
- 
+> ![Open Storage Account in Storage Explorer](images/media/image189.png)
 
-![](images/media/image189.png)
+After authenticating and locating the storage account in the Storage Explorer, create an **images** Blob container:
 
- 
+If you’re using the Portal’s Storage explorer, Set the permission to "Public read access for blobs only" to allow them to be accessible.
 
-After authenticating and locating the storage account in the Storage
-Explorer, create an "images" Blob container:
-
-If you’re using the Portal’s Storage explorer, Set the permission to
-"Public read access for blobs only" to allow them to be accessible.
-
-![](images/media/image190.png)
+> ![Create images container](images/media/image190.png)
 
 If you’re using the Microsoft Azure Storage Explorer for Windows:
 
-![](images/media/image191.png)
+> ![Create images container](images/media/image191.png)
 
 Change the "Public Access Level" for the "images" container:
 
-![](images/media/image192.png)
+> ![Set container access level to public](images/media/image192.png)
 
- 
+Set the permission to "Public read access for blobs only" to allow them to be accessible:
 
-Set the permission to "Public read access for blobs only" to allow them
-to be accessible:
+> ![Set container access level to Public read access for blobs only](images/media/image193.png)
 
-![](images/media/image193.png)
+Then proceed to copy all the files in the "/images" folder inside of the PartsUnlimitedWebsite
 
- 
+> ![Upload files to images container](images/media/image194.png)
 
-Then proceed to copy all the files in the "/images" folder inside of the
-PartsUnlimitedWebsite
+You can test now by requesting in a browser the URL of the endpoint + /images/ + any of the file names and the image should be displayed:
 
-![](images/media/image194.png)
-
- 
-
-You can test now by requesting in a browser the URL of the endpoint +
-/images/ + any of the file names and the image should be displayed:
-
-![](images/media/image195.png)
-
- 
+> ![Test CDN for images](images/media/image195.png)
 
 ### Task 5: Integrate into web application
 
-We now need to add an Application Setting to use as source for the
-images, say we call it CDNUrl, add it to the web.config file with no
-value:
+We now need to add an Application Setting to use as source for the images, say we call it CDNUrl, add it to the web.config file with no value:
 
- 
+> ![Add a CDNUrl app setting](images/media/image196.png)
 
-![](images/media/image196.png)
+Adding it without value will ensure the changes we are introducing do not change the behavior of the application. Now to make it easier to use, we already have a **ConfigurationHelpers** class in the project, so we can add the **PartsUnlimited.Utils** namespace in the **Views/web.config** file to make it easier to use in our views. This will shorten using this class in all places where we need it.
 
- 
+> ![Add PartsUnlimited.Utils namespace to view/web.config](images/media/image197.png)
 
-Adding it without value will ensure the changes we are introducing do
-not change the behavior of the application. Now to make it easier to
-use, we already have a **ConfigurationHelpers** class in the project, so
-we can add the **PartsUnlimited.Utils** namespace in the
-**Views/web.config** file to make it easier to use in our views. This
-will shorten using this class in all places where we need it.
+Now let's find the views that need to use the CDN for images, say we only concentrate on the product images, so find the pattern **images/@** in the **PartsUnlimitedWebsite** project:
 
- 
+> ![Find usage of images in solution](images/media/image198.png)
 
-![](images/media/image197.png)
+We can see in the results that 3 of the files are related to showing product images, we need to change those to use the **CDNUrl** setting, the quickest way would be to simply using the **ConfigurationHelpers.GetString** method, like the following screenshot shows in the **Views/Store/Details.cshtml** file:
 
- 
+> ![Add use of CDNUrl setting for all images](images/media/image199.png)
 
-Now let's find the views that need to use the CDN for images, say we
-only concentrate on the product images, so find the pattern **images/@**
-in the **PartsUnlimitedWebsite** project:
+Add the @**ConfigurationHelpers.GetString("CDNUrl")** to all 3 files and test the application to make sure all images are still displayed correctly.
 
-![](images/media/image198.png)
+Now add the value of the **CDNUrl** application setting using the name of the endpoint from the Azure Portal:
 
- 
-
-We can see in the results that 3 of the files are related to showing
-product images, we need to change those to use the **CDNUrl** setting,
-the quickest way would be to simply using the
-**ConfigurationHelpers.GetString** method, like the following screenshot
-shows in the **Views/Store/Details.cshtml** file:
-
-![](images/media/image199.png)
-
- 
-
-Add the @**ConfigurationHelpers.GetString("CDNUrl")** to all 3 files and
-test the application to make sure all images are still displayed
-correctly.
-
-Now add the value of the **CDNUrl** application setting using the name
-of the endpoint from the Azure Portal:
-
-![](images/media/image195.png)
-
- 
+> ![Add value of CDNUrl](images/media/image195.png)
 
 Now test the application with the product images being served via CDN.
 
-At this point the product images could be removed from the project or
-marked with build action to **None** and avoid them being included in
-the build artifacts.
+At this point the product images could be removed from the project or marked with build action to **None** and avoid them being included in the build artifacts.
 
-The deployment of the images to the storage account could also be
-automated using:
+The deployment of the images to the storage account could also be automated using:
 
 **CLI**  
 az storage blob
@@ -1449,27 +1355,18 @@ upload-batch
 
 Set-AzureStorageBlobContent
 
-[https://docs.microsoft.com/en-us/powershell/module/azure.storage/Set-AzureStorageBlobContent?view=azurermps-5.3.0](mhtml:file://C:\\Users\\danshue\\Desktop\\Workshop\\AppMigrationAndModernizationWorkshopPresenter.mht!https://docs.microsoft.com/en-us/powershell/module/azure.storage/Set-AzureStorageBlobContent?view=azurermps-5.3.0)
+[https://docs.microsoft.com/en-us/powershell/module/azure.storage/Set-AzureStorageBlobContent?view=azurermps-5.3.0](https://docs.microsoft.com/en-us/powershell/module/azure.storage/Set-AzureStorageBlobContent?view=azurermps-5.3.0)
 
-Add a comment to your change set and commit/sync your changes, which
-will start a CI/CD.
+Add a comment to your change set and commit/sync your changes, which will start a CI/CD.
 
-![](images/media/image200.png)
-
- 
+> ![Commit changes](images/media/image200.png)
 
 ### Task 6: Explore Enhancements
 
- 
-
-  - Restrict access by country
-
-  - Compression
-
-  - Caching
-rules
-
-  - Purge
+- Restrict access by country
+- Compression
+- Caching rules
+- Purge
 
 ## Exercise 8: Increase Application / Database Performance with Redis Cache
 

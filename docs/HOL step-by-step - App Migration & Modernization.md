@@ -84,7 +84,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 5: Reducing database utilization](#task-5-reducing-database-utilization)
   - [Exercise 9: Improve Quality & Performance of Search with Azure Search](#exercise-9-improve-quality--performance-of-search-with-azure-search)
     - [Task 1: Create Azure Search Service](#task-1-create-azure-search-service)
-    - [Task 2: Configure Azure Search](#task-2-configure-azure-search)
+    - [Task 2: Import Data in Azure Search](#task-2-import-data-in-azure-search)
     - [Task 3: Integrate search into application](#task-3-integrate-search-into-application)
     - [Task 4: Verify Search Results](#task-4-verify-search-results)
     - [Task 5: Commit & Sync Code](#task-5-commit--sync-code)
@@ -1633,286 +1633,179 @@ If everything works as expected, then comment and commit/sync your code into Azu
 
 ## Exercise 9: Improve Quality & Performance of Search with Azure Search
 
-Duration: 30 minutes
+**Duration**: 30 minutes
 
-It has come to the businesses attention that customers are not able to
-find what they are looking for easily. After some investigation it was
-determined that the existing search capabilities were not adequate and
-needed to be updated. To improve the application’s search capability as
-quickly as possible, with as little code as possible, while ensuring the
-ability to support the sites growing traffic, Azure Search will be
-implemented.
+It has come to the businesses attention that customers are not able to find what they are looking for easily. After some investigation it was determined that the existing search capabilities were not adequate and needed to be updated. To improve the application’s search capability as quickly as possible, with as little code as possible, while ensuring the ability to support the sites growing traffic, Azure Search will be implemented.
 
-  - Go to the Azure Portal
-
-  - Look at the Parts Unlimited DB config
-
-  - Add Azure Search
-
-  - Create a branch
-
-  - Modify the application to use Azure Search
-
-  - Test Local
-
-  - Commit and push to release
-
-  - Test in production
+- Go to the Azure Portal
+- Look at the Parts Unlimited DB config
+- Add Azure Search
+- Create a branch
+- Modify the application to use Azure Search
+- Test Local
+- Commit and push to release
+- Test in production
 
 **References**
 
-|              |                                                  |
-| ------------ | ------------------------------------------------ |
-| Azure Search | <https://docs.microsoft.com/en-us/azure/search/> |
+- [Azure Search](https://docs.microsoft.com/en-us/azure/search/)
 
 ### Task 1: Create Azure Search Service
 
-Current search is based on SQL queries and prone to bad results. Doing a
-search like "jumper" or "leads" will return a product match like the
-following:
+Current search is based on SQL queries and prone to bad results. Doing a search like "jumper" or "leads" will return a product match like the following:
 
-![](images/media/image205.png)
+> ![Parts Unlimited Search](images/media/image205.png)
 
- 
+Clicking on the Product, we can see a lot more text that could be searched for:
 
-Clicking on the Product, we can see a lot more text that could be
-searched for:
+> ![Product Description](images/media/image206.png)
 
-![](images/media/image206.png)
+But doing a search on text within the Product's description or details, like "corrosion" would not return any matches:
 
- 
-
-But doing a search on text within the Product's description or details,
-like "corrosion" would not return any matches:
-
-![](images/media/image207.png)
-
- 
+> ![Search does not match description](images/media/image207.png)
 
 In the Azure Portal, create a new instance of **Azure Search**:
 
-![](images/media/image208.png)
+> ![Provision Azure Search](images/media/image208.png)
 
- 
+Enter the **name** and **resource group** for the service and click create:
 
-Enter the **name** and **resource group** for the service and click
-create:
+> ![Provision Azure Search](images/media/image209.png)
 
- 
+### Task 2: Import Data in Azure Search
 
-![](images/media/image209.png)
+After the service is created, we must proceed to create an index and populate it with data. To start this process, we will take advantage of the existing database and use the **Import Data** wizard:
 
-### Task 2: Configure Azure Search
+> ![Import Data in Azure Search](images/media/image210.png)
 
-After the service is created, we must proceed to create an index and
-populate it with data. To start this process, we will take advantage of
-the existing database and use the **Import Data** wizard:
+Provide the details for a data source, selecting the type of source, in our case **Azure SQL Database** and providing the connection string values and selecting the **Table/View** of **Products**: For the name, since this is a unique value, type in the host name associated with the application. After typing the name, select the partsUnlimitedDB for the database, UserId, and Password, click on **Test connection** in order to verify the credentials are correct.
 
-![](images/media/image210.png)
+**Note**: Use the same name for the database that you used when you created the environment. Note, you may also need to change the login to \[username\]@hostname.
 
- 
+- Database User: sysadmin
+- Database Password: Password$123
 
-Provide the details for a data source, selecting the type of source, in
-our case **Azure SQL Database** and providing the connection string
-values and selecting the **Table/View** of **Products**: For the name,
-since this is a unique value, type in the host name associated with the
-application. After typing the name, select the partsUnlimitedDB for the
-database, UserId, and Password, click on **Test connection** in order to
-verify the credentials are correct.
+> ![Add data source](images/media/image211.png)
 
-**Note**: Use the same name for the database that you used when you
-created the environment. Note, you may also need to change the login to
-\[username\]@hostname.
+Configure the index, name it **products-index**, select all fields to be retrievable and select as *searchable* **Title**, **Description** and **ProductDetails**:
 
-Default DB Login Name: workshopServiceAcc
+> ![Configure index](images/media/image212.png)
 
-Default DB User Name: workshopServiceAcc
+Define the indexer property to update the data in the index, in this case we will select **Once** and click **Ok**. To setup recurring indexer we would need a field to use to track changes, which we don't have now, but adding a field like **UpdatedDate** that is updated every time the product fields are updated would work.
 
-Default DB User Password: P2ssw0rd
+> ![Configure indexer](images/media/image213.png)
 
-Default Database Name: partsUnlimitedDB
+Clicking Ok on the Import Data blade after all details are provided would trigger the indexer to run and it should look like the screenshot below indicating all documents have been indexed.
 
-![](images/media/image211.png)
-
-Configure the index, name it **products-index**, select all fields to be
-retrievable and select as *searchable* **Title**, **Description** and
-**ProductDetails**:
-
-![](images/media/image212.png)
-
-Define the indexer property to update the data in the index, in this
-case we will select **Once** and click **Ok**. To setup recurring
-indexer we would need a field to use to track changes, which we don't
-have now, but adding a field like **UpdatedDate** that is updated every
-time the product fields are updated would work.
-
- 
-
-![](images/media/image213.png)
-
-Clicking Ok on the Import Data blade after all details are provided
-would trigger the indexer to run and it should look like the screenshot
-below indicating all documents have been indexed.
-
- 
-
-![](images/media/image214.png)
-
- 
+> ![Check indexer status](images/media/image214.png)
 
 ### Task 3: Integrate search into application
 
- Remote into the vmdev01 using the User Name and Password used when
-creating the environment.
+Remote into the **vmdev01** using the User Name and Password used when creating the environment.
 
-**Note**:
+Upgrade the **PartsUnlimitedWebsite** project to target at least the **.Net Framework 4.5.2** to be able to use the Azure Search SDK. This is done via the properties page of the project.
 
-Default Admin: sysadmin
-
-Default Password: Password$123
-
-> ![](images/media/image11.png)
-
-Upgrade the **PartsUnlimitedWebsite** project to target at least the
-**.Net Framework 4.5.2** to be able to use the Azure Search SDK. This is
-done via the properties page of the project.
-
-You must add the NuGet package **Microsoft.Azure.Search** that will
-enable us to code against the Azure Search service. This can be done
-from the Package Manager Console with the following command:
+You must add the NuGet package **Microsoft.Azure.Search** that will enable us to code against the Azure Search service. This can be done from the Package Manager Console with the following command:
 
 *Install-Package Microsoft.Azure.Search*
 
-Add some entries in the **Web.config** that will be used to setup the
-values for integrating with the Azure Search service. The value for the
-**SearchServiceQueryApiKey** is obtained from the **Azure Search
-Service/Keys/Manage Search Query** blade.
+Add some entries in the **Web.config** that will be used to setup the values for integrating with the Azure Search service. The value for the **SearchServiceQueryApiKey** is obtained from the **Azure Search Service/Keys/Manage Search Query** blade.
 
-![](images/media/image215.png)
+> ![Azure Search Keys](images/media/image215.png)
+>
+> ![Azure Search Query Keys](images/media/image216.png)
 
- 
+```xml
+<add key="SearchServiceName" value="partsunlimited" />
+<add key="SearchServiceQueryApiKey" value="*************" />
+<add key="SearchServiceIndexName" value="products-index" />
+```
 
-![](images/media/image216.png)
+Add a new class called **AzureIndexProductSearch** in the **ProductSearch** directory:
 
-<table>
-<tbody>
-<tr class="odd">
-<td><p>&lt;add key="SearchServiceName" value="partsunlimited"/&gt; </p>
-<p>&lt;add key="SearchServiceQueryApiKey" value="*************"/&gt; </p>
-<p>&lt;add key="SearchServiceIndexName" value="products-index"/&gt;</p></td>
-</tr>
-</tbody>
-</table>
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using Microsoft.Azure.Search;
+using Microsoft.Azure.Search.Models;
+using PartsUnlimited.Models;
 
- 
+namespace PartsUnlimited.ProductSearch
+{
+    public class AzureIndexProductSearch : IProductSearch
+    {
+        public async Task<IEnumerable<Product>> Search(string query)
+        {
+            List<Product> products = new List<Product>();
 
-Add a new class called **AzureIndexProductSearch** in the
-**ProductSearch** directory:
+            try
+            {
+                DocumentSearchResult<Product> searchResults;
 
-<table>
-<tbody>
-<tr class="odd">
-<td><p>using System;<br />
-using System.Collections.Generic;<br />
-using System.Data.Entity;<br />
-using System.Linq;<br />
-using System.Threading.Tasks;</p>
-<p>using Microsoft.Azure.Search;<br />
-using Microsoft.Azure.Search.Models;</p>
-<p>using PartsUnlimited.Models;<br />
-<br />
-namespace PartsUnlimited.ProductSearch<br />
-{<br />
-    public class AzureIndexProductSearch : IProductSearch<br />
-    {<br />
-        public AzureIndexProductSearch() { }<br />
-<br />
-         public async Task&lt;IEnumerable&lt;Product&gt;&gt; Search(string query)<br />
-        {        </p>
-<p>List&lt;Product&gt; products = new List&lt;Product&gt;(); </p>
-<p>try </p>
-<p>{ </p>
-<p>DocumentSearchResult&lt;Product&gt; searchResults; </p>
-<p> </p>
-<p>var parameters = new SearchParameters() </p>
-<p>{ </p>
-<p>Select = new[] { "ProductId", "SkuNumber", "CategoryId", "Title", "Price", "SalePrice", "ProductArtUrl", "Description", "ProductDetails", "Inventory", "LeadTime" } </p>
-<p>}; </p>
-<p> </p>
-<p>using (var searchClient = CreateSearchIndexClient())<br />
-                {<br />
-                    searchResults = await searchClient.Documents.SearchAsync&lt;Product&gt;(query, parameters);<br />
-                }</p>
-<p> </p>
-<p>foreach (var r in searchResults.Results) </p>
-<p>{ </p>
-<p>products.Add(r.Document); </p>
-<p>} </p>
-<p> </p>
-<p>return products; </p>
-<p>} </p>
-<p>catch(Exception ex) </p>
-<p>{ </p>
-<p>//eat it </p>
-<p>} </p>
-<p> </p>
-<p>return products; </p>
-<p>        }</p>
-<p> </p>
-<p>private static SearchIndexClient CreateSearchIndexClient() </p>
-<p>{ </p>
-<p>string searchServiceName = ConfigurationManager.AppSettings["SearchServiceName"]; </p>
-<p>string queryApiKey = ConfigurationManager.AppSettings["SearchServiceQueryApiKey"]; </p>
-<p>string indexName = ConfigurationManager.AppSettings["SearchServiceIndexName"]; </p>
-<p> </p>
-<p>return new SearchIndexClient(searchServiceName, indexName, new SearchCredentials(queryApiKey));</p>
-<p>} <br />
-}<br />
-}</p></td>
-</tr>
-</tbody>
-</table>
+                var parameters = new SearchParameters()
+                {
+                    Select = new[] { "ProductId", "SkuNumber", "CategoryId", "Title", "Price", "SalePrice", "ProductArtUrl", "Description", "ProductDetails", "Inventory", "LeadTime" }
+                };
 
- 
+                using (var searchClient = CreateSearchIndexClient())
+                {
+                    searchResults = await searchClient.Documents.SearchAsync<Product>(query, parameters);
+                }
 
-Replace the class used for the search in the **UnityConfig.cs** file in
-the **App\_Start**
-directory:
+                foreach (var r in searchResults.Results)
+                {
+                    products.Add(r.Document);
+                }
+            }
+            catch (Exception)
+            {
+                // Throw exception for easier troubleshooting
+                throw;
+            }
+
+            return products;
+        }
+
+        private static SearchIndexClient CreateSearchIndexClient()
+        {
+            string searchServiceName = ConfigurationManager.AppSettings["SearchServiceName"];
+            string queryApiKey = ConfigurationManager.AppSettings["SearchServiceQueryApiKey"];
+            string indexName = ConfigurationManager.AppSettings["SearchServiceIndexName"];
+
+            return new SearchIndexClient(searchServiceName, indexName, new SearchCredentials(queryApiKey));
+        }
+
+    }
+}
+```
+
+Replace the class used for the search in the **UnityConfig.cs** file in the **App\_Start** directory:
 
 Replace:
 
- 
+```csharp
+container.RegisterType<IProductSearch, StringContainsProductSearch>();
+```
 
-|                                                                          |
-| ------------------------------------------------------------------------ |
-| container.RegisterType\<IProductSearch, StringContainsProductSearch\>(); |
+With:
 
- 
-
-with:
-
-|                                                                      |
-| -------------------------------------------------------------------- |
-| container.RegisterType\<IProductSearch, AzureIndexProductSearch\>(); |
-
- 
+```csharp
+container.RegisterType<IProductSearch, AzureIndexProductSearch>();
+```
 
 ### Task 4: Verify Search Results
 
-Running the application should allow us to perform the same search as
-before for "jumper" or "leads" and obtain the same results. However, it
-is possible now to obtain results by searching by the word "corrosion"
-and getting as expected the Product with that text in the Description:
+Running the application should allow us to perform the same search as before for "jumper" or "leads" and obtain the same results. However, it is possible now to obtain results by searching by the word "corrosion" and getting as expected the Product with that text in the Description:
 
-![](images/media/image217.png)
+> ![Verify Search Results](images/media/image217.png)
 
 ### Task 5: Commit & Sync Code
 
-When you’re all done verifying the search is working on your local
-machine, comment, commit, and sync your code. This will kick off the
-CI/CD. Once Azure DevOps Release Management deploys the code, perform a spot
-check to verify the changes you’ve made to the search is showing
-up.
+When you’re all done verifying the search is working on your local machine, comment, commit, and sync your code. This will kick off the CI/CD. Once Azure DevOps Release Management deploys the code, perform a spot check to verify the changes you’ve made to the search is showing up.
 
 ## Exercise 10: Accelerate development and take advantage of serverless using Azure Functions
 

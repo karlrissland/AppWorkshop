@@ -1370,376 +1370,266 @@ Add a comment to your change set and commit/sync your changes, which will start 
 
 ## Exercise 8: Increase Application / Database Performance with Redis Cache
 
-Duration: 60 minutes
+**Duration**: 60 minutes
 
-It has come to the businesses attention that customers are experiencing
-slow.
+It has come to the businesses attention that customers are experiencing slow.
 
-  - Provision the Azure Redis service
-
-  - Improve session state by using Redis as Session State Provider
-
-  - Speed up output by using Redis as Output Cache Provider
-
-  - Reduce database usage by using Redis as Data
-Cache
+- Provision the Azure Redis service
+- Improve session state by using Redis as Session State Provider
+- Speed up output by using Redis as Output Cache Provider
+- Reduce database usage by using Redis as Data Cache
 
 **References**
 
-| Redis Cache Quick Start | <https://docs.microsoft.com/en-us/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache> |
-| ----------------------- | ---------------------------------------------------------------------------------------------- |
-| No Cache Anti Pattern   | https://docs.microsoft.com/en-us/azure/architecture/antipatterns/no-caching/                   |
+- [Redis Cache Quick Start](https://docs.microsoft.com/en-us/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache)
+- [No Cache Anti Pattern](https://docs.microsoft.com/en-us/azure/architecture/antipatterns/no-caching/)
 
 ### Task 1: Provisioning the Redis Cache Service
 
-Create a new Redis Cache service to use with the Parts Unlimited
-Website. Click to create a new resource and search for **Redis Cache**,
-once found highlight and click on the **Create** button:
+Create a new Redis Cache service to use with the Parts Unlimited Website. Click to create a new resource and search for **Redis Cache**, once found highlight and click on the **Create** button:
 
- 
+![Provision Azure Redis Cache](images/media/image201.png)
 
-![](images/media/image201.png)
+Provide the values to create the service, provide name (use your web application name), resource group, and choose the same region where your web application is located. Select "Standard C0" for pricing tier and click **Create**.
 
- 
+Notice the differences in the pricing tier, networking features, clustering capabilities, size, SLA, connectivity limits, etc.
 
-Provide the values to create the service, provide name (use your web
-application name), resource group, and choose the same region where your
-web application is located. Select "Standard C0" for pricing tier and
-click **Create**.
+> ![Configure Redis Cache Pricing Tier](images/media/image202.png)
 
- 
+Navigate to the resource and click on the **Access Keys** property to get the primary key which we will need later to establish connectivity to the Redis Cache:
 
-***Note***: Notice the differences in the pricing tier, networking
-features, clustering capabilities, size, SLA, connectivity limits, etc.
-
- 
-
-![](images/media/image202.png)
-
- 
-
-Navigate to the resource and click on the **Access Keys** property to
-get the primary key which we will need later to establish connectivity
-to the Redis Cache:
-
- 
-
-![](images/media/image203.png)
+> ![Redis Cache Access Keys](images/media/image203.png)
 
 ### Task 2: Improve Session Performance
 
-Remote into the vmdev01 using the User Name and Password used when
-creating the environment.
+Remote into the **vmdev01** using the User Name and Password used when creating the environment.
 
-> ![](images/media/image52.png)
+> ![Remote Desktop Connection Warning](images/media/image52.png)
 
 **Note**:
 
-Default Admin: sysadmin
+- Default Admin: sysadmin
+- Default Password: Password$123
 
-Default Password: Password$123
+> ![Remote Desktop Credentials](images/media/image11-vm-credentials.png)
+>
+> ![Remote Desktop Connection Certificate Warning](images/media/image53.png)
 
-> ![](images/media/image11.png)
-> 
-> ![](images/media/image53.png)
+Upgrade Project to target .Net Framework 4.5.2
 
-Note: Upgrade Framework to .NET 4.5.2
-
-Install the NuGet package **Microsoft.Web.RedisSessionStateProvider** in
-the **PartsUnlimitedWebsite** project.
+Install the NuGet package **Microsoft.Web.RedisSessionStateProvider** in the **PartsUnlimitedWebsite** project. Notice the latest version does not work the .Net Framework version of this project, so you must choose version **3.0.2**
 
 Modify the **Web.config** to add a new connection string replacing the
 \[SERVER\_NAME\] and \[KEY\] values.
 
-<table>
-<tbody>
-<tr class="odd">
-<td><p>&lt;add name="RedisCacheConnectionString"</p>
-<p>connectionString="[SERVER_NAME].redis.cache.windows.net:6380,password=[KEY],ssl=True,abortConnect=False" /&gt;</p></td>
-</tr>
-</tbody>
-</table>
+```xml
+<connectionStrings>
+    <add name="RedisCacheConnectionString" connectionString="[SERVER_NAME].redis.cache.windows.net:6380,password=[KEY],ssl=True,abortConnect=False" />
+</connectionStrings>
+```
 
- 
+You will notice a **sessionState** section is added in the **Web.config** file, within the **system.web** element. Replace it with the following which uses that connection string:
 
-Add the following section in the **Web.config** file, within the
-**system.web** element. If the sessionState node already exist, replace
-it with the following which uses that connection string:
+```xml
+<sessionState mode="Custom" customProvider="MySessionStateStore">
+    <providers>
+        <add type = "Microsoft.Web.Redis.RedisSessionStateProvider"
+            name = "MySessionStateStore"
+            connectionString = "RedisCacheConnectionString" />
+    </providers>
+</sessionState>
+```
 
-<table>
-<tbody>
-<tr class="odd">
-<td><p>  &lt;sessionState mode="Custom" customProvider="MySessionStateStore"&gt;</p>
-<p>&lt;providers&gt;</p>
-<p>&lt;add type = "Microsoft.Web.Redis.RedisSessionStateProvider"</p>
-<p>name = "MySessionStateStore"</p>
-<p>connectionString = "RedisCacheConnectionString"/&gt;</p>
-<p>&lt;/providers&gt;</p>
-<p>&lt;/sessionState&gt;</p></td>
-</tr>
-</tbody>
-</table>
+**Note**: Use the connection string method to be able to be able to change the values at runtime without deploying your code.
 
- 
+After the changes, run locally to verify everything has been configured correctly by simply navigate to the Shopping Cart on the website, add a few items to the cart, then check the statistics on the Redis Cache:
 
-**Note**: Use the connection string method to be able to be able to
-change the values at runtime without deploying your code.
+> ![Azure Redis Cache](images/media/image204.png)
 
-After the changes, run locally to verify everything has been configured
-correctly by simply navigate to the Shopping Cart on the website, add a
-few items to the cart, then check the statistics on the Redis Cache:
-
-![Machine generated alternative text: \> \_ Console Essentials Delete
-Resource group (cunge) Partsunlimited Running - Basic 250 MB Location
-East US Subscription name (change) Visual Studio Enterprise - romarden
-Subscription ID ca4f2f4a- Id81-4f32-af97-849d45806dec Monitoring Hits
-and Misses Host name partsunimited.redis.cache.windows.net Non-SSL port
-(6379) disabled Show access keys... •Best practices\*
-http://aka.ms/redis/p/bestpractices •New features\* Geo-replication 12
-Gets and Sets Apr 10 261 Connections (256 max) 6 PM Apr 10 12 Total
-Commands Apr 10 6 PM 586 Apr 10 ](images/media/image204.png)
-
- 
-
-To prove this works, scale out to 2 instances, repeat adding some
-products to the cart. Scale down and keep doing the same actions on the
-site and everything should work without any data being lost.
-
- 
+To prove this works, scale out to 2 instances, repeat adding some products to the cart. Scale down and keep doing the same actions on the site and everything should work without any data being lost.
 
 ### Task 4: Speed Up Output and Reduce Memory Footprint
 
-The next thing we want to do is reduce the memory footprint and speed up
-the output when customers browse the store front. While we have some
-performance gains by adding a CDN across the site, we also can make
-further improvements by making some minor changes to our code based
-specific to the store.
+The next thing we want to do is reduce the memory footprint and speed up the output when customers browse the store front. While we have some performance gains by adding a CDN across the site, we also can make further improvements by making some minor changes to our code based specific to the store.
 
-Install the NuGet package **Microsoft.Web.RedisOutputCacheProvider** in
-the **PartsUnlimitedWebsite** project.
+Install the NuGet package **Microsoft.Web.RedisOutputCacheProvider** in the **PartsUnlimitedWebsite** project.
 
 Second, add the following section in the **Web.config** file, within the
 **system.web** element:
 
- 
+You will notice a **sessionState** section is added in the **Web.config** file, within the **system.web** element. Replace it with the following which uses that connection string:
 
-<table>
-<tbody>
-<tr class="odd">
-<td>    &lt;caching&gt;<br />
-      &lt;outputCache defaultProvider="MyStoreRedisOutputCache"&gt;<br />
-        &lt;providers&gt;<br />
-          &lt;add name="MyRedisOutputCache" type="Microsoft.Web.Redis.RedisOutputCacheProvider" host="REDIS_HOSTNAME" accessKey="PRIMARY_KEY" ssl="true" /&gt;<br />
-        &lt;/providers&gt;<br />
-      &lt;/outputCache&gt;<br />
-    &lt;/caching&gt;</td>
-</tr>
-</tbody>
-</table>
+```xml
+<outputCache defaultProvider="MyStoreRedisOutputCache">
+    <providers>
+        <add type = "Microsoft.Web.Redis.RedisOutputCacheProvider"
+            name = "MyStoreRedisOutputCache"
+            connectionString = "RedisCacheConnectionString" />
+    </providers>
+</outputCache>
+```
 
- 
+**Note**: Use the connection string method to be able to be able to change the values at runtime without deploying your code.
 
-Third, modify the **Controllers\\StoreController.cs** file to add the
-following attributes in the Browse and Details functions:
+Third, modify the **Controllers\\StoreController.cs** file to add the following attributes in the Browse and Details functions:
 
- 
+```csharp
+[OutputCache(Duration = 30, VaryByParam = "*")]
+public ActionResult Browse(int categoryId) {
+    ...
+}
 
-<table>
-<tbody>
-<tr class="odd">
-<td><p>[OutputCache(Duration = 30, VaryByParam = "*")]<br />
-public ActionResult Browse(int categoryId)<br />
-…<br />
- </p>
-<p>[OutputCache(Duration = 30, VaryByParam = "id")]<br />
-public ActionResult Details(int id)</p></td>
-</tr>
-</tbody>
-</table>
+[OutputCache(Duration = 30, VaryByParam = "id")]
+public ActionResult Details(int id){
+    ...
+}
+```
 
- 
+Notice the first one will cache the output taking into accounts all the parameters, the second one will do it only for the id parameter.
 
-Notice the first one will cache the output taking into accounts all the
-parameters, the second one will do it only for the id parameter.
-
-You can verify by adding a breakpoint inside the methods and visiting a
-product in the website, the first time you visit the page the code will
-hit the breakpoint, subsequent visits to the page will not.
+You can verify by adding a breakpoint inside the methods and visiting a product in the website, the first time you visit the page the code will hit the breakpoint, subsequent visits to the page will not.
 
 ### Task 5: Reducing database utilization
 
-This next section, we will demonstrate how to reduce the amount of
-database utilization by using Redis as a custom caching provider. This
-will require some custom code.
+This next section, we will demonstrate how to reduce the amount of database utilization by using Redis as a custom caching provider. This will require some custom code.
 
-If not already installed, install the NuGet package
-**StackExchange.Redis.StrongName** in the **PartsUnlimitedWebsite**
-project.
+If not already installed, install the NuGet package **StackExchange.Redis.StrongName** in the **PartsUnlimitedWebsite** project.
 
-Right-Click on the PartsUnlintedWebSite project name in Solution
-Explorer. Select **Manage NuGet Packages…** from the available options.
-From the NuGet Manager screen on the Browse tab, search for
-**StackExchange.Redis.StrongName** and **Install** the latest version.
+Right-Click on the PartsUnlintedWebSite project name in Solution Explorer. Select **Manage NuGet Packages…** from the available options.
+From the NuGet Manager screen on the Browse tab, search for **StackExchange.Redis.StrongName** and **Install** the latest version.
 
-Create a new C\# file in the **Utils** folder called **RedisHelper.cs**
-and copy the contents below into that new file.
+Create a new C\# file in the **Utils** folder called **RedisHelper.cs** and copy the contents below into that new file.
 
-  
+```csharp
+using Newtonsoft.Json;
+using StackExchange.Redis;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
-<table>
-<tbody>
-<tr class="odd">
-<td><p>using Newtonsoft.Json;</p>
-<p>using StackExchange.Redis;</p>
-<p>using System;</p>
-<p>using System.Collections.Generic;</p>
-<p>using System.Configuration;</p>
-<p>using System.IO;</p>
-<p>using System.Runtime.Serialization.Formatters.Binary;</p>
-<p>namespace PartsUnlimited.Utils</p>
-<p>{</p>
-<p>static class RedisHelper</p>
-<p>{</p>
-<p>private static JsonSerializerSettings serializerSettings;</p>
-<p>static RedisHelper()</p>
-<p>{</p>
-<p>serializerSettings = new JsonSerializerSettings</p>
-<p>{</p>
-<p>ReferenceLoopHandling = ReferenceLoopHandling.Ignore</p>
-<p>};</p>
-<p>}</p>
-<p>private static Lazy&lt;ConnectionMultiplexer&gt; lazyConnection = new Lazy&lt;ConnectionMultiplexer&gt;(() =&gt;</p>
-<p>{</p>
-<p>string redisHost = ConfigurationManager.AppSettings["RedisCacheConnectionString"];</p>
-<p>return ConnectionMultiplexer.Connect(redisHost);</p>
-<p>});</p>
-<p>public static ConnectionMultiplexer Connection</p>
-<p>{</p>
-<p>get</p>
-<p>{</p>
-<p>return lazyConnection.Value;</p>
-<p>}</p>
-<p>}</p>
-<p>public static T Get&lt;T&gt;(string key)</p>
-<p>{</p>
-<p>var r = Connection.GetDatabase().StringGet(key);</p>
-<p>return Deserialize&lt;T&gt;(r);</p>
-<p>}</p>
-<p>public static List&lt;T&gt; GetList&lt;T&gt;(string key)</p>
-<p>{</p>
-<p>return Get&lt;List&lt;T&gt;&gt;(key);</p>
-<p>}</p>
-<p>public static void SetList&lt;T&gt;(string key, List&lt;T&gt; list)</p>
-<p>{</p>
-<p>Set(key, list);</p>
-<p>}</p>
-<p>public static void Set(string key, object value)</p>
-<p>{</p>
-<p>Connection.GetDatabase().StringSet(key, Serialize(value));</p>
-<p>}</p>
-<p>static string Serialize(object o)</p>
-<p>{</p>
-<p>if (o == null)</p>
-<p>{</p>
-<p>return null;</p>
-<p>}</p>
-<p>return JsonConvert.SerializeObject(o, serializerSettings);</p>
-<p>}</p>
-<p>static T Deserialize&lt;T&gt;(string value)</p>
-<p>{</p>
-<p>if (value == null)</p>
-<p>{</p>
-<p>return default(T);</p>
-<p>}</p>
-<p>return JsonConvert.DeserializeObject&lt;T&gt;(value, serializerSettings);</p>
-<p>}</p>
-<p>}</p>
-<p>}</p></td>
-</tr>
-</tbody>
-</table>
+namespace PartsUnlimited.Utils
+{
+    static class RedisHelper
+    {
+        private static JsonSerializerSettings serializerSettings;
 
-We now need to ensure our models can be serialized, which is required by
-Redis. Navigate to the Models folder and add **\[Serializable\]**
-attribute to the top of the **Product.cs** and **Category.cs**: 
+        static RedisHelper()
+        {
+            serializerSettings = new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+        }
 
-<table>
-<tbody>
-<tr class="odd">
-<td>namespace PartsUnlimited.Models<br />
-{<br />
-    [Serializable]<br />
-    public class Product<br />
-    {</td>
-</tr>
-</tbody>
-</table>
+        private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["RedisCacheConnectionString"].ConnectionString;
 
- 
+            return ConnectionMultiplexer.Connect(connectionString);
+        });
 
-Note: The system assembly also needs to be referenced, add “using
-System;” before the namespace.
+        public static ConnectionMultiplexer Connection
+        {
+            get
+            {
+                return lazyConnection.Value;
+            }
+        }
 
-<table>
-<tbody>
-<tr class="odd">
-<td><p>using System;</p>
-<p>namespace PartsUnlimited.Models<br />
-{<br />
-    [Serializable]<br />
-    public class Category<br />
-    {</p></td>
-</tr>
-</tbody>
-</table>
+        public static T Get<T>(string key)
+        {
+            var r = Connection.GetDatabase().StringGet(key);
+            return Deserialize<T>(r);
+        }
 
- 
+        public static List<T> GetList<T>(string key)
+        {
+            return Get<List<T>>(key);
+        }
 
-Modify the **HomeController.cs** to use Redis instead of the
-MemoryCache:
+        public static void SetList<T>(string key, List<T> list)
+        {
+            Set(key, list);
+        }
 
- 
+        public static void Set(string key, object value)
+        {
+            Connection.GetDatabase().StringSet(key, Serialize(value));
+        }
 
-<table>
-<tbody>
-<tr class="odd">
-<td>public ActionResult Index()<br />
-{<br />
-    // Get most popular products<br />
-    var topSellingProducts = Utils.RedisHelper.GetList&lt;Product&gt;("topselling");<br />
-    if (topSellingProducts == null)<br />
-    {<br />
-        topSellingProducts = GetTopSellingProducts(4);<br />
-        Utils.RedisHelper.SetList("topselling", topSellingProducts);<br />
-    }<br />
-<br />
-    var newProducts = Utils.RedisHelper.GetList&lt;Product&gt;("newarrivals");<br />
-    if (newProducts == null)<br />
-    {<br />
-        newProducts = GetNewProducts(4);<br />
-        Utils.RedisHelper.SetList("newarrivals", newProducts);<br />
-    }<br />
-<br />
-    var viewModel = new HomeViewModel<br />
-    {<br />
-        NewProducts = newProducts,<br />
-        TopSellingProducts = topSellingProducts,<br />
-        CommunityPosts = GetCommunityPosts()<br />
-    };<br />
-<br />
-    return View(viewModel);<br />
-}</td>
-</tr>
-</tbody>
-</table>
+        static string Serialize(object o)
+        {
+            if (o == null)
+            {
+                return null;
+            }
 
-Validate our changes by adding a breakpoint on the first line of the
-Index() function in the HomeController.cs and run the website locally. A
-call to the **GetTopSellingProducts** and **GetNewProducts** should be
-made only the first time the page loads.
+            return JsonConvert.SerializeObject(o, serializerSettings);
+        }
 
-If everything works as expected, then comment and commit/sync your code
-into Azure DevOps.
+        static T Deserialize<T>(string value)
+        {
+            if (value == null)
+            {
+                return default(T);
+            }
+
+            return JsonConvert.DeserializeObject<T>(value, serializerSettings);
+        }
+    }
+}
+```
+
+**Note**: The system assembly also needs to be referenced, add “using System;” before the namespace.
+
+```csharp
+using System;
+namespace PartsUnlimited.Models
+{
+    [Serializable]
+    public class Category
+    {
+        ...
+    }
+}
+```
+
+Modify the **HomeController.cs** to use Redis instead of the MemoryCache:
+
+```csharp
+public ActionResult Index()
+{
+    // Get most popular products
+    var topSellingProducts = Utils.RedisHelper.GetList<Product>("topselling");
+    if (topSellingProducts == null)
+    {
+        topSellingProducts = GetTopSellingProducts(4);
+        Utils.RedisHelper.SetList("topselling", topSellingProducts);
+    }
+
+    var newProducts = Utils.RedisHelper.GetList<Product>("newarrivals");
+    if (newProducts == null)
+    {
+        newProducts = GetNewProducts(4);
+        Utils.RedisHelper.SetList("newarrivals", newProducts);
+    }
+
+    var viewModel = new HomeViewModel
+    {
+        NewProducts = newProducts,
+        TopSellingProducts = topSellingProducts,
+        CommunityPosts = GetCommunityPosts()
+    };
+
+    return View(viewModel);
+}
+```
+
+Validate our changes by adding a breakpoint on the first line of the Index() function in the HomeController.cs and run the website locally. A call to the **GetTopSellingProducts** and **GetNewProducts** should be made only the first time the page loads.
+
+If everything works as expected, then comment and commit/sync your code into Azure DevOps.
 
 ## Exercise 9: Improve Quality & Performance of Search with Azure Search
 

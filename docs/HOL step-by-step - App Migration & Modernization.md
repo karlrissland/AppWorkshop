@@ -2223,12 +2223,9 @@ The solution file will now produce artifacts for the web application, **PartsUnl
 
 ## Exercise 11: Monetize your data and services, and open new channels to customers using Azure API Management
 
-Duration: 45 minutes
+**Duration**: 45 minutes
 
-Now that Parts Unlimited has an API available, the business wants to
-start building relationships with other retailers, so they can sell
-their product through multiple channels. We’ve decided to use Azure API
-Management to expose and manage our
+Now that Parts Unlimited has an API available, the business wants to start building relationships with other retailers, so they can sell their product through multiple channels. We’ve decided to use Azure API Management to expose and manage our
 API.
 
 **References**
@@ -2237,231 +2234,77 @@ API.
 
 ### Task 1: Create Azure API Management
 
-Since the creation of the Azure API Management takes a little bit to
-provision, we will configure it now. In the Azure Portal, create a new
-instance of API Management:
+Since the creation of the Azure API Management takes a little bit to provision, we will configure it now. In the Azure Portal, create a new instance of API Management:
 
-![Machine generated alternative text: Microsoft Azure Home \> Resource
-groups Everything Filte API management Results NAME API management
-Report a bug Server-Migration-EastUS \> Everything Search resources,
-services and docs x x ManageEngine DesktopCentral MSP ManageEngine
-Desktop Central PUBLISHER Microsoft ManageEngine ManageEngine CATEGORY
-Web + Mobile Compute Compute ](images/media/image46.png)
+> ![API Management in the Azure Marketplace](images/media/image46.png)
 
- 
+Type in the name (e.g. use the same name as your web application), choose the region that’s the same as the web application that is already deployed, then type in the organization name, and then type your email address. When you’re all done, click **Create.** Provisioning this resource can take up to 1 hour.
 
-Type in the name (e.g. use the same name as your web application),
-choose the region that’s the same as the web application that is already
-deployed, then type in the organization name, and then type your email
-address. When you’re all done, click **Create.** Provisioning this
-resource can take up to 1 hour.
-
-![Machine generated alternative text: Home \> Resource groups \>
-Server-Migration-EastUS \> Everything API Management service
-partsunlimitedapi \* Subscription Visual Studio Enterprise \* Resource
-group O Create new Use existing Server-Migration-EastUS \* Location East
-US \* Organization name O Parts Unlimitedl \* Administrator email O
-romarden@microsoft.com Pricing tier (View full pricing details)
-Developer (No SLA) Pin to dashboard API management \> API Management se
-.azure-api.net Create Automation options
-](images/media/image47.png)
+> ![Create API Management Resource](images/media/image47.png)
 
 ### Task 2: Set up new a new API in the Azure Portal
 
-To create a new API in Azure API Management, we will use the OpenAPI
-definition (Swagger) from our web application.
+To create a new API in Azure API Management, we will use the OpenAPI definition (Swagger) from our web application.
 
 Add a new API using the Azure Portal:
 
-![](images/media/image251.png)
-
- 
-
-![](images/media/image252.png)
+> ![API Management](images/media/image251.png)
+>
+> ![Add new API](images/media/image252.png)
 
 Click **Browse** to select the new function to Add.
 
-![](images/media/image253.png)
+> ![Add Function App](images/media/image253.png)
 
- 
+To add an OpenAPI definition, go to the Function App and use the Platform Features tab to add an API definition:
 
-To add an OpenAPI definition, go to the Function App and use the
-Platform Features tab to add an API definition:
-
-![](images/media/image254.png)
-
- 
+> ![Generate API Definition](images/media/image254.png)
 
 It might fail at first:
 
-![](images/media/image255.png)
+> ![Generate API Definition](images/media/image255.png)
 
-Click on the **Generate API definition template** button to generate it
-from code and then click the **Save** button:
+Click on the **Generate API definition template** button to generate it from code and then click the **Save** button:
 
-![](images/media/image256.png)
+> ![Generate API Definition](images/media/image256.png)
 
- 
+The auto generated API definition is not complete and contains a few placeholders that should be edited manually, for simplicity use **-application/json** as value for the **produces** and **consumes** attributes, add descriptions and remove the security related attributes.
 
-The auto generated API definition is not complete and contains a few
-placeholders that should be edited manually, for simplicity use **-
-application/json** as value for the **produces** and **consumes**
-attributes, add descriptions and remove the security related attributes.
+Now add the API to API Management as attempted before and the error should not be present anymore, make sure to only add the **Unlimited** product:
 
-With exception of the HOST attribute (make sure to use hostname), the
-swagger should look like the following:
-
-<table>
-<tbody>
-<tr class="odd">
-<td><p>swagger: '2.0'</p>
-<p>info:</p>
-<p>title: Parts Unlimited Store Service</p>
-<p>version: 1.0.0</p>
-<p>host: partsunlimitedstoreservice.azurewebsites.net</p>
-<p>basePath: /</p>
-<p>schemes:</p>
-<p>- https</p>
-<p>- http</p>
-<p>paths:</p>
-<p>'/api/categories/{id}':</p>
-<p>get:</p>
-<p>operationId: '/api/categories/{id}/get'</p>
-<p>produces: [application/json]</p>
-<p>consumes: [application/json]</p>
-<p>parameters:</p>
-<p>- name: id</p>
-<p>in: path</p>
-<p>required: true</p>
-<p>type: integer</p>
-<p>description: &gt;-</p>
-<p>Get the specific category based off the specific id</p>
-<p>#http://swagger.io/specification/#operationObject</p>
-<p>responses:</p>
-<p>'200':</p>
-<p>description: Success operation</p>
-<p>/api/categories:</p>
-<p>get:</p>
-<p>operationId: /api/categories/get</p>
-<p>produces: [application/json]</p>
-<p>consumes: [application/json]</p>
-<p>parameters: []</p>
-<p>description: &gt;-</p>
-<p>Get all available categories</p>
-<p>#http://swagger.io/specification/#operationObject</p>
-<p>responses:</p>
-<p>'200':</p>
-<p>description: Success operation</p>
-<p>'/api/product/{id}':</p>
-<p>get:</p>
-<p>operationId: '/api/product/{id}/get'</p>
-<p>produces: [application/json]</p>
-<p>consumes: [application/json]</p>
-<p>parameters:</p>
-<p>- name: id</p>
-<p>in: path</p>
-<p>required: true</p>
-<p>type: integer</p>
-<p>description: &gt;-</p>
-<p>Get the spoecific product based off the specific id</p>
-<p>#http://swagger.io/specification/#operationObject</p>
-<p>responses:</p>
-<p>'200':</p>
-<p>description: Success operation</p>
-<p>definitions: {}</p></td>
-</tr>
-</tbody>
-</table>
-
- 
-
-Now add the API to API Management as attempted before and the error
-should not be present anymore, make sure to only add the **Unlimited**
-product:
-
-![](images/media/image257.png)
+> ![Add API](images/media/image257.png)
 
 After your selections, click **Create**.
 
-You can now test each of the methods of API in API Management, like the
-following test with get categories:
+You can now test each of the methods of API in API Management, like the following test with get categories:
 
-![](images/media/image258.png)
+> ![Test API](images/media/image258.png)
+>
+> ![Test API](images/media/image259.png)
 
- 
+Update the web project GetFromStoreService method to pass the StoreServiceKey value in the HTTP header request. Change the StoreServiceBaseAddress in the AppSetting section of the **Web.Config**.
 
-![](images/media/image259.png)
-
-Update the web project GetFromStoreService method to pass the
-StoreServiceKey value in the HTTP header request. Change the
-StoreServiceBaseAddress in the AppSetting section of the **Web.Config**.
-
-Run the project locally and if everything works, then commit and push
-your code to the repository. After the build has complete.
-
-<table>
-<tbody>
-<tr class="odd">
-<td><p>private static async Task&lt;T&gt; GetFromStoreService&lt;T&gt;(string path)<br />
-{<br />
-    using (var client = new HttpClient())<br />
-    {</p>
-<p>// https://stackoverflow.com/questions/46223078/c-sharp-httpclient-an-existing-connection-was-forcibly-closed-by-the-remote-host</p>
-<p>// C# 4.6 still defaults to only SSL3/TLS 1.0 even though TLS 1.1 and 1.2 are supported.</p>
-<p>// If this is the cause of the issue, you can manually add TLS 1.1 and 1.2</p>
-<p>ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;</p>
-<p>        var baseAddress = ConfigurationManager.AppSettings["StoreServiceBaseAddress"];<br />
-        var key = ConfigurationManager.AppSettings["StoreServiceKey"];<br />
-<br />
-        client.DefaultRequestHeaders.Accept.Clear();<br />
-        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));</p>
-<p>client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", key);</p>
-<p>        var uri = new Uri(baseAddress + path);<br />
-<br />
-        HttpResponseMessage response = await client.GetAsync(uri);<br />
-        return await response.Content.ReadAsAsync&lt;T&gt;();<br />
-    }<br />
-}</p></td>
-</tr>
-</tbody>
-</table>
+Run the project locally and if everything works, then commit and push your code to the repository. After the build has complete.
 
 ### Task 3: Enable Application Insights
 
-Now that the API is set, we want to further monitor application
-performance and be able to easily trace down exceptions when this
-occurs. Configure Application Insights by navigating to the Application
-Insights (preview). In the stop, **Select Application Insights** and
-pick the web application subscription. This will mark settings as
-**Enabled** and automatically insert the instrumentation key, click on
-**Save**.
+Now that the API is set, we want to further monitor application performance and be able to easily trace down exceptions when this occurs. Configure Application Insights by navigating to the Application Insights (preview). In the stop, **Select Application Insights** and pick the web application subscription. This will mark settings as **Enabled** and automatically insert the instrumentation key, click on **Save**.
 
-![](images/media/image260.png)
+> ![Enable Application Insights](images/media/image260.png)
 
-After the site has been deployed, explore the live site. Navigate back
-to the Azure Portal and explore Application Insight. Look at the
-different dependencies being called Database, Function, and API
-Management.
+After the site has been deployed, explore the live site. Navigate back to the Azure Portal and explore Application Insight. Look at the different dependencies being called Database, Function, and API Management.
 
 ### Task 4: Explore the API Management (APIM) Developer Portal
 
-From the APIM resource in the Azure Portal, click on the link to the
-Developer Portal:
+From the APIM resource in the Azure Portal, click on the link to the Developer Portal:
 
-![](images/media/image261.png)
+> ![API Management Developer Portal](images/media/image261.png)
 
- 
+Here you can sign up for access to the API, browse through API definitions and test them, check the products and applications available.
 
-Here you can sign up for access to the API, browse through API
-definitions and test them, check the products and applications
-available.
+Here you will also have the possibility to customize styles for the look and feel of the developer portal:
 
-Here you will also have the possibility to customize styles for the look
-and feel of the developer portal:
-
- 
-
-![](images/media/image262.png)
+> ![API Management Developer Portal Customization](images/media/image262.png)
 
 ## After the hands-on workshop
 

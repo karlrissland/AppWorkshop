@@ -1809,598 +1809,417 @@ When you’re all done verifying the search is working on your local machine, co
 
 ## Exercise 10: Accelerate development and take advantage of serverless using Azure Functions
 
-Duration: 45 minutes
+**Duration**: 45 minutes
 
-Parts Unlimited has been growing. The business wants to start building
-relationships with other retailers, so they can sell their product
-through multiple channels, not just Parts Unlimited.
+Parts Unlimited has been growing. The business wants to start building relationships with other retailers, so they can sell their product through multiple channels, not just Parts Unlimited.
 
-To get started, the Parts Unlimited site needs to be improved
-architecturally so portions of its functionality can be reused when
-integrating with third parties. To accomplish this, the products model
-will be split into a reusable class. Functions will then be built using
-this class. Next, the Parts Unlimited website will be modified to use
-the Azure functions as opposed to accessing the database
-directly.
+To get started, the Parts Unlimited site needs to be improved architecturally so portions of its functionality can be reused when integrating with third parties. To accomplish this, the products model will be split into a reusable class. Functions will then be built using this class. Next, the Parts Unlimited website will be modified to use the Azure functions as opposed to accessing the database directly.
 
 **References**
 
-| Azure Functions                              | <https://docs.microsoft.com/en-us/azure/azure-functions/>                                      |
-| -------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Creating a Function through the Azure Portal | <https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function> |
+- [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/)
+- [Creating a Function through the Azure Portal](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function)
 
-### Task 1: Refactor 
+### Task 1: Refactor
 
-Add a new **PartsUnlimitedModels** Class Library (.Net Framework)
-project to the Visual Studio solution to move all models classes, make
-sure to select **.Net Framework 4.5.2**:
+Add a new **PartsUnlimitedModels** Class Library (.Net Framework) project to the Visual Studio solution to move all models classes, make sure to select **.Net Framework 4.5.2**:
 
-![](images/media/image218.png)
+> ![Add new project](images/media/image218.png)
+>
+> ![Select Class Library (.NET Framework)](images/media/image219.png)
 
- 
+Add the following NuGet packages to the project (Managing NuGet packages in the solution is the fastest way to do this) using the Solution NuGet Package Management option to match the existing versions:
 
-![](images/media/image219.png)
+- EntityFramework
+- Owin
+- Microsoft.Owin
+- Microsoft.AspNet.Identity.Owin
+- Microsoft.AspNet.Identity.EntityFramework
+- Microsoft.AspNet.Mvc
 
- 
+Add an assembly reference to **System.Web**
 
-Add the following NuGet packages to the project (Managing NuGet packages
-in the solution is the fastest way to do this) using the Solution NuGet
-Package Management option to match the existing versions:
+> ![Adding System.Web reference](images/media/image220.png)
 
-  - EntityFramework
+Move the **Models** directory and all files within it to the **PartsUnlimitedModels** project:
 
-  - Owin
+> ![PartsUnlimitedModels Project](images/media/image221.png)
 
-  - Microsoft.Owin
+Add a project reference in **PartsUnlimitedWebsite** to **PartsUnlimitedModels** and make sure it still builds successfully:
 
-  - Microsoft.AspNet.Identity.Owin
-
-  - Microsoft.AspNet.Identity.EntityFramework
-
-  - Microsoft.AspNet.Mvc
-
-Add an assembly reference to **System.Web:**
-
- 
-
-![](images/media/image220.png)
-
- 
-
-Move the **Models** directory and all files within it to the
-**PartsUnlimitedModels** project:
-
-![](images/media/image221.png)
-
- 
-
-Add a project reference in **PartsUnlimitedWebsite** to
-**PartsUnlimitedModels** and make sure it still builds successfully:
-
-<table>
-<tbody>
-<tr class="odd">
-<td><p><img src="images/media/image222.png" alt="Machine generated alternative text: Solution Explorer Search Solution Explorer (Ctrl+,•) Solution &#39;laaS2PaaSWeb&#39; (5 projects) Environments PartsUnlimitedDatabase PartsUnlimitedModels PartsUnlimitedWebsite Add Reference... Add Service Reference... Add Connected Service Add Analyzer... Manage NuGet Packages... Scope to This New Solution Explorer View Connected Services o erties References pp_Data pp Start reas In ontent ontrollers onts ubs Images Migrations " style="width:5.36447in;height:4.64634in" /></p>
-<p> </p></td>
-<td><p><img src="images/media/image223.png" alt="Machine generated alternative text: Reference Manager - PartsUnlimitedWebsite x Assemblies projects Solution COM Browse [3 Name Environments PartsUnlimitedDatabase PartsUnlimitedModels Path C:\Source\GitHub\karlr... C:\Source\GitHub\karlr... C:\Source\GitHub\karlr... Search (Ctrl+E) Name: Environments " style="width:6.90125in;height:4.76458in" /></p>
-<p> </p></td>
-</tr>
-</tbody>
-</table>
-
- 
+> ![Add PartsUnlimitedModels Project Reference](images/media/image222.png)
+>
+> ![Add PartsUnlimitedModels Project Reference](images/media/image223.png)
 
 Build and run the solution to ensure everything compiles and runs okay.
 
 ### Task 2: Modernize
 
-Add a new **Azure Functions** project to the solution called
-**PartsUnlimitedStoreService** using the **Cloud** templates:
+Add a new **Azure Functions** project to the solution called **PartsUnlimitedStoreService** using the **Cloud** templates:
 
- 
+> ![Add new Azure Functions Project](images/media/image224.png)
 
-![](images/media/image224.png)
+When creating a new Azure Functions project, make sure to change the framework to “Azure Functions v1 (.NET Framework), then click **OK** to continue.
 
- 
+> ![Add new Azure Functions Project](images/media/image225.png)
 
-When creating a new Azure Functions project, make sure to change the
-framework to “Azure Functions v1 (.NET Framework), then click **OK** to
-continue.
+**Note**: Make sure the **PartsUnlimitedModels** and **PartsUnlimitedStoreService** projects are both running the same .NET framework version
 
-![](images/media/image225.png)
+After the project is created, we’ll create three new Functions. The 3 functions in the Function App: **BrowseCategory**, **GetCategories** & **GetProductDetails** to provide the functionality currently available in the **StoreController** in the **PartsUnlimitedWebsite** project. They should be accessed via URLs in the form **"/api/categories"**, **"/api/categories/{id}"** & **"/api/products/{id}"** respectively.
 
- 
+> ![Add Class](images/media/image226.png)
 
-**Note**: Make search the **PartsUnlimitedModels** and
-**PartsUnlimitedStoreService** projects are both running the same .NET
-framework version
+Right click on the new **PartsUnlimitedStoreService** project, choose **Add**, **New Azure Function**.
 
-After the project is created, we’ll create three new Functions. The 3
-functions in the Function App: **BrowseCategory**, **GetCategories** &
-**GetProductDetails** to provide the functionality currently available
-in the **StoreController** in the **PartsUnlimitedWebsite** project.
-They should be accessed via URLs in the form **"/api/categories"**,
-**"/api/categories/{id}"** & **"/api/products/{id}"** respectively.
-
-![](images/media/image226.png)
-
-Right click on the new **PartsUnlimitedStoreService** project, choose
-**Add**, **New Azure Function**.
-
-![](images/media/image227.png)
+> ![New Azure Function](images/media/image227.png)
 
 Select the **Http trigger** and the Access Rights as **Function**.
 
-![](images/media/image228.png)
+> ![New Azure Function](images/media/image228.png)
 
 Next, make a reference to our **PartsUnlimitedModels** project:
 
-![](images/media/image229.png)
+> ![Add reference to PartsUnlimitedModels Project](images/media/image229.png)
 
-Add a reference to the same version of the **EntityFramework** that
-you’re using in the web project. In the Solution Explorer, right-click
-on dependencies and select **Manage NuGet Package.** Click the
-**Browse** tab and search for EntityFramework.
+Add a reference to the same version of the **EntityFramework** that you’re using in the web project. In the Solution Explorer, right-click on dependencies and select **Manage NuGet Package.** Click the **Browse** tab and search for EntityFramework.
 
-Notice that for this to work, we will need the connection string to the
-database available for the Function App to work, which locally can be
-set in the **local.settings.json** file:
+Notice that for this to work, we will need the connection string to the database available for the Function App to work, which locally can be set in the **local.settings.json** file:
 
-<table>
-<tbody>
-<tr class="odd">
-<td>{<br />
-  "IsEncrypted": false,<br />
-  "Values": {<br />
-    "AzureWebJobsStorage": "UseDevelopmentStorage=true",<br />
-    "AzureWebJobsDashboard": "UseDevelopmentStorage=true"<br />
-  },<br />
-  "ConnectionStrings": {<br />
-    "DefaultConnectionString": "Server=(localdb)\\mssqllocaldb;Database=PartsUnlimitedWebsite;Integrated Security=True;"<br />
-  }<br />
-}</td>
-</tr>
-</tbody>
-</table>
+```json
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "AzureWebJobsDashboard": "UseDevelopmentStorage=true"
+  },
+  "ConnectionStrings": {
+    "DefaultConnectionString": "Server=(localdb)\\mssqllocaldb;Database=PartsUnlimitedWebsite;Integrated Security=True;"
+  }
+}
+```
 
- 
-
-Create a new class called **GlobalConfiguration.cs** and replace its
-contents with the snippet below:
+Create a new class called **GlobalConfiguration.cs** and replace its contents with the snippet below:
 
 **GlobalConfiguration.cs**
 
-<table>
-<tbody>
-<tr class="odd">
-<td><p>using System.Net.Http;<br />
-using System.Web.Http;<br />
-<br />
-namespace PartsUnlimitedStoreService<br />
-{<br />
-    internal static class GlobalConfiguration<br />
-    {<br />
-        internal static void SetConfiguration(HttpRequestMessage req)<br />
-        {<br />
-            HttpConfiguration config = req.GetConfiguration();</p>
-<p>((Newtonsoft.Json.Serialization.DefaultContractResolver)config.Formatters.JsonFormatter.SerializerSettings.ContractResolver).IgnoreSerializableAttribute = true;</p>
-<p>            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;<br />
-        }<br />
-    }<br />
-}</p></td>
-</tr>
-</tbody>
-</table>
+```csharp
+using System.Net.Http;
+using System.Web.Http;
 
- 
+namespace PartsUnlimitedStoreService
+{
+    internal static class GlobalConfiguration
+    {
+        internal static void SetConfiguration(HttpRequestMessage req)
+        {
+            HttpConfiguration config = req.GetConfiguration();
+
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+        }
+    }
+}
+```
 
 Replaces the contents of the GetCategories.cs from below.
 
-Create a new class called **GetCategories.cs** and replace its contents
-with the snippet below:
+Create a new class called **GetCategories.cs** and replace its contents with the snippet below:
 
 **GetCategories.cs**
 
-<table>
-<tbody>
-<tr class="odd">
-<td>using System.Data.Entity;<br />
-using System.Net;<br />
-using System.Net.Http;<br />
-using System.Threading.Tasks;<br />
-using Microsoft.Azure.WebJobs;<br />
-using Microsoft.Azure.WebJobs.Extensions.Http;<br />
-using Microsoft.Azure.WebJobs.Host;<br />
-using PartsUnlimited.Models;<br />
-<br />
-namespace PartsUnlimitedStoreService<br />
-{<br />
-    public static class GetCategories<br />
-    {<br />
-        [FunctionName("GetCategories")]<br />
-        public static async Task&lt;HttpResponseMessage&gt; Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "categories")]HttpRequestMessage req, TraceWriter log)<br />
-        {<br />
-            GlobalConfiguration.SetConfiguration(req);<br />
-<br />
-            log.Info("Retrieving Product Categories");<br />
-<br />
-            var db = new PartsUnlimitedContext();<br />
-            var categories = await db.Categories.ToListAsync();<br />
-<br />
-            return req.CreateResponse(HttpStatusCode.OK, categories);<br />
-        }<br />
-    }<br />
-}</td>
-</tr>
-</tbody>
-</table>
+```csharp
+using System.Data.Entity;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.WebJobs.Host;
+using PartsUnlimited.Models;
 
->  
+namespace PartsUnlimitedStoreService
+{
+    public static class GetCategories
+    {
+        [FunctionName("GetCategories")]
+        public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "categories")]HttpRequestMessage req, TraceWriter log)
+        {
+            GlobalConfiguration.SetConfiguration(req);
 
-Create a new class called **BrowseCategory.cs** and replace its contents
-with the snippet below:
+            log.Info("Retrieving Product Categories");
+
+            var db = new PartsUnlimitedContext();
+            var categories = await db.Categories.ToListAsync();
+
+            return req.CreateResponse(HttpStatusCode.OK, categories);
+        }
+    }
+}
+```
+
+Create a new class called **BrowseCategory.cs** and replace its contents with the snippet below:
 
 **BrowseCategory.cs**
 
-<table>
-<tbody>
-<tr class="odd">
-<td>using System.Data.Entity;<br />
-using System.Net;<br />
-using System.Net.Http;<br />
-using System.Threading.Tasks;<br />
-using Microsoft.Azure.WebJobs;<br />
-using Microsoft.Azure.WebJobs.Extensions.Http;<br />
-using Microsoft.Azure.WebJobs.Host;<br />
-using PartsUnlimited.Models;<br />
-<br />
-namespace PartsUnlimitedStoreService<br />
-{<br />
-    public static class BrowseCategory<br />
-    {<br />
-        [FunctionName("BrowseCategory")]<br />
-        public static async Task&lt;HttpResponseMessage&gt; Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "categories/{id:int}")]HttpRequestMessage req, int? id, TraceWriter log)<br />
-        {<br />
-            GlobalConfiguration.SetConfiguration(req);<br />
-<br />
-            log.Info($"Get Product Category {id}");<br />
-<br />
-            if (!id.HasValue)<br />
-                return req.CreateResponse(HttpStatusCode.BadRequest, "Please pass a valid category ID");<br />
-<br />
-            var db = new PartsUnlimitedContext();<br />
-            var genreModel = await db.Categories.Include("Products").SingleAsync(g =&gt; g.CategoryId == id.Value);<br />
-<br />
-            return req.CreateResponse(HttpStatusCode.OK, genreModel);<br />
-        }<br />
-    }<br />
-}</td>
-</tr>
-</tbody>
-</table>
+```csharp
+using System.Data.Entity;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.WebJobs.Host;
+using PartsUnlimited.Models;
 
- 
+namespace PartsUnlimitedStoreService
+{
+    public static class BrowseCategory
+    {
+        [FunctionName("BrowseCategory")]
+        public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "categories/{id:int}")]HttpRequestMessage req, int? id, TraceWriter log)
+        {
+            GlobalConfiguration.SetConfiguration(req);
 
-Create a new class called **GetProductDetails.cs** and replace its
-contents with the snippet below:
+            log.Info($"Get Product Category {id}");
+
+            if (!id.HasValue)
+                return req.CreateResponse(HttpStatusCode.BadRequest, "Please pass a valid category ID");
+
+            var db = new PartsUnlimitedContext();
+            var genreModel = await db.Categories.Include("Products").SingleAsync(g => g.CategoryId == id.Value);
+
+            return req.CreateResponse(HttpStatusCode.OK, genreModel);
+        }
+    }
+}
+```
+
+Create a new class called **GetProductDetails.cs** and replace its contents with the snippet below:
 
 **GetProductDetails.cs**
 
-<table>
-<tbody>
-<tr class="odd">
-<td>using System.Data.Entity;<br />
-using System.Net;<br />
-using System.Net.Http;<br />
-using System.Threading.Tasks;<br />
-using Microsoft.Azure.WebJobs;<br />
-using Microsoft.Azure.WebJobs.Extensions.Http;<br />
-using Microsoft.Azure.WebJobs.Host;<br />
-using PartsUnlimited.Models;<br />
-<br />
-namespace PartsUnlimitedStoreService<br />
-{<br />
-    public static class GetProductDetails<br />
-    {<br />
-        [FunctionName("GetProductDetails")]<br />
-        public static async Task&lt;HttpResponseMessage&gt; Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "product/{id:int}")]HttpRequestMessage req, int? id, TraceWriter log)<br />
-        {<br />
-            GlobalConfiguration.SetConfiguration(req);<br />
-<br />
-            log.Info($"GetProductDetails {id}");<br />
-<br />
-            if (!id.HasValue)<br />
-                return req.CreateResponse(HttpStatusCode.BadRequest, "Please pass a valid product id");<br />
-<br />
-            var db = new PartsUnlimitedContext();<br />
-            var product = await db.Products.SingleAsync(a =&gt; a.ProductId == id.Value);<br />
-<br />
-            return req.CreateResponse(HttpStatusCode.OK, product);<br />
-        }<br />
-    }<br />
-}</td>
-</tr>
-</tbody>
-</table>
+```csharp
+using System.Data.Entity;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.WebJobs.Host;
+using PartsUnlimited.Models;
 
- 
+namespace PartsUnlimitedStoreService
+{
+    public static class GetProductDetails
+    {
+        [FunctionName("GetProductDetails")]
+        public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "product/{id:int}")]HttpRequestMessage req, int? id, TraceWriter log)
+        {
+            GlobalConfiguration.SetConfiguration(req);
 
-The function can now be tested locally using an Http Client like Postman
-or any other of your choice. To test, right-click on
-**PartsUnlimitedStoreService** as click on **Set as Startup Project**.
+            log.Info($"GetProductDetails {id}");
 
-![](images/media/image230.png)
+            if (!id.HasValue)
+                return req.CreateResponse(HttpStatusCode.BadRequest, "Please pass a valid product id");
+
+            var db = new PartsUnlimitedContext();
+            var product = await db.Products.SingleAsync(a => a.ProductId == id.Value);
+
+            return req.CreateResponse(HttpStatusCode.OK, product);
+        }
+    }
+}
+```
+
+The function can now be tested locally using an Http Client like Postman or any other of your choice. To test, right-click on **PartsUnlimitedStoreService** as click on **Set as Startup Project**.
+
+> ![Set PartsUnlimitedStoreService as startup project](images/media/image230.png)
 
 If prompted to install the Azure Function CLI tools, click **Yes**.
 
-![](images/media/image231.png)
+> ![Azure CLI Installation Confirmation](images/media/image231.png)
 
-After a moment, you’ll see a command window appear running func.exe.
-Note the URLs
+After a moment, you’ll see a command window appear running func.exe. Note the URLs
 
-![](images/media/image232.png)
+> ![Azure CLI Console](images/media/image232.png)
 
-Run Postman from the Desktop and issue a GET against the
-**GetCategories** /api/GetCategories
+Run Postman from the Desktop and issue a GET against the **GetCategories** /api/GetCategories
 
-![](images/media/image233.png)
+> ![Use Postman to test](images/media/image233.png)
 
 ### Task 3: Integrate
 
-Replace the code in **StoreController.cs** in the
-**PartsUnlimitedWebsite** project to retrieve data from the Function App
-by making a REST call to the appropriate endpoint.
+Replace the code in **StoreController.cs** in the **PartsUnlimitedWebsite** project to retrieve data from the Function App by making a REST call to the appropriate endpoint.
 
-**Tip**: Using a utility class like **System.Net.Http.HttpClient** makes
-it easy to implement the calls and writing a generic method convenient
-for reusability.
+**Tip**: Using a utility class like **System.Net.Http.HttpClient** makes it easy to implement the calls and writing a generic method convenient for reusability.
 
-The URL of the Function App should be defined in the **Web.config** to
-easily change it during deployment and if a key is to be used for access
-control should be also in configuration. Add the following two lines to
-the \<appSettings\> section, replacing the value of the
-StoreServiceBaseAddress with your local instance.
+The URL of the Function App should be defined in the **Web.config** to easily change it during deployment and if a key is to be used for access control should be also in configuration. Add the following two lines to the ```<appSettings/>``` section, replacing the value of the StoreServiceBaseAddress with your local instance.
 
-<table>
-<tbody>
-<tr class="odd">
-<td><p>&lt;add key="StoreServiceBaseAddress" value="http://localhost:7071/api/" /&gt;</p>
-<p>&lt;add key="StoreServiceKey" value="" /&gt;</p></td>
-</tr>
-</tbody>
-</table>
+```xml
+<add key="StoreServiceBaseAddress" value="http://localhost:7071/api/" />
+<add key="StoreServiceKey" value="" />
+```
 
 Next add to the bottom of the **StoreController.cs** method:
 
-<table>
-<tbody>
-<tr class="odd">
-<td><p>private static async Task&lt;T&gt; GetFromStoreService&lt;T&gt;(string path)<br />
-{<br />
-    using (var client = new HttpClient())<br />
-    {</p>
-<p>// https://stackoverflow.com/questions/46223078/c-sharp-httpclient-an-existing-connection-was-forcibly-closed-by-the-remote-host</p>
-<p>// C# 4.6 still defaults to only SSL3/TLS 1.0 even though TLS 1.1 and 1.2 are supported.</p>
-<p>// If this is the cause of the issue, you can manually add TLS 1.1 and 1.2</p>
-<p>ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;</p>
-<p>        var baseAddress = ConfigurationManager.AppSettings["StoreServiceBaseAddress"];<br />
-        var key = ConfigurationManager.AppSettings["StoreServiceKey"];<br />
-<br />
-        client.DefaultRequestHeaders.Accept.Clear();<br />
-        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));<br />
-<br />
-        var uri = new Uri(baseAddress + path);<br />
-<br />
-        HttpResponseMessage response = await client.GetAsync(uri);<br />
-        return await response.Content.ReadAsAsync&lt;T&gt;();<br />
-    }<br />
-}</p></td>
-</tr>
-</tbody>
-</table>
+```csharp
+private static async Task<T> GetFromStoreService<T>(string path)
+{
+    //specify to use TLS 1.2 as default connection
+    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
 
- 
+    using (var client = new HttpClient())
+    {
+        var baseAddress = ConfigurationManager.AppSettings["StoreServiceBaseAddress"];
+        var key = ConfigurationManager.AppSettings["StoreServiceKey"];
 
-Add the **System.Threading.Tasks**, **System.Collections.Generic,
-System.Net.Http, and System.Net.Http.Headers**, **System.Net**;
-reference to the top of the class. Then replace the Intex(),
-Browse(int), Details(int) methods with the ones below. Notice the public
-methods in the class can be implemented in an asynchronous way and
-simpler:
+        client.DefaultRequestHeaders.Accept.Clear();
+        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-<table>
-<tbody>
-<tr class="odd">
-<td><p>using System.Threading.Tasks;</p>
-<p>using System.Collections.Generic;</p>
-<p>using System.Net.Http;</p>
-<p>using System.Net.Http.Headers;</p>
-<p>using System.Net;</p>
-<p>….</p>
-<p>//<br />
-// GET: /Store/<br />
-public async Task&lt;ActionResult&gt; Index()<br />
-{<br />
-    return View(await GetFromStoreService&lt;List&lt;Category&gt;&gt;("categories"));<br />
-}<br />
-<br />
-//<br />
-// GET: /Store/Browse?genre=Disco<br />
-public async Task&lt;ActionResult&gt; Browse(int categoryId)<br />
-{<br />
-    return View(await GetFromStoreService&lt;Category&gt;($"categories/{categoryId}"));<br />
-}<br />
-<br />
-public async Task&lt;ActionResult&gt; Details(int id)<br />
-{<br />
-    var productCacheKey = string.Format("product_{0}", id);<br />
-    var product = MemoryCache.Default[productCacheKey] as Product;<br />
-    if (product == null)<br />
-    {<br />
-        product = await GetFromStoreService&lt;Product&gt;($"product/{id}");<br />
-        //Remove it from cache if not retrieved in last 10 minutes<br />
-        MemoryCache.Default.Add(productCacheKey, product, new CacheItemPolicy { SlidingExpiration = TimeSpan.FromMinutes(10) });<br />
-    }<br />
-<br />
-    var viewModel = new ProductViewModel<br />
-    {<br />
-        Product = product,<br />
-        ShowRecommendations = ConfigurationHelpers.GetBool("ShowRecommendations")<br />
-    };<br />
-<br />
-    return View(viewModel);<br />
-}</p></td>
-</tr>
-</tbody>
-</table>
+        if (!string.IsNullOrWhiteSpace(key))
+        {
+            client.DefaultRequestHeaders.Add("x-functions-key", key);
+        }
 
- 
+        var uri = new Uri(baseAddress + path);
 
-Test locally and ensure everything works as expected and no
-functionality has been affected from the website standpoint.
+        HttpResponseMessage response = await client.GetAsync(uri);
+        return await response.Content.ReadAsAsync<T>();
+    }
+}
+```
 
-In Solution Explorer, right-click on the Solution and click **Set
-Startup Projects**. Select Multiple startup projects and for the action
-for **PartsUnlimitedStoreService** and **PartsUnlimitedWebsite**, choose
-**Start**.
+Add the **System.Threading.Tasks**, **System.Collections.Generic, System.Net.Http, and System.Net.Http.Headers**, **System.Net**; reference to the top of the class. Then replace the Intex(), Browse(int), Details(int) methods with the ones below. Notice the public methods in the class can be implemented in an asynchronous way and simpler:
 
-Browse the product categories and details of the site and notice the
-Functions getting executed.
+```csharp
+using PartsUnlimited.Models;
+using System;
+using System.Runtime.Caching;
+using System.Web.Mvc;
+using PartsUnlimited.Utils;
+using PartsUnlimited.ViewModels;
+using System.Net.Http;
+using System.Configuration;
+using System.Net.Http.Headers;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Net;
 
-![](images/media/image234.png)
+namespace PartsUnlimited.Controllers
+{
+    public class StoreController : Controller
+    {
+
+    …
+
+        // GET: /Store/
+        public async Task<ActionResult> Index()
+        {
+            return View(await GetFromStoreService<List<Category>>("categories"));
+        }
+
+        //
+        // GET: /Store/Browse?genre=Disco
+        public async Task<ActionResult> Browse(int categoryId)
+        {
+            return View(await GetFromStoreService<Category>($"categories/{categoryId}"));
+        }
+
+        public async Task<ActionResult> Details(int id)
+        {
+            var productCacheKey = string.Format("product_{0}", id);
+            var product = MemoryCache.Default[productCacheKey] as Product;
+            if (product == null)
+            {
+                product = await GetFromStoreService<Product>($"product/{id}");
+                //Remove it from cache if not retrieved in last 10 minutes
+                MemoryCache.Default.Add(productCacheKey, product, new CacheItemPolicy { SlidingExpiration = TimeSpan.FromMinutes(10) });
+            }
+
+            var viewModel = new ProductViewModel
+            {
+                Product = product,
+                ShowRecommendations = ConfigurationHelpers.GetBool("ShowRecommendations")
+            };
+
+            return View(viewModel);
+        }
+    }
+}
+```
+
+Test locally and ensure everything works as expected and no functionality has been affected from the website standpoint.
+
+In Solution Explorer, right-click on the Solution and click **Set Startup Projects**. Select Multiple startup projects and for the action for **PartsUnlimitedStoreService** and **PartsUnlimitedWebsite**, choose **Start**.
+
+Browse the product categories and details of the site and notice the Functions getting executed.
+
+> ![Console output](images/media/image234.png)
 
 ### Task 4: Publish the Service
 
-Now that we have a working Function App with the website, it is time to
-deploy to Azure, which can be accomplished using the Publish feature in
-Visual Studio. Before we continue, we need to update the Azure Functions
-and Web Jobs Tools in Visual Studio.
+Now that we have a working Function App with the website, it is time to deploy to Azure, which can be accomplished using the Publish feature in Visual Studio. 
 
-![](images/media/image235.png)
-
-![](images/media/image236.png)
-
-Once Visual Studio has restarted, reload the project and begin
-publishing.
-
-![](images/media/image237.png)
-
- 
+> ![Publish Project](images/media/image237.png)
 
 Select the **Function App** target and **Create new** option:
 
-![](images/media/image238.png)
+> ![Publish to Azure Function App](images/media/image238.png)
 
-Enter or select the appropriate values for the publish profile,
-selecting the Consumption for the hosting plan and your existing Storage
-Account used for the website. You can also choose your existing website
-to host the Functions.
+Enter or select the appropriate values for the publish profile, selecting the Consumption for the hosting plan and your existing Storage Account used for the website. You can also choose your existing website to host the Functions.
 
-![](images/media/image239.png)
+> ![Function App Configuration](images/media/image239.png)
 
-Decide how this function will be hosted. It will either use a
-Consumption Plan, where Microsoft manages the scaling up/down the
-infrastructure to support your Function or an existing App Plan to take
-advantage of infrastructure you’ve already defined. Select your existing
-Storage Account where you’re storing the Application Log files. After
-everything is configured, click **Create** to continue.
+Decide how this function will be hosted. It will either use a Consumption Plan, where Microsoft manages the scaling up/down the infrastructure to support your Function or an existing App Plan to take advantage of infrastructure you’ve already defined. Select your existing Storage Account where you’re storing the Application Log files. After everything is configured, click **Create** to continue.
 
-![](images/media/image240.png)
+> ![Configure Hosting Plan](images/media/image240.png)
 
-In a few moments, the new enviornment will be configured and the
-deployment to that will begin.
+In a few moments, the new environment will be configured and the deployment to that will begin.
 
-![](images/media/image241.png)
+> ![Publish Dialog](images/media/image241.png)
 
 ### Task 5: Configure Function Database Connection
 
-Once the Function is complete, using the Azure Portal, navigate to the
-newly created Function **App Service**. Notice the Function Icon.
+Once the Function is complete, using the Azure Portal, navigate to the newly created Function **App Service**. Notice the Function Icon.
 
-![](images/media/image242.png)
+> ![Azure Function App Resource](images/media/image242.png)
 
-You can navigation to the URL for the Function App to verify the
-Function has been provisioned correctly.
+You can navigation to the URL for the Function App to verify the Function has been provisioned correctly.
 
-![](images/media/image243.png)
+> ![Function App Settings](images/media/image243.png)
+>
+> ![Verify Function App Running](images/media/image244.png)
 
-![](images/media/image244.png)
+After publishing the Function App, we need to add the required Connection String for the database, which can be done via the Azure portal:
 
- 
+> ![Add Database Connection String to Azure Function App](images/media/image245.png)
 
-After publishing the Function App, we need to add the required
-Connection String for the database, which can be done via the Azure
-portal:
+After publishing is completed, publish a new version of the website including the Application Settings for the location and key of the Store Service and test.
 
-![](images/media/image245.png)
+### Task 5: Configure Function Application Insights
 
- 
-
-After publishing is completed, publish a new version of the website
-including the Application Settings for the location and key of the Store
-Service and test.
-
-**Default Settings**
-
-db Login Name: workshopServiceAcc  
-db User Name: workshopServiceAcc  
-db User Password: P2ssw0rd
-
-Database Name: partsUnlimitedDB
-
-DefaultConnectionString:
-
-Server=tcp:{server\_name}.database.windows.net,1433;Initial
-Catalog=partsUnlimitedDB;Persist Security Info=False;User
-ID={db\_user\_name};Password={db\_user\_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection
-Timeout=30;
-
-**Note**: Be sure to the Connection String has a space between User and
-ID (e.g. “User ID”), otherwise the Entity Framework will throw an
-exception ‘Keyword not supported: 'userid'’. This is a known issue with
-the version of Entity Framework being used and has been corrected in a
-later version.
-
-### Task 5: Configure Function Application Insights 
-
-![](images/media/image246.png)
+> ![Add Application Insights to Azure Function App](images/media/image246.png)
 
 Click **Configure**.
 
-![](images/media/image247.png)
+> ![Configure Application Insights](images/media/image247.png)
 
-Next, you have a choice to create a new Application Insights instance or
-select your existing resource. Since we want to see everything in area,
-we’ll select our existing application and click **OK.** After
-configuring Application Insights, notice the Live Stream is now
-available.
+Next, you have a choice to create a new Application Insights instance or select your existing resource. Since we want to see everything in area, we’ll select our existing application and click **OK.** After configuring Application Insights, notice the Live Stream is now available.
 
-![](images/media/image248.png)
+> ![Application Insights Metrics](images/media/image248.png)
 
-Use Postman to verify that everything the function can communicate with
-the database and Application Insights in configured correctly.
+Use Postman to verify that everything the function can communicate with the database and Application Insights in configured correctly.
 
-In Postman, send a Get to the Function Service using the URL
-(<https://[service_name].azurewebsites.net/api/categories>) and ensure
-the payload coming back is the json results.
+In Postman, send a Get to the Function Service using the URL (<https://[service_name].azurewebsites.net/api/categories>) and ensure the payload coming back is the json results.
 
-![](images/media/image249.png)
+> ![Test in Postman](images/media/image249.png)
 
-Instead of configuring our web application to use the Function directly,
-in our next Exercise, we’ll configure our website to go through API
-Management instead.
+Instead of configuring our web application to use the Function directly, in our next Exercise, we’ll configure our website to go through API Management instead.
 
 ### Task 6: Modify App Service CI/CD Task
 
-The solution file will now produce artifacts for the web application,
-**PartsUnlimitedWebsite.zip**, and one for the store,
-**PartsUnlimitedStoreService.zip**. Our current build task will fail
-since it can’t deploy multiple ZIP files to the service, therefore, we
-need to specify the correct file. Navigate to your Azure DevOps instance, to
-Releases, and modify the App Service deployment task to have the correct
-file.
+The solution file will now produce artifacts for the web application, **PartsUnlimitedWebsite.zip**, and one for the store, **PartsUnlimitedStoreService.zip**. Our current build task will fail since it can’t deploy multiple ZIP files to the service, therefore, we need to specify the correct file. Navigate to your Azure DevOps instance, to Releases, and modify the App Service deployment task to have the correct file.
 
-![](images/media/image250.png)
+> ![Fix CI/CD release pipeline](images/media/image250.png)
 
 ## Exercise 11: Monetize your data and services, and open new channels to customers using Azure API Management
 

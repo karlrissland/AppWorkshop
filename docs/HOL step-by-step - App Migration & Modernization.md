@@ -491,12 +491,12 @@ So far, we have been running against the database running on our VM.  In this ta
 
 16. Review the configuration and then click 'create' to provision an Azure SQL Server and then an Azure SQL database on that server.
 
-![](./media/e1t3i18.png)
+  ![](./media/e1t3i18.png)
 
 17. When complete, you will be shown a deployment summary.  Click the link to the resource group where you deployed the server and database.  This should be the resource group containing your app service and traffic manager service.
 
-![](./media/e1t3i19.png)
-![](./media/e1t3i20.png)
+  ![](./media/e1t3i19.png)
+  ![](./media/e1t3i20.png)
 
 18. We need to lookup the full name of our SQL server for use with the data migration tool.  Within your resource group, click on your SQL Server, then click 'properties' in the left menu.  Copy the server name, you will enter this in the data migration tool.
 
@@ -504,37 +504,37 @@ So far, we have been running against the database running on our VM.  In this ta
 
 19. Next we need to configure the firewall rules on the SQL server such that the Migration Tool is able to connect.  NOTE: you must be browsing the azure portal with the same VM where the migration tool was installed.  On the SQL Server Overview page, click 'Show Firewall Settings'
 
-![](./media/e1t3i22.png)
+  ![](./media/e1t3i22.png)
 
 20.  Simply click 'Add Clint IP' and then click 'save'
 
-![](./media/e1t3i23.png)
+  ![](./media/e1t3i23.png)
 
 21.  Now, go back to the Data Migration Tool and enter the Azure SQL Server name, choose SQL authentication, enter the user you configured, the password for the user, and click 'connect'
 
-![](./media/e1t3i24.png)
+  ![](./media/e1t3i24.png)
 
 22.  Select 'partsUnlimitedDB' as your target database and click 'Next'
 
-![](./media/e1t3i25.png)
+  ![](./media/e1t3i25.png)
 
 23.  Select all the tables and users and then click 'Generate SQL Script'
 
-![](./media/e1t3i26.png)
+  ![](./media/e1t3i26.png)
 
 24.  You will be shown the generated SQL script which will create the objects you selected on the previous screen.  Click 'Deploy Schema' to create the schema in our SQL Azure database.
 
-![](./media/e1t3i27.png)
+  ![](./media/e1t3i27.png)
 
 25.  As the schema is deployed, you will see a list of successfully created objects be generated.  Once done, click  'Migrate Data' to move your data to SQL Azure.
 
-![](./media/e1t3i28.png)
+  ![](./media/e1t3i28.png)
 
 26.  Ensure that all the database tables have been selected and click 'Start Data Migration' to start the migration process.
 
-![](./media/e1t3i29.png)
+  ![](./media/e1t3i29.png)
 
-![](./media/e1t3i30.png)
+  ![](./media/e1t3i30.png)
 
 27.  At this point, your data has been migrated to SQL Azure.
 
@@ -546,25 +546,52 @@ So far, we have been running against the database running on our VM.  In this ta
 - Data and Schema has been migrated to SQL Azure
 
 ### Task 4: Finalize Migration
-Almost done.  We need to configure our app service to use SQL Azure and remove the Hybrid connection.
+Almost done.  We need to configure our app service to use SQL Azure , remove the Hybrid connection, and have traffic manager only use the App Service Endpoint.
+
+1. Go to the resource group containing traffic manager and click on your traffic manager instance.
+
+  ![](./media/e1t4i1.png)
+
+2. Click on the IaaSEndpoint.
+
+  ![](./media/e1t4i2.png)
+
+3. Select to 'Disable' the endpoint then click the 'Save' button.
+
+  ![](./media/e1t4i3.png)
+
+4. Next we need to grab the connection string for your SQL Azure database.  Back to your resource group, click on the partsUnlimitedDB.
+
+  ![](./media/e1t4i4.png)
+
+5. On the overview page, click the 'Show database connection strings' link and copy the connection string.  NOTE: the connection string will not contain user name and password information.  You will need to edit the connection string to provide this.
+
+  ![](./media/e1t4i5.png)
+
+6. Back to the resource group, click on your app service.
+
+  ![](./media/e1t4i6.png)
+
+7. Within your App Service, click on the 'Configuration (Preview)' menu, then click on 'Application Settings'.  Next, click the 'New connection string' button.  Copy the connection string containing your user name and password, click 'Update', then click the 'Save' button.
+
+  ![](./media/e1t4i7.png)
+
+8. Right now, all connections are using the Hybrid Connection.  Before our App Service can reach our SQL Database, we need to delete the Hybrid Connection.  In your app service, click the networking menu, then click to configure Hybrid Connections.  Delete the Hybrid Connection.
+
+  ![](./media/e1t4i8.png)
+
+9. Your App Service Web App should be connected to your SQL Azure Database.  Browse to your web application and verify everything is working correctly.
 
 
-------------------ADD NEW STUFF HERE ------------------------
+10. If you like, you can uninstall the Hybrid Connection client from your VM and/or delete the IaaS endpoint within traffic manager.
 
-![](./media/e1t4i1.png)
-![](./media/e1t4i2.png)
-![](./media/e1t4i3.png)
-![](./media/e1t4i4.png)
-![](./media/e1t4i5.png)
-![](./media/e1t4i6.png)
-![](./media/e1t4i7.png)
-![](./media/e1t4i8.png)
 
 **Exit criteria**
 
 - Traffic Manager has been configured to only point to Azure App Service
 - The web application has been configured to use SQL Azure
-- The Hybrid connection has been removed
+- The Hybrid connection has been removed from the app service
+- Optionally, you have removed the IaaS endpoint and uninstalled the Hybrid Connection client.
 
 ## Exercise 2: Implementing DevOps Continuous Integration / Continuous Deployment (CI/CD)
 

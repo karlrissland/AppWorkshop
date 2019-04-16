@@ -26,8 +26,10 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 1: Set up the environment](#task-1-set-up-the-environment)
     - [Task 2: Validate you can connect to the Development Environment](#task-2-validate-you-can-connect-to-the-development-environment)
   - [Exercise 1: Migration to Azure PaaS](#exercise-1-migration-to-azure-paas)
-    - [Task 1: Migration Tool to Lift and Shift Application to PaaS](#task-1-migration-tool-to-lift-and-shift-application-to-paas)
-    - [Task 2: Validate Application Migration](#task-2-validate-application-migration)
+    - [Task 1: Migrate the Website to Azure PaaS](#task-1-migrate-the-website-to-azure-paas)
+    - [Task 2: Setup Traffic Manager (Optional)](#task-2-setup-traffic-manager-optional)
+    - [Task 3: Migrate the Data to SQL Azure](#task-3-migrate-the-data-to-sql-azure)
+    - [Task 4: Finalize Migration](#task-4-finalize-migration)
   - [Exercise 2: Implementing DevOps Continuous Integration / Continuous Deployment (CI/CD)](#exercise-2-implementing-devops-continuous-integration--continuous-deployment-cicd)
     - [Task 1: Add a new project to Azure DevOps and upload the code](#task-1-add-a-new-project-to-azure-devops-and-upload-the-code)
     - [Task 2: Upload Code to Git Repository in Azure DevOps](#task-2-upload-code-to-git-repository-in-azure-devops)
@@ -264,10 +266,11 @@ These features setup Parts Unlimited for future enhancement and scale without ha
 **References**
 
 - [App Service Overview](https://docs.microsoft.com/en-us/azure/app-service/app-service-web-overview)
-- [Migration to Azure](https://www.migratetoazure.net/)
+- [App Service Migration Tool](https://appmigration.microsoft.com)
 - [Azure SQL Database](https://docs.microsoft.com/en-us/azure/sql-database/)
+- [Azure Data Migration Tool](https://docs.microsoft.com/en-us/sql/dma/dma-overview?view=sql-server-2017)
 
-### Task 1: Migration Tool to Lift and Shift Application to PaaS
+### Task 1: Migrate the Website to Azure PaaS
 
 In this exercise, you will use migration tool to lift and shift application to PaaS.
 
@@ -284,112 +287,43 @@ In this exercise, you will use migration tool to lift and shift application to P
 
     ![Disable IE Enhanced Security Configuration](./media/image17-disable-ie-enhanced-configuration.png)
 
-3. Install the following component using Microsoft Web Platform Installer:
-
-    ![Microsoft Web Platform Installer](./media/image18-microsoft-webpi.png)
-
-   1. SQL Server Shared Management Objects
-   2. SQL Server Data-Tier Application Framework (DACFx)
-4. Install the Azure App Service Migration Assistant tool for Windows 
-   1. Browse to <http://www.migratetoazure.net/>
-
-    ![Azure App Service Migration Assistant](./media/image26-azure-app-service-migration-assistant.jpeg)
-
-   2. Switch to the **Windows Tool** tab an click on **Install Tool**
-
-    ![Azure App Service Migration Assistant Windows](./media/image28-azure-app-service-migration-assistance-windows.jpeg)
-
-   3. You will be presented with a security warning, click install to continue.
-
-    ![Security Warning - Install](./media/image29-security-warning-install.png)
-
-   4. You will then be asked to run the file, click Run to continue.
-
-    ![Security Warning - Run](./media/image30-security-warning-run.png)
-
-5. Run the Azure App Service Migration Assistant
-   1. Choose the first option, **migrate sites and databases on the local server to Azure and click continue**
-
-    ![Migrate sites and databases on the local server to Azure](./media/image31-migration-assistant.jpeg)
-
-    > **Note**: The tool will quickly scan your IIS server to pick up any websites that are migration candidates and the corresponding connection strings.  You can select what you want to migrate, then click next.
-
-   2. Select the default site and click on **Next**
-
-    ![Migration Candidates](./media/image32-migration-candidates.jpeg)
-
-    > **Note**: You will be presented with a Readiness Report.  You can upload this for analysis or save for later.
-
-   3. Preview readiness report and click **Upload** to check if your site is ready to be migrated.
-
-    ![Migration Readiness Report](./media/image33-migration-readiness-report.jpeg)
-
-   4. Check the results of the assesment
-
-    ![Readiness Assessment](./media/image34-readines-assesment.jpeg)
-
-   5. If everything looks good, click on **Begin Migration**
-   6. Provide the credentials to connect with Azure
-   7. Once signed in, provide **tenant**, **subscription** and **resource group name** and click **Start Migration**
-
-    ![Migrate your sites](./media/image36-migrate-your-sites.jpeg)
-
-   8. In this step, the tool will ask you to use an existing Azure SQL Server or create a new one, select the websites to migrate, as well as other configuration details.
-
-    ![Migration Configuration Details](./media/image38-migration-configuration.jpeg)
-
-    > **Note**: Use the admin user and password that you used for the server and the same name for the database that you used when you created the environment
-
-    ![Migration Configuration Details](./media/image37-migration-configuration.png)
-
-   9. Click on **Create** to create the services
-
-    ![Azures PaaS Services Deployment](./media/image39-services-deployment.jpeg)
-
-   10. Click on **Begin Publish** to publish site and database
-
-    ![Application & Database Publishing](./media/image40-publishing.jpeg)
-
-   11. Click on the link to verify the application is running
-
-    ![Migration completed](./media/image41-migration-completed.jpeg)
+------------------ADD NEW STUFF HERE ------------------------
 
 **Exit criteria**
 
-- Azure App Service instances should be created with the application
-- Note the URLs of the provisioned web for future reference
-- Save the new database connection string for later
+- An Azure App Service instance should be created with the application
+- A Hybrid Connection should be created and configured 
+- The application runs against the database running on your SQLVM
 
-### Task 2: Validate Application Migration
+### Task 2: Setup Traffic Manager (Optional)
 
-After a few minutes, your site and content will be ready to go.  Click the link to view your site.
+------------------ADD NEW STUFF HERE ------------------------
 
-Ask yourself: How did the web site connect to the database? Did the migration tool modify the Web.Config file with the new database? We’ll answer that below.
+**Exit criteria**
 
-Go back to the Azure portal and look at the Resource Groups.  You will see a new Resource Group called "Server-Migration-\<location\>." or the name you entered in the migration tool.
+- A Traffic Manager Service has been created
+- Traffic manager has been configured to leverage both your IaaS web endpoint and your PaaS web endpoint.
+- Your website renders via the traffic manager endpoint
 
-![Server Migration Resource Group](./media/image42.jpeg)
+### Task 3: Migrate the Data to SQL Azure
 
-Navigate into the resource group to inspect the services that were created.
+------------------ADD NEW STUFF HERE ------------------------
 
-![Server Migration Resource Group Resources](./media/image43.jpeg)
+**Exit criteria**
 
-You should have 4 items:
+- A SQL Azure Server has been created
+- A SQL Azure Database has been created
+- Data and Schema has been migrated to SQL Azure
 
-- SQL Server
-- SQL Database
-- App Service Plan
-- App Service
+### Task 4: Finalize Migration
 
-Click the web app and then click app settings so we can have a look at what was created.
+------------------ADD NEW STUFF HERE ------------------------
 
-![Web App - Application Settings](./media/image44.jpeg)
+**Exit criteria**
 
-Notice there are lots of options, we will be discussing them throughout this workshop.  However, note the connection string.  The App Service will override application settings defined in your Web.Config, making it easy to manage and secure.
-
-Go back to the resource group and click on the App Service Plan.  The app service plan defines the infrastructure your app is hosted on. Scale Up defines the instance size you are running on and scale out defines the number of instances.
-
-![App Service Plan Overview](./media/image45.jpeg)
+- Traffic Manager has been configured to only point to Azure App Service
+- The web application has been configured to use SQL Azure
+- The Hybrid connection has been removed
 
 ## Exercise 2: Implementing DevOps Continuous Integration / Continuous Deployment (CI/CD)
 

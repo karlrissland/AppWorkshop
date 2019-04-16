@@ -358,19 +358,63 @@ After filling out the form, click the 'Migrate' button to start the proces.
 - The application runs against the database running on your SQLVM
 
 ### Task 2: Setup Traffic Manager (Optional)
+This is an optional step.  Traffic manager will load balance across any public endpoint.  This allows us to load balance between our WebVM (IaaS/OnPrem) environment and our PaaS service.  This could be useful in many situations.
 
-------------------ADD NEW STUFF HERE ------------------------
+Our intent is to use traffic manager as a way to gradually move our web servers to Azure PaaS.  Later, We will use traffic manager to facilitate our site running in more than one region.
 
-![](./media/e1t2i1.png)
-![](./media/e1t2i2.png)
-![](./media/e1t2i3.png)
-![](./media/e1t2i4.png)
-![](./media/e1t2i5.png)
-![](./media/e1t2i6.png)
-![](./media/e1t2i7.png)
-![](./media/e1t2i8.png)
-![](./media/e1t2i9.png)
-![](./media/e1t2i10.png)
+1. Open the Azure portal and navigate to the Resource Group you created when using the App Service Migration tool (Ex 1, Task 1, Step 11).  Click the 'Add' button to add a new service.
+
+  ![](./media/e1t2i1.png)
+
+2. Enter 'traffic manager' and hit enter to search for the traffic manager service and select the 'Traffic Manager profile' published by Microsoft.
+
+  ![](./media/e1t2i2.png)
+
+3. Click 'Create'
+
+  ![](./media/e1t2i3.png)
+
+4. Configure the settings for traffic manager
+   - Name: Whatever you want
+   - Routing method: performance
+   - Subscription: the same subscription you deployed your app service to
+   - Resource Group: the same resource group you deployed your app service to
+ 
+   Then click 'Create'.  In a few moments, a traffic manager service will be provisioned into your resource group.
+
+  ![](./media/e1t2i4.png)
+
+  ![](./media/e1t2i5.png)
+
+1. Click on traffic manager and select 'Endpoints' then click 'Add'
+
+  ![](./media/e1t2i6.png)
+
+6. You will configure the IaaS/OnPrem endpoint first.  Enter the following;
+   - Type: Azure Endpoint
+   - Name: IaaSEndpoint
+   - Target resource type: Public IP Address
+   - Target Resource: vmweb01PubIp
+
+   Click 'OK' when finished
+
+  ![](./media/e1t2i7.png)
+
+7. You will now configure your second endpoint which will point to your App Service Web App.  Enter the following;
+   - Type: Azure Endpoint
+   - Name: PaaSEndpoint
+   - Target Resource Type: App Service
+   - Target Resource: Your App Service Name
+
+   Click 'OK' when finished
+
+  ![](./media/e1t2i8.png)
+
+8. Click on Endpoints in the left menu.  Note that the monitor status will say 'Checking endpoint'.  Wait a little while and then click the 'refresh' button.  Repreat the refresh every minute or so until the monitor status reads 'Online'.  Once online, browse to the DNS name and verify traffic manager is working correctly.  The DNS name can be found in the traffic manager overview.
+
+  ![](./media/e1t2i9.png)
+
+  ![](./media/e1t2i10.png)
 
 **Exit criteria**
 

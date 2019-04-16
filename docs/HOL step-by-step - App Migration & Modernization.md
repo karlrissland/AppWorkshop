@@ -272,40 +272,84 @@ These features setup Parts Unlimited for future enhancement and scale without ha
 
 ### Task 1: Migrate the Website to Azure PaaS
 
-In this exercise, you will use migration tool to lift and shift application to PaaS.
+In this task we will migrate the web front end to Azure PaaS and leave the database in place.  To allow the PaaS web application to access the database, we will setup a hybrid connection.
 
 1. Connect to the **vmweb01** virtual machine
 
-    ![Migrated App & Database](./media/image14-connect-to-vm.jpeg)
+     ![Migrated App & Database](./media/image14-connect-to-vm.jpeg)
 
 2. When you first connect, Server Manager will open.  To make is simpler to browse the web, let's turn off IE Enhanced Security.
-   1. Click on Local Server.  You will see an option for IE Enhanced Security, click it
+   
+    a. Click on Local Server.  You will see an option for IE Enhanced Security, click it
 
-    ![Local Server Manager](./media/image16-local-server-manager.jpeg)
+     ![Local Server Manager](./media/image16-local-server-manager.jpeg)
 
-   2. Toggle both to Off
+    b. Toggle both to Off
 
-    ![Disable IE Enhanced Security Configuration](./media/image17-disable-ie-enhanced-configuration.png)
+     ![Disable IE Enhanced Security Configuration](./media/image17-disable-ie-enhanced-configuration.png)
+   
+3. navigate to the [App Migration Tool](https://appmigration.microsoft.com) site.
 
-------------------ADD NEW STUFF HERE ------------------------
-![](./media/e1t1i1.png)
-![](./media/e1t1i2.png)
-![](./media/e1t1i3.png)
-![](./media/e1t1i4.png)
-![](./media/e1t1i5.png)
-![](./media/e1t1i6.png)
-![](./media/e1t1i7.png)
-![](./media/e1t1i8.png)
-![](./media/e1t1i9.png)
-![](./media/e1t1i10.png)
-![](./media/e1t1i11.png)
-![](./media/e1t1i12.png)
-![](./media/e1t1i13.png)
-![](./media/e1t1i14.png)
-![](./media/e1t1i15.png)
-![](./media/e1t1i16.png)
-![](./media/e1t1i17.png)
-![](./media/e1t1i18.png)
+  ![](./media/e1t1i1.png)
+
+4. First, enter the URL to the website hosted on your VM to assess your sites compatibility with Azure App Service and click 'Assess'
+
+  ![](./media/e1t1i2.png)
+
+5. The tool will attempt to asertain which technologies your web application is using and alert you to any potential blockers.  After review, click the 'Start Migrating Now!' button to download the tool.
+
+  ![](./media/e1t1i3.png)
+
+6. Click the 'Download' button to download the migration tool.  NOTE: ensure you are working from the Web Server VM.
+
+  ![](./media/e1t1i4.png)
+
+7. Once the migration tool has been downloaded to your Web Server, run the migration tool to start the process.  NOTE: you may receive an Migcheck.exe error.  If you do, simply close and restart the migration tool.  This is a known bug that will be fixed in the future.
+
+  ![](./media/e1t1i5.png)
+
+  ![](./media/e1t1i6.png)
+
+8.  Click on the 'Default Web Site' and then click the 'Next' button.
+
+  ![](./media/e1t1i7.png)
+
+9. You will be shown another assessment report.  This will potentially have more information since the tool has access to the web server itself.  Click the 'Next' button.
+
+ ![](./media/e1t1i8.png)
+
+10. You will not be prompted to authenticate with Azure.  You will be given a code and prompted to enter that code into a browser where you have authenticated with Azure.  Copy the code and paste it into your browser, then click 'Continue'.
+
+  ![](./media/e1t1i9.png)
+
+  ![](./media/e1t1i10.png)
+
+11. Next we will fill out some config information so the migration tool can create and configure the appropriate Azure services;
+- Subscription: select your prefered subscription.
+- Resource Group: choose the 'create new' option and enter a name for your resource group.  Note: this is the resource group we will use for all the PaaS/Serverless resources, please write it down.
+- Destination Site Name: choose an appropriate name for your website.  NOTE: the tool will check the availability of the name you choose.
+- Region: choose the region which is pysically closest to you
+- Databases: check the 'set up Hybrid Connection' check box and enter vmsql01 as the on-prem database server and 1433 as the port.
+
+ ![](./media/e1t1i12.png)
+
+After filling out the form, click the 'Migrate' button to start the proces.
+
+ ![](./media/e1t1i13.png)
+
+12.   Once the tool has completed migrating the website, it will walk you through setting up the Hybrid connection.  Again, make sure you are running on the WebSrv vm.  Download and install the hybrid connection to this server.  Then click 'Next' to continue.
+ 
+   ![](./media/e1t1i14.png)
+   
+   ![](./media/e1t1i15.png)
+
+   ![](./media/e1t1i16.png)
+     
+13. Once the migration process has been completed, click the 'Go To Your website' and verify that the migrated site runs correctly
+
+  ![](./media/e1t1i17.png)
+
+  ![](./media/e1t1i18.png)
 
 **Exit criteria**
 

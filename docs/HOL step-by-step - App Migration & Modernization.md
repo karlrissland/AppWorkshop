@@ -288,6 +288,24 @@ In this exercise, you will use migration tool to lift and shift application to P
     ![Disable IE Enhanced Security Configuration](./media/image17-disable-ie-enhanced-configuration.png)
 
 ------------------ADD NEW STUFF HERE ------------------------
+![](./media/e1t1i1.png)
+![](./media/e1t1i2.png)
+![](./media/e1t1i3.png)
+![](./media/e1t1i4.png)
+![](./media/e1t1i5.png)
+![](./media/e1t1i6.png)
+![](./media/e1t1i7.png)
+![](./media/e1t1i8.png)
+![](./media/e1t1i9.png)
+![](./media/e1t1i10.png)
+![](./media/e1t1i11.png)
+![](./media/e1t1i12.png)
+![](./media/e1t1i13.png)
+![](./media/e1t1i14.png)
+![](./media/e1t1i15.png)
+![](./media/e1t1i16.png)
+![](./media/e1t1i17.png)
+![](./media/e1t1i18.png)
 
 **Exit criteria**
 
@@ -299,6 +317,17 @@ In this exercise, you will use migration tool to lift and shift application to P
 
 ------------------ADD NEW STUFF HERE ------------------------
 
+![](./media/e1t2i1.png)
+![](./media/e1t2i2.png)
+![](./media/e1t2i3.png)
+![](./media/e1t2i4.png)
+![](./media/e1t2i5.png)
+![](./media/e1t2i6.png)
+![](./media/e1t2i7.png)
+![](./media/e1t2i8.png)
+![](./media/e1t2i9.png)
+![](./media/e1t2i10.png)
+
 **Exit criteria**
 
 - A Traffic Manager Service has been created
@@ -309,6 +338,37 @@ In this exercise, you will use migration tool to lift and shift application to P
 
 ------------------ADD NEW STUFF HERE ------------------------
 
+![](./media/e1t3i1.png)
+![](./media/e1t3i2.png)
+![](./media/e1t3i3.png)
+![](./media/e1t3i4.png)
+![](./media/e1t3i5.png)
+![](./media/e1t3i6.png)
+![](./media/e1t3i7.png)
+![](./media/e1t3i8.png)
+![](./media/e1t3i9.png)
+![](./media/e1t3i10.png)
+![](./media/e1t3i11.png)
+![](./media/e1t3i12.png)
+![](./media/e1t3i13.png)
+![](./media/e1t3i14.png)
+![](./media/e1t3i15.png)
+![](./media/e1t3i16.png)
+![](./media/e1t3i17.png)
+![](./media/e1t3i18.png)
+![](./media/e1t3i19.png)
+![](./media/e1t3i20.png)
+![](./media/e1t3i21.png)
+![](./media/e1t3i22.png)
+![](./media/e1t3i23.png)
+![](./media/e1t3i24.png)
+![](./media/e1t3i25.png)
+![](./media/e1t3i26.png)
+![](./media/e1t3i27.png)
+![](./media/e1t3i28.png)
+![](./media/e1t3i29.png)
+![](./media/e1t3i30.png)
+
 **Exit criteria**
 
 - A SQL Azure Server has been created
@@ -318,6 +378,15 @@ In this exercise, you will use migration tool to lift and shift application to P
 ### Task 4: Finalize Migration
 
 ------------------ADD NEW STUFF HERE ------------------------
+
+![](./media/e1t4i1.png)
+![](./media/e1t4i2.png)
+![](./media/e1t4i3.png)
+![](./media/e1t4i4.png)
+![](./media/e1t4i5.png)
+![](./media/e1t4i6.png)
+![](./media/e1t4i7.png)
+![](./media/e1t4i8.png)
 
 **Exit criteria**
 

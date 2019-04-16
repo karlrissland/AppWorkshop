@@ -423,39 +423,121 @@ Our intent is to use traffic manager as a way to gradually move our web servers 
 - Your website renders via the traffic manager endpoint
 
 ### Task 3: Migrate the Data to SQL Azure
+So far, we have been running against the database running on our VM.  In this task, we are going to migrate the database schema and data to Azure SQL.  We will use the SQL Data Mimgration Tool for this task.
 
-------------------ADD NEW STUFF HERE ------------------------
+1. Download the [Data Migration Tool](https://docs.microsoft.com/en-us/sql/dma/dma-overview?view=sql-server-2017 ) and install on any of the VMs.
 
-![](./media/e1t3i1.png)
-![](./media/e1t3i2.png)
-![](./media/e1t3i3.png)
-![](./media/e1t3i4.png)
-![](./media/e1t3i5.png)
-![](./media/e1t3i6.png)
-![](./media/e1t3i7.png)
-![](./media/e1t3i8.png)
-![](./media/e1t3i9.png)
-![](./media/e1t3i10.png)
-![](./media/e1t3i11.png)
-![](./media/e1t3i12.png)
-![](./media/e1t3i13.png)
-![](./media/e1t3i14.png)
-![](./media/e1t3i15.png)
-![](./media/e1t3i16.png)
-![](./media/e1t3i17.png)
+
+2. Run the Data Migration Tool, click the '+' button and add a new Assessment.  Give the assessment a name, choose the source server type as SQL Server, the target server type as Azure SQL Database, and click 'Create'
+
+  ![](./media/e1t3i1.png)
+
+3. Leave the default options and click 'Next'
+
+ ![](./media/e1t3i2.png)
+
+4. Select the datasource.  Enter vmSql01 as the server, pick Windows Authentication as the Authentication type, and select Encrypt connection and Trust server certificate, then click 'connect'
+
+  ![](./media/e1t3i3.png)
+
+5. Select the 'partsUnlimitedDB' and then click 'Add'
+
+  ![](./media/e1t3i4.png)
+
+6. Click 'Start Assessment'
+
+  ![](./media/e1t3i5.png)
+
+7. Review the assessment to see if there are any outstanding issues.
+
+  ![](./media/e1t3i6.png)
+
+8. Seeing that there are no blocking issues, click the '+' button again, select 'Migration', fill out a project name, pick SQL server as the source and azure SQl as the target.  Lastly pick schema and data for the migration scope then click 'create'.
+
+  ![](./media/e1t3i7.png)
+
+9. After creating, you will be shown the migration project you just created and where you are in the migration process.  Click 'connect' to start the process.
+
+  ![](./media/e1t3i8.png)
+
+10. Select the database that you want to migrate, in this case, the partsUnlimitedDB.  Then click 'Next'.
+
+  ![](./media/e1t3i9.png)
+
+11. Before we can select the target, we need to fist create an Azure SQL Server and Database.  Open the Azure portal and go to the resource group containing your app service and traffic manager.
+
+  ![](./media/e1t3i10.png)
+
+12. Click the '+' button in your resource group and enter 'sql' and select 'SQL Database' by Microsoft.
+
+  ![](./media/e1t3i11.png)
+
+  ![](./media/e1t3i12.png)
+
+13. In the 'Create SQL Database' dialog, enter;
+      - Subscription: your subscription
+      - Resource Group: The resource group containing your app service and traffic manager
+      - Click 'Create New' for the database server
+
+      ![](./media/e1t3i13.png)
+
+14. You will be prompted to create a new server.  Provide a server name, server login, password, and location.  Check the box allowing azure services to access the server.  Click 'select'.  NOTE: put the database server in the same region as your app service.  NOTE: please write down the database password for future use.
+
+  ![](./media/e1t3i14.png)
+
+15. Once you have selected finished filling out the information for your new database server, you will be taken back to the create sql database page with the server information filled out.  Select 'No' for the elastic pool option and select 'Standard S0' as the database size.  Click 'Review and Create'.
+
+  ![](./media/e1t3i15.png)
+
+16. Review the configuration and then click 'create' to provision an Azure SQL Server and then an Azure SQL database on that server.
+
 ![](./media/e1t3i18.png)
+
+17. When complete, you will be shown a deployment summary.  Click the link to the resource group where you deployed the server and database.  This should be the resource group containing your app service and traffic manager service.
+
 ![](./media/e1t3i19.png)
 ![](./media/e1t3i20.png)
-![](./media/e1t3i21.png)
+
+18. We need to lookup the full name of our SQL server for use with the data migration tool.  Within your resource group, click on your SQL Server, then click 'properties' in the left menu.  Copy the server name, you will enter this in the data migration tool.
+
+  ![](./media/e1t3i21.png)
+
+19. Next we need to configure the firewall rules on the SQL server such that the Migration Tool is able to connect.  NOTE: you must be browsing the azure portal with the same VM where the migration tool was installed.  On the SQL Server Overview page, click 'Show Firewall Settings'
+
 ![](./media/e1t3i22.png)
+
+20.  Simply click 'Add Clint IP' and then click 'save'
+
 ![](./media/e1t3i23.png)
+
+21.  Now, go back to the Data Migration Tool and enter the Azure SQL Server name, choose SQL authentication, enter the user you configured, the password for the user, and click 'connect'
+
 ![](./media/e1t3i24.png)
+
+22.  Select 'partsUnlimitedDB' as your target database and click 'Next'
+
 ![](./media/e1t3i25.png)
+
+23.  Select all the tables and users and then click 'Generate SQL Script'
+
 ![](./media/e1t3i26.png)
+
+24.  You will be shown the generated SQL script which will create the objects you selected on the previous screen.  Click 'Deploy Schema' to create the schema in our SQL Azure database.
+
 ![](./media/e1t3i27.png)
+
+25.  As the schema is deployed, you will see a list of successfully created objects be generated.  Once done, click  'Migrate Data' to move your data to SQL Azure.
+
 ![](./media/e1t3i28.png)
+
+26.  Ensure that all the database tables have been selected and click 'Start Data Migration' to start the migration process.
+
 ![](./media/e1t3i29.png)
+
 ![](./media/e1t3i30.png)
+
+27.  At this point, your data has been migrated to SQL Azure.
+
 
 **Exit criteria**
 
@@ -464,6 +546,8 @@ Our intent is to use traffic manager as a way to gradually move our web servers 
 - Data and Schema has been migrated to SQL Azure
 
 ### Task 4: Finalize Migration
+Almost done.  We need to configure our app service to use SQL Azure and remove the Hybrid connection.
+
 
 ------------------ADD NEW STUFF HERE ------------------------
 

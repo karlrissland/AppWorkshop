@@ -219,6 +219,10 @@
     "webSrvUri": {
       "value": "[parameters('WebSrvName')]",
       "type": "string"
+    },
+    "webServerDns": {
+      "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',variables('WebSrvPubIpName'))).dnsSettings.fqdn]",
+      "type": "string"
     }
   }
 }

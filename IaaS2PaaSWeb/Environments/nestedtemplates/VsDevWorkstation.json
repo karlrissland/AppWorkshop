@@ -199,6 +199,9 @@
     }
   ],
   "outputs": {
-
+    "vsDevDns": {
+      "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',variables('VsDevWorkstationPubIPName'))).dnsSettings.fqdn]",
+      "type": "string"
+    }
   }
 }

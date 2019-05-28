@@ -187,5 +187,57 @@
     }
   ],
   "outputs": {
+    "VsDevWorkstation VM DNS Name": {
+      "type": "string",
+      "value": "[reference('DevWorkstation').outputs.vsDevDns.value]"
+    },
+    "VsDevWorkstation VM Username": {
+      "type": "string",
+      "value": "[parameters('AdminUserName')]"
+    },
+    "VsDevWorkstation VM Password": {
+      "type": "string",
+      "value": "[parameters('AdminUserPassword')]"
+    },
+    "Web Server VM DNS Name": {
+      "type": "string",
+      "value": "[reference('WebSrv').outputs.webServerDns.value]"
+    },
+    "Web Server VM Username": {
+      "type": "string",
+      "value": "[parameters('AdminUserName')]"
+    },
+    "Web Server VM Password": {
+      "type": "string",
+      "value": "[parameters('AdminUserPassword')]"
+    },
+    "SQL Server VM DNS Name": {
+      "type": "string",
+      "value": "[reference('SqlSrv').outputs.sqlSrvDns.value]"
+    },
+    "SQL Server VM Admin Username": {
+      "type": "string",
+      "value": "[parameters('AdminUserName')]"
+    },
+    "SQL Server VM User Password": {
+      "type": "string",
+      "value": "[parameters('AdminUserPassword')]"
+    },
+    "Database Name": {
+      "type": "string",
+      "value": "[parameters('databaseName')]"
+    },
+    "Database Login Name": {
+      "type": "string",
+      "value": "[parameters('dbLoginName')]"
+    },
+    "Database User Name": {
+      "type": "string",
+      "value": "[parameters('dbUserName')]"
+    },
+    "Database User Password": {
+      "type": "string",
+      "value": "[parameters('dbUserPassword')]"
+    }
   }
 }

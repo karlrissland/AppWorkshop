@@ -215,7 +215,10 @@
       "dependsOn": [],
       "location": "[resourceGroup().location]",
       "properties": {
-        "publicIPAllocationMethod": "Dynamic"
+        "publicIPAllocationMethod": "Dynamic",
+         "dnsSettings": {
+          "domainNameLabel": "[variables('publicIpAddressDnsName')]"
+        }
       }
     },
     {
@@ -271,6 +274,10 @@
   "outputs": {
     "sqlSrvUri": {
       "value": "[parameters('virtualMachineName')]",
+      "type": "string"
+    },
+    "sqlSrvDns": {
+      "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',variables('publicIpAddressName'))).dnsSettings.fqdn]",
       "type": "string"
     }
   }

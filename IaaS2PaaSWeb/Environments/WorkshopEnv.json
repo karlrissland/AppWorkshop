@@ -43,7 +43,7 @@
       "defaultValue": "workshopServiceAcc"
     },
     "dbUserPassword": {
-      "type": "string",
+      "type": "securestring",
       "defaultValue": "Password$123"
     },
     "databaseName": {

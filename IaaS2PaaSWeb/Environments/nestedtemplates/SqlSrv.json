@@ -32,7 +32,7 @@
       "type": "string"
     },
     "dbUserPassword": {
-      "type": "string"
+      "type": "securestring"
     },
     "databaseName": {
       "type": "string"

@@ -19,6 +19,9 @@ Write-Host("databaseRole  $databaseRole")
 Write-Host("sqlSchemaScript  $sqlSchemaScript")
 Write-Host("sqlDataScript  $sqlDataScript")
 
+#use tsl 1.2
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
 # Install Nuget, needed to install DSC modules via PowerShellGet
 Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
 

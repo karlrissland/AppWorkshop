@@ -44,6 +44,9 @@ $env:Path += ";C:\Program Files\dotnet\"
 $env:Path += ";C:\Program Files\Microsoft SQL Server\130\Tools\Binn\"
 $env:Path += ";C:\Program Files\Git\cmd"
 
+#use tsl 1.2
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
 #Restore NuGet packages
 & "C:\Source\AppWorkshop\IaaS2PaaSWeb\nuget.exe" restore C:\Source\AppWorkshop\IaaS2PaaSWeb\IaaS2PaaSWeb.sln
 

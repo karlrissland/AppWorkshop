@@ -1,4 +1,5 @@
 # Deployment of workshop environment.
+-A great platform for learner.
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fkarlrissland%2FAppWorkshop%2Fmaster%2FIaaS2PaaSWeb%2FEnvironments%2FWorkshopEnv.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
